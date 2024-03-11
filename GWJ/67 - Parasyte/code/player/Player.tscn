@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsm3m1oj3i0cq"]
+
+[ext_resource type="Script" path="res://player/Player.gd" id="1_rlmt2"]
+[ext_resource type="Texture2D" uid="uid://bmik4qaxl6nhd" path="res://player/player.png" id="2_e3vun"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="3_u4qre"]
+[ext_resource type="PackedScene" uid="uid://df8wp84xke8tg" path="res://player/grid/GridSpot.tscn" id="5_0eg4j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwqfx"]
+size = Vector2(8, 8)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_rlmt2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-1.90735e-06, 1.90735e-06)
+texture = ExtResource("2_e3vun")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wwqfx")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -19)
+zoom = Vector2(10, 10)
+editor_draw_limits = true
+script = ExtResource("3_u4qre")
+priority_override = false
+priority = 0
+zoom = Vector2(10, 10)
+follow_mode = 2
+follow_target = NodePath("..")
+follow_parameters/target_offset = Vector2(0, -19)
+follow_parameters/damping = false
+frame_preview = true
+pixel_perfect = true
+limit/draw_limits = false
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = false
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
+
+[node name="GridSpot1" parent="." instance=ExtResource("5_0eg4j")]
+position = Vector2(-4, 0)
+rotation = 1.5708
+scale = Vector2(0.4, 0.4)
+target_position = Vector2(0, 19)
+
+[node name="GridSpot2" parent="." instance=ExtResource("5_0eg4j")]
+position = Vector2(4, -1.42109e-14)
+rotation = -1.5708
+scale = Vector2(0.4, 0.4)
+target_position = Vector2(0, 19)
+
+[node name="GridSpot3" parent="." instance=ExtResource("5_0eg4j")]
+position = Vector2(1.42109e-13, -4)
+rotation = 3.14159
+scale = Vector2(0.4, 0.4)
+target_position = Vector2(0, 19)
+
+[node name="GridSpot4" parent="." instance=ExtResource("5_0eg4j")]
+position = Vector2(0, 4)
+scale = Vector2(0.4, 0.4)
+target_position = Vector2(0, 19)
+
+[node name="Container" type="PanelContainer" parent="."]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Container"]
+layout_mode = 2

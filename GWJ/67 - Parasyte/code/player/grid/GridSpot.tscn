@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://df8wp84xke8tg"]
+
+[ext_resource type="Texture2D" uid="uid://c6qb4ui6q1uk5" path="res://player/grid/GridSpot.png" id="1_85jh5"]
+
+[node name="GridSpot" type="RayCast2D"]
+target_position = Vector2(0, 20)
+hit_from_inside = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 10)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_85jh5")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://player/GridSpot.aseprite"
+}

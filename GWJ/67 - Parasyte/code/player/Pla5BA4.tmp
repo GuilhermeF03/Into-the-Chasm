@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsm3m1oj3i0cq"]
+
+[ext_resource type="Script" path="res://player/Player.gd" id="1_rlmt2"]
+[ext_resource type="Texture2D" uid="uid://bdr2l868oqt2r" path="res://icon.svg" id="2_a1dev"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="3_u4qre"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwqfx"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_rlmt2")
+MOV_SPEED = null
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.90735e-06, 1.90735e-06)
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("2_a1dev")
+
+[node name="SpotChecker" type="RayCast2D" parent="."]
+target_position = Vector2(-30, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wwqfx")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -50)
+zoom = Vector2(5, 5)
+editor_draw_limits = true
+script = ExtResource("3_u4qre")
+priority_override = false
+priority = 0
+zoom = Vector2(5, 5)
+follow_mode = 2
+follow_target = NodePath("..")
+follow_parameters/target_offset = Vector2(0, -50)
+follow_parameters/damping = false
+frame_preview = true
+pixel_perfect = true
+limit/draw_limits = false
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = false
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
