@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://okq1vurdbveb"]
+
+[ext_resource type="Texture2D" uid="uid://6v3v0reidi10" path="res://player/inventory/equipment/equipment_slot.png" id="1_ap6wd"]
+[ext_resource type="Script" path="res://player/inventory/ItemManager.gd" id="1_k1hfn"]
+[ext_resource type="Texture2D" uid="uid://ekmbsrud0m58" path="res://items/resources/minerals_icon.png" id="2_h8p6m"]
+
+[node name="Weapon" type="MarginContainer"]
+script = ExtResource("1_k1hfn")
+iconPath = NodePath("Slot/Icon/Icon")
+
+[node name="Slot" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_ap6wd")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Icon" type="AspectRatioContainer" parent="Slot"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="Slot/Icon"]
+layout_mode = 2
+texture = ExtResource("2_h8p6m")
+stretch_mode = 5

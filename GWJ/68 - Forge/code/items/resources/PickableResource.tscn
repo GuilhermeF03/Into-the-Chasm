@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://dje586mcin71p"]
+
+[ext_resource type="Script" path="res://items/resources/PickableResource.gd" id="1_udx31"]
+[ext_resource type="Texture2D" uid="uid://ekmbsrud0m58" path="res://items/resources/minerals_icon.png" id="2_tcby1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rck3t"]
+radius = 40.0
+
+[sub_resource type="Animation" id="Animation_fpw6r"]
+resource_name = "hover"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -8), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../InnerBody/CollisionShape2D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -8), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dcoea"]
+_data = {
+"hover": SubResource("Animation_fpw6r")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kvaxt"]
+
+[node name="PickableResource" type="Area2D"]
+position = Vector2(144, 48)
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("1_udx31")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rck3t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_tcby1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_dcoea")
+}
+autoplay = "hover"
+
+[node name="InnerBody" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InnerBody"]
+shape = SubResource("CircleShape2D_kvaxt")
+
+[connection signal="area_entered" from="." to="." method="_on_player_enter"]
+[connection signal="body_entered" from="InnerBody" to="." method="_on_collected"]

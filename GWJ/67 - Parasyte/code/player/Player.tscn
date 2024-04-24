@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsm3m1oj3i0cq"]
+[gd_scene load_steps=7 format=3 uid="uid://bsm3m1oj3i0cq"]
 
 [ext_resource type="Script" path="res://player/Player.gd" id="1_rlmt2"]
 [ext_resource type="Texture2D" uid="uid://bmik4qaxl6nhd" path="res://player/player.png" id="2_e3vun"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="3_u4qre"]
 [ext_resource type="PackedScene" uid="uid://df8wp84xke8tg" path="res://player/grid/GridSpot.tscn" id="5_0eg4j"]
+[ext_resource type="PackedScene" uid="uid://dq03e0g0jjpof" path="res://player/ledge/LedgeDetector.tscn" id="5_5tktr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wwqfx"]
 size = Vector2(8, 8)
@@ -44,29 +45,6 @@ tween_parameters = null
 tween_on_load = true
 inactive_update_mode = 0
 
-[node name="GridSpot1" parent="." instance=ExtResource("5_0eg4j")]
-position = Vector2(-4, 0)
-rotation = 1.5708
-scale = Vector2(0.4, 0.4)
-target_position = Vector2(0, 19)
-
-[node name="GridSpot2" parent="." instance=ExtResource("5_0eg4j")]
-position = Vector2(4, -1.42109e-14)
-rotation = -1.5708
-scale = Vector2(0.4, 0.4)
-target_position = Vector2(0, 19)
-
-[node name="GridSpot3" parent="." instance=ExtResource("5_0eg4j")]
-position = Vector2(1.42109e-13, -4)
-rotation = 3.14159
-scale = Vector2(0.4, 0.4)
-target_position = Vector2(0, 19)
-
-[node name="GridSpot4" parent="." instance=ExtResource("5_0eg4j")]
-position = Vector2(0, 4)
-scale = Vector2(0.4, 0.4)
-target_position = Vector2(0, 19)
-
 [node name="Container" type="PanelContainer" parent="."]
 texture_filter = 1
 offset_right = 40.0
@@ -74,3 +52,56 @@ offset_bottom = 40.0
 
 [node name="MarginContainer" type="MarginContainer" parent="Container"]
 layout_mode = 2
+
+[node name="GridSpots" type="Node" parent="."]
+process_mode = 4
+
+[node name="GridSpot_Ground" parent="." instance=ExtResource("5_0eg4j")]
+position = Vector2(2.38419e-07, 4)
+scale = Vector2(0.4, 0.4)
+target_position = Vector2(0, 5)
+
+[node name="GridSpot_Wall_Left" parent="." instance=ExtResource("5_0eg4j")]
+position = Vector2(-4, -2.38419e-07)
+rotation = 1.5708
+scale = Vector2(0.4, 0.4)
+target_position = Vector2(0, 5)
+
+[node name="GridSpot_Wall_Right" parent="." instance=ExtResource("5_0eg4j")]
+position = Vector2(4, 0)
+rotation = -1.5708
+scale = Vector2(0.4, 0.4)
+target_position = Vector2(0, 5)
+
+[node name="GridSpot_Ceilling" parent="." instance=ExtResource("5_0eg4j")]
+position = Vector2(-2.38419e-07, -4)
+rotation = 3.14159
+scale = Vector2(0.4, 0.4)
+target_position = Vector2(0, 5)
+
+[node name="LedgeSpots" type="Node" parent="."]
+process_mode = 4
+
+[node name="LedgeSpot_Wall_Left" parent="." instance=ExtResource("5_5tktr")]
+visible = false
+position = Vector2(-4, -4)
+target_position = Vector2(-5, 0)
+hit_from_inside = true
+
+[node name="LedgeSpot_Wall_Right" parent="." instance=ExtResource("5_5tktr")]
+visible = false
+position = Vector2(4, -4)
+target_position = Vector2(5, 0)
+hit_from_inside = true
+
+[node name="LedgeSpot_Ground_Left" parent="." instance=ExtResource("5_5tktr")]
+visible = false
+position = Vector2(-4, 4)
+target_position = Vector2(-5, 0)
+hit_from_inside = true
+
+[node name="LedgeSpot_Ground_Right2" parent="." instance=ExtResource("5_5tktr")]
+visible = false
+position = Vector2(4, 4)
+target_position = Vector2(5, 0)
+hit_from_inside = true

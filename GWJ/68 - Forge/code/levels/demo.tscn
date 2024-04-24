@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxy1wsxu5cisv"]
+
+[ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://player/Player.tscn" id="1_cv3c6"]
+[ext_resource type="PackedScene" uid="uid://dje586mcin71p" path="res://items/resources/PickableResource.tscn" id="2_tuplk"]
+
+[node name="Demo" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_cv3c6")]
+position = Vector2(312, 120)
+
+[node name="PickableResource" parent="." instance=ExtResource("2_tuplk")]
+position = Vector2(40, 264)
+type = 1
+ammount = 15
+
+[node name="PickableResource2" parent="." instance=ExtResource("2_tuplk")]
+position = Vector2(536, 120)
+type = 2
+ammount = 10

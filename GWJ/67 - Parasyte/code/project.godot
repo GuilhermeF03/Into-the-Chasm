@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Simbiote"
+config/name="Simbyote"
 run/main_scene="res://areas/testing/Movement Test.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"

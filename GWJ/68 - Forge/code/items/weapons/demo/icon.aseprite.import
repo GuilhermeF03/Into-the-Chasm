@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://jy4cgjo8p4kd"
+path="res://.godot/imported/icon.aseprite-2e304f288e068b36d095458f57e6a3eb.res"
+
+[deps]
+
+source_file="res://items/weapons/demo/icon.aseprite"
+dest_files=["res://.godot/imported/icon.aseprite-2e304f288e068b36d095458f57e6a3eb.res"]
+
+[params]
+

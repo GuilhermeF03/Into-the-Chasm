@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dxlwxgamv2btv"
+path="res://.godot/imported/recipes_background.aseprite-9b9a724ab7dd90346d467b02f2319bd4.res"
+
+[deps]
+
+source_file="res://player/inventory/recipes/recipes_background.aseprite"
+dest_files=["res://.godot/imported/recipes_background.aseprite-9b9a724ab7dd90346d467b02f2319bd4.res"]
+
+[params]
+

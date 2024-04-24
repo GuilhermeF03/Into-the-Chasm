@@ -1,0 +1,373 @@
+[gd_scene load_steps=15 format=3 uid="uid://dd1bjjaxa7dur"]
+
+[ext_resource type="Script" path="res://player/inventory/InventoryUi.gd" id="1_hdbb4"]
+[ext_resource type="Texture2D" uid="uid://crpyqyoagayi6" path="res://player/inventory/iventory_background.png" id="2_b1jei"]
+[ext_resource type="Texture2D" uid="uid://suvxlf36pnxb" path="res://player/inventory/resources/resource_slot.png" id="3_4ss0e"]
+[ext_resource type="Texture2D" uid="uid://d3o5vqs2jd6x4" path="res://player/inventory/bag/bag_open.png" id="3_ksl4t"]
+[ext_resource type="Texture2D" uid="uid://ekmbsrud0m58" path="res://items/resources/minerals_icon.png" id="4_mrd7e"]
+[ext_resource type="Script" path="res://player/inventory/resources/ResourcesManager.gd" id="4_wmraf"]
+[ext_resource type="Texture2D" uid="uid://dfebc0sobfqb6" path="res://player/inventory/resources/resource_counter_spot.png" id="5_6s1he"]
+[ext_resource type="Texture2D" uid="uid://ci2fc814jymsq" path="res://items/resources/organics_icon.png" id="6_wtnyt"]
+[ext_resource type="Texture2D" uid="uid://cf22k8dv7sqdg" path="res://items/resources/cristals_icons.png" id="7_q12tu"]
+[ext_resource type="Texture2D" uid="uid://cf783jyg0so8k" path="res://player/inventory/recipes/recipes_background.png" id="9_4ekob"]
+[ext_resource type="PackedScene" uid="uid://okq1vurdbveb" path="res://player/inventory/equipment/weapon.tscn" id="9_e8wf6"]
+[ext_resource type="Script" path="res://player/inventory/equipment/ConsumablesManager.gd" id="11_vhlw2"]
+[ext_resource type="Script" path="res://player/inventory/recipes/RecipesManager.gd" id="13_13q6j"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i0noo"]
+texture = ExtResource("9_4ekob")
+
+[node name="Inventory" type="CanvasLayer"]
+script = ExtResource("1_hdbb4")
+
+[node name="Ui" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Outer Margin" type="MarginContainer" parent="Ui"]
+layout_mode = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 16
+
+[node name="Background" type="TextureRect" parent="Ui/Outer Margin"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_b1jei")
+stretch_mode = 5
+
+[node name="Inner Margin" type="AspectRatioContainer" parent="Ui/Outer Margin/Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.05
+anchor_right = 0.8
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Body" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin"]
+layout_mode = 2
+
+[node name="Label" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("3_ksl4t")
+
+[node name="Content" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Resources" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+alignment = 1
+
+[node name="Title" type="RichTextLabel" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+theme_override_font_sizes/normal_font_size = 24
+text = "Resources"
+fit_content = true
+
+[node name="Slots" type="HBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource("4_wmraf")
+
+[node name="Minerals" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Slot Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Minerals"]
+layout_mode = 2
+texture = ExtResource("3_4ss0e")
+stretch_mode = 5
+
+[node name="Resource" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Minerals/Slot Icon"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = 0.35
+anchor_right = 0.65
+anchor_bottom = 0.65
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Minerals/Slot Icon/Resource"]
+layout_mode = 2
+texture = ExtResource("4_mrd7e")
+stretch_mode = 5
+
+[node name="Value Display" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Minerals/Slot Icon"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.55
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Minerals/Slot Icon/Value Display"]
+layout_mode = 2
+texture = ExtResource("5_6s1he")
+stretch_mode = 5
+
+[node name="Text" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Minerals/Slot Icon/Value Display/Icon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 3
+
+[node name="Value" type="RichTextLabel" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Minerals/Slot Icon/Value Display/Icon/Text"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center]74"
+fit_content = true
+
+[node name="Organics" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Slot Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Organics"]
+layout_mode = 2
+texture = ExtResource("3_4ss0e")
+stretch_mode = 5
+
+[node name="Resource" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Organics/Slot Icon"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = 0.35
+anchor_right = 0.65
+anchor_bottom = 0.65
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Organics/Slot Icon/Resource"]
+layout_mode = 2
+texture = ExtResource("6_wtnyt")
+stretch_mode = 5
+
+[node name="Value Display" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Organics/Slot Icon"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.55
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Organics/Slot Icon/Value Display"]
+layout_mode = 2
+texture = ExtResource("5_6s1he")
+stretch_mode = 5
+
+[node name="Text" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Organics/Slot Icon/Value Display/Icon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 3
+
+[node name="Value" type="RichTextLabel" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Organics/Slot Icon/Value Display/Icon/Text"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center]74"
+fit_content = true
+
+[node name="Cristals" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Slot Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Cristals"]
+layout_mode = 2
+texture = ExtResource("3_4ss0e")
+stretch_mode = 5
+
+[node name="Resource" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Cristals/Slot Icon"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = 0.35
+anchor_right = 0.65
+anchor_bottom = 0.65
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Cristals/Slot Icon/Resource"]
+layout_mode = 2
+texture = ExtResource("7_q12tu")
+stretch_mode = 5
+
+[node name="Value Display" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Cristals/Slot Icon"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.55
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Cristals/Slot Icon/Value Display"]
+layout_mode = 2
+texture = ExtResource("5_6s1he")
+stretch_mode = 5
+
+[node name="Text" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Cristals/Slot Icon/Value Display/Icon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 3
+
+[node name="Value" type="RichTextLabel" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Cristals/Slot Icon/Value Display/Icon/Text"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center]74"
+fit_content = true
+
+[node name="Equipment" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Equipment"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+theme_override_font_sizes/normal_font_size = 24
+text = "Equipment"
+fit_content = true
+
+[node name="Slots" type="MarginContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Equipment"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 0
+
+[node name="Content" type="HBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Equipment/Slots"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 16.0
+alignment = 1
+
+[node name="Weapon" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Equipment/Slots/Content" instance=ExtResource("9_e8wf6")]
+layout_mode = 2
+
+[node name="Consumables" type="MarginContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Equipment/Slots/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Content" type="HBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Equipment/Slots/Content/Consumables"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("11_vhlw2")
+
+[node name="Recipes" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Recipes"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+theme_override_font_sizes/normal_font_size = 24
+text = "Recipes"
+fit_content = true
+
+[node name="Content" type="HBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Recipes"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+alignment = 1
+
+[node name="Outter Margin" type="MarginContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Recipes/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 32
+
+[node name="Background" type="PanelContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Recipes/Content/Outter Margin"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_i0noo")
+
+[node name="Inner Margin" type="MarginContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Recipes/Content/Outter Margin/Background"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 52
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 52
+theme_override_constants/margin_bottom = 15
+
+[node name="Recipes" type="GridContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Recipes/Content/Outter Margin/Background/Inner Margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 4
+script = ExtResource("13_13q6j")

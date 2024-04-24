@@ -5,9 +5,6 @@
 
 [node name="MovementTest" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_n1lgk")]
-position = Vector2(528, 220)
-
 [node name="Ground" parent="." instance=ExtResource("2_14apj")]
 position = Vector2(521, 232)
 scale = Vector2(4.9, 0.8)
@@ -15,3 +12,6 @@ scale = Vector2(4.9, 0.8)
 [node name="Ground2" parent="." instance=ExtResource("2_14apj")]
 position = Vector2(464, 260)
 scale = Vector2(4.9, 0.8)
+
+[node name="Player" parent="." instance=ExtResource("1_n1lgk")]
+position = Vector2(528, 220)

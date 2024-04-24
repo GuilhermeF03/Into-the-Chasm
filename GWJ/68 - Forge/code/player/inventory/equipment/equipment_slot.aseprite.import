@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://utbcloms6plj"
+path="res://.godot/imported/equipment_slot.aseprite-f293f5b9e4f1838cc2054bd01b30a24c.res"
+
+[deps]
+
+source_file="res://player/inventory/equipment/equipment_slot.aseprite"
+dest_files=["res://.godot/imported/equipment_slot.aseprite-f293f5b9e4f1838cc2054bd01b30a24c.res"]
+
+[params]
+
