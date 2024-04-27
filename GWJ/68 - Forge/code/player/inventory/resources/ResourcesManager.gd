@@ -14,33 +14,26 @@ var cristals : int = 0;
 
 func _ready():
 	# Set initial values
-	update_holder(InventoryManager.ResourceType.MINERAL)
-	update_holder(InventoryManager.ResourceType.ORGANIC)
-	update_holder(InventoryManager.ResourceType.CRISTAL)
+	update_holder(InventoryManager.ResourceType.MINERAL, InventorySingleton.minerals)
+	update_holder(InventoryManager.ResourceType.ORGANIC, InventorySingleton.organics)
+	update_holder(InventoryManager.ResourceType.CRISTAL, InventorySingleton.cristals)
 	
-	InventoryManager
-	
-func set_resource(type : InventoryManager.ResourceType, value : int, override : bool = false):
-	InventoryManager.set_resource(type, value, override)
-	update_holder(type)	
+	# Connect signals
+	InventorySingleton.resource_changed.connect(set_resource)
 
-func increment(type : InventoryManager.ResourceType, ammount : int):
-	set_resource(type, ammount)
+func set_resource(type : InventoryManager.ResourceType, value : int):
+	update_holder(type, value)	
 
-func decrement(type : InventoryManager.ResourceType, ammount : int):
-	set_resource(type, -ammount)
 
-func update_holder(type : InventoryManager.ResourceType):
+func update_holder(type : InventoryManager.ResourceType, value : int):
 	match type:
 		InventoryManager.ResourceType.MINERAL:
-			minerals_holder.text = render_resource_value(InventoryManager.minerals)
+			minerals_holder.text = render_resource_value(value)
 		InventoryManager.ResourceType.ORGANIC:
-			organics_holder.text = render_resource_value(InventoryManager.organics)
+			organics_holder.text = render_resource_value(value)
 		InventoryManager.ResourceType.CRISTAL:
-			cristals_holder.text = render_resource_value(InventoryManager.cristals)
+			cristals_holder.text = render_resource_value(value)
+
 
 func render_resource_value(value : int):
-	return "[center]" + str(value) + (
-		"+" if value > InventoryManager.RESOURCE_CAP 
-		else ""
-	) 
+	return str(value) + ("+" if value > InventoryManager.RESOURCE_CAP else "") 

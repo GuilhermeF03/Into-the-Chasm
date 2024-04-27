@@ -1,24 +1,19 @@
-[gd_scene load_steps=15 format=3 uid="uid://dd1bjjaxa7dur"]
+[gd_scene load_steps=12 format=3 uid="uid://dd1bjjaxa7dur"]
 
-[ext_resource type="Script" path="res://player/inventory/InventoryUi.gd" id="1_hdbb4"]
-[ext_resource type="Texture2D" uid="uid://crpyqyoagayi6" path="res://player/inventory/iventory_background.png" id="2_b1jei"]
+[ext_resource type="Script" path="res://player/inventory/Inventory.gd" id="1_ildrf"]
+[ext_resource type="Texture2D" uid="uid://co7jndcjlidj1" path="res://player/inventory/inventory_book.png" id="2_q1kpp"]
 [ext_resource type="Texture2D" uid="uid://suvxlf36pnxb" path="res://player/inventory/resources/resource_slot.png" id="3_4ss0e"]
-[ext_resource type="Texture2D" uid="uid://d3o5vqs2jd6x4" path="res://player/inventory/bag/bag_open.png" id="3_ksl4t"]
-[ext_resource type="Texture2D" uid="uid://ekmbsrud0m58" path="res://items/resources/minerals_icon.png" id="4_mrd7e"]
+[ext_resource type="Texture2D" uid="uid://ekmbsrud0m58" path="res://interactables/items/resources/minerals_icon.png" id="4_mrd7e"]
 [ext_resource type="Script" path="res://player/inventory/resources/ResourcesManager.gd" id="4_wmraf"]
 [ext_resource type="Texture2D" uid="uid://dfebc0sobfqb6" path="res://player/inventory/resources/resource_counter_spot.png" id="5_6s1he"]
-[ext_resource type="Texture2D" uid="uid://ci2fc814jymsq" path="res://items/resources/organics_icon.png" id="6_wtnyt"]
-[ext_resource type="Texture2D" uid="uid://cf22k8dv7sqdg" path="res://items/resources/cristals_icons.png" id="7_q12tu"]
-[ext_resource type="Texture2D" uid="uid://cf783jyg0so8k" path="res://player/inventory/recipes/recipes_background.png" id="9_4ekob"]
+[ext_resource type="Texture2D" uid="uid://ci2fc814jymsq" path="res://interactables/items/resources/organics_icon.png" id="6_wtnyt"]
+[ext_resource type="Texture2D" uid="uid://cf22k8dv7sqdg" path="res://interactables/items/resources/cristals_icons.png" id="7_q12tu"]
 [ext_resource type="PackedScene" uid="uid://okq1vurdbveb" path="res://player/inventory/equipment/weapon.tscn" id="9_e8wf6"]
 [ext_resource type="Script" path="res://player/inventory/equipment/ConsumablesManager.gd" id="11_vhlw2"]
 [ext_resource type="Script" path="res://player/inventory/recipes/RecipesManager.gd" id="13_13q6j"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i0noo"]
-texture = ExtResource("9_4ekob")
-
 [node name="Inventory" type="CanvasLayer"]
-script = ExtResource("1_hdbb4")
+script = ExtResource("1_ildrf")
 
 [node name="Ui" type="PanelContainer" parent="."]
 anchors_preset = 15
@@ -28,78 +23,69 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 
 [node name="Outer Margin" type="MarginContainer" parent="Ui"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 128
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 128
 theme_override_constants/margin_bottom = 16
 
-[node name="Background" type="TextureRect" parent="Ui/Outer Margin"]
+[node name="Background" type="NinePatchRect" parent="Ui/Outer Margin"]
 texture_filter = 1
 layout_mode = 2
-texture = ExtResource("2_b1jei")
-stretch_mode = 5
+texture = ExtResource("2_q1kpp")
 
-[node name="Inner Margin" type="AspectRatioContainer" parent="Ui/Outer Margin/Background"]
+[node name="Inner Margin" type="MarginContainer" parent="Ui/Outer Margin/Background"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.2
-anchor_top = 0.05
-anchor_right = 0.8
-anchor_bottom = 0.9
+anchor_left = 0.11
+anchor_top = 0.187
+anchor_right = 0.89
+anchor_bottom = 0.75
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="Body" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin"]
+[node name="Pages" type="HBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin"]
 layout_mode = 2
 
-[node name="Label" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body"]
-visible = false
+[node name="Resources & Equipment" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("3_ksl4t")
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+theme_override_constants/separation = 16
 
-[node name="Content" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 12
-alignment = 1
-
-[node name="Resources" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content"]
+[node name="Resources" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.6
-alignment = 1
+size_flags_stretch_ratio = 0.5
 
-[node name="Title" type="RichTextLabel" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources"]
-visible = false
+[node name="Label" type="RichTextLabel" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources"]
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.1
 theme_override_font_sizes/normal_font_size = 24
-text = "Resources"
+bbcode_enabled = true
+text = "[center] Resources"
 fit_content = true
 
-[node name="Slots" type="HBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources"]
+[node name="ResourcesSlots" type="HBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 script = ExtResource("4_wmraf")
 
-[node name="Minerals" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots"]
+[node name="Minerals" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Slot Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Minerals"]
+[node name="Slot Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Minerals"]
 layout_mode = 2
 texture = ExtResource("3_4ss0e")
 stretch_mode = 5
 
-[node name="Resource" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Minerals/Slot Icon"]
+[node name="Resource" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Minerals/Slot Icon"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.35
@@ -113,12 +99,12 @@ offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Minerals/Slot Icon/Resource"]
+[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Minerals/Slot Icon/Resource"]
 layout_mode = 2
 texture = ExtResource("4_mrd7e")
 stretch_mode = 5
 
-[node name="Value Display" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Minerals/Slot Icon"]
+[node name="Value Display" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Minerals/Slot Icon"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -128,12 +114,12 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Minerals/Slot Icon/Value Display"]
+[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Minerals/Slot Icon/Value Display"]
 layout_mode = 2
 texture = ExtResource("5_6s1he")
 stretch_mode = 5
 
-[node name="Text" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Minerals/Slot Icon/Value Display/Icon"]
+[node name="Text" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Minerals/Slot Icon/Value Display/Icon"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -148,24 +134,21 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch_mode = 3
 
-[node name="Value" type="RichTextLabel" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Minerals/Slot Icon/Value Display/Icon/Text"]
-clip_contents = false
+[node name="Value" type="Label" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Minerals/Slot Icon/Value Display/Icon/Text"]
 layout_mode = 2
-size_flags_vertical = 4
-bbcode_enabled = true
-text = "[center]74"
-fit_content = true
+text = "74"
+horizontal_alignment = 1
 
-[node name="Organics" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots"]
+[node name="Organics" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Slot Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Organics"]
+[node name="Slot Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Organics"]
 layout_mode = 2
 texture = ExtResource("3_4ss0e")
 stretch_mode = 5
 
-[node name="Resource" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Organics/Slot Icon"]
+[node name="Resource" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Organics/Slot Icon"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.35
@@ -179,12 +162,12 @@ offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Organics/Slot Icon/Resource"]
+[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Organics/Slot Icon/Resource"]
 layout_mode = 2
 texture = ExtResource("6_wtnyt")
 stretch_mode = 5
 
-[node name="Value Display" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Organics/Slot Icon"]
+[node name="Value Display" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Organics/Slot Icon"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -194,12 +177,12 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Organics/Slot Icon/Value Display"]
+[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Organics/Slot Icon/Value Display"]
 layout_mode = 2
 texture = ExtResource("5_6s1he")
 stretch_mode = 5
 
-[node name="Text" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Organics/Slot Icon/Value Display/Icon"]
+[node name="Text" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Organics/Slot Icon/Value Display/Icon"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -214,24 +197,21 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch_mode = 3
 
-[node name="Value" type="RichTextLabel" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Organics/Slot Icon/Value Display/Icon/Text"]
-clip_contents = false
+[node name="Value" type="Label" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Organics/Slot Icon/Value Display/Icon/Text"]
 layout_mode = 2
-size_flags_vertical = 4
-bbcode_enabled = true
-text = "[center]74"
-fit_content = true
+text = "74"
+horizontal_alignment = 1
 
-[node name="Cristals" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots"]
+[node name="Cristals" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Slot Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Cristals"]
+[node name="Slot Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Cristals"]
 layout_mode = 2
 texture = ExtResource("3_4ss0e")
 stretch_mode = 5
 
-[node name="Resource" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Cristals/Slot Icon"]
+[node name="Resource" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Cristals/Slot Icon"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.35
@@ -245,12 +225,12 @@ offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Cristals/Slot Icon/Resource"]
+[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Cristals/Slot Icon/Resource"]
 layout_mode = 2
 texture = ExtResource("7_q12tu")
 stretch_mode = 5
 
-[node name="Value Display" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Cristals/Slot Icon"]
+[node name="Value Display" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Cristals/Slot Icon"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -260,12 +240,12 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Cristals/Slot Icon/Value Display"]
+[node name="Icon" type="TextureRect" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Cristals/Slot Icon/Value Display"]
 layout_mode = 2
 texture = ExtResource("5_6s1he")
 stretch_mode = 5
 
-[node name="Text" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Cristals/Slot Icon/Value Display/Icon"]
+[node name="Text" type="AspectRatioContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Cristals/Slot Icon/Value Display/Icon"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -280,94 +260,84 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch_mode = 3
 
-[node name="Value" type="RichTextLabel" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Resources/Slots/Cristals/Slot Icon/Value Display/Icon/Text"]
-clip_contents = false
+[node name="Value" type="Label" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Resources/ResourcesSlots/Cristals/Slot Icon/Value Display/Icon/Text"]
 layout_mode = 2
-size_flags_vertical = 4
-bbcode_enabled = true
-text = "[center]74"
-fit_content = true
+text = "74"
+horizontal_alignment = 1
 
-[node name="Equipment" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content"]
+[node name="Equipment" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment"]
 layout_mode = 2
 size_flags_vertical = 3
-alignment = 1
 
-[node name="Label" type="RichTextLabel" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Equipment"]
+[node name="Equipment" type="RichTextLabel" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Equipment"]
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.1
 theme_override_font_sizes/normal_font_size = 24
-text = "Equipment"
+bbcode_enabled = true
+text = "[center] Equipment"
 fit_content = true
 
-[node name="Slots" type="MarginContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Equipment"]
+[node name="Content" type="HBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Equipment"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 0
 
-[node name="Content" type="HBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Equipment/Slots"]
+[node name="Weapon" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Equipment/Content" instance=ExtResource("9_e8wf6")]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 16.0
-alignment = 1
+mouse_filter = 0
+mouse_default_cursor_shape = 2
 
-[node name="Weapon" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Equipment/Slots/Content" instance=ExtResource("9_e8wf6")]
-layout_mode = 2
-
-[node name="Consumables" type="MarginContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Equipment/Slots/Content"]
+[node name="Consumables" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Resources & Equipment/Equipment/Content"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.5
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="Content" type="HBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Equipment/Slots/Content/Consumables"]
-layout_mode = 2
-alignment = 1
 script = ExtResource("11_vhlw2")
 
-[node name="Recipes" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content"]
+[node name="Page-Break" type="Container" parent="Ui/Outer Margin/Background/Inner Margin/Pages"]
 layout_mode = 2
-size_flags_vertical = 3
-alignment = 1
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.29
 
-[node name="Label" type="RichTextLabel" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Recipes"]
+[node name="Recipes &" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+
+[node name="Recipes" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Recipes &"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.1
+size_flags_stretch_ratio = 0.5
+
+[node name="Label" type="RichTextLabel" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Recipes &/Recipes"]
+layout_mode = 2
 theme_override_font_sizes/normal_font_size = 24
-text = "Recipes"
+bbcode_enabled = true
+text = "[center] Recipes"
 fit_content = true
 
-[node name="Content" type="HBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Recipes"]
+[node name="PanelContainer" type="PanelContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Recipes &/Recipes"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 3.0
-alignment = 1
 
-[node name="Outter Margin" type="MarginContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Recipes/Content"]
+[node name="RecipesGrid" type="GridContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Recipes &/Recipes/PanelContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_right = 32
+size_flags_vertical = 3
+columns = 3
+script = ExtResource("13_13q6j")
 
-[node name="Background" type="PanelContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Recipes/Content/Outter Margin"]
+[node name="&" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Recipes &"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_i0noo")
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
 
-[node name="Inner Margin" type="MarginContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Recipes/Content/Outter Margin/Background"]
+[node name="Label" type="RichTextLabel" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Recipes &/&"]
+visible = false
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 52
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 52
-theme_override_constants/margin_bottom = 15
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center] Recipes"
+fit_content = true
 
-[node name="Recipes" type="GridContainer" parent="Ui/Outer Margin/Background/Inner Margin/Body/Content/Recipes/Content/Outter Margin/Background/Inner Margin"]
+[node name="RecipesGrid" type="GridContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages/Recipes &/&"]
 layout_mode = 2
-size_flags_horizontal = 3
-columns = 4
+size_flags_vertical = 3
+columns = 3
 script = ExtResource("13_13q6j")

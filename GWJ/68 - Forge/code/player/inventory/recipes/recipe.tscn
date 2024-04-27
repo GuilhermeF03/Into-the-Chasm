@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://player/inventory/ItemManager.gd" id="1_atobf"]
 [ext_resource type="Texture2D" uid="uid://c4n2g6p15btbv" path="res://player/inventory/recipes/recipe_slot.png" id="2_rhwq5"]
-[ext_resource type="Texture2D" uid="uid://ekmbsrud0m58" path="res://items/resources/minerals_icon.png" id="3_mm7fj"]
+[ext_resource type="Texture2D" uid="uid://ekmbsrud0m58" path="res://interactables/items/resources/minerals_icon.png" id="3_mm7fj"]
 
 [node name="Recipe" type="AspectRatioContainer"]
 size_flags_horizontal = 3

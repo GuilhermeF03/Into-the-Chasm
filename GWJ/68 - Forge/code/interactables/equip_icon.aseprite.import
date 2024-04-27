@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bcal2fmorwmp2"
+path="res://.godot/imported/equip_icon.aseprite-e89b1b713110f0c10ef99231eda9b51d.res"
+
+[deps]
+
+source_file="res://interactables/equip_icon.aseprite"
+dest_files=["res://.godot/imported/equip_icon.aseprite-e89b1b713110f0c10ef99231eda9b51d.res"]
+
+[params]
+

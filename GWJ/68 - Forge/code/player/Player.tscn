@@ -1,11 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://d0mst4eki2yyd"]
+[gd_scene load_steps=18 format=3 uid="uid://d0mst4eki2yyd"]
 
 [ext_resource type="Script" path="res://player/PlayerController.gd" id="1_3iq6n"]
 [ext_resource type="Texture2D" uid="uid://b4g5kl5t1cfkk" path="res://player/player.png" id="1_34gvv"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="2_ajiiy"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_fqu6u"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_jiv16"]
 [ext_resource type="PackedScene" uid="uid://dd1bjjaxa7dur" path="res://player/inventory/inventory.tscn" id="2_urbfw"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_qsgj2"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="3_kosb7"]
+[ext_resource type="PackedScene" uid="uid://ywpg5nkhidqk" path="res://player/WeaponHandler.tscn" id="7_cn85d"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0n3kf"]
 radius = 16.0
@@ -211,25 +211,20 @@ _data = {
 "walk_up": SubResource("Animation_yushi")
 }
 
-[sub_resource type="Resource" id="Resource_qtjg3"]
-script = ExtResource("6_qsgj2")
-duration = 1.0
-transition = 0
-ease = 3
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5tmpo"]
 radius = 16.0
 height = 64.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3xweo"]
-radius = 120.0
+radius = 96.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_brdpf"]
 radius = 24.0
 height = 64.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 process_mode = 3
+y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_3iq6n")
 DODGE_COOLDOWN = 0.7
@@ -244,7 +239,27 @@ drag_bottom_margin = 0.4
 editor_draw_drag_margin = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera"]
-script = ExtResource("2_fqu6u")
+script = ExtResource("2_jiv16")
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+position = Vector2(0, -50)
+script = ExtResource("3_kosb7")
+priority_override = false
+priority = 0
+zoom = Vector2(1, 1)
+follow_mode = 0
+frame_preview = true
+pixel_perfect = false
+limit/draw_limits = false
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = false
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
 
 [node name="Inventory" parent="." instance=ExtResource("2_urbfw")]
 visible = false
@@ -282,34 +297,6 @@ libraries = {
 "": SubResource("AnimationLibrary_4p46q")
 }
 
-[node name="PhantomCamera2D" type="Node2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(0, -50)
-script = ExtResource("2_ajiiy")
-priority_override = false
-priority = 0
-zoom = Vector2(1, 1)
-follow_mode = 5
-follow_target = NodePath("..")
-follow_parameters/target_offset = Vector2(0, -50)
-follow_parameters/damping = true
-follow_parameters/damping_value = 10.0
-follow_parameters/dead_zone_horizontal = 1.0
-follow_parameters/dead_zone_vertical = 1.0
-follow_parameters/viewfinder_in_play = false
-frame_preview = true
-pixel_perfect = true
-limit/draw_limits = true
-limit/left = -10000000
-limit/top = -10000000
-limit/right = 10000000
-limit/bottom = 10000000
-limit/limit_node_target = NodePath("")
-limit/smoothed = false
-tween_parameters = SubResource("Resource_qtjg3")
-tween_on_load = true
-inactive_update_mode = 0
-
 [node name="ItemCollect" type="Node2D" parent="."]
 
 [node name="Collect" type="Area2D" parent="ItemCollect"]
@@ -341,6 +328,11 @@ shape = SubResource("CapsuleShape2D_brdpf")
 
 [node name="DodgeTimer" type="Timer" parent="Timers"]
 one_shot = true
+
+[node name="Weapon" type="Node2D" parent="."]
+
+[node name="WeaponHandler" parent="Weapon" instance=ExtResource("7_cn85d")]
+position = Vector2(40, 2.84217e-14)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="area_entered" from="ItemCollect/Collect" to="." method="_on_item_collect"]

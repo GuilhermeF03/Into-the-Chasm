@@ -1,16 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckocjrsrqurep"]
+[gd_scene load_steps=4 format=3 uid="uid://ckocjrsrqurep"]
 
-[ext_resource type="Script" path="res://player/inventory/ItemManager.gd" id="1_ex2i6"]
-[ext_resource type="Texture2D" uid="uid://6v3v0reidi10" path="res://player/inventory/equipment/equipment_slot.png" id="2_4s1wn"]
+[ext_resource type="Script" path="res://player/inventory/equipment/Consumable.gd" id="1_ngh6v"]
+[ext_resource type="Texture2D" uid="uid://6v3v0reidi10" path="res://player/inventory/equipment/equipment_slot.png" id="2_rqjy4"]
+[ext_resource type="PackedScene" uid="uid://b5ote6c6nj3y5" path="res://player/inventory/StatsPanel.tscn" id="3_dcto8"]
 
 [node name="Consumable" type="AspectRatioContainer"]
 size_flags_horizontal = 3
-script = ExtResource("1_ex2i6")
-iconPath = NodePath("Slot/Icon/Icon")
+script = ExtResource("1_ngh6v")
 
 [node name="Slot" type="TextureRect" parent="."]
 layout_mode = 2
-texture = ExtResource("2_4s1wn")
+mouse_filter = 2
+texture = ExtResource("2_rqjy4")
 stretch_mode = 5
 
 [node name="Icon" type="AspectRatioContainer" parent="Slot"]
@@ -26,7 +27,20 @@ offset_right = 8.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Icon" type="TextureRect" parent="Slot/Icon"]
 layout_mode = 2
 stretch_mode = 5
+
+[node name="Stats" parent="Slot" instance=ExtResource("3_dcto8")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_enter"]
+[connection signal="mouse_exited" from="." to="." method="_ou_mouse_exit"]
