@@ -1,11 +1,18 @@
-[gd_scene load_steps=18 format=3 uid="uid://d0mst4eki2yyd"]
+[gd_scene load_steps=20 format=3 uid="uid://d0mst4eki2yyd"]
 
 [ext_resource type="Script" path="res://player/PlayerController.gd" id="1_3iq6n"]
 [ext_resource type="Texture2D" uid="uid://b4g5kl5t1cfkk" path="res://player/player.png" id="1_34gvv"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_jiv16"]
 [ext_resource type="PackedScene" uid="uid://dd1bjjaxa7dur" path="res://player/inventory/inventory.tscn" id="2_urbfw"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="3_kosb7"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="6_rymay"]
 [ext_resource type="PackedScene" uid="uid://ywpg5nkhidqk" path="res://player/WeaponHandler.tscn" id="7_cn85d"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="7_mgchg"]
+
+[sub_resource type="Resource" id="Resource_xygcn"]
+script = ExtResource("7_mgchg")
+duration = 1.0
+transition = 0
+ease = 2
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0n3kf"]
 radius = 16.0
@@ -230,7 +237,6 @@ script = ExtResource("1_3iq6n")
 DODGE_COOLDOWN = 0.7
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(0, -50)
 position_smoothing_speed = 1.0
 drag_left_margin = 0.3
 drag_top_margin = 0.3
@@ -241,25 +247,11 @@ editor_draw_drag_margin = true
 [node name="PhantomCameraHost" type="Node" parent="Camera"]
 script = ExtResource("2_jiv16")
 
-[node name="PhantomCamera2D" type="Node2D" parent="."]
-position = Vector2(0, -50)
-script = ExtResource("3_kosb7")
-priority_override = false
-priority = 0
-zoom = Vector2(1, 1)
-follow_mode = 0
-frame_preview = true
-pixel_perfect = false
-limit/draw_limits = false
-limit/left = -10000000
-limit/top = -10000000
-limit/right = 10000000
-limit/bottom = 10000000
-limit/limit_node_target = NodePath("")
-limit/smoothed = false
-tween_parameters = null
-tween_on_load = true
-inactive_update_mode = 0
+[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+script = ExtResource("6_rymay")
+follow_mode = 2
+follow_target = NodePath("..")
+tween_resource = SubResource("Resource_xygcn")
 
 [node name="Inventory" parent="." instance=ExtResource("2_urbfw")]
 visible = false

@@ -81,7 +81,10 @@ func _input(event : InputEvent):
 	# Toggle inventory
 	if event.is_action_pressed("inventory"):
 		inventory_on = !inventory_on
-	inventory.visible = inventory_on
+		if inventory_on:
+			inventory.open()
+		else:
+			inventory.close()
 	
 	# Dodge
 	if event.is_action_pressed("dodge") and dodge_timer.is_stopped():

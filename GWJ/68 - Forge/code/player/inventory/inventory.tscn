@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://dd1bjjaxa7dur"]
+[gd_scene load_steps=18 format=3 uid="uid://dd1bjjaxa7dur"]
 
 [ext_resource type="Script" path="res://player/inventory/Inventory.gd" id="1_ildrf"]
-[ext_resource type="Texture2D" uid="uid://co7jndcjlidj1" path="res://player/inventory/inventory_book.png" id="2_q1kpp"]
+[ext_resource type="Texture2D" uid="uid://o7iaj1spvmj2" path="res://player/inventory/inventory_book1.png" id="2_qa66g"]
 [ext_resource type="Texture2D" uid="uid://suvxlf36pnxb" path="res://player/inventory/resources/resource_slot.png" id="3_4ss0e"]
 [ext_resource type="Texture2D" uid="uid://ekmbsrud0m58" path="res://interactables/items/resources/minerals_icon.png" id="4_mrd7e"]
 [ext_resource type="Script" path="res://player/inventory/resources/ResourcesManager.gd" id="4_wmraf"]
@@ -10,7 +10,74 @@
 [ext_resource type="Texture2D" uid="uid://cf22k8dv7sqdg" path="res://interactables/items/resources/cristals_icons.png" id="7_q12tu"]
 [ext_resource type="PackedScene" uid="uid://okq1vurdbveb" path="res://player/inventory/equipment/weapon.tscn" id="9_e8wf6"]
 [ext_resource type="Script" path="res://player/inventory/equipment/ConsumablesManager.gd" id="11_vhlw2"]
+[ext_resource type="Texture2D" uid="uid://4qlqvtwm36fh" path="res://player/inventory/inventory_book2.png" id="12_hbqnt"]
+[ext_resource type="Texture2D" uid="uid://cdura015na1v" path="res://player/inventory/inventory_book3.png" id="13_6rihv"]
 [ext_resource type="Script" path="res://player/inventory/recipes/RecipesManager.gd" id="13_13q6j"]
+[ext_resource type="Texture2D" uid="uid://c3e7sbd48vvop" path="res://player/inventory/inventory_book4.png" id="14_1y488"]
+
+[sub_resource type="Animation" id="Animation_1jn1n"]
+resource_name = "Open"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ui/Outer Margin/Background:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_qa66g"), ExtResource("12_hbqnt"), ExtResource("13_6rihv"), ExtResource("14_1y488")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ui/Outer Margin/Background:region_rect")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(0, 0, 0, 0), Rect2(0, 0, 0, 0), Rect2(0, 13.8965, 128, 97.9665), Rect2(5.355, 30.3854, 117.084, 68.9921)]
+}
+
+[sub_resource type="Animation" id="Animation_nsqjg"]
+resource_name = "Close"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ui/Outer Margin/Background:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("14_1y488"), ExtResource("13_6rihv"), ExtResource("12_hbqnt"), ExtResource("2_qa66g")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ui/Outer Margin/Background:region_rect")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(5.355, 30.3854, 117.084, 68.9921), Rect2(0, 13.8965, 128, 97.9665), Rect2(0, 0, 0, 0), Rect2(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qjwj2"]
+_data = {
+"Close": SubResource("Animation_nsqjg"),
+"Open": SubResource("Animation_1jn1n")
+}
 
 [node name="Inventory" type="CanvasLayer"]
 script = ExtResource("1_ildrf")
@@ -36,20 +103,21 @@ theme_override_constants/margin_bottom = 16
 [node name="Background" type="NinePatchRect" parent="Ui/Outer Margin"]
 texture_filter = 1
 layout_mode = 2
-texture = ExtResource("2_q1kpp")
+texture = ExtResource("2_qa66g")
 
 [node name="Inner Margin" type="MarginContainer" parent="Ui/Outer Margin/Background"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.11
-anchor_top = 0.187
-anchor_right = 0.89
+anchor_left = 0.09
+anchor_top = 0.11
+anchor_right = 0.92
 anchor_bottom = 0.75
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
 [node name="Pages" type="HBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin"]
+visible = false
 layout_mode = 2
 
 [node name="Resources & Equipment" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages"]
@@ -341,3 +409,8 @@ layout_mode = 2
 size_flags_vertical = 3
 columns = 3
 script = ExtResource("13_13q6j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qjwj2")
+}
