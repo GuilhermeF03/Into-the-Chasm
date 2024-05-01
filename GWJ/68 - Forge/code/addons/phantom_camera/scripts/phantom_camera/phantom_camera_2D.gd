@@ -483,7 +483,12 @@ func _process(delta: float) -> void:
 						_set_limit_clamp_position(global_position)
 					)
 #			InactiveUpdateMode.EXPONENTIALLY:
-#				TODO
+#				TODO - Trigger positional updates less frequently as more Pcams gets added
+
+	## TODO - Needs to see if this can be triggerd only from CollisionShape2D Transform changes
+	if Engine.is_editor_hint():
+		if draw_limits:
+			update_limit_all_sides()
 
 	if not _should_follow: return
 
@@ -596,7 +601,7 @@ func _smooth_damp(target_axis: float, self_axis: float, index: int, current_velo
 		return output
 
 
-func _set_limit_clamp_position(value: Vector2) -> Vector2i:
+func _set_limit_clamp_position(value: Vector2) -> Vector2:
 	var camera_frame_rect_size: Vector2 = _camera_frame_rect().size
 	value.x = clampf(value.x, _limit_sides.x + camera_frame_rect_size.x / 2, _limit_sides.z - camera_frame_rect_size.x / 2)
 	value.y = clampf(value.y, _limit_sides.y + camera_frame_rect_size.y / 2, _limit_sides.w - camera_frame_rect_size.y / 2)
@@ -619,13 +624,6 @@ func _camera_frame_rect() -> Rect2:
 	var screen_size_zoom: Vector2 = Vector2(screen_size_width / get_zoom().x, screen_size_height / get_zoom().y)
 
 	return Rect2(-screen_size_zoom / 2, screen_size_zoom)
-
-
-func _notification(what):
-	if what == NOTIFICATION_TRANSFORM_CHANGED:
-		if Engine.is_editor_hint(): # Used for updating Limit when a CollisionShape2D is applied
-			if not _is_active:
-				update_limit_all_sides()
 
 
 func _on_tile_map_changed() -> void:
@@ -685,7 +683,6 @@ func _set_camera_2d_limit(side: int, limit: int) -> void:
 	if not _is_active: return
 	get_pcam_host_owner().camera_2d.set_limit(side, limit)
 
-
 #endregion
 
 
@@ -697,8 +694,8 @@ func update_limit_all_sides() -> void:
 	var limit_rect: Rect2
 
 	if not is_instance_valid(_limit_node):
-		_limit_sides.y = limit_top
 		_limit_sides.x = limit_left
+		_limit_sides.y = limit_top
 		_limit_sides.z = limit_right
 		_limit_sides.w = limit_bottom
 	elif _limit_node is TileMap:
@@ -756,26 +753,14 @@ func update_limit_all_sides() -> void:
 		_set_camera_2d_limit(SIDE_BOTTOM, _limit_sides.w)
 
 
-## Resets the limit size to the default values and removes the
-## [param limit_target].
 func reset_limit() -> void:
-	limit_left = _limit_sides_default.x
-	limit_top = _limit_sides_default.y
-	limit_right = _limit_sides_default.z
-	limit_bottom = _limit_sides_default.w
 	if not _has_valid_pcam_owner(): return
 	if not _is_active: return
-	get_pcam_host_owner().camera_2d.set_limit(SIDE_LEFT, limit_left)
-	get_pcam_host_owner().camera_2d.set_limit(SIDE_TOP, limit_top)
-	get_pcam_host_owner().camera_2d.set_limit(SIDE_RIGHT, limit_right)
-	get_pcam_host_owner().camera_2d.set_limit(SIDE_BOTTOM, limit_bottom)
+	get_pcam_host_owner().camera_2d.set_limit(SIDE_LEFT, _limit_sides_default.x)
+	get_pcam_host_owner().camera_2d.set_limit(SIDE_TOP, _limit_sides_default.y)
+	get_pcam_host_owner().camera_2d.set_limit(SIDE_RIGHT, _limit_sides_default.z)
+	get_pcam_host_owner().camera_2d.set_limit(SIDE_BOTTOM, _limit_sides_default.w)
 
-	#update_limit_all_sides()
-
-	#_set_camera_2d_limit(SIDE_LEFT, -10000000)
-	#_set_camera_2d_limit(SIDE_TOP, -10000000)
-	#_set_camera_2d_limit(SIDE_RIGHT, 10000000)
-	#_set_camera_2d_limit(SIDE_BOTTOM, 10000000)
 
 ## Assigns the value of the [param has_tweened] property.
 ## [b][color=yellow]Important:[/color][/b] This value can only be changed
@@ -1047,8 +1032,29 @@ func set_auto_zoom_margin(value: Vector4) -> void:
 func get_auto_zoom_margin() -> Vector4:
 	return auto_zoom_margin
 
+## Sets a limit side based on the side parameter.[br]
+## It's recommended to pass the [enum Side] enum as the sid parameter.
+func set_limit(side: int, value: int) -> void:
+	match side:
+		SIDE_LEFT: 		limit_left = value
+		SIDE_TOP: 		limit_top = value
+		SIDE_RIGHT: 	limit_right = value
+		SIDE_BOTTOM: 	limit_bottom = value
+		_:				printerr("Not a valid Side.")
+## Gets the limit side 
+func get_limit(value: int) -> int:
+	match value:
+		SIDE_LEFT: 		return limit_left
+		SIDE_TOP: 		return limit_top
+		SIDE_RIGHT: 	return limit_right
+		SIDE_BOTTOM: 	return limit_bottom
+		_:
+						printerr("Not a valid Side.")
+						return -1
+
 ## Assign a the Camera2D Left Limit Side value.
 func set_limit_left(value: int) -> void:
+	_limit_target_exist_error()
 	limit_left = value
 	update_limit_all_sides()
 ## Gets the Camera2D Left Limit value.
@@ -1057,6 +1063,7 @@ func get_limit_left() -> int:
 
 ## Assign a the Camera2D Top Limit Side value.
 func set_limit_top(value: int) -> void:
+	_limit_target_exist_error()
 	limit_top = value
 	update_limit_all_sides()
 ## Gets the Camera2D Top Limit value.
@@ -1065,6 +1072,7 @@ func get_limit_top() -> int:
 
 ## Assign a the Camera2D Right Limit Side value.
 func set_limit_right(value: int) -> void:
+	_limit_target_exist_error()
 	limit_right = value
 	update_limit_all_sides()
 ## Gets the Camera2D Right Limit value.
@@ -1073,17 +1081,20 @@ func get_limit_right() -> int:
 
 ## Assign a the Camera2D Bottom Limit Side value.
 func set_limit_bottom(value: int) -> void:
+	_limit_target_exist_error()
 	limit_bottom = value
 	update_limit_all_sides()
 ## Gets the Camera2D Bottom Limit value.
 func get_limit_bottom() -> int:
 	return limit_bottom
 
+func _limit_target_exist_error() -> void:
+	if not limit_target.is_empty():
+		printerr("Unable to set Limit Side due to Limit Target ", _limit_node.name,  " being assigned")
+
 # Set Limit Target.
 func set_limit_target(value: NodePath) -> void:
 	limit_target = value
-
-	set_notify_transform(false)
 
 	# Waits for PCam2d's _ready() before trying to validate limit_node_path
 	if not is_node_ready(): await ready
@@ -1091,20 +1102,26 @@ func set_limit_target(value: NodePath) -> void:
 	# Removes signal from existing TileMap node
 	if is_instance_valid(get_node_or_null(value)):
 		var prev_limit_node: Node2D = _limit_node
+		var new_limit_node: Node2D = get_node(value)
+
 		if prev_limit_node is TileMap:
 			if prev_limit_node.changed.is_connected(_on_tile_map_changed):
 				prev_limit_node.changed.disconnect(_on_tile_map_changed)
 
-		if _limit_node is TileMap:
-			var tile_map_node: TileMap = get_node(value)
-			tile_map_node.changed.connect(_on_tile_map_changed)
-
-		elif _limit_node is CollisionShape2D:
+		if new_limit_node is TileMap:
+			if not new_limit_node.changed.is_connected(_on_tile_map_changed):
+				new_limit_node.changed.connect(_on_tile_map_changed)
+		elif new_limit_node is CollisionShape2D:
 			var col_shape: CollisionShape2D = get_node(value)
-			if col_shape.get_shape() == null:
+
+			if col_shape.shape == null:
 				printerr("No Shape2D in: ", col_shape.name)
-			else:
-				set_notify_transform(true)
+				reset_limit()
+				limit_target = null
+				return
+	else:
+		reset_limit()
+		limit_target = null
 
 	_limit_node = get_node_or_null(value)
 

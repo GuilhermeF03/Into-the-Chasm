@@ -551,7 +551,7 @@ func _process(delta: float) -> void:
 			InactiveUpdateMode.NEVER:
 				return
 #			InactiveUpdateMode.EXPONENTIALLY:
-#				TODO
+#				TODO - Trigger positional updates less frequently as more Pcams gets added
 
 	if _should_follow:
 		match follow_mode:
@@ -581,8 +581,8 @@ func _process(delta: float) -> void:
 
 						var distance: float
 						if auto_follow_distance:
-							follow_distance = lerp(auto_follow_distance_min, auto_follow_distance_max, bounds.get_longest_axis_size() / auto_follow_distance_divisor)
-							follow_distance = clamp(follow_distance, auto_follow_distance_min, auto_follow_distance_max)
+							distance = lerp(auto_follow_distance_min, auto_follow_distance_max, bounds.get_longest_axis_size() / auto_follow_distance_divisor)
+							distance = clamp(distance, auto_follow_distance_min, auto_follow_distance_max)
 						else:
 							distance = follow_distance
 
@@ -1082,7 +1082,7 @@ func set_follow_targets(value: Array[Node3D]) -> void:
 			_has_multiple_follow_targets = false
 
 ## Adds a single [Node3D] to [member follow_targets] array.
-func append_follow_targets_node(value: Node3D) -> void:
+func append_follow_targets(value: Node3D) -> void:
 	if not is_instance_valid(value):
 		printerr(value, " is not a valid instance")
 		return

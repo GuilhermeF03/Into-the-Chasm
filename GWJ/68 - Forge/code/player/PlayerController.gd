@@ -81,10 +81,13 @@ func _input(event : InputEvent):
 	# Toggle inventory
 	if event.is_action_pressed("inventory"):
 		inventory_on = !inventory_on
-		if inventory_on:
-			inventory.open()
-		else:
-			inventory.close()
+		inventory.handle_input = !inventory.handle_input
+		
+		if inventory_on: inventory.open()
+		else: inventory.close()
+	
+	# Input handling in inventory while in inventory mode
+	if inventory.handle_input: return
 	
 	# Dodge
 	if event.is_action_pressed("dodge") and dodge_timer.is_stopped():
