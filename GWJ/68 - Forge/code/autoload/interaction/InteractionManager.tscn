@@ -5,7 +5,6 @@
 [sub_resource type="GDScript" id="GDScript_m7sit"]
 script/source = "extends Node2D
 
-@onready var player : Node2D = get_tree().get_first_node_in_group(\"Player\")
 @onready var icon = $icon
 
 var interactAction =  InputMap.action_get_events(\"interact\")[0].as_text()[0]
@@ -51,6 +50,7 @@ func _process(_delta):
 			icon.visible = false
 
 func _sortInteractables(objA : InteractArea, objB : InteractArea):
+	var player = LevelManager.player
 	var distA = abs(player.position - objA.global_position)
 	var distB = abs(player.global_position - objB.global_position)
 	if distA == distB:
@@ -69,7 +69,7 @@ func _input(event):
 			currInteractable = null
 		else: # Normal path
 			if canInteract && interactableQueue.size() > 0:
-				canInteract = false	
+				canInteract = false
 				var interactable = interactableQueue[0]
 				
 				# Not toggle only - start interaction handling

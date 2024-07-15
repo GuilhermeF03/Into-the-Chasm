@@ -53,10 +53,9 @@ static func spawn(_type : InventoryManager.ResourceType, _ammount : int):
 	pickable.ammount = _ammount
 	pickable.sprite.texture = pickable.get_texture()
 
-
 func _on_player_enter(_area : Area2D):
 	start_follow = true
 
 func _on_collected(_body):
-	InventorySingleton.set_resource(type, ammount)
+	InventoryManager.set_resource(type, ammount)
 	self.queue_free()

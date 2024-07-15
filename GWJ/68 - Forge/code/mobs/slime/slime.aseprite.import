@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c71fbverq6u3a"
+path="res://.godot/imported/slime.aseprite-babfa89f6e4ab6eefcbe4a1a30078871.res"
+
+[deps]
+
+source_file="res://mobs/slime/slime.aseprite"
+dest_files=["res://.godot/imported/slime.aseprite-babfa89f6e4ab6eefcbe4a1a30078871.res"]
+
+[params]
+

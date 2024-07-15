@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3 uid="uid://cxy1wsxu5cisv"]
+
+[ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://player/Player.tscn" id="1_cv3c6"]
+[ext_resource type="PackedScene" uid="uid://dje586mcin71p" path="res://interactables/items/resources/PickableResource.tscn" id="2_tuplk"]
+[ext_resource type="PackedScene" uid="uid://cdvv3bgj8fab6" path="res://interactables/items/weapons/PickableWeapon.tscn" id="3_0e6tt"]
+[ext_resource type="Texture2D" uid="uid://dfju6gbnxykt8" path="res://interactables/items/weapons/sword/sword.png" id="3_0h6po"]
+[ext_resource type="PackedScene" uid="uid://cpa8ag7qoliw7" path="res://interactables/items/tools/PickableTool.tscn" id="5_yn12o"]
+[ext_resource type="Texture2D" uid="uid://ci2fc814jymsq" path="res://interactables/items/resources/organics_icon.png" id="6_i8tlq"]
+[ext_resource type="Script" path="res://interactables/items/tools/effects/HealEffect.gd" id="6_yvadb"]
+[ext_resource type="Texture2D" uid="uid://dw8y2vxonkiof" path="res://interactables/items/tools/healing/small_jar.png" id="7_fej61"]
+[ext_resource type="PackedScene" uid="uid://dr5k3xeuoe3os" path="res://interactables/items/recipes/PickableRecipe.tscn" id="8_mxjmx"]
+
+[node name="Demo" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_cv3c6")]
+position = Vector2(312, 120)
+
+[node name="PickableResource" parent="." instance=ExtResource("2_tuplk")]
+position = Vector2(526, 272)
+type = 1
+ammount = 20
+
+[node name="PickableResource2" parent="." instance=ExtResource("2_tuplk")]
+position = Vector2(545, 83)
+type = 2
+ammount = 15
+
+[node name="PickableConsumable" parent="." instance=ExtResource("5_yn12o")]
+position = Vector2(163, 321)
+effect = ExtResource("6_yvadb")
+item_name = "Healing potion"
+texture = ExtResource("7_fej61")
+
+[node name="PickableConsumable2" parent="." instance=ExtResource("5_yn12o")]
+position = Vector2(226, 320)
+effect = ExtResource("6_yvadb")
+item_name = "Herb"
+texture = ExtResource("6_i8tlq")
+
+[node name="PickableWeapon" parent="." instance=ExtResource("3_0e6tt")]
+position = Vector2(809, 159)
+damage = 10
+item_name = "Sword"
+texture = ExtResource("3_0h6po")
+
+[node name="PickableRecipe" parent="." instance=ExtResource("8_mxjmx")]
+position = Vector2(137, 107)

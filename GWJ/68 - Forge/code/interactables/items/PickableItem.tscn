@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cte68dj3jl77y"]
+[gd_scene load_steps=6 format=3 uid="uid://cte68dj3jl77y"]
 
 [ext_resource type="Script" path="res://interactables/items/PickableItem.gd" id="1_al5b1"]
-[ext_resource type="Texture2D" uid="uid://dfju6gbnxykt8" path="res://interactables/items/weapons/sword/sword.png" id="2_8m4kb"]
-[ext_resource type="PackedScene" uid="uid://dh86htrmpu0mq" path="res://core/InteractArea.tscn" id="2_coey2"]
+[ext_resource type="PackedScene" uid="uid://dh86htrmpu0mq" path="res://interactables/InteractArea.tscn" id="2_coey2"]
 
 [sub_resource type="Animation" id="Animation_qqgpw"]
 resource_name = "hover"
@@ -39,17 +38,15 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1tcku"]
-radius = 9.60003
+radius = 11.2
 
 [node name="PickableItem" type="Node2D"]
 scale = Vector2(5, 5)
 script = ExtResource("1_al5b1")
-texture = ExtResource("2_8m4kb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, 4.76837e-07)
-texture = ExtResource("2_8m4kb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -58,6 +55,7 @@ libraries = {
 autoplay = "hover"
 
 [node name="InteractArea" parent="." instance=ExtResource("2_coey2")]
+scale = Vector2(2, 2)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]

@@ -12,15 +12,16 @@ config_version=5
 
 config/name="GWJ 68 - Forge"
 config/features=PackedStringArray("4.2", "Forward Plus")
-boot_splash/image="res://title.png"
 config/icon="res://title.png"
 
 [autoload]
 
 InventoryManager="*res://autoload/inventory/InventoryManager.gd"
-InventorySingleton="*res://autoload/inventory/InventorySingleton.tscn"
+InventorySingleton="res://autoload/inventory/InventorySingleton.tscn"
 InteractionManager="*res://autoload/interaction/InteractionManager.tscn"
 LevelManager="*res://autoload/level/LevelManager.tscn"
+UiManager="*res://autoload/ui/UiManager.tscn"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [editor_plugins]
 
@@ -50,7 +51,7 @@ move_right={
 }
 dodge={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"echo":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(198, 10),"global_position":Vector2(202, 51),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
 inventory={

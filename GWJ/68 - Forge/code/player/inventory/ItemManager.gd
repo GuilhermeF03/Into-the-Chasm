@@ -4,9 +4,7 @@ class_name ItemManager
 var item : Item = null
 @onready var icon : TextureRect = $"Slot/Icon/Icon"
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+signal item_set(item: Item)
 
 func set_item(data : Item):
 	item = data
@@ -15,4 +13,5 @@ func set_item(data : Item):
 		icon.scale = Vector2(2, 2)
 	else:
 		icon.texture = null
+	item_set.emit(data)
 

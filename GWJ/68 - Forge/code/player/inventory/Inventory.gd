@@ -3,7 +3,7 @@ class_name Inventory
 
 @onready var player = $AnimationPlayer
 @onready var pages = $"Ui/Outer Margin/Background/Inner Margin"
-
+@onready var map_label = $"Ui/Outer Margin/Background/Inner Margin/Pages0/Map/MarginContainer/Map/Label"
 var handle_input : bool = false
 var current_page : int = 0
 
@@ -14,7 +14,7 @@ var current_page : int = 0
 
 @export_subgroup("Equipment")
 @onready var weapon : WeaponManager
-@onready var consumables : ConsumablesManager
+@onready var tools : ToolManager
 
 #endregion
 
@@ -28,17 +28,14 @@ var current_page : int = 0
 func _ready():
 	resources = self.find_child("ResourcesSlots")
 	weapon = self.find_child("Weapon")
-	consumables = self.find_child("Consumables")
+	tools = self.find_child("Tools")
 	recipes = self.find_child("RecipesManager")
 	
-	weapon.set_item(InventoryManager.weapon)
-
+	map_label.text = "[center]Map - " + get_tree().current_scene.name
 
 func open():
-	current_page = 0
 	pages.visible = false
 	self.visible = true
-	player.speed_scale = 1
 	player.play("Open")
 	await player.animation_finished
 	
@@ -59,11 +56,12 @@ func leaf(next_page : int):
 		"leaf_right" if next_page > current_page
 		else "leaf_left"
 	)
+
+	current_page = next_page
+	
 	await player.animation_finished
 	for page : HBoxContainer in pages.get_children():
 		page.visible = (page.name == "Pages" + str(next_page))
-	
-	current_page = next_page
 		
 func _input(event: InputEvent) -> void:
 	if !handle_input: return

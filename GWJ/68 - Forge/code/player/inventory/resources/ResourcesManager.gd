@@ -14,15 +14,15 @@ var cristals : int = 0;
 
 func _ready():
 	# Set initial values
-	update_holder(InventoryManager.ResourceType.MINERAL, InventorySingleton.minerals)
-	update_holder(InventoryManager.ResourceType.ORGANIC, InventorySingleton.organics)
-	update_holder(InventoryManager.ResourceType.CRISTAL, InventorySingleton.cristals)
+	update_holder(InventoryManager.ResourceType.MINERAL, InventoryManager.minerals)
+	update_holder(InventoryManager.ResourceType.ORGANIC, InventoryManager.organics)
+	update_holder(InventoryManager.ResourceType.CRISTAL, InventoryManager.cristals)
 	
 	# Connect signals
-	InventorySingleton.resource_changed.connect(set_resource)
+	InventoryManager.resource_changed.connect(set_resource)
 
 func set_resource(type : InventoryManager.ResourceType, value : int):
-	update_holder(type, value)	
+	update_holder(type, value)
 
 
 func update_holder(type : InventoryManager.ResourceType, value : int):

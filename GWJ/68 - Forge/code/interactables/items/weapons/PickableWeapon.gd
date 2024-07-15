@@ -1,5 +1,6 @@
 @tool
 extends Weapon
+class_name PickableWeapon
 const MIN_SPAWN_RANGE = 75
 const MAX_SPAWN_RANGE = 300
 
@@ -25,4 +26,11 @@ func _process(_delta):
 		pickable.texture = texture
 
 func _on_get_picked():
-	InventorySingleton.set_weapon(self as Weapon)
+	InventoryManager.set_weapon(self as Weapon)
+
+func set_data(data : Weapon):
+	self.item_name = data.item_name
+	self.item_description = data.item_description
+	self.weapon_range = data.weapon_range
+	self.damage = data.damage
+	self.texture = data.texture

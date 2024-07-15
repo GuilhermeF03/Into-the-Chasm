@@ -7,5 +7,8 @@ func _enter_tree():
 	scene = get_tree().current_scene
 	print("Scene:", scene)
 	
-func spawn(node : Node):
+	
+func spawn(node : Node, position : Vector2 = Vector2.ZERO):
+	if node is Node2D:
+		node.global_position = position
 	scene.add_child(node)

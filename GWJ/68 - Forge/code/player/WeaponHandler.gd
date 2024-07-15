@@ -9,13 +9,10 @@ extends Node2D
 var animation : Animation
 var attack_finished = true
 
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	if !Engine.is_editor_hint():
-		set_weapon(InventorySingleton.weapon)
-		InventorySingleton.weapon_changed.connect(set_weapon)
+		set_weapon(InventoryManager.weapon)
+		InventoryManager.weapon_changed.connect(set_weapon)
 
 func _process(_delta):
 	if Engine.is_editor_hint():

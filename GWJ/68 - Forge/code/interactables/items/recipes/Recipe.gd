@@ -6,20 +6,21 @@ class_name Recipe
 @export_range(0,100) var organics : int
 @export_range(0,100) var cristals : int
 
+@export var crafted_item : PackedScene
+
 func can_craft() -> bool:
-	var _minerals = InventorySingleton.minerals
-	var _organics = InventorySingleton.organics
-	var _cristals = InventorySingleton.cristals
+	var _minerals = InventoryManager.minerals
+	var _organics = InventoryManager.organics
+	var _cristals = InventoryManager.cristals
 	
 	return (
 		_minerals >= minerals && _organics >= organics && _cristals >= cristals
 	)
 
 func craft():
-	if can_craft(): # this is for extra safety -> the button should be disabled if the player can't craft
-		InventorySingleton.minerals -= minerals
-		InventorySingleton.organics -= organics
-		InventorySingleton.cristals -= cristals
-		InventorySingleton.add_item(self)
-		return true
-	return false
+	InventoryManager.set_resource(InventoryManager.ResourceType.MINERAL, -minerals)
+	InventoryManager.set_resource(InventoryManager.ResourceType.ORGANIC, -organics)
+	InventoryManager.set_resource(InventoryManager.ResourceType.CRISTAL, -cristals)
+	
+	var item = crafted_item.instantiate()
+	LevelManager.spawn(item, LevelManager.player.global_position)

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b63c4i425fn8t"
+path="res://.godot/imported/small_jar.aseprite-cf6307db958f69763e2d1672994744b1.res"
+
+[deps]
+
+source_file="res://interactables/items/tools/healing/small_jar.aseprite"
+dest_files=["res://.godot/imported/small_jar.aseprite-cf6307db958f69763e2d1672994744b1.res"]
+
+[params]
+

@@ -8,6 +8,5 @@ y_sort_enabled = true
 script = ExtResource("1_olvi3")
 
 [node name="PickableItem" parent="." instance=ExtResource("2_k6ker")]
-texture = null
 
 [connection signal="get_picked" from="PickableItem" to="." method="_on_get_picked"]

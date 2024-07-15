@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d0mst4eki2yyd"]
+[gd_scene load_steps=21 format=3 uid="uid://d0mst4eki2yyd"]
 
 [ext_resource type="Script" path="res://player/PlayerController.gd" id="1_3iq6n"]
 [ext_resource type="Texture2D" uid="uid://b4g5kl5t1cfkk" path="res://player/player.png" id="1_34gvv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="6_rymay"]
 [ext_resource type="PackedScene" uid="uid://ywpg5nkhidqk" path="res://player/WeaponHandler.tscn" id="7_cn85d"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="7_mgchg"]
+[ext_resource type="PackedScene" uid="uid://b2uv4ura4s6tm" path="res://player/minimap/Minimap.tscn" id="8_8o5uc"]
 
 [sub_resource type="Resource" id="Resource_xygcn"]
 script = ExtResource("7_mgchg")
@@ -262,6 +263,7 @@ scale = Vector2(5, 5)
 texture = ExtResource("1_34gvv")
 hframes = 4
 vframes = 3
+frame = 5
 metadata/_aseprite_wizard_config_ = {
 "i_mode": -1,
 "keep_anim_length": false,
@@ -325,6 +327,8 @@ one_shot = true
 
 [node name="WeaponHandler" parent="Weapon" instance=ExtResource("7_cn85d")]
 position = Vector2(40, 2.84217e-14)
+
+[node name="Minimap" parent="." instance=ExtResource("8_8o5uc")]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="area_entered" from="ItemCollect/Collect" to="." method="_on_item_collect"]

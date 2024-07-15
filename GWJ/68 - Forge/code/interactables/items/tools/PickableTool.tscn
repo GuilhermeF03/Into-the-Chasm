@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpa8ag7qoliw7"]
+
+[ext_resource type="Script" path="res://interactables/items/tools/PickableTool.gd" id="1_qq6hf"]
+[ext_resource type="PackedScene" uid="uid://cte68dj3jl77y" path="res://interactables/items/PickableItem.tscn" id="2_su1dh"]
+
+[node name="PickableTool" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_qq6hf")
+
+[node name="PickableItem" parent="." instance=ExtResource("2_su1dh")]
+
+[connection signal="get_picked" from="PickableItem" to="." method="_on_get_picked"]
