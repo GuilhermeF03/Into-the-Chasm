@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c7b5eawf24chj"
+path="res://.godot/imported/recipe_slot.aseprite-d4c97c192385705ceac59c64197311d5.res"
+
+[deps]
+
+source_file="res://entities/player/inventory/recipes/recipe_slot.aseprite"
+dest_files=["res://.godot/imported/recipe_slot.aseprite-d4c97c192385705ceac59c64197311d5.res"]
+
+[params]
+

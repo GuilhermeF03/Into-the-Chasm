@@ -23,6 +23,10 @@ LevelManager="*res://autoload/level/LevelManager.tscn"
 UiManager="*res://autoload/ui/UiManager.tscn"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/Asset_Drawer/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/awesome_input_icons/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")

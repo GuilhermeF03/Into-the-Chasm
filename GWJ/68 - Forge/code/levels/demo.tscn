@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://cxy1wsxu5cisv"]
 
-[ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://player/Player.tscn" id="1_cv3c6"]
+[ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://entities/player/Player.tscn" id="1_cv3c6"]
 [ext_resource type="PackedScene" uid="uid://dje586mcin71p" path="res://interactables/items/resources/PickableResource.tscn" id="2_tuplk"]
 [ext_resource type="PackedScene" uid="uid://cpa8ag7qoliw7" path="res://interactables/items/tools/PickableTool.tscn" id="5_yn12o"]
 [ext_resource type="Texture2D" uid="uid://ci2fc814jymsq" path="res://interactables/items/resources/organics_icon.png" id="6_i8tlq"]
 [ext_resource type="Script" path="res://interactables/items/tools/effects/HealEffect.gd" id="6_yvadb"]
 [ext_resource type="Texture2D" uid="uid://dw8y2vxonkiof" path="res://interactables/items/tools/healing/small_jar.png" id="7_fej61"]
 [ext_resource type="PackedScene" uid="uid://dr5k3xeuoe3os" path="res://interactables/items/recipes/PickableRecipe.tscn" id="8_mxjmx"]
-[ext_resource type="PackedScene" uid="uid://cwseeacjaeuni" path="res://mobs/slime/Slime.tscn" id="9_2ibo8"]
+[ext_resource type="PackedScene" uid="uid://cwseeacjaeuni" path="res://entities/mobs/slime/Slime.tscn" id="9_2ibo8"]
 [ext_resource type="PackedScene" uid="uid://d2at40xfyklc" path="res://interactables/items/weapons/sword/Sword.tscn" id="10_1clum"]
 
 [node name="Demo" type="Node2D"]
