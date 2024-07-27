@@ -13,69 +13,64 @@ extends CharacterBody2D
 @onready var sprite = $Sprite
 @onready var dodge_timer = $Timers/DodgeTimer
 @onready var weapon = $Weapon
-@onready var weapon_handler = $Weapon/WeaponHandler
+@onready var weapon_handler : WeaponHandler = $Weapon/WeaponHandler
 @onready var camera = $PhantomCamera2D
-
 
 @export_category("Animation")
 var dodging = false
 var inventory_on = false
 var back_view = false
 
+
 func _ready():
-	set_timers()
-	
+	dodge_timer.wait_time = DODGE_COOLDOWN
+
+
 func _physics_process(_delta):
-	var input = get_movement_input()
-	# Handlers
+	var input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+
 	handle_movement(input)
 	handle_animation(input)
 	handle_weapon()
 	handle_camera()
 	
-	
 	get_tree().paused = inventory_on
-	
-func set_timers():
-	dodge_timer.wait_time = DODGE_COOLDOWN
+
 
 func handle_movement(input):
-	self.velocity = (
-		input.normalized() * (DODGE_SPEED if dodging else MOV_SPEED)
-	)
-	
+	self.velocity = input.normalized() * (DODGE_SPEED if dodging else MOV_SPEED)
 	move_and_slide()
-	
+
+
 func handle_weapon():
 	weapon.look_at(get_global_mouse_position())
 	weapon_handler.scale.y = -5 if get_local_mouse_position().x < 0 else 5
 
+
 func handle_camera():
 	if inventory_on: return
 	
-	var mouse_pos = (
+	var axis = (
 		get_global_mouse_position() - LevelManager.player.global_position
-	) + Vector2.UP * 200 # Add offset so camera has slight offset
+	) + Vector2.UP * 200 # Add offset to camera
 	
-	var mouse_magnitude = (mouse_pos * 10).normalized()
-	var mouse_drift = mouse_magnitude * MAX_MOUSE_DRIFT
+	var axis_normalized = (axis * 10).normalized()
+	var mouse_drift = axis_normalized * MAX_MOUSE_DRIFT
 	
-	var lower_bound = mouse_magnitude if mouse_magnitude < mouse_drift else mouse_drift
-	var upper_bound = mouse_magnitude if mouse_magnitude > mouse_drift else mouse_drift 
+	var lower_bound = axis_normalized if axis_normalized < mouse_drift else mouse_drift
+	var upper_bound = axis_normalized if axis_normalized > mouse_drift else mouse_drift 
 	
 	camera.follow_offset = clamp(
-		mouse_pos / MOUSE_DRIFT_FACTOR,
+		axis / MOUSE_DRIFT_FACTOR,
 		lower_bound,
 		upper_bound
 	)
 	
-	#camera.follow_offset = mouse_pos / 3
-	
-	sprite.scale.x = -5 if (mouse_pos / MOUSE_DRIFT_FACTOR).x < 0 else 5
+	sprite.scale.x = -5 if (axis / MOUSE_DRIFT_FACTOR).x < 0 else 5
+
 
 func dodge():
 	var input = velocity.normalized()
-
 	back_view = input.y < 0
 	
 	animation_player.play("roll_" + ("up" if back_view else "down"));
@@ -85,27 +80,27 @@ func dodge():
 
 # region Inputs
 
-func get_movement_input():
-	return Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
 func _input(event : InputEvent):
 	handle_inventory_toggle_input(event)
 	
 	# Skip input handling if on inventory
-	if inventory.handle_input: return
+	if inventory.handling_input: return
 	
 	handle_tool_selection(event)
 	handle_dodge_input(event)
 	handle_attack_input(event)
 
+
 func handle_inventory_toggle_input(event : InputEvent):
 	# Toggle inventory
 	if event.is_action_pressed("inventory"):
 		inventory_on = !inventory_on
-		inventory.handle_input = !inventory.handle_input
+		inventory.handling_input = !inventory.handling_input
 		
 		if inventory_on: inventory.open()
 		else: inventory.close()
+
 
 func handle_dodge_input(event : InputEvent):
 	if (
@@ -115,13 +110,15 @@ func handle_dodge_input(event : InputEvent):
 	):
 		dodge()
 
+
 func handle_attack_input(event : InputEvent):
 	if (
 		event.is_action_pressed("attack") 
-		and weapon_handler.attack_finished
+		and weapon_handler.can_attack
 		and !dodging
 	):
 		weapon_handler.attack()
+
 
 func handle_tool_selection(event : InputEvent): # TODO - change this to work with mouse wheel
 	if (
@@ -129,7 +126,9 @@ func handle_tool_selection(event : InputEvent): # TODO - change this to work wit
 		and !event.is_echo() 
 		and event.as_text().is_valid_int()
 	):
-		inventory.tools.select_tool(event.as_text().to_int() - 1)
+		var tool = event.as_text().to_int() - 1
+		inventory.tools.select_tool(tool)
+
 
 # endregion
 
@@ -149,6 +148,7 @@ func handle_animation(input):
 	back_view = input.y < 0
 	
 	animation_player.play("walk_" + ("up" if back_view else "down"));
+
 
 func _on_animation_finished(anim_name):
 	if anim_name == "roll_up" or anim_name == "roll_down":

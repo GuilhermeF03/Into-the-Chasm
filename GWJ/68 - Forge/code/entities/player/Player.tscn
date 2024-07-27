@@ -238,6 +238,7 @@ script = ExtResource("1_3iq6n")
 DODGE_COOLDOWN = 0.7
 
 [node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(1.2, 1.2)
 position_smoothing_speed = 1.0
 drag_left_margin = 0.3
 drag_top_margin = 0.3
@@ -277,7 +278,8 @@ metadata/_aseprite_wizard_config_ = {
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": false,
 "layer_section": false,
-"output_section": true
+"output_section": true,
+"slice_section": false
 }
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]

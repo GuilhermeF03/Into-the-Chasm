@@ -1,5 +1,6 @@
 @tool
 extends Node2D
+class_name WeaponHandler
 
 @export var texture : Texture2D
  
@@ -7,21 +8,24 @@ extends Node2D
 @onready var player : AnimationPlayer = $AnimationPlayer
 
 var animation : Animation
-var attack_finished = true
+var can_attack = true
+
 
 func _ready():
 	if !Engine.is_editor_hint():
-		set_weapon(InventoryManager.weapon)
+		set_weapon(InventoryManager.weapon) # To avoid having weapon already set before connecting signals
 		InventoryManager.weapon_changed.connect(set_weapon)
+
 
 func _process(_delta):
 	if Engine.is_editor_hint():
 		sprite.texture = texture
 
+
 func attack():
 	if(texture != null):
 		sprite.visible = true
-		attack_finished = false
+		can_attack = false
 		player.play("attack")
 
 
@@ -33,6 +37,7 @@ func set_weapon(weapon : Weapon):
 	else:
 		sprite.texture = null
 
+
 func _on_animation_finished(_anim_name):
 	sprite.frame_coords = Vector2.ZERO
-	attack_finished = true
+	can_attack = true

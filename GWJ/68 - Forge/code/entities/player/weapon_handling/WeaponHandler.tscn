@@ -61,7 +61,7 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://interactables/items/weapons/sword/sword.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "d1c5efbd6bc7768c5e52bac3f4690d05"
+metadata/_aseprite_wizard_source_file_hash_ = "e3be9e06ad5c10fe8d908403981af8d9"
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": false,
 "layer_section": false,
@@ -80,7 +80,6 @@ position = Vector2(13, 2)
 scale = Vector2(1.065, 1.5)
 collision_layer = 0
 collision_mask = 8
-monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
