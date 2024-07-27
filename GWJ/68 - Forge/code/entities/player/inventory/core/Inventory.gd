@@ -4,8 +4,10 @@ class_name Inventory
 @onready var player = $AnimationPlayer
 @onready var pages = $"Ui/Outer Margin/Background/Inner Margin"
 @onready var map_label = $"Ui/Outer Margin/Background/Inner Margin/Pages0/Map/MarginContainer/Map/Label"
-var handling_input : bool = false
+var handling_input: set = set_handling_input;
 var current_page : int = 0
+
+signal on_handling_changed(value : bool)
 
 #region Pages 1 - Resources & Equipment | Map
 
@@ -32,6 +34,13 @@ func _ready():
 	recipes = self.find_child("RecipesManager")
 	
 	map_label.text = "[center]Map - " + get_tree().current_scene.name
+
+
+func toggle():
+	handling_input = !handling_input
+	
+	if handling_input: open()
+	else: close()
 
 
 func open():
@@ -81,3 +90,10 @@ func _input(event: InputEvent) -> void:
 		if not(current_page - 1 < 0):
 			next_page = current_page - 1
 			leaf(next_page)
+
+
+# region setters & getters
+
+func set_handling_input(new_value : bool):
+	handling_input = new_value
+	on_handling_changed.emit(new_value)

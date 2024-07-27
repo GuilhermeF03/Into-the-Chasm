@@ -18,12 +18,12 @@ extends CharacterBody2D
 
 @export_category("Animation")
 var dodging = false
-var inventory_on = false
 var back_view = false
 
 
 func _ready():
 	dodge_timer.wait_time = DODGE_COOLDOWN
+	LevelManager.add_pause_trigger(inventory.on_handling_changed)
 
 
 func _physics_process(_delta):
@@ -34,7 +34,7 @@ func _physics_process(_delta):
 	handle_weapon()
 	handle_camera()
 	
-	get_tree().paused = inventory_on
+
 
 
 func handle_movement(input):
@@ -48,7 +48,7 @@ func handle_weapon():
 
 
 func handle_camera():
-	if inventory_on: return
+	if inventory.handling_input: return
 	
 	var axis = (
 		get_global_mouse_position() - LevelManager.player.global_position
@@ -95,11 +95,7 @@ func _input(event : InputEvent):
 func handle_inventory_toggle_input(event : InputEvent):
 	# Toggle inventory
 	if event.is_action_pressed("inventory"):
-		inventory_on = !inventory_on
-		inventory.handling_input = !inventory.handling_input
-		
-		if inventory_on: inventory.open()
-		else: inventory.close()
+		inventory.toggle()
 
 
 func handle_dodge_input(event : InputEvent):
@@ -143,7 +139,7 @@ func handle_animation(input):
 		animation_player.play("idle_" + ("up" if back_view else "down"))
 		return
 	# Freeze movement with inventory on
-	if inventory_on: return
+	if inventory.handling_input: return
 	
 	back_view = input.y < 0
 	
