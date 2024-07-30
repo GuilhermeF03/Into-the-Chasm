@@ -7,8 +7,8 @@ class_name WeaponHandler
 @onready var sprite = $Sprite2D
 @onready var player : AnimationPlayer = $AnimationPlayer
 
-var animation : Animation
 var can_attack = true
+var animation : Animation
 
 
 func _ready():

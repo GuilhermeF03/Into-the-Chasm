@@ -43,6 +43,7 @@ anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="item_set" from="." to="." method="_on_item_set"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_enter"]
 [connection signal="mouse_exited" from="." to="." method="_ou_mouse_exit"]

@@ -27,8 +27,8 @@ func handleInteraction(): _onInteraction.emit()
 	
 ## Player entered interaction zone
 func _on_interaction_zone_entered(_area):
-	InteractionManager.registerInteraction(self)
+	InteractionManager.register_interaction(self)
 
 ## Player exited interaction zone
 func _on_interaction_zone_exited(_area):
-	InteractionManager.unregisterInteraction(self)
+	InteractionManager.unregister_interaction(self)

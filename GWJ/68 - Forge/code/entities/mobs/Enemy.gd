@@ -7,15 +7,15 @@ class_name Enemy
 @export var RAYCAST_FOLLOW_DIST = 150
 @export var RAYCAST_PATROL_DIST = 100
 
-@onready var player = $AnimationPlayer
 @onready var sprite = $Sprite2D
 @onready var sprite_2 = $Sprite2D2
+@onready var player = $AnimationPlayer
 
 
-@onready var idle_timer = $Timers/IdleTimer
-@onready var patrol_idle_timer = $Timers/PatrolIdleTimer
 @onready var sight_raycast = $SightRayCast
+@onready var idle_timer = $Timers/IdleTimer
 @onready var patrol_raycast = $PatrolRayCast
+@onready var patrol_idle_timer = $Timers/PatrolIdleTimer
 
 enum EnemyState {PATROL, CHASE}
 

@@ -1,11 +1,11 @@
 extends Node
 class_name Inventory
 
+var current_page : int = 0
+var handling_input: set = set_handling_input;
 @onready var player = $AnimationPlayer
 @onready var pages = $"Ui/Outer Margin/Background/Inner Margin"
 @onready var map_label = $"Ui/Outer Margin/Background/Inner Margin/Pages0/Map/MarginContainer/Map/Label"
-var handling_input: set = set_handling_input;
-var current_page : int = 0
 
 signal on_handling_changed(value : bool)
 

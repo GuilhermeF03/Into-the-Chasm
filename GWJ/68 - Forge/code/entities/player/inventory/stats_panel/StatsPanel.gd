@@ -4,6 +4,7 @@ class_name ItemStats
 @onready var label = $Content/Label
 
 func set_stats(item : Item):
+	if item == null: return
 	if item is Recipe:
 		print("Recipe")
 	if item is Tool:

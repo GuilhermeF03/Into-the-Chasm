@@ -2,23 +2,23 @@ extends CharacterBody2D
 
 @export_category("Constants")
 @export_range(100, 500, 50) var MOV_SPEED = 300
+@export_range(10, 500) var MAX_MOUSE_DRIFT = 250
 @export_range(200, 1000, 100) var DODGE_SPEED = 600
 @export_range(0.5, 5) var DODGE_COOLDOWN : float = 0.5
-@export_range(10, 500) var MAX_MOUSE_DRIFT = 250
 @export_range(1, 10) var MOUSE_DRIFT_FACTOR : float = 3.25
 
 @export_category("Nodes")
+@onready var sprite = $Sprite
+@onready var weapon = $Weapon
+@onready var camera = $PhantomCamera2D
+@onready var dodge_timer = $Timers/DodgeTimer
 @onready var inventory : Inventory = $Inventory
 @onready var animation_player = $AnimationPlayer
-@onready var sprite = $Sprite
-@onready var dodge_timer = $Timers/DodgeTimer
-@onready var weapon = $Weapon
 @onready var weapon_handler : WeaponHandler = $Weapon/WeaponHandler
-@onready var camera = $PhantomCamera2D
 
 @export_category("Animation")
-var dodging = false
 var back_view = false
+var dodging = false
 
 
 func _ready():
@@ -34,9 +34,7 @@ func _physics_process(_delta):
 	handle_weapon()
 	handle_camera()
 	
-
-
-
+#region Handlers
 func handle_movement(input):
 	self.velocity = input.normalized() * (DODGE_SPEED if dodging else MOV_SPEED)
 	move_and_slide()
@@ -69,22 +67,10 @@ func handle_camera():
 	sprite.scale.x = -5 if (axis / MOUSE_DRIFT_FACTOR).x < 0 else 5
 
 
-func dodge():
-	var input = velocity.normalized()
-	back_view = input.y < 0
-	
-	animation_player.play("roll_" + ("up" if back_view else "down"));
-	dodging = true
-	dodge_timer.start()
-	
-
-# region Inputs
-
-
+#region Inputs
 func _input(event : InputEvent):
 	handle_inventory_toggle_input(event)
 	
-	# Skip input handling if on inventory
 	if inventory.handling_input: return
 	
 	handle_tool_selection(event)
@@ -93,7 +79,6 @@ func _input(event : InputEvent):
 
 
 func handle_inventory_toggle_input(event : InputEvent):
-	# Toggle inventory
 	if event.is_action_pressed("inventory"):
 		inventory.toggle()
 
@@ -104,41 +89,42 @@ func handle_dodge_input(event : InputEvent):
 		and dodge_timer.is_stopped() 
 		and velocity != Vector2.ZERO
 	):
-		dodge()
+		var input = velocity.normalized()
+		back_view = input.y < 0
+		
+		animation_player.play("roll_" + ("up" if back_view else "down"));
+		dodging = true
+		dodge_timer.start()
 
 
 func handle_attack_input(event : InputEvent):
 	if (
 		event.is_action_pressed("attack") 
 		and weapon_handler.can_attack
-		and !dodging
+		and not dodging
 	):
 		weapon_handler.attack()
 
 
-func handle_tool_selection(event : InputEvent): # TODO - change this to work with mouse wheel
-	if (
-		event.is_pressed() 
-		and !event.is_echo() 
-		and event.as_text().is_valid_int()
-	):
-		var tool = event.as_text().to_int() - 1
-		inventory.tools.select_tool(tool)
+func handle_tool_selection(event : InputEvent):
+	var curr_tool_idx = InventoryManager.curr_tool_idx
+		
+	if event.is_action_pressed("next_consumable"):
+		InventoryManager.select_tool(curr_tool_idx + 1)
+	if event.is_action_pressed("prev_consumable"):
+		InventoryManager.select_tool(curr_tool_idx - 1)
 
 
-# endregion
+#endregion
 
-# region Animation
-
+#region Animation
 func handle_animation(input):
-	# Dodging - wait
 	if dodging: return
 	
-	# Set Idle
 	if input == Vector2.ZERO:
 		animation_player.play("idle_" + ("up" if back_view else "down"))
 		return
-	# Freeze movement with inventory on
+
 	if inventory.handling_input: return
 	
 	back_view = input.y < 0
@@ -150,4 +136,4 @@ func _on_animation_finished(anim_name):
 	if anim_name == "roll_up" or anim_name == "roll_down":
 		dodging = false
 
-# endregion
+#endregion

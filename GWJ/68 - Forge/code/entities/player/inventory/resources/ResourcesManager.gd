@@ -21,6 +21,7 @@ func _ready():
 	# Connect signals
 	InventoryManager.resource_changed.connect(set_resource)
 
+
 func set_resource(type : InventoryManager.ResourceType, value : int):
 	update_holder(type, value)
 

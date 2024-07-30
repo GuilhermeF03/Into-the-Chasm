@@ -38,6 +38,12 @@ effect = ExtResource("6_yvadb")
 item_name = "Herb"
 texture = ExtResource("6_i8tlq")
 
+[node name="PickableConsumable3" parent="." instance=ExtResource("5_yn12o")]
+position = Vector2(397, 458)
+effect = ExtResource("6_yvadb")
+item_name = "Herb"
+texture = ExtResource("6_i8tlq")
+
 [node name="PickableRecipe" parent="." instance=ExtResource("8_mxjmx")]
 position = Vector2(137, 107)
 organics = 10

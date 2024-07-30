@@ -1,8 +1,11 @@
 extends ItemManager
 class_name ToolSlot
 
-@onready var stats : ItemStats = $Slot/Stats
 @onready var equipment_icon = $Slot
+@onready var stats : ItemStats = $Slot/Stats
+
+signal on_drop(ToolSlot)
+
 
 func _on_mouse_enter():
 	if item != null:
@@ -13,3 +16,8 @@ func _ou_mouse_exit():
 
 func _on_item_set(_item: Item) -> void:
 	stats.set_stats(_item)
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("drop_item"):
+		on_drop.emit(self)
