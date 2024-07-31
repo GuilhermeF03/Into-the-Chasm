@@ -2,36 +2,38 @@
 extends Node2D
 class_name WeaponHandler
 
-@export var texture : Texture2D
- 
+@export_category("Nodes")
 @onready var sprite = $Sprite2D
 @onready var player : AnimationPlayer = $AnimationPlayer
 
+@export_category("Data")
+@export var texture : Texture2D
 var can_attack = true
 var animation : Animation
 
 
 func _ready():
-	if !Engine.is_editor_hint():
-		set_weapon(InventoryManager.weapon) # To avoid having weapon already set before connecting signals
-		InventoryManager.weapon_changed.connect(set_weapon)
+	if Engine.is_editor_hint(): return
+
+	set_weapon(InventoryManager.weapon) # To avoid having weapon already set before connecting signals
+	InventoryManager.weapon_changed.connect(set_weapon)
 
 
 func _process(_delta):
-	if Engine.is_editor_hint():
-		sprite.texture = texture
+	if not Engine.is_editor_hint(): return
+	sprite.texture = texture
 
 
 func attack():
-	if(texture != null):
-		sprite.visible = true
-		can_attack = false
-		player.play("attack")
+	if texture == null: return
+	sprite.visible = true
+	can_attack = false
+	player.play("attack")
 
 
 func set_weapon(weapon : Weapon):
-	texture = weapon.texture if(weapon != null) else null
-	if (texture != null):
+	texture = weapon.texture if weapon != null else null
+	if texture != null:
 		var base_path = texture.resource_path.split(".png")[0] + "_attack"
 		sprite.texture = load(base_path + ".png")
 	else:

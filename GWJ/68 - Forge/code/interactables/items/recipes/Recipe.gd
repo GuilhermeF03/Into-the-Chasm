@@ -6,16 +6,17 @@ class_name Recipe
 @export_range(0,100) var organics : int
 @export_range(0,100) var cristals : int
 
+@export_category("Crafted Item")
 @export var crafted_item : PackedScene
+
 
 func can_craft() -> bool:
 	var _minerals = InventoryManager.minerals
 	var _organics = InventoryManager.organics
 	var _cristals = InventoryManager.cristals
 	
-	return (
-		_minerals >= minerals && _organics >= organics && _cristals >= cristals
-	)
+	return _minerals >= minerals && _organics >= organics && _cristals >= cristals
+
 
 func craft():
 	InventoryManager.set_resource(InventoryManager.ResourceType.MINERAL, -minerals)

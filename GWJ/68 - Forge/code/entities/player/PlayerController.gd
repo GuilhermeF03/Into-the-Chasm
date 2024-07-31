@@ -34,6 +34,7 @@ func _physics_process(_delta):
 	handle_weapon()
 	handle_camera()
 	
+
 #region Handlers
 func handle_movement(input):
 	self.velocity = input.normalized() * (DODGE_SPEED if dodging else MOV_SPEED)
@@ -65,6 +66,9 @@ func handle_camera():
 	)
 	
 	sprite.scale.x = -5 if (axis / MOUSE_DRIFT_FACTOR).x < 0 else 5
+
+
+#endregion
 
 
 #region Inputs
@@ -117,6 +121,7 @@ func handle_tool_selection(event : InputEvent):
 
 #endregion
 
+
 #region Animation
 func handle_animation(input):
 	if dodging: return
@@ -135,5 +140,6 @@ func handle_animation(input):
 func _on_animation_finished(anim_name):
 	if anim_name == "roll_up" or anim_name == "roll_down":
 		dodging = false
+
 
 #endregion

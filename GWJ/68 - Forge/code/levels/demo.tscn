@@ -18,13 +18,13 @@ position = Vector2(638, -369)
 
 [node name="PickableResource" parent="." instance=ExtResource("2_tuplk")]
 position = Vector2(526, 272)
-type = 1
 ammount = 20
+type = 1
 
 [node name="PickableResource2" parent="." instance=ExtResource("2_tuplk")]
 position = Vector2(545, 83)
-type = 2
 ammount = 15
+type = 2
 
 [node name="PickableConsumable" parent="." instance=ExtResource("5_yn12o")]
 position = Vector2(105, 302)

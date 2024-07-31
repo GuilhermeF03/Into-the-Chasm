@@ -52,7 +52,6 @@ position = Vector2(0, 4.76837e-07)
 libraries = {
 "": SubResource("AnimationLibrary_ujd57")
 }
-autoplay = "hover"
 
 [node name="InteractArea" parent="." instance=ExtResource("2_coey2")]
 scale = Vector2(2, 2)

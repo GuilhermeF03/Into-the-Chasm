@@ -1,7 +1,9 @@
 extends PanelContainer
 class_name ItemStats
 
+@export_category("Nodes")
 @onready var label = $Content/Label
+
 
 func set_stats(item : Item):
 	if item == null: return

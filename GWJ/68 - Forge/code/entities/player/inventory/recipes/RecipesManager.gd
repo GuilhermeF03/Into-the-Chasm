@@ -1,8 +1,10 @@
 extends GridContainer
 class_name RecipesManager
 
+@export_category("Preloaded Nodes")
 var recipe_node : PackedScene = preload("res://entities/player/inventory/recipes/RecipeSlot.tscn")
 
+@export_category("Data")
 var children : Array[Node]
 
 
@@ -12,7 +14,7 @@ func _ready():
 	InventoryManager.recipe_removed.connect(unequip)
 
 
-func equip(recipe : Recipe, index : int):
+func equip(recipe : Recipe):
 	add_recipe_node(recipe)
 
 

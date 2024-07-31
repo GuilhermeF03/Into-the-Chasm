@@ -9,8 +9,8 @@ y_sort_enabled = true
 script = ExtResource("1_esdyf")
 damage = 15
 item_name = "Sword"
-item_description = "Close combat weapon"
 texture = ExtResource("2_6fnhg")
+item_description = "Close combat weapon"
 
 [node name="PickableItem" parent="." instance=ExtResource("2_mrba5")]
 texture = ExtResource("2_6fnhg")

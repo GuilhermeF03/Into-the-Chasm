@@ -1,13 +1,18 @@
 extends Node
 class_name ItemManager
 
-var item : Item = null
-
+@export_category("Constants")
 const ITEM_SCALE = Vector2(2,2)
 
+@export_category("Nodes")
 @onready var icon : TextureRect = $"Slot/Icon/Icon"
 
+@export_category("Data")
+var item : Item = null
+
+@export_category("Signals")
 signal item_set(item: Item)
+
 
 func set_item(data : Item):
 	item = data

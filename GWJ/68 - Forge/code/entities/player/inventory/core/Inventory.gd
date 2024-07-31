@@ -1,15 +1,14 @@
 extends Node
 class_name Inventory
 
-var current_page : int = 0
-var handling_input: set = set_handling_input;
+@export_category("Nodes")
 @onready var player = $AnimationPlayer
 @onready var pages = $"Ui/Outer Margin/Background/Inner Margin"
 @onready var map_label = $"Ui/Outer Margin/Background/Inner Margin/Pages0/Map/MarginContainer/Map/Label"
 
-signal on_handling_changed(value : bool)
-
-#region Pages 1 - Resources & Equipment | Map
+@export_category("Data")
+var current_page : int = 0
+var handling_input: set = set_handling_input;
 
 @export_subgroup("Resources")
 @onready var resources : ResourcesManager
@@ -18,20 +17,18 @@ signal on_handling_changed(value : bool)
 @onready var weapon : WeaponManager
 @onready var tools : ToolManager
 
-#endregion
-
-#region Pages 2 - Inventory | Recipes
-
 @export_subgroup("Recipes")
 @onready var recipes : RecipesManager
 
-#endregion
+@export_category("Signals")
+signal on_handling_changed(value : bool)
+
 
 func _ready():
-	resources = self.find_child("ResourcesSlots")
-	weapon = self.find_child("Weapon")
 	tools = self.find_child("Tools")
+	weapon = self.find_child("Weapon")
 	recipes = self.find_child("RecipesManager")
+	resources = self.find_child("ResourcesSlots")
 	
 	map_label.text = "[center]Map - " + get_tree().current_scene.name
 
@@ -47,6 +44,7 @@ func open():
 	pages.visible = false
 	self.visible = true
 	player.play("Open")
+
 	await player.animation_finished
 
 	for page : HBoxContainer in pages.get_children():
@@ -92,8 +90,12 @@ func _input(event: InputEvent) -> void:
 			leaf(next_page)
 
 
-# region setters & getters
+#region setters & getters
+
 
 func set_handling_input(new_value : bool):
 	handling_input = new_value
 	on_handling_changed.emit(new_value)
+
+
+# endregion
