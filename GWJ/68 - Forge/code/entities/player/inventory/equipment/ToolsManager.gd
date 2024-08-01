@@ -70,6 +70,6 @@ func select_tool(index : int):
 
 func drop_tool(slot : ToolSlot):
 	var index = self.get_children().find(slot)
-	if index not in range(InventoryManager.tools.size()):
+	if index in range(InventoryManager.tools.size()):
 		InventoryManager.remove_tool(index)
 

@@ -6,7 +6,9 @@ class_name ItemStats
 
 
 func set_stats(item : Item):
-	if item == null: return
+	if item == null: 
+		label.text = ""
+		return
 	if item is Recipe:
 		print("Recipe")
 	if item is Tool:
