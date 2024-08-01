@@ -14,7 +14,7 @@ func _ready():
 	InventoryManager.recipe_removed.connect(unequip)
 
 
-func equip(recipe : Recipe):
+func equip(recipe : Recipe, _index : int):
 	add_recipe_node(recipe)
 
 

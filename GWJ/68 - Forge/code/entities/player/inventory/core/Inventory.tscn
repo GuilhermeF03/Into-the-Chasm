@@ -187,6 +187,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Pages0" type="HBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin"]
+visible = false
 layout_mode = 2
 
 [node name="Resources & Equipment" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages0"]
@@ -463,7 +464,6 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 
 [node name="Pages1" type="HBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin"]
-visible = false
 layout_mode = 2
 
 [node name="Inventory" type="VBoxContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages1"]
@@ -538,8 +538,8 @@ horizontal_scroll_mode = 0
 
 [node name="RecipesGrid" type="GridContainer" parent="Ui/Outer Margin/Background/Inner Margin/Pages1/Recipes/PanelContainer/MarginContainer/ScrollContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 2
+size_flags_vertical = 2
 mouse_filter = 2
 columns = 3
 script = ExtResource("13_13q6j")

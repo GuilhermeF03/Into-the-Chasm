@@ -27,10 +27,12 @@ func _ready():
 
 
 func _physics_process(_delta):
-	var input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var movement = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
-	handle_movement(input)
-	handle_animation(input)
+	handle_movement(movement)
+	handle_animation(movement)
+
+	# camera & weapon follow
 	handle_weapon()
 	handle_camera()
 	
@@ -73,18 +75,10 @@ func handle_camera():
 
 #region Inputs
 func _input(event : InputEvent):
-	handle_inventory_toggle_input(event)
-	
 	if inventory.handling_input: return
 	
 	handle_tool_selection(event)
 	handle_dodge_input(event)
-	handle_attack_input(event)
-
-
-func handle_inventory_toggle_input(event : InputEvent):
-	if event.is_action_pressed("inventory"):
-		inventory.toggle()
 
 
 func handle_dodge_input(event : InputEvent):
@@ -100,14 +94,8 @@ func handle_dodge_input(event : InputEvent):
 		dodging = true
 		dodge_timer.start()
 
-
-func handle_attack_input(event : InputEvent):
-	if (
-		event.is_action_pressed("attack") 
-		and weapon_handler.can_attack
-		and not dodging
-	):
-		weapon_handler.attack()
+		await animation_player.animation_finished
+		dodging = false
 
 
 func handle_tool_selection(event : InputEvent):
@@ -115,7 +103,7 @@ func handle_tool_selection(event : InputEvent):
 		
 	if event.is_action_pressed("next_consumable"):
 		InventoryManager.select_tool(curr_tool_idx + 1)
-	if event.is_action_pressed("prev_consumable"):
+	elif event.is_action_pressed("prev_consumable"):
 		InventoryManager.select_tool(curr_tool_idx - 1)
 
 
@@ -135,11 +123,6 @@ func handle_animation(input):
 	back_view = input.y < 0
 	
 	animation_player.play("walk_" + ("up" if back_view else "down"));
-
-
-func _on_animation_finished(anim_name):
-	if anim_name == "roll_up" or anim_name == "roll_down":
-		dodging = false
 
 
 #endregion

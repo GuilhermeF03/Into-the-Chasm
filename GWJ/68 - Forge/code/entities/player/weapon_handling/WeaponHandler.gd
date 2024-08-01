@@ -4,7 +4,7 @@ class_name WeaponHandler
 
 @export_category("Nodes")
 @onready var sprite = $Sprite2D
-@onready var player : AnimationPlayer = $AnimationPlayer
+@onready var anim_player : AnimationPlayer = $AnimationPlayer
 
 @export_category("Data")
 @export var texture : Texture2D
@@ -28,7 +28,7 @@ func attack():
 	if texture == null: return
 	sprite.visible = true
 	can_attack = false
-	player.play("attack")
+	anim_player.play("attack")
 
 
 func set_weapon(weapon : Weapon):
@@ -43,3 +43,8 @@ func set_weapon(weapon : Weapon):
 func _on_animation_finished(_anim_name):
 	sprite.frame_coords = Vector2.ZERO
 	can_attack = true
+	
+	
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("attack") and can_attack:
+		attack()

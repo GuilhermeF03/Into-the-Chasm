@@ -21,7 +21,6 @@ InventorySingleton="res://autoload/inventory/InventorySingleton.tscn"
 InteractionManager="*res://autoload/interaction/InteractionManager.tscn"
 LevelManager="*res://autoload/level/LevelManager.tscn"
 UiManager="*res://autoload/ui/UiManager.tscn"
-PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [display]
 

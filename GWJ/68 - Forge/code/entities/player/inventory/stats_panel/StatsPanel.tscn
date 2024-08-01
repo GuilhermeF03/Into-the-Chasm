@@ -20,8 +20,10 @@ alignment = 1
 
 [node name="Label" type="Label" parent="Content"]
 layout_mode = 2
+size_flags_vertical = 6
 text = "<Item Name>"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="Info" type="HBoxContainer" parent="Content"]
 visible = false

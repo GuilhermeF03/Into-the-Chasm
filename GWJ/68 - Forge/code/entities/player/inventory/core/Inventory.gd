@@ -5,6 +5,8 @@ class_name Inventory
 @onready var player = $AnimationPlayer
 @onready var pages = $"Ui/Outer Margin/Background/Inner Margin"
 @onready var map_label = $"Ui/Outer Margin/Background/Inner Margin/Pages0/Map/MarginContainer/Map/Label"
+@onready var ui = $Ui
+
 
 @export_category("Data")
 var current_page : int = 0
@@ -38,7 +40,11 @@ func toggle():
 	
 	if handling_input: open()
 	else: close()
-
+	
+	ui.process_mode = (
+		Node.PROCESS_MODE_DISABLED if !handling_input
+		else Node.PROCESS_MODE_INHERIT
+	)
 
 func open():
 	pages.visible = false
@@ -76,6 +82,9 @@ func leaf(next_page : int):
 
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("inventory"):
+		toggle()
+	
 	if not handling_input: return
 	
 	var next_page = 0
