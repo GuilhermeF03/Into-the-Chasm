@@ -5,6 +5,8 @@ class_name PickableItem
 @export_category("Constants")
 const MIN_WAIT_TIME = 0.1
 const MAX_WAIT_TIME = 1
+const MAX_SPAWN_RANGE = 125
+const MIN_SPAWN_RANGE = 75
 
 @export_category("Nodes")
 @onready var sprite = $Sprite2D
@@ -21,8 +23,24 @@ signal get_picked
 
 func _ready():
 	if Engine.is_editor_hint(): return
+	
+	var parent = self.get_parent()
+
+	var spawn_vector = (
+		Vector2(randf_range(-1, 1), randf_range(-1, 1)) 
+		* randi_range(MIN_SPAWN_RANGE, MAX_SPAWN_RANGE)
+	)
+	print("Spawn_vector:", spawn_vector)
+
+	var tween = create_tween()
+	(
+	tween.tween_property(parent, "position", global_position + spawn_vector, 1.5)
+	.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	)
 
 	interact_area.toggle_only = true
+	interact_area._on_interaction_enter.connect(_on_get_picked)
+	
 	await get_tree().create_timer(randf_range(MIN_WAIT_TIME, MAX_WAIT_TIME)).timeout
 	animation_player.play('hover')
 	

@@ -28,7 +28,7 @@ func start_interaction_mode(interactable : InteractArea):
 	
 
 func _physics_process(_delta: float) -> void:
-	if on_interaction_mode: curr_interactable.handleInteraction()
+	if on_interaction_mode: curr_interactable.handle_interaction()
 
 
 func _process(_delta):
@@ -68,7 +68,7 @@ func _input(event):
 	# Call exit handler and end the current interaction
 	if on_interaction_mode:
 		on_interaction_mode = false
-		await curr_interactable.exitInteraction()
+		await curr_interactable.exit_interaction()
 		curr_interactable = null
 	else: # Normal path
 		if not can_interact or interactable_queue.is_empty(): return

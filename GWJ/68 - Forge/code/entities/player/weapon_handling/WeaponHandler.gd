@@ -29,22 +29,20 @@ func attack():
 	sprite.visible = true
 	can_attack = false
 	anim_player.play("attack")
+	await anim_player.animation_finished
+	sprite.frame_coords = Vector2.ZERO
+	can_attack = true
 
 
 func set_weapon(weapon : Weapon):
 	texture = weapon.texture if weapon != null else null
 	if texture != null:
-		var base_path = texture.resource_path.split(".png")[0] + "_attack"
-		sprite.texture = load(base_path + ".png")
+		var path = texture.resource_path.split(".png")[0] + "_attack.png" 
+		sprite.texture = load(path)
 	else:
 		sprite.texture = null
 
 
-func _on_animation_finished(_anim_name):
-	sprite.frame_coords = Vector2.ZERO
-	can_attack = true
-	
-	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack") and can_attack:
 		attack()

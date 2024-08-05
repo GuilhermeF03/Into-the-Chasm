@@ -5,9 +5,9 @@ extends CanvasLayer
 
 @export_category("Nodes")
 @onready var top_dock = $TopDock/MarginContainer
-@onready var bottom_dock = $BottomDock/MarginContainer
 @onready var left_dock = $LeftDock/MarginContainer
 @onready var right_dock = $RightDock/MarginContainer
+@onready var bottom_dock = $BottomDock/MarginContainer
 
 
 @export_category("Docks")

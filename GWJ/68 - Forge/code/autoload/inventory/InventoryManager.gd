@@ -81,9 +81,6 @@ func add_tool(tool : Tool):
 		tool_added.emit(tool, available_slot)
 	else: 
 		var idx = curr_tool_number - 1 # No space - swap with last tool
-	
-		if idx not in range(curr_tool_number):
-			push_error("Invalid tool slot index")
 		
 		tools[idx] = tool
 		tool_added.emit(tool, idx)

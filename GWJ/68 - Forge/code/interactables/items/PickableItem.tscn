@@ -60,6 +60,5 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
 shape = SubResource("CircleShape2D_1tcku")
 
-[connection signal="_onInteractionEnter" from="InteractArea" to="." method="_on_get_picked"]
 [connection signal="area_entered" from="InteractArea" to="." method="_on_interact_area_area_entered"]
 [connection signal="area_exited" from="InteractArea" to="." method="_on_interact_area_area_exited"]

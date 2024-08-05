@@ -3,11 +3,11 @@ class_name InteractArea
 
 @export_category("Signals")
 ## Called when player interacts with this interactable
-signal _onInteractionEnter
+signal _on_interaction_enter
 ## Called when player ends interaction with the interactable
-signal _onInteractionExit
+signal _on_interaction_exit
 ## An handler for handling continuos interaction beetween player and interactable
-signal _onInteraction
+signal _on_interaction
 
 
 @export_category("Data")
@@ -15,15 +15,15 @@ signal _onInteraction
 
 
 ## Signals player entered interaction
-func interact(): _onInteractionEnter.emit()
+func interact(): _on_interaction_enter.emit()
 
 
 ## Signals interaction termination
-func exitInteraction(): _onInteractionExit.emit()
+func exit_interaction(): _on_interaction_exit.emit()
 	
 	
 ## Signals the interaction handler to be called
-func handleInteraction(): _onInteraction.emit()
+func handle_interaction(): _on_interaction.emit()
 	
 	
 ## Player entered interaction zone
