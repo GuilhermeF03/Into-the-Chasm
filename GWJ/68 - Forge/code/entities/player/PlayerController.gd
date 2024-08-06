@@ -76,9 +76,17 @@ func handle_camera():
 #region Inputs
 func _input(event : InputEvent):
 	if inventory.handling_input: return
-	
-	handle_tool_selection(event)
 	handle_dodge_input(event)
+	handle_tool_selection(event)
+
+
+func handle_tool_selection(event: InputEvent) -> void:
+	var curr_tool_idx = InventoryManager.curr_tool_idx
+		
+	if event.is_action_pressed("next_consumable"):
+		InventoryManager.select_tool(curr_tool_idx + 1)
+	elif event.is_action_pressed("prev_consumable"):
+		InventoryManager.select_tool(curr_tool_idx - 1)
 
 
 func handle_dodge_input(event : InputEvent):
@@ -98,13 +106,7 @@ func handle_dodge_input(event : InputEvent):
 		dodging = false
 
 
-func handle_tool_selection(event : InputEvent):
-	var curr_tool_idx = InventoryManager.curr_tool_idx
-		
-	if event.is_action_pressed("next_consumable"):
-		InventoryManager.select_tool(curr_tool_idx + 1)
-	elif event.is_action_pressed("prev_consumable"):
-		InventoryManager.select_tool(curr_tool_idx - 1)
+
 
 
 #endregion

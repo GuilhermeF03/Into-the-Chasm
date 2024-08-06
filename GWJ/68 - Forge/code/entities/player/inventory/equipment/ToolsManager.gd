@@ -42,8 +42,6 @@ func add_tool():
 
 	self.add_child(tool)
 	tool.on_drop.connect(drop_tool)
-
-	if self.get_child_count() == 1: curr_tool = tool
 	
 	
 func update_holder(tool : Tool, index : int = -1):
@@ -60,12 +58,20 @@ func update_holder(tool : Tool, index : int = -1):
 
 	
 func select_tool(index : int):
+	if index == -1 and curr_tool != null:
+		curr_tool.equipment_icon.texture = icon
+		curr_tool = null
+		return
+	
 	var tool = self.get_child(index) as ToolSlot
 
 	if tool.item != null:
-		tool.equipment_icon.texture = selected_icon
+		print("selected")
+		var prev_tool = curr_tool
 		curr_tool = tool
-		curr_tool.equipment_icon.texture = icon
+		curr_tool.equipment_icon.texture = selected_icon
+		if prev_tool != null and prev_tool != curr_tool:
+			prev_tool.equipment_icon.texture = icon
 		
 
 func drop_tool(slot : ToolSlot):

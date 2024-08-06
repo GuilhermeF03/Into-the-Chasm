@@ -7,9 +7,9 @@ class_name WeaponHandler
 @onready var anim_player : AnimationPlayer = $AnimationPlayer
 
 @export_category("Data")
-@export var texture : Texture2D
 var can_attack = true
 var animation : Animation
+@export var texture : Texture2D
 
 
 func _ready():

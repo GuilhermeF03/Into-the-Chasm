@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dfebc0sobfqb6" path="res://entities/player/inventory/resources/resource_counter_spot.png" id="5_6s1he"]
 [ext_resource type="Texture2D" uid="uid://ci2fc814jymsq" path="res://interactables/items/resources/organics_icon.png" id="6_wtnyt"]
 [ext_resource type="Texture2D" uid="uid://cf22k8dv7sqdg" path="res://interactables/items/resources/cristals_icons.png" id="7_q12tu"]
-[ext_resource type="PackedScene" uid="uid://okq1vurdbveb" path="res://entities/player/inventory/equipment/weapon.tscn" id="9_eucnu"]
+[ext_resource type="PackedScene" uid="uid://okq1vurdbveb" path="res://entities/player/inventory/equipment/Weapon.tscn" id="9_chcp0"]
 [ext_resource type="Script" path="res://entities/player/inventory/equipment/ToolsManager.gd" id="10_f3ohn"]
 [ext_resource type="Texture2D" uid="uid://dmnp2u754cari" path="res://entities/player/inventory/stats_panel/panel.png" id="11_g6ukt"]
 [ext_resource type="Texture2D" uid="uid://c3e7sbd48vvop" path="res://entities/player/inventory/core/art/inventory_book4.png" id="11_nkym1"]
@@ -149,6 +149,7 @@ _data = {
 }
 
 [node name="Inventory" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_ildrf")
 
 [node name="Ui" type="PanelContainer" parent="."]
@@ -416,7 +417,7 @@ fit_content = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Weapon" parent="Ui/Outer Margin/Background/Inner Margin/Pages0/Resources & Equipment/Equipment/Content" instance=ExtResource("9_eucnu")]
+[node name="Weapon" parent="Ui/Outer Margin/Background/Inner Margin/Pages0/Resources & Equipment/Equipment/Content" instance=ExtResource("9_chcp0")]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 0

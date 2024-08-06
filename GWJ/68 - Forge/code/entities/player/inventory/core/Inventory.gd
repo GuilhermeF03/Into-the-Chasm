@@ -41,11 +41,7 @@ func toggle():
 	if handling_input: open()
 	else: close()
 	
-	ui.process_mode = (
-		Node.PROCESS_MODE_DISABLED if !handling_input
-		else Node.PROCESS_MODE_INHERIT
-	)
-
+	
 func open():
 	pages.visible = false
 	self.visible = true

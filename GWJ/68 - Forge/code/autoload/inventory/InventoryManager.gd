@@ -79,6 +79,12 @@ func add_tool(tool : Tool):
 	if available_slot != -1:
 		tools[available_slot] = tool
 		tool_added.emit(tool, available_slot)
+		if (
+			available_slot == 0 
+			and tools.filter(func (val): return val != null).size() == 1
+		):
+			curr_tool = tool
+			tool_selected.emit(0)
 	else: 
 		var idx = curr_tool_number - 1 # No space - swap with last tool
 		
@@ -91,8 +97,20 @@ func remove_tool(index : int = -1):
 		tools.size() if index not in range(curr_tool_number)
 		else index
 	)
+	var tool = tools[index]
+	
 	tools[index] = null
 	tool_removed.emit(idx)
+	
+	# Dropped current selected tool -> defer to next available tool
+	if curr_tool == tool:
+		var available_tools = tools.filter(func (value): return value != null)
+		if available_tools.is_empty():
+			tool_selected.emit(-1)
+		else:
+			curr_tool = available_tools.front()
+			var curr_tool_index = tools.find(curr_tool)
+			tool_selected.emit(curr_tool_idx)
 	
 	
 func select_tool(index : int):
