@@ -4,4 +4,5 @@
 
 [node name="InventoryManager" type="Node2D"]
 process_mode = 3
+process_priority = 1
 script = ExtResource("1_s78wo")

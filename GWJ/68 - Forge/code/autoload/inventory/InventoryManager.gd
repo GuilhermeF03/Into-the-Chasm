@@ -13,18 +13,17 @@ var weapon : Weapon
 
 @export_subgroup("Tools")
 const MAX_TOOLS : int = 4
-const INITIAL_TOOLS : int = 2
+const INITIAL_TOOLS : int = 3
 
-var curr_tool_idx = 0
+var curr_tool_idx = -1
 var curr_tool : Tool = null
 var tools : Array[Tool] = []
-var curr_tool_number = INITIAL_TOOLS
+var curr_tools_size = INITIAL_TOOLS
 
 @export_category("Recipes")
 var recipes : Array[Recipe]
 
 @export_category("Signals")
-
 signal weapon_changed(weapon : Weapon)
 
 signal tool_removed(index : int)
@@ -32,14 +31,14 @@ signal tool_selected(index : int)
 signal tool_slots_upgraded(ammount : int)
 signal tool_added(tool : Tool, index : int)
 
-signal recipe_removed(index : int)
 signal recipe_added(recipe : Recipe, index : int)
 
 signal resource_changed(resource : ResourceType, ammount : int)
 
 
 func _enter_tree() -> void:
-	for i in range(curr_tool_number): tools.append(null)
+	tools.reize(curr_tools_size)
+	tools.fill(null)
 
 
 #region Resources
@@ -49,6 +48,7 @@ func set_resource(resource : ResourceType, ammount : int, override : bool = fals
 		else organics if resource == ResourceType.ORGANIC
 		else cristals
 	)
+
 	var value = (0 if override else resource_holder) + ammount
 	var new_amount = clamp(value, 0, RESOURCE_CAP)
 	
@@ -79,22 +79,21 @@ func add_tool(tool : Tool):
 	if available_slot != -1:
 		tools[available_slot] = tool
 		tool_added.emit(tool, available_slot)
-		if (
-			available_slot == 0 
-			and tools.filter(func (val): return val != null).size() == 1
-		):
+		
+		if available_slot == 0 and curr_tool == null:
 			curr_tool = tool
-			tool_selected.emit(0)
+			select_tool(0)
 	else: 
-		var idx = curr_tool_number - 1 # No space - swap with last tool
+		var idx = curr_tools_size - 1 # No space - swap with last tool
 		
 		tools[idx] = tool
 		tool_added.emit(tool, idx)
 
 
 func remove_tool(index : int = -1):
+	print("Removing tool...")
 	var idx = (
-		tools.size() if index not in range(curr_tool_number)
+		tools.size() if index not in range(curr_tools_size)
 		else index
 	)
 	var tool = tools[index]
@@ -104,28 +103,35 @@ func remove_tool(index : int = -1):
 	
 	# Dropped current selected tool -> defer to next available tool
 	if curr_tool == tool:
-		var available_tools = tools.filter(func (value): return value != null)
+		var available_tools = tools.filter(func(value): return value != null)
 		if available_tools.is_empty():
-			tool_selected.emit(-1)
+			select_tool(-1)
+			curr_tool = null
 		else:
-			curr_tool = available_tools.front()
-			var curr_tool_index = tools.find(curr_tool)
-			tool_selected.emit(curr_tool_idx)
+			var curr_tool_index = tools.find(available_tools.front())
+			select_tool(curr_tool_index)
 	
 	
 func select_tool(index : int):
-	var tools_size = tools.size()
-	if tools_size == 0: return
-
-	index = abs(index) % tools_size
+	if index == -1:
+		curr_tool = null
+		curr_tool_idx = -1
+		tool_selected.emit(-1)
+		return
 	
-	curr_tool = tools[index]
+	var _tool = tools[index]
+	
+	curr_tool = (
+		_tool if _tool != null
+		else tools.filter(func(value): return value != null and value != curr_tool).front()
+	)	
+		
 	curr_tool_idx = index
 	tool_selected.emit(index)
 	
 	
 func add_tool_slots(ammount : int):
-	curr_tool_number = clamp(curr_tool_number + ammount, 0, MAX_TOOLS)
+	curr_tools_size = clamp(curr_tools_size + ammount, 0, MAX_TOOLS)
 	tool_slots_upgraded.emit(ammount)
 
 
@@ -136,12 +142,6 @@ func add_tool_slots(ammount : int):
 func add_recipe(recipe : Recipe):
 	recipes.push_back(recipe)
 	recipe_added.emit(recipe, recipes.size() - 1)
-
-
-func remove_recipe(index : int):
-	if index not in range(recipes.size()): return
-	recipes.remove_at(index)
-	recipe_removed.emit(index)
 
 
 #endregion

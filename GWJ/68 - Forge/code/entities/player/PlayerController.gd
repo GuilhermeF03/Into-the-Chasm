@@ -80,15 +80,6 @@ func _input(event : InputEvent):
 	handle_tool_selection(event)
 
 
-func handle_tool_selection(event: InputEvent) -> void:
-	var curr_tool_idx = InventoryManager.curr_tool_idx
-		
-	if event.is_action_pressed("next_consumable"):
-		InventoryManager.select_tool(curr_tool_idx + 1)
-	elif event.is_action_pressed("prev_consumable"):
-		InventoryManager.select_tool(curr_tool_idx - 1)
-
-
 func handle_dodge_input(event : InputEvent):
 	if (
 		event.is_action_pressed("dodge") 
@@ -106,7 +97,29 @@ func handle_dodge_input(event : InputEvent):
 		dodging = false
 
 
-
+func handle_tool_selection(event: InputEvent) -> void:
+	var curr_tool_idx = InventoryManager.curr_tool_idx
+	var tools_size = InventoryManager.tools.filter(func(value): return value != null).size()
+	
+	if tools_size == 0: return
+	
+	var idx = 0
+	
+	if (
+		event.is_pressed() and !event.is_echo()
+		and event.as_text().is_valid_int()
+	):
+		idx = event.as_text().to_int() - 1
+	else:
+		idx = curr_tool_idx + (
+			1 if event.is_action_pressed("next_consumable")
+			else -1 if event.is_action_pressed("prev_consumable") 
+			else 0
+		)
+		
+	if idx != curr_tool_idx:
+		idx = tools_size -1 if idx == -1 else idx % InventoryManager.tools.size()
+		InventoryManager.select_tool(idx)
 
 
 #endregion

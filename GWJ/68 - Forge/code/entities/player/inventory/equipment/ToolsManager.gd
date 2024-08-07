@@ -58,6 +58,7 @@ func update_holder(tool : Tool, index : int = -1):
 
 	
 func select_tool(index : int):
+	print("Selected at:", index)
 	if index == -1 and curr_tool != null:
 		curr_tool.equipment_icon.texture = icon
 		curr_tool = null
@@ -66,7 +67,6 @@ func select_tool(index : int):
 	var tool = self.get_child(index) as ToolSlot
 
 	if tool.item != null:
-		print("selected")
 		var prev_tool = curr_tool
 		curr_tool = tool
 		curr_tool.equipment_icon.texture = selected_icon

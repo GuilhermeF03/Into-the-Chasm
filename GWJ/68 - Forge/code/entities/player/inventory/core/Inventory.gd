@@ -5,7 +5,6 @@ class_name Inventory
 @onready var player = $AnimationPlayer
 @onready var pages = $"Ui/Outer Margin/Background/Inner Margin"
 @onready var map_label = $"Ui/Outer Margin/Background/Inner Margin/Pages0/Map/MarginContainer/Map/Label"
-@onready var ui = $Ui
 
 
 @export_category("Data")
@@ -83,8 +82,11 @@ func _input(event: InputEvent) -> void:
 	
 	if not handling_input: return
 	
-	var next_page = 0
+	handle_page_leaf(event)
 	
+	
+func handle_page_leaf(event: InputEvent):
+	var next_page = 0
 	if event.is_action_pressed("next_page"):
 		if not(current_page + 1 >= pages.get_child_count()):
 			next_page = current_page + 1

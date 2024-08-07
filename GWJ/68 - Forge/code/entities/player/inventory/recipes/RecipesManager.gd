@@ -11,15 +11,10 @@ var children : Array[Node]
 func _ready():
 	children = self.get_children()
 	InventoryManager.recipe_added.connect(equip)
-	InventoryManager.recipe_removed.connect(unequip)
 
 
 func equip(recipe : Recipe, _index : int):
 	add_recipe_node(recipe)
-
-
-func unequip(index : int):
-	remove_recipe_node(index)
 
 
 func add_recipe_node(recipe : Recipe):
