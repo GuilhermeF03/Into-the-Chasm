@@ -7,7 +7,6 @@ class_name PickableResource
 const MIN_SPAWN_RANGE = 75
 const MAX_SPAWN_RANGE = 150
 
-
 @export_category("Info")
 @export_range(0, 80, 5) var ammount : int
 @export var type : InventoryManager.ResourceType
@@ -46,7 +45,7 @@ func _process(_delta):
 
 		var tween = create_tween()
 		(
-			tween.tween_property(self, "position", player_pos,1)
+			tween.tween_property(self, "position", player_pos, 1)
 			.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
 		)
 

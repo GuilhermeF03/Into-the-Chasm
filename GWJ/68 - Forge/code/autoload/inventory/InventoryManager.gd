@@ -37,7 +37,7 @@ signal resource_changed(resource : ResourceType, ammount : int)
 
 
 func _enter_tree() -> void:
-	tools.reize(curr_tools_size)
+	tools.resize(curr_tools_size)
 	tools.fill(null)
 
 
@@ -61,6 +61,7 @@ func set_resource(resource : ResourceType, ammount : int, override : bool = fals
 
 
 #endregion
+
 
 #region Weapons
 func set_weapon(new_weapon : Weapon):
@@ -124,7 +125,7 @@ func select_tool(index : int):
 	curr_tool = (
 		_tool if _tool != null
 		else tools.filter(func(value): return value != null and value != curr_tool).front()
-	)	
+	)
 		
 	curr_tool_idx = index
 	tool_selected.emit(index)

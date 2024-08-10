@@ -17,8 +17,8 @@ extends CharacterBody2D
 @onready var weapon_handler : WeaponHandler = $Weapon/WeaponHandler
 
 @export_category("Animation")
-var back_view = false
 var dodging = false
+var back_view = false
 
 
 func _ready():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxy1wsxu5cisv"]
+[gd_scene load_steps=9 format=3 uid="uid://cxy1wsxu5cisv"]
 
 [ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://entities/player/Player.tscn" id="1_cv3c6"]
 [ext_resource type="PackedScene" uid="uid://dje586mcin71p" path="res://interactables/items/resources/PickableResource.tscn" id="2_tuplk"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://dw8y2vxonkiof" path="res://interactables/items/tools/healing/small_jar.png" id="7_fej61"]
 [ext_resource type="PackedScene" uid="uid://dr5k3xeuoe3os" path="res://interactables/items/recipes/PickableRecipe.tscn" id="8_mxjmx"]
 [ext_resource type="PackedScene" uid="uid://cwseeacjaeuni" path="res://entities/mobs/slime/Slime.tscn" id="9_2ibo8"]
-[ext_resource type="PackedScene" uid="uid://d2at40xfyklc" path="res://interactables/items/weapons/sword/Sword.tscn" id="10_1clum"]
 
 [node name="Demo" type="Node2D"]
 y_sort_enabled = true
@@ -47,24 +46,12 @@ texture = ExtResource("6_i8tlq")
 
 [node name="PickableRecipe" parent="." instance=ExtResource("8_mxjmx")]
 position = Vector2(389, -158)
-organics = 10
-cristals = 10
-crafted_item = ExtResource("10_1clum")
-item_name = "Sword"
 
 [node name="PickableRecipe12" parent="." instance=ExtResource("8_mxjmx")]
 position = Vector2(389, -158)
-organics = 10
-cristals = 10
-crafted_item = ExtResource("10_1clum")
-item_name = "Sword"
 
 [node name="PickableRecipe13" parent="." instance=ExtResource("8_mxjmx")]
 position = Vector2(391, -157)
-organics = 10
-cristals = 10
-crafted_item = ExtResource("10_1clum")
-item_name = "Sword"
 
 [node name="Slime" parent="." instance=ExtResource("9_2ibo8")]
 position = Vector2(1049, -392)

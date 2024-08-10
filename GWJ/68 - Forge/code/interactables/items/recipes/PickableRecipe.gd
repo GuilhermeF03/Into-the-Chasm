@@ -2,7 +2,6 @@
 extends Recipe
 class_name PickableRecipe
 
-#@onready var pickable : PickableItem = $PickableItem
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
@@ -11,10 +10,11 @@ func _ready() -> void:
 	if not $PickableItem.get_picked.is_connected(get_picked):
 		$PickableItem.get_picked.connect(get_picked)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		pickable.texture = texture
+
 
 func get_picked():
 	InventoryManager.add_recipe(self as Recipe)

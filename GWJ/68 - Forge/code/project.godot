@@ -21,6 +21,7 @@ InputManager="*res://autoload/input/InputManager.tscn"
 InventoryManager="*res://autoload/inventory/InventoryManager.gd"
 InteractionManager="*res://autoload/interaction/InteractionManager.tscn"
 UiManager="*res://autoload/ui/UiManager.tscn"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [display]
 

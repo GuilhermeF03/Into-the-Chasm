@@ -329,6 +329,7 @@ one_shot = true
 position = Vector2(40, 2.84217e-14)
 
 [node name="Inventory" parent="." instance=ExtResource("2_urbfw")]
+visible = false
 
 [node name="Minimap" parent="." instance=ExtResource("8_8o5uc")]
 
