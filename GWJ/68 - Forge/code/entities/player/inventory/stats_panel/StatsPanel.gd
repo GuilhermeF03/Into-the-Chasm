@@ -2,7 +2,7 @@ extends PanelContainer
 class_name ItemStats
 
 @export_category("Nodes")
-@onready var label = $Content/Label
+@onready var label = $Label
 
 
 func set_stats(item : Item):

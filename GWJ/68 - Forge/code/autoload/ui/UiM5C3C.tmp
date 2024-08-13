@@ -19,10 +19,10 @@ theme_override_constants/margin_left = 48
 theme_override_constants/margin_top = 48
 theme_override_constants/margin_right = 48
 theme_override_constants/margin_bottom = 48
-metadata/_edit_use_anchors_ = true
 
 [node name="TopDock" parent="MarginContainer" instance=ExtResource("2_4bcfh")]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 2
 
 [node name="LeftDock" parent="MarginContainer" instance=ExtResource("2_4bcfh")]

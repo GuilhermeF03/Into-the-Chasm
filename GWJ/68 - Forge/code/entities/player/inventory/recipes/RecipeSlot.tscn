@@ -15,7 +15,7 @@ anchor_bottom = 0.9
 offset_left = -20.0
 offset_top = -16.0
 offset_right = 20.0
-offset_bottom = 16.0
+offset_bottom = 15.6
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -24,10 +24,12 @@ mouse_default_cursor_shape = 2
 script = ExtResource("1_r5nc6")
 
 [node name="Slot" type="TextureRect" parent="."]
+clip_contents = true
 custom_minimum_size = Vector2(99, 80)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 texture = ExtResource("2_00bxr")
 stretch_mode = 5
 
@@ -53,16 +55,6 @@ stretch_mode = 5
 [node name="Stats" parent="Slot" instance=ExtResource("4_sodqs")]
 z_index = 1
 layout_mode = 1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 1.5
-anchor_bottom = 1.5
-offset_left = -572.0
-offset_top = -320.0
-offset_right = -580.0
-offset_bottom = -328.0
-grow_horizontal = 0
-grow_vertical = 0
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="item_set" from="." to="." method="_on_item_set"]

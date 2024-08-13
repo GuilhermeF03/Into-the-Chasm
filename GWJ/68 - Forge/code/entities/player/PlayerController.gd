@@ -29,9 +29,11 @@ func _ready():
 func _physics_process(_delta):
 	var movement = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
+	if inventory.handling_input: return
+	
 	handle_movement(movement)
 	handle_animation(movement)
-
+	
 	# camera & weapon follow
 	handle_weapon()
 	handle_camera()
