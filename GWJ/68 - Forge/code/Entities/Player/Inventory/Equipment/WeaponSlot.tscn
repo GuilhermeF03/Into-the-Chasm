@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://okq1vurdbveb"]
+
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Equipment/WeaponManager.gd" id="1_tyb64"]
+[ext_resource type="Texture2D" uid="uid://6v3v0reidi10" path="res://Entities/Player/Inventory/Equipment/Tools/equipment_slot.png" id="2_266j1"]
+[ext_resource type="PackedScene" uid="uid://b5ote6c6nj3y5" path="res://Entities/Player/Inventory/Stats Panel/StatsPanel.tscn" id="3_5jpfx"]
+
+[node name="Weapon" type="MarginContainer"]
+script = ExtResource("1_tyb64")
+
+[node name="Slot" type="TextureRect" parent="."]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_266j1")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Icon" type="AspectRatioContainer" parent="Slot"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Slot/Icon"]
+layout_mode = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="Stats" parent="Slot" instance=ExtResource("3_5jpfx")]
+visible = false
+layout_mode = 1
+
+[connection signal="item_set" from="." to="." method="_on_item_set"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_enter"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exit"]

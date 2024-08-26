@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dje586mcin71p"]
 
-[ext_resource type="Script" path="res://interactables/items/resources/PickableResource.gd" id="1_udx31"]
-[ext_resource type="Texture2D" uid="uid://ekmbsrud0m58" path="res://interactables/items/resources/minerals_icon.png" id="2_tcby1"]
+[ext_resource type="Script" path="res://Interactables/Items/Resources/PickableResource.gd" id="1_udx31"]
+[ext_resource type="Texture2D" uid="uid://ekmbsrud0m58" path="res://Interactables/Items/Resources/Art/minerals_icon.png" id="2_tcby1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rck3t"]
 radius = 36.0

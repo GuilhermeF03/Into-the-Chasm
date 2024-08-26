@@ -16,9 +16,9 @@ const MAX_SPAWN_RANGE = 150
 @onready var player = $AnimationPlayer
 
 @export_category("Textures")
-var mineral_icon : Texture2D = preload("res://interactables/items/resources/minerals_icon.png")
-var organic_icon : Texture2D = preload("res://interactables/items/resources/organics_icon.png")
-var cristal_icon : Texture2D = preload("res://interactables/items/resources/cristals_icons.png")
+var mineral_icon : Texture2D = preload("res://Interactables/Items/Resources/Art/minerals_icon.png")
+var organic_icon : Texture2D = preload("res://Interactables/Items/Resources/Art/organics_icon.png")
+var cristal_icon : Texture2D = preload("res://Interactables/Items/Resources/Art/cristals_icons.png")
 
 @export_category("Data")
 var start_follow : bool = false

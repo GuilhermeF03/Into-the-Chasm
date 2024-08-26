@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ccqmky2gwrlux"
+path="res://.godot/imported/inventory_book.aseprite-90d9ea31a12eee6f81a9d43c4c8d28de.res"
+
+[deps]
+
+source_file="res://Entities/Player/Inventory/Art/inventory_book.aseprite"
+dest_files=["res://.godot/imported/inventory_book.aseprite-90d9ea31a12eee6f81a9d43c4c8d28de.res"]
+
+[params]
+

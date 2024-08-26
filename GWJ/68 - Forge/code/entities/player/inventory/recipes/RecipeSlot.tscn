@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bunwl8y8h0o3k"]
 
-[ext_resource type="Script" path="res://entities/player/inventory/recipes/RecipeSlot.gd" id="1_r5nc6"]
-[ext_resource type="Texture2D" uid="uid://c4n2g6p15btbv" path="res://entities/player/inventory/recipes/recipe_slot.png" id="2_00bxr"]
-[ext_resource type="Texture2D" uid="uid://ekmbsrud0m58" path="res://interactables/items/resources/minerals_icon.png" id="3_lgf4s"]
-[ext_resource type="PackedScene" uid="uid://b5ote6c6nj3y5" path="res://entities/player/inventory/stats_panel/StatsPanel.tscn" id="4_sodqs"]
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Recipes/RecipeSlot.gd" id="1_r5nc6"]
+[ext_resource type="Texture2D" uid="uid://c4n2g6p15btbv" path="res://Entities/Player/Inventory/Recipes/Art/recipe_slot.png" id="2_00bxr"]
+[ext_resource type="Texture2D" uid="uid://ekmbsrud0m58" path="res://Interactables/Items/Resources/Art/minerals_icon.png" id="3_lgf4s"]
+[ext_resource type="PackedScene" uid="uid://b5ote6c6nj3y5" path="res://Entities/Player/Inventory/Stats Panel/StatsPanel.tscn" id="4_sodqs"]
 
 [node name="Recipe" type="AspectRatioContainer"]
 texture_filter = 1
@@ -53,6 +53,7 @@ texture = ExtResource("3_lgf4s")
 stretch_mode = 5
 
 [node name="Stats" parent="Slot" instance=ExtResource("4_sodqs")]
+visible = false
 z_index = 1
 layout_mode = 1
 

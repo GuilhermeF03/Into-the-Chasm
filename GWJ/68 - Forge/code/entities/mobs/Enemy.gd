@@ -10,8 +10,8 @@ class_name Enemy
 
 @export_category("Nodes")
 @onready var sprite = $Sprite2D
-@onready var sprite_2 = $Sprite2D2
 @onready var player = $AnimationPlayer
+
 
 @onready var sight_raycast = $SightRayCast
 @onready var idle_timer = $Timers/IdleTimer
@@ -19,17 +19,20 @@ class_name Enemy
 @onready var patrol_idle_timer = $Timers/PatrolIdleTimer
 
 @export_category("Data")
-enum EnemyState {PATROL, CHASE}
+enum EnemyState {PATROL, CHASE, IDLE}
 
 var state : EnemyState
-var patrolling = false
+var prev_state : EnemyState
 
+## Patrol
+var moving_to_patrol_spot = false
 var patrol_spot : Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
 	idle_timer.wait_time = randf_range(1, IDLE_WAIT_TIME)
 	state = EnemyState.PATROL
+	prev_state = state
 
 
 func _physics_process(delta: float) -> void:
@@ -37,21 +40,21 @@ func _physics_process(delta: float) -> void:
 	
 	match state:
 		EnemyState.PATROL: handle_patrol_state(delta)
-		EnemyState.CHASE: handle_chase_state()
+		EnemyState.CHASE: handle_chase_state(delta)
+		EnemyState.IDLE: pass
 	
 	if velocity != Vector2.ZERO:
 		idle_timer.stop()
 		player.play("Walk")
 		sprite.scale.x = -1 if velocity.x < 0 else 1
 		
-	move_and_slide()
-	
+		move_and_slide()
 
 
 func handle_patrol_state(_delta):
-	if not patrolling:
-		print("Choosing new spot")
 		
+	 # Reached previous patrol spot
+	if not moving_to_patrol_spot:
 		patrol_raycast.target_position = Vector2(
 			randf_range(-1, 1), randf_range(-1, 1)
 		) * RAYCAST_PATROL_DIST
@@ -61,32 +64,32 @@ func handle_patrol_state(_delta):
 			else to_global(patrol_raycast.target_position)
 		)
 
-		patrolling = true
+		moving_to_patrol_spot = true
 	else:
-		sprite_2.global_position = patrol_spot
 		var mov_vect = global_position.direction_to(patrol_spot) * MOV_SPEED
 		var dist = self.global_position.distance_to(patrol_spot)
 
-		if(dist <= 0.5 and dist >= -0.5):
-			print("Reached")
+		# Reached destination
+		if abs(dist) <= 1:
 			velocity = Vector2.ZERO
-			patrolling = false
+			moving_to_patrol_spot = false
+			replace_state(EnemyState.IDLE)
 			idle_timer.start()
 			return
 		
 		velocity = mov_vect
-	
-		
-func handle_chase_state():
+
+
+func handle_chase_state(delta):
 	pass
 
 
 func _on_idle_timer_timeout() -> void:
-	print("Timeout")
 	player.play("idle")
 	await player.animation_finished
-	idle_timer.start()
-	
+	replace_state(prev_state)
 
-func _on_patrol_idle_timeout() -> void:
-	patrolling = false
+
+func replace_state(new_state: EnemyState):
+	prev_state = state
+	state = new_state

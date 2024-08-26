@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwseeacjaeuni"]
+[gd_scene load_steps=6 format=3 uid="uid://cwseeacjaeuni"]
 
-[ext_resource type="Script" path="res://entities/mobs/Enemy.gd" id="1_gf03x"]
-[ext_resource type="Texture2D" uid="uid://dpluhx8mta40i" path="res://entities/mobs/slime/slime.png" id="2_d4hhx"]
-[ext_resource type="Texture2D" uid="uid://ctjk2mxqxpyqk" path="res://Logo.png" id="3_07fhj"]
+[ext_resource type="Script" path="res://Entities/Mobs/Enemy.gd" id="1_gf03x"]
+[ext_resource type="Texture2D" uid="uid://dpluhx8mta40i" path="res://Entities/Mobs/Slime/slime.png" id="2_d4hhx"]
 
 [sub_resource type="Animation" id="Animation_3p6cb"]
 length = 0.5
@@ -67,6 +66,7 @@ _data = {
 [node name="Slime" type="CharacterBody2D"]
 scale = Vector2(5, 5)
 script = ExtResource("1_gf03x")
+IDLE_WAIT_TIME = 2
 RAYCAST_DETECT_DIST = 80
 RAYCAST_FOLLOW_DIST = 120
 
@@ -104,15 +104,12 @@ collision_mask = 2
 collision_mask = 0
 hit_from_inside = true
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-scale = Vector2(0.01, 0.01)
-texture = ExtResource("3_07fhj")
-
 [node name="Timers" type="Node" parent="."]
 
 [node name="PatrolIdleTimer" type="Timer" parent="Timers"]
 
 [node name="IdleTimer" type="Timer" parent="Timers"]
+one_shot = true
 autostart = true
 
 [connection signal="timeout" from="Timers/PatrolIdleTimer" to="." method="_on_patrol_idle_timeout"]

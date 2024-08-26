@@ -12,7 +12,7 @@ extends CharacterBody2D
 @onready var weapon = $Weapon
 @onready var camera = $PhantomCamera2D
 @onready var dodge_timer = $Timers/DodgeTimer
-@onready var inventory : Inventory = $Inventory
+@onready var inventory : Inventory = $UI/Inventory
 @onready var animation_player = $AnimationPlayer
 @onready var weapon_handler : WeaponHandler = $Weapon/WeaponHandler
 
@@ -37,7 +37,7 @@ func _physics_process(_delta):
 	# camera & weapon follow
 	handle_weapon()
 	handle_camera()
-	
+
 
 #region Handlers
 func handle_movement(input):
@@ -120,7 +120,7 @@ func handle_tool_selection(event: InputEvent) -> void:
 		)
 		
 	if idx != curr_tool_idx:
-		idx = tools_size -1 if idx == -1 else idx % InventoryManager.tools.size()
+		idx = tools_size - 1 if idx == -1 else idx % InventoryManager.get_tools_size()
 		InventoryManager.select_tool(idx)
 
 

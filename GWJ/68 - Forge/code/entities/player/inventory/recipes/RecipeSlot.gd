@@ -13,6 +13,7 @@ var is_crafting : bool = false
 
 
 func _on_mouse_entered() -> void:
+	
 	UiManager.queue_dock(UiManager.DOCK.RIGHT, stats)
 	
 	

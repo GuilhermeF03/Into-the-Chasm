@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b8pr5l700brek"
+path="res://.godot/imported/minerals_icon.aseprite-44a07611796d7697a9974e75d5761b49.res"
+
+[deps]
+
+source_file="res://Interactables/Items/Resources/Art/minerals_icon.aseprite"
+dest_files=["res://.godot/imported/minerals_icon.aseprite-44a07611796d7697a9974e75d5761b49.res"]
+
+[params]
+

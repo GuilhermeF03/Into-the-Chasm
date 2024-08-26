@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cte68dj3jl77y"]
 
-[ext_resource type="Script" path="res://interactables/items/PickableItem.gd" id="1_al5b1"]
-[ext_resource type="PackedScene" uid="uid://dh86htrmpu0mq" path="res://interactables/InteractArea.tscn" id="2_coey2"]
+[ext_resource type="Script" path="res://Interactables/Items/PickableItem.gd" id="1_al5b1"]
+[ext_resource type="PackedScene" uid="uid://dh86htrmpu0mq" path="res://Interactables/InteractArea.tscn" id="2_coey2"]
 
 [sub_resource type="Animation" id="Animation_qqgpw"]
 resource_name = "hover"

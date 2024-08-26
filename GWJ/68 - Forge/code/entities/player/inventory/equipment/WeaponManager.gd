@@ -8,7 +8,6 @@ var weapon_node = preload("res://interactables/items/weapons/PickableWeapon.tscn
 @onready var stats : ItemStats = $Slot/Stats
 
 
-
 func _ready():
 	InventoryManager.weapon_changed.connect(equip)
 

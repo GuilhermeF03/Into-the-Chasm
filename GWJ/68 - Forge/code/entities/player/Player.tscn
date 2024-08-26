@@ -1,15 +1,15 @@
 [gd_scene load_steps=21 format=3 uid="uid://d0mst4eki2yyd"]
 
-[ext_resource type="Script" path="res://entities/player/PlayerController.gd" id="1_3iq6n"]
-[ext_resource type="Texture2D" uid="uid://b4g5kl5t1cfkk" path="res://entities/player/player.png" id="1_34gvv"]
+[ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_3iq6n"]
+[ext_resource type="Texture2D" uid="uid://b4g5kl5t1cfkk" path="res://Entities/Player/Art/player.png" id="1_34gvv"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_jiv16"]
-[ext_resource type="PackedScene" uid="uid://dd1bjjaxa7dur" path="res://entities/player/inventory/core/Inventory.tscn" id="2_urbfw"]
+[ext_resource type="PackedScene" uid="uid://dd1bjjaxa7dur" path="res://Entities/Player/Inventory/Inventory.tscn" id="2_urbfw"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="6_rymay"]
-[ext_resource type="PackedScene" uid="uid://ywpg5nkhidqk" path="res://entities/player/weapon_handling/WeaponHandler.tscn" id="7_cn85d"]
+[ext_resource type="PackedScene" uid="uid://ywpg5nkhidqk" path="res://Entities/Player/Weapon Handling/WeaponHandler.tscn" id="7_cn85d"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="7_mgchg"]
-[ext_resource type="PackedScene" uid="uid://b2uv4ura4s6tm" path="res://entities/player/minimap/Minimap.tscn" id="8_8o5uc"]
+[ext_resource type="PackedScene" uid="uid://5xry0mnc8j7o" path="res://Entities/Player/HUD/HUD.tscn" id="9_hyecf"]
 
-[sub_resource type="Resource" id="Resource_xygcn"]
+[sub_resource type="Resource" id="Resource_jstsm"]
 script = ExtResource("7_mgchg")
 duration = 1.0
 transition = 0
@@ -238,7 +238,8 @@ script = ExtResource("1_3iq6n")
 DODGE_COOLDOWN = 0.7
 
 [node name="Camera" type="Camera2D" parent="."]
-zoom = Vector2(1.2, 1.2)
+physics_interpolation_mode = 1
+zoom = Vector2(0.8, 0.8)
 position_smoothing_speed = 1.0
 drag_left_margin = 0.3
 drag_top_margin = 0.3
@@ -248,14 +249,6 @@ editor_draw_drag_margin = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera"]
 script = ExtResource("2_jiv16")
-
-[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
-script = ExtResource("6_rymay")
-follow_mode = 2
-follow_target = NodePath("..")
-zoom = Vector2(1.2, 1.2)
-snap_to_pixel = true
-tween_resource = SubResource("Resource_xygcn")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -281,6 +274,13 @@ metadata/_aseprite_wizard_interface_config_ = {
 "output_section": true,
 "slice_section": false
 }
+
+[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+script = ExtResource("6_rymay")
+follow_mode = 2
+follow_target = NodePath("..")
+zoom = Vector2(0.8, 0.8)
+tween_resource = SubResource("Resource_jstsm")
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -328,10 +328,12 @@ one_shot = true
 [node name="WeaponHandler" parent="Weapon" instance=ExtResource("7_cn85d")]
 position = Vector2(40, 2.84217e-14)
 
-[node name="Inventory" parent="." instance=ExtResource("2_urbfw")]
+[node name="UI" type="Node" parent="."]
+
+[node name="Inventory" parent="UI" instance=ExtResource("2_urbfw")]
 visible = false
 
-[node name="Minimap" parent="." instance=ExtResource("8_8o5uc")]
+[node name="HUD" parent="UI" instance=ExtResource("9_hyecf")]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="area_entered" from="ItemCollect/Collect" to="." method="_on_item_collect"]

@@ -1,0 +1,351 @@
+[gd_scene load_steps=25 format=3 uid="uid://dd1bjjaxa7dur"]
+
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Inventory.gd" id="1_ildrf"]
+[ext_resource type="PackedScene" uid="uid://70somrqkb0mp" path="res://Entities/Player/Inventory/Resources/Slot/ResourceSlot.tscn" id="4_6vkx1"]
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Resources/ResourcesManager.gd" id="4_wmraf"]
+[ext_resource type="PackedScene" uid="uid://okq1vurdbveb" path="res://Entities/Player/Inventory/Equipment/WeaponSlot.tscn" id="9_chcp0"]
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Equipment/Tools/ToolsManager.gd" id="10_f3ohn"]
+[ext_resource type="Texture2D" uid="uid://dmnp2u754cari" path="res://Entities/Player/Inventory/Stats Panel/panel.png" id="11_g6ukt"]
+[ext_resource type="Texture2D" uid="uid://c3e7sbd48vvop" path="res://Entities/Player/Inventory/Art/inventory_book4.png" id="11_nkym1"]
+[ext_resource type="Texture2D" uid="uid://cdura015na1v" path="res://Entities/Player/Inventory/Art/inventory_book3.png" id="12_0oju1"]
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Recipes/RecipesManager.gd" id="13_13q6j"]
+[ext_resource type="Texture2D" uid="uid://4qlqvtwm36fh" path="res://Entities/Player/Inventory/Art/inventory_book2.png" id="13_rrmk6"]
+[ext_resource type="Texture2D" uid="uid://o7iaj1spvmj2" path="res://Entities/Player/Inventory/Art/inventory_book1.png" id="14_vk8mh"]
+[ext_resource type="Texture2D" uid="uid://bthhvdfd0ks6c" path="res://Entities/Player/Inventory/Art/inventory_book5.png" id="15_hfgly"]
+[ext_resource type="Texture2D" uid="uid://dh0k4kynwyk6" path="res://Entities/Player/Inventory/Art/inventory_book11.png" id="15_y37vd"]
+[ext_resource type="Texture2D" uid="uid://dq8t0tpsd3inl" path="res://Entities/Player/Inventory/Art/inventory_book6.png" id="16_g8ihw"]
+[ext_resource type="Texture2D" uid="uid://eq14mbdjqfqg" path="res://Entities/Player/Inventory/Art/inventory_book9.png" id="17_yeked"]
+[ext_resource type="Texture2D" uid="uid://iigt8ljrj4yk" path="res://Entities/Player/Inventory/Art/inventory_book8.png" id="18_gpli6"]
+[ext_resource type="Texture2D" uid="uid://bjfefqleldswb" path="res://Entities/Player/Inventory/Art/inventory_book10.png" id="19_4pd8o"]
+[ext_resource type="Texture2D" uid="uid://dk4hy76pvns6p" path="res://Entities/Player/Inventory/Art/inventory_book7.png" id="19_wu4re"]
+[ext_resource type="Texture2D" uid="uid://boajpui177h8" path="res://Entities/Player/Inventory/Art/inventory_book12.png" id="20_68m23"]
+
+[sub_resource type="Animation" id="Animation_nsqjg"]
+resource_name = "Close"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background Panel/Outer Margin/UI:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("11_nkym1"), ExtResource("12_0oju1"), ExtResource("13_rrmk6"), ExtResource("14_vk8mh")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background Panel/Outer Margin/UI:region_rect")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(8, 56, 240, 136), Rect2(0, 0, 256, 200), Rect2(0, 1, 256, 207), Rect2(0, 1, 256, 207)]
+}
+
+[sub_resource type="Animation" id="Animation_kuv2n"]
+resource_name = "Close_2"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background Panel/Outer Margin/UI:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("14_vk8mh"), ExtResource("13_rrmk6"), ExtResource("12_0oju1"), ExtResource("11_nkym1")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background Panel/Outer Margin/UI:region_rect")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(0, 0, 256, 207), Rect2(0, 1, 256, 215), Rect2(16, 40, 240, 152), Rect2(8, 56, 240, 136)]
+}
+
+[sub_resource type="Animation" id="Animation_8b0dc"]
+resource_name = "leaf_left"
+length = 0.6
+step = 0.06
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background Panel/Outer Margin/UI:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.3, 0.36, 0.42, 0.48, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("15_y37vd"), ExtResource("19_4pd8o"), ExtResource("17_yeked"), ExtResource("18_gpli6"), ExtResource("19_wu4re"), ExtResource("16_g8ihw"), ExtResource("15_hfgly"), ExtResource("11_nkym1")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background Panel/Outer Margin/UI:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.3, 0.36, 0.42, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(0, 56, 256, 144), Rect2(0, 56, 256, 144), Rect2(0, 0, 256, 200), Rect2(0, 0, 256, 200), Rect2(0, 0, 256, 200), Rect2(0, 0, 256, 200), Rect2(8, 56, 240, 136)]
+}
+
+[sub_resource type="Animation" id="Animation_mhrla"]
+resource_name = "leaf_right"
+length = 0.6
+step = 0.06
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background Panel/Outer Margin/UI:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.3, 0.36, 0.42, 0.48, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("11_nkym1"), ExtResource("15_hfgly"), ExtResource("16_g8ihw"), ExtResource("19_wu4re"), ExtResource("18_gpli6"), ExtResource("17_yeked"), ExtResource("19_4pd8o"), ExtResource("20_68m23")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background Panel/Outer Margin/UI:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.3, 0.36, 0.42, 0.48, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(8, 56, 248, 144), Rect2(8, 56, 248, 144), Rect2(0, 0, 256, 200), Rect2(0, 0, 256, 200), Rect2(0, 0, 256, 200), Rect2(0, 0, 256, 200), Rect2(0, 56, 256, 144), Rect2(8, 56, 240, 136)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qjwj2"]
+_data = {
+"Close": SubResource("Animation_nsqjg"),
+"Open": SubResource("Animation_kuv2n"),
+"leaf_left": SubResource("Animation_8b0dc"),
+"leaf_right": SubResource("Animation_mhrla")
+}
+
+[node name="Inventory" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_ildrf")
+
+[node name="Background Panel" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Outer Margin" type="MarginContainer" parent="Background Panel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 16
+
+[node name="UI" type="NinePatchRect" parent="Background Panel/Outer Margin"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("11_nkym1")
+region_rect = Rect2(8, 56, 240, 136)
+
+[node name="Content" type="MarginContainer" parent="Background Panel/Outer Margin/UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.09
+anchor_top = 0.15
+anchor_right = 0.92
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Pages-0" type="HBoxContainer" parent="Background Panel/Outer Margin/UI/Content"]
+layout_mode = 2
+
+[node name="Resources & Tools" type="VBoxContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-0"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="Resources" type="VBoxContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Header" type="RichTextLabel" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Resources"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center] Resources"
+fit_content = true
+
+[node name="Slots" type="HBoxContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Resources"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource("4_wmraf")
+
+[node name="Minerals" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Resources/Slots" instance=ExtResource("4_6vkx1")]
+layout_mode = 2
+type = 0
+
+[node name="Organics" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Resources/Slots" instance=ExtResource("4_6vkx1")]
+layout_mode = 2
+type = 1
+
+[node name="Cristals" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Resources/Slots" instance=ExtResource("4_6vkx1")]
+layout_mode = 2
+
+[node name="Tools" type="VBoxContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Header" type="RichTextLabel" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Tools"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center] Equipment"
+fit_content = true
+
+[node name="Content" type="HBoxContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Tools"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Weapon Slot" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Tools/Content" instance=ExtResource("9_chcp0")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+
+[node name="Tool Slots" type="VBoxContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Tools/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("10_f3ohn")
+
+[node name="Page-Break" type="Container" parent="Background Panel/Outer Margin/UI/Content/Pages-0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Map" type="VBoxContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-0"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Header" type="RichTextLabel" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Map"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center] <Level Name>"
+fit_content = true
+
+[node name="Content" type="PanelContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Map"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Break" type="Container" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Map"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Pages-1" type="HBoxContainer" parent="Background Panel/Outer Margin/UI/Content"]
+visible = false
+layout_mode = 2
+
+[node name="Inventory" type="VBoxContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Header" type="RichTextLabel" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Inventory"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center] Inventory"
+fit_content = true
+
+[node name="Content" type="PanelContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Inventory"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Break" type="Container" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Inventory"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+
+[node name="Page-Break" type="Container" parent="Background Panel/Outer Margin/UI/Content/Pages-1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Recipes" type="VBoxContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Header" type="RichTextLabel" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center] Recipes"
+fit_content = true
+
+[node name="Content" type="NinePatchRect" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("11_g6ukt")
+
+[node name="Margin" type="MarginContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes/Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Scroll Container" type="ScrollContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes/Content/Margin"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Recipes Grid" type="GridContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes/Content/Margin/Scroll Container"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+mouse_filter = 2
+columns = 3
+script = ExtResource("13_13q6j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qjwj2")
+}
