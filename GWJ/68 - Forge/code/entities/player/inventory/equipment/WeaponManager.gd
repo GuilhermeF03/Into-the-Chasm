@@ -2,7 +2,7 @@ extends ItemManager
 class_name WeaponManager
 
 @export_category("Preloaded Nodes")
-var weapon_node = preload("res://interactables/items/weapons/PickableWeapon.tscn")
+var weapon_node = preload("res://Interactables/Items/Weapons/PickableWeapon.tscn")
 
 @export_category("Nodes")
 @onready var stats : ItemStats = $Slot/Stats

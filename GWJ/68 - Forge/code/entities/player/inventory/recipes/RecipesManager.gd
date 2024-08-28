@@ -2,7 +2,7 @@ extends GridContainer
 class_name RecipesManager
 
 @export_category("Preloaded Nodes")
-var recipe_node : PackedScene = preload("res://entities/player/inventory/recipes/RecipeSlot.tscn")
+var recipe_node : PackedScene = preload("res://Entities/Player/Inventory/Recipes/RecipeSlot.tscn")
 
 @export_category("Data")
 var children : Array[Node]

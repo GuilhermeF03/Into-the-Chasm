@@ -266,7 +266,7 @@ metadata/_aseprite_wizard_config_ = {
 "only_visible": false,
 "player": "AnimationPlayer",
 "slice": "",
-"source": "res://player/player.aseprite"
+"source": "res://Player/Art/player.aseprite"
 }
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": false,

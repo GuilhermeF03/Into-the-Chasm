@@ -10,7 +10,7 @@ metadata={
 
 [deps]
 
-source_file="res://player/inventory/iventory_background.png"
+source_file="res://Entities/Player/Inventory/iventory_background.png"
 dest_files=["res://.godot/imported/iventory_background.png-c3085c11e55b31f4055bb35313386a42.ctex"]
 
 [params]

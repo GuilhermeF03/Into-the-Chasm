@@ -1,7 +1,90 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwseeacjaeuni"]
+[gd_scene load_steps=10 format=3 uid="uid://cwseeacjaeuni"]
 
 [ext_resource type="Script" path="res://Entities/Mobs/Enemy.gd" id="1_gf03x"]
 [ext_resource type="Texture2D" uid="uid://dpluhx8mta40i" path="res://Entities/Mobs/Slime/slime.png" id="2_d4hhx"]
+[ext_resource type="Texture2D" uid="uid://b7wvexlb5dars" path="res://icon.svg" id="3_2geq6"]
+
+[sub_resource type="Animation" id="Animation_vcn6l"]
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [11, 12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_804y1"]
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5, 0.6, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_xryky"]
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5, 0.6, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 2, 18, 19, 20]
+}
 
 [sub_resource type="Animation" id="Animation_3p6cb"]
 length = 0.5
@@ -32,6 +115,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_538ks"]
 length = 1.3
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -59,6 +143,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c7awx"]
 _data = {
+"Chase": SubResource("Animation_vcn6l"),
+"Idle": SubResource("Animation_804y1"),
+"Search": SubResource("Animation_xryky"),
 "Walk": SubResource("Animation_3p6cb"),
 "idle": SubResource("Animation_538ks")
 }
@@ -66,15 +153,30 @@ _data = {
 [node name="Slime" type="CharacterBody2D"]
 scale = Vector2(5, 5)
 script = ExtResource("1_gf03x")
-IDLE_WAIT_TIME = 2
-RAYCAST_DETECT_DIST = 80
-RAYCAST_FOLLOW_DIST = 120
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_2geq6")
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"slice": "",
+"source": "res://Mobs/Slime/slime.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "b663b135c9fe0ab993d1bd7a6c6ddcaf"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_d4hhx")
-hframes = 4
-vframes = 3
+hframes = 5
+vframes = 5
 frame = 6
 metadata/_aseprite_wizard_config_ = {
 "i_mode": -1,
@@ -86,9 +188,12 @@ metadata/_aseprite_wizard_config_ = {
 "only_visible": false,
 "player": "AnimationPlayer",
 "slice": "",
-"source": "res://mobs/slime/slime.aseprite"
+"source": "res://Entities/Mobs/Slime/slime.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "b663b135c9fe0ab993d1bd7a6c6ddcaf"
+metadata/_aseprite_wizard_source_file_hash_ = "2d8c9693810618c06329734dc731776e"
+metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": false
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -106,11 +211,7 @@ hit_from_inside = true
 
 [node name="Timers" type="Node" parent="."]
 
-[node name="PatrolIdleTimer" type="Timer" parent="Timers"]
-
 [node name="IdleTimer" type="Timer" parent="Timers"]
 one_shot = true
-autostart = true
 
-[connection signal="timeout" from="Timers/PatrolIdleTimer" to="." method="_on_patrol_idle_timeout"]
 [connection signal="timeout" from="Timers/IdleTimer" to="." method="_on_idle_timer_timeout"]
