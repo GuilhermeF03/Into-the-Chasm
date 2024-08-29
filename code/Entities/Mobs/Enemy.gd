@@ -1,12 +1,24 @@
 extends CharacterBody2D
 class_name Enemy
 
-@export_category("Constants")
+
+@export_category("Speeds")
 @export var PATROL_SPEED = 125.0
 @export var CHASE_SPEED = 200.0
+
+@export_category("Timers")
 @export var IDLE_WAIT_TIME = 1.2
+
+@export_category("Raycast")
 @export var RAYCAST_DETECT_DIST = 75
 @export var RAYCAST_PATROL_DIST = 100
+
+@export_category("Movement")
+@export var PATH_CURVATURE = 0.5
+var moving_to_patrol_spot = false
+var patrol_spot : Vector2 = Vector2.ZERO
+var control_spot : Vector2 = Vector2.ZERO
+var path_t = 0.0
 
 @export_category("Nodes")
 @onready var sprite = $Sprite2D
@@ -27,23 +39,22 @@ var state = EnemyState.PATROL:
 var prev_state : EnemyState = EnemyState.PATROL
 
 ## Patrol
-var moving_to_patrol_spot = false
-var patrol_spot : Vector2 = Vector2.ZERO
+
 
 
 func _ready() -> void:
-	idle_timer.wait_time = IDLE_WAIT_TIME
+	idle_timer.wait_time = IDLE_WAIT_TIME + player.get_animation("Search").length
 	sight_raycast.target_position = Vector2(RAYCAST_DETECT_DIST, 0)
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	sight_raycast.look_at(LevelManager.player.global_position)
 
 	if sight_raycast.is_colliding():
 		state = EnemyState.CHASE
 
 	match state:
-		EnemyState.PATROL: handle_patrol_state()
+		EnemyState.PATROL: handle_patrol_state(delta)
 		EnemyState.CHASE: handle_chase_state()
 		EnemyState.IDLE: pass
 	
@@ -51,7 +62,7 @@ func _physics_process(_delta: float) -> void:
 		move()
 
 
-func handle_patrol_state():
+func handle_patrol_state(delta):
 	 # Reached previous patrol spot
 	if not moving_to_patrol_spot:
 		patrol_raycast.target_position = Vector2(
@@ -61,15 +72,22 @@ func handle_patrol_state():
 		set_patrol_spot()
 		print("Chose new spot")
 	else:
+		path_t += delta
 		$Sprite2D2.global_position = patrol_spot
-		var mov_vect = global_position.direction_to(patrol_spot) * PATROL_SPEED
-		var dist = self.global_position.distance_to(patrol_spot)
+		var vect = (patrol_spot - global_position)
+	
+		var mov_vect = vect.normalized() * PATROL_SPEED
+		var dist = global_position.distance_to(patrol_spot)
 
 		# Reached destination
 		if abs(dist) <= 1:
 			player.stop()
 			velocity = Vector2.ZERO
 			moving_to_patrol_spot = false
+			
+			# search
+			sprite.scale.x = 1
+			player.play("Search")
 			state = EnemyState.IDLE
 			idle_timer.start()
 			return
@@ -89,11 +107,18 @@ func handle_chase_state():
 
 
 func set_patrol_spot():
+	path_t = 0
 	patrol_spot = (
 		patrol_raycast.get_collision_point() if patrol_raycast.is_colliding()
 		else to_global(patrol_raycast.target_position)
 	)
 	moving_to_patrol_spot = true
+	var path_midpoint = global_position.distance_to(patrol_spot) / 2
+
+	control_spot = Vector2(
+		global_position.x + path_midpoint,
+		global_position.y + (path_midpoint * PATH_CURVATURE)
+	)
 
 
 func move():
@@ -108,9 +133,4 @@ func move():
 
 
 func _on_idle_timer_timeout() -> void:
-	sprite.scale.x = 1
-	player.play(
-		"Search"
-	)
-	await player.animation_finished
 	state = prev_state

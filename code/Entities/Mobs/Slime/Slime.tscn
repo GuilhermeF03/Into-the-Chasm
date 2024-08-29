@@ -29,7 +29,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [11, 12, 13, 14, 15]
+"values": [5, 6, 7, 8, 9]
 }
 
 [sub_resource type="Animation" id="Animation_804y1"]
@@ -60,7 +60,8 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_xryky"]
-length = 1.3
+length = 1.15
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -80,14 +81,15 @@ tracks/1/path = NodePath("Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = false
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.5, 0.6, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.075, 0.475, 0.55, 0.95),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [16, 17, 2, 18, 19, 20]
+"values": [10, 11, 12, 13, 14]
 }
 
 [sub_resource type="Animation" id="Animation_3p6cb"]
 length = 0.5
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -110,7 +112,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [6, 7, 8, 9, 10]
+"values": [0, 1, 2, 3, 4]
 }
 
 [sub_resource type="Animation" id="Animation_538ks"]
@@ -175,9 +177,9 @@ metadata/_aseprite_wizard_source_file_hash_ = "b663b135c9fe0ab993d1bd7a6c6ddcaf"
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_d4hhx")
-hframes = 5
-vframes = 5
-frame = 6
+hframes = 4
+vframes = 4
+frame = 5
 metadata/_aseprite_wizard_config_ = {
 "i_mode": -1,
 "keep_anim_length": false,
@@ -190,7 +192,7 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Entities/Mobs/Slime/slime.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "2d8c9693810618c06329734dc731776e"
+metadata/_aseprite_wizard_source_file_hash_ = "2044d46f7bf37183aae131f10c2234a3"
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": false
 }
