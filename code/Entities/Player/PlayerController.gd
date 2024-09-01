@@ -53,9 +53,10 @@ func handle_weapon():
 func handle_camera():
 	if inventory.handling_input: return
 	
-	var axis = (
-		get_global_mouse_position() - LevelManager.player.global_position
-	) + Vector2.UP * 200 # Add offset to camera
+	
+	var player_pos = LevelManager.player.global_position
+	var mouse_pos = get_global_mouse_position()
+	var axis = (mouse_pos - player_pos) + Vector2.UP * 200 # Add offset to camera
 	
 	var axis_normalized = (axis * 10).normalized()
 	var mouse_drift = axis_normalized * MAX_MOUSE_DRIFT
@@ -70,6 +71,11 @@ func handle_camera():
 	)
 	
 	sprite.scale.x = -5 if (axis / MOUSE_DRIFT_FACTOR).x < 0 else 5
+	
+	back_view = (mouse_pos).y < player_pos.y
+	
+	print("Mouse pos:", mouse_pos)
+	print("Player pos:", player_pos)
 
 
 #endregion
@@ -136,8 +142,6 @@ func handle_animation(input):
 		return
 
 	if inventory.handling_input: return
-	
-	back_view = input.y < 0
 	
 	animation_player.play("walk_" + ("up" if back_view else "down"));
 

@@ -70,11 +70,10 @@ func handle_patrol_state(delta):
 		) * RAYCAST_PATROL_DIST
 		
 		set_patrol_spot()
-		print("Chose new spot")
 	else:
 		path_t += delta
 		$Sprite2D2.global_position = patrol_spot
-		var vect = (patrol_spot - global_position)
+		var vect = patrol_spot - global_position
 	
 		var mov_vect = vect.normalized() * PATROL_SPEED
 		var dist = global_position.distance_to(patrol_spot)

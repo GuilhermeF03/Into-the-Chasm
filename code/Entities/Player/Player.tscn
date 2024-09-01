@@ -1,9 +1,9 @@
 [gd_scene load_steps=21 format=3 uid="uid://d0mst4eki2yyd"]
 
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_3iq6n"]
-[ext_resource type="Texture2D" uid="uid://b4g5kl5t1cfkk" path="res://Entities/Player/Art/player.png" id="1_34gvv"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_jiv16"]
 [ext_resource type="PackedScene" uid="uid://dd1bjjaxa7dur" path="res://Entities/Player/Inventory/Inventory.tscn" id="2_urbfw"]
+[ext_resource type="Texture2D" uid="uid://c43xb8p2q3io8" path="res://Entities/Player/player.png" id="3_w4srp"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="6_rymay"]
 [ext_resource type="PackedScene" uid="uid://ywpg5nkhidqk" path="res://Entities/Player/Weapon Handling/WeaponHandler.tscn" id="7_cn85d"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="7_mgchg"]
@@ -253,7 +253,7 @@ script = ExtResource("2_jiv16")
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(5, 5)
-texture = ExtResource("1_34gvv")
+texture = ExtResource("3_w4srp")
 hframes = 4
 vframes = 3
 metadata/_aseprite_wizard_config_ = {
@@ -266,7 +266,7 @@ metadata/_aseprite_wizard_config_ = {
 "only_visible": false,
 "player": "AnimationPlayer",
 "slice": "",
-"source": "res://Player/Art/player.aseprite"
+"source": "res://Entities/Player/Art/player.aseprite"
 }
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": false,
@@ -274,6 +274,7 @@ metadata/_aseprite_wizard_interface_config_ = {
 "output_section": true,
 "slice_section": false
 }
+metadata/_aseprite_wizard_source_file_hash_ = "e7f9ca64e4ba319ab2ce673932bb9a86"
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 script = ExtResource("6_rymay")
@@ -317,6 +318,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_brdpf")
+disabled = true
 
 [node name="Timers" type="Node" parent="."]
 
