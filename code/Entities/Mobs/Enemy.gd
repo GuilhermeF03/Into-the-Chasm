@@ -17,8 +17,6 @@ class_name Enemy
 @export var PATH_CURVATURE = 0.5
 var moving_to_patrol_spot = false
 var patrol_spot : Vector2 = Vector2.ZERO
-var control_spot : Vector2 = Vector2.ZERO
-var path_t = 0.0
 
 @export_category("Nodes")
 @onready var sprite = $Sprite2D
@@ -71,7 +69,6 @@ func handle_patrol_state(delta):
 		
 		set_patrol_spot()
 	else:
-		path_t += delta
 		$Sprite2D2.global_position = patrol_spot
 		var vect = patrol_spot - global_position
 	
@@ -106,18 +103,11 @@ func handle_chase_state():
 
 
 func set_patrol_spot():
-	path_t = 0
 	patrol_spot = (
 		patrol_raycast.get_collision_point() if patrol_raycast.is_colliding()
 		else to_global(patrol_raycast.target_position)
 	)
 	moving_to_patrol_spot = true
-	var path_midpoint = global_position.distance_to(patrol_spot) / 2
-
-	control_spot = Vector2(
-		global_position.x + path_midpoint,
-		global_position.y + (path_midpoint * PATH_CURVATURE)
-	)
 
 
 func move():
