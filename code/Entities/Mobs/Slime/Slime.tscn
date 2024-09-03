@@ -192,7 +192,7 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Entities/Mobs/Slime/slime.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "2044d46f7bf37183aae131f10c2234a3"
+metadata/_aseprite_wizard_source_file_hash_ = "0aa7062e147a0355ef1e38073f525581"
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": false
 }

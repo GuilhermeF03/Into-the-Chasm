@@ -77,6 +77,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_mxlqg"]
 length = 0.275
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -116,6 +117,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_eqvl6"]
 length = 0.3
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -256,6 +258,7 @@ scale = Vector2(5, 5)
 texture = ExtResource("3_w4srp")
 hframes = 4
 vframes = 3
+frame = 2
 metadata/_aseprite_wizard_config_ = {
 "i_mode": -1,
 "keep_anim_length": false,
@@ -274,7 +277,7 @@ metadata/_aseprite_wizard_interface_config_ = {
 "output_section": true,
 "slice_section": false
 }
-metadata/_aseprite_wizard_source_file_hash_ = "e7f9ca64e4ba319ab2ce673932bb9a86"
+metadata/_aseprite_wizard_source_file_hash_ = "508620da1326c00cf1dddb15e58cc1a7"
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 script = ExtResource("6_rymay")
