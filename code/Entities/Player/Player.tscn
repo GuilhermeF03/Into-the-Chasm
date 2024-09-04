@@ -77,7 +77,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_mxlqg"]
 length = 0.275
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -117,7 +116,6 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_eqvl6"]
 length = 0.3
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -235,13 +233,15 @@ height = 64.0
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 process_mode = 3
 y_sort_enabled = true
-collision_layer = 2
+collision_layer = 34
+collision_mask = 33
+motion_mode = 1
 script = ExtResource("1_3iq6n")
 DODGE_COOLDOWN = 0.7
 
 [node name="Camera" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-zoom = Vector2(0.8, 0.8)
+zoom = Vector2(1.5, 1.5)
 position_smoothing_speed = 1.0
 drag_left_margin = 0.3
 drag_top_margin = 0.3
@@ -258,7 +258,7 @@ scale = Vector2(5, 5)
 texture = ExtResource("3_w4srp")
 hframes = 4
 vframes = 3
-frame = 2
+frame = 9
 metadata/_aseprite_wizard_config_ = {
 "i_mode": -1,
 "keep_anim_length": false,
@@ -283,7 +283,7 @@ metadata/_aseprite_wizard_source_file_hash_ = "508620da1326c00cf1dddb15e58cc1a7"
 script = ExtResource("6_rymay")
 follow_mode = 2
 follow_target = NodePath("..")
-zoom = Vector2(0.8, 0.8)
+zoom = Vector2(1.5, 1.5)
 tween_resource = SubResource("Resource_jstsm")
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]

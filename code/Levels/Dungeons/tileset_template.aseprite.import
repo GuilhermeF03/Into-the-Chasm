@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bpljr83xdmcn6"
+path="res://.godot/imported/tileset_template.aseprite-8a1f6c0f33e47d74c1bf247d1d62903b.res"
+
+[deps]
+
+source_file="res://Levels/Dungeons/tileset_template.aseprite"
+dest_files=["res://.godot/imported/tileset_template.aseprite-8a1f6c0f33e47d74c1bf247d1d62903b.res"]
+
+[params]
+
