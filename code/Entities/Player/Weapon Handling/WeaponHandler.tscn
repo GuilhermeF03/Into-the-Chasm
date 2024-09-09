@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ywpg5nkhidqk"]
 
 [ext_resource type="Script" path="res://Entities/Player/Weapon Handling/WeaponHandler.gd" id="1_uqibm"]
-[ext_resource type="Animation" uid="uid://c83ud757yrmwe" path="res://Interactables/Items/Weapons/Attack.res" id="2_v1ey2"]
+[ext_resource type="Animation" uid="uid://c83ud757yrmwe" path="res://Interactables/Items/Weapons/attack.res" id="2_v1ey2"]
 
 [sub_resource type="Animation" id="Animation_64vk5"]
 length = 0.1

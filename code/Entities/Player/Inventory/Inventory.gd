@@ -66,14 +66,12 @@ func leaf(next_page : int):
 	await player.animation_finished
 	
 	var page_name = get_page(next_page)
-	for page : HBoxContainer in pages.get_children():
+	for page: HBoxContainer in pages.get_children():
 		page.visible = (page.name == page_name)
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("inventory"):
-		toggle()
-	
+	if event.is_action_pressed("inventory"): toggle()
 	if not handling_input: return
 	
 	handle_page_leaf(event)
@@ -82,7 +80,7 @@ func _input(event: InputEvent) -> void:
 func handle_page_leaf(event: InputEvent):
 	var next_page = 0
 	if event.is_action_pressed("next_page"):
-		if not(current_page + 1 >= pages.get_child_count()):
+		if current_page + 1 < pages.get_child_count():
 			next_page = current_page + 1
 			leaf(next_page)
 	if event.is_action_pressed("prev_page"):
@@ -97,10 +95,8 @@ func get_page(n: int):
 
 #region setters & getters
 
-
 func set_handling_input(new_value : bool):
 	handling_input = new_value
 	on_handling_changed.emit(new_value)
 
-
-# endregion
+#endregion

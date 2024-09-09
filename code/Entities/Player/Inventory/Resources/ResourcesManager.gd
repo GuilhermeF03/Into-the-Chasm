@@ -7,9 +7,9 @@ class_name ResourcesManager
 @onready var cristals_holder = $"Cristals/Slot Icon/Value Display/Icon/Text/Value"
 
 @export_category("Data")
-var minerals : int = 0;
-var organics : int = 0;
-var cristals : int = 0;
+var minerals : int = 0
+var organics : int = 0
+var cristals : int = 0
 
 
 func _ready():
@@ -27,14 +27,13 @@ func set_resource(type : InventoryManager.ResourceType, value : int):
 
 
 func update_holder(type : InventoryManager.ResourceType, value : int):
-	match type:
-		InventoryManager.ResourceType.MINERAL:
-			minerals_holder.text = render_resource_value(value)
-		InventoryManager.ResourceType.ORGANIC:
-			organics_holder.text = render_resource_value(value)
-		InventoryManager.ResourceType.CRISTAL:
-			cristals_holder.text = render_resource_value(value)
-
+	var holder = (
+		minerals_holder if type == InventoryManager.ResourceType.MINERAL
+		else organics_holder if type == InventoryManager.ResourceType.ORGANIC
+		else cristals_holder
+	)
+	
+	holder.text = render_resource_value(value)
 
 func render_resource_value(value : int):
 	return str(value) + ("+" if value > InventoryManager.RESOURCE_CAP else "") 

@@ -27,21 +27,22 @@ func _ready():
 
 
 func _physics_process(_delta):
-	var movement = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-
 	if inventory.handling_input: return
 	
+	var movement = Input.get_vector(
+		"move_left", "move_right", 
+		"move_up", "move_down"
+	)
+
 	handle_movement(movement)
 	handle_animation(movement)
-	
-	# camera & weapon follow
 	handle_weapon()
 	handle_camera()
 
 
 #region Handlers
 func handle_movement(input):
-	self.velocity = input.normalized() * (DODGE_SPEED if dodging else MOV_SPEED)
+	velocity = input.normalized() * (DODGE_SPEED if dodging else MOV_SPEED)
 	move_and_slide()
 
 
@@ -52,7 +53,6 @@ func handle_weapon():
 
 func handle_camera():
 	if inventory.handling_input: return
-	
 	
 	var player_pos = LevelManager.player.global_position
 	var mouse_pos = get_global_mouse_position()
@@ -70,13 +70,12 @@ func handle_camera():
 		upper_bound
 	)
 	
-	sprite.scale.x = -5 if (axis / MOUSE_DRIFT_FACTOR).x < 0 else 5
+	sprite.flip_h = (axis / MOUSE_DRIFT_FACTOR).x < 0
 	
-	back_view = (mouse_pos).y < player_pos.y
+	back_view = mouse_pos.y < player_pos.y
 	
 	print("Mouse pos:", mouse_pos)
 	print("Player pos:", player_pos)
-
 
 #endregion
 
@@ -94,8 +93,6 @@ func handle_dodge_input(event : InputEvent):
 		and dodge_timer.is_stopped() 
 		and velocity != Vector2.ZERO
 	):
-		var input = velocity.normalized()
-		back_view = input.y < 0
 		
 		animation_player.play("roll_" + ("up" if back_view else "down"));
 		dodging = true
@@ -113,10 +110,7 @@ func handle_tool_selection(event: InputEvent) -> void:
 	
 	var idx = 0
 	
-	if (
-		event.is_pressed() and !event.is_echo()
-		and event.as_text().is_valid_int()
-	):
+	if event.is_pressed() and not event.is_echo() and event.as_text().is_valid_int():
 		idx = event.as_text().to_int() - 1
 	else:
 		idx = curr_tool_idx + (
@@ -129,21 +123,16 @@ func handle_tool_selection(event: InputEvent) -> void:
 		idx = tools_size - 1 if idx == -1 else idx % InventoryManager.get_tools_size()
 		InventoryManager.select_tool(idx)
 
-
 #endregion
 
 
 #region Animation
 func handle_animation(input):
-	if dodging: return
+	if dodging or inventory.handling_input: return
 	
-	if input == Vector2.ZERO:
-		animation_player.play("idle_" + ("up" if back_view else "down"))
-		return
-
-	if inventory.handling_input: return
+	var animation_side = "up" if back_view else "down"
+	var animation = "idle_" if input == Vector2.ZERO else "walk_"
 	
-	animation_player.play("walk_" + ("up" if back_view else "down"));
-
-
+	animation_player.play(animation + animation_side)
+	
 #endregion

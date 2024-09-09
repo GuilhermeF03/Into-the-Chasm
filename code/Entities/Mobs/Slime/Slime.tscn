@@ -155,6 +155,7 @@ _data = {
 [node name="Slime" type="CharacterBody2D"]
 scale = Vector2(5, 5)
 script = ExtResource("1_gf03x")
+CHASE_SPEED = 150.0
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 texture_filter = 1

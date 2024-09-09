@@ -26,10 +26,13 @@ func _process(_delta):
 
 func attack():
 	if texture == null: return
+	
 	sprite.visible = true
 	can_attack = false
+	
 	anim_player.play("attack")
 	await anim_player.animation_finished
+	
 	sprite.frame_coords = Vector2.ZERO
 	can_attack = true
 
