@@ -74,9 +74,6 @@ func handle_camera():
 	
 	back_view = mouse_pos.y < player_pos.y
 	
-	print("Mouse pos:", mouse_pos)
-	print("Player pos:", player_pos)
-
 #endregion
 
 

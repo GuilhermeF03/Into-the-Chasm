@@ -22,4 +22,3 @@ func set_item(data : Item):
 	else:
 		icon.texture = null
 	item_set.emit(data)
-

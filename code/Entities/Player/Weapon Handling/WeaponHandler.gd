@@ -8,9 +8,11 @@ class_name WeaponHandler
 
 @export_category("Data")
 var can_attack = true
-var animation : Animation
 @export var texture : Texture2D
 
+@export_category("Animation")
+var animation_library : AnimationLibrary
+var animation_library_name : StringName
 
 func _ready():
 	if Engine.is_editor_hint(): return
@@ -21,27 +23,41 @@ func _ready():
 
 func _process(_delta):
 	if not Engine.is_editor_hint(): return
-	sprite.texture = texture
+	if texture != null:
+		var texture_path = texture.resource_path.split(".png")[0]
+		sprite.texture = load(texture_path + "_attack.png")
+		
+		if animation_library != null:
+			anim_player.remove_animation_library(texture_path)
+		
+		animation_library = load(texture_path + "_lib.res")
+		anim_player.add_animation_library(texture_path, animation_library)
+	else:
+		sprite.texture = null
 
 
 func attack():
+	
 	if texture == null: return
 	
-	sprite.visible = true
 	can_attack = false
-	
-	anim_player.play("attack")
-	await anim_player.animation_finished
-	
-	sprite.frame_coords = Vector2.ZERO
-	can_attack = true
+	anim_player.play(animation_library_name + "/attack")	
 
 
 func set_weapon(weapon : Weapon):
 	texture = weapon.texture if weapon != null else null
 	if texture != null:
-		var path = texture.resource_path.split(".png")[0] + "_attack.png" 
-		sprite.texture = load(path)
+		var texture_path = texture.resource_path.split(".png")[0]
+		sprite.texture = load(texture_path + "_attack.png")
+		sprite.frame_coords = Vector2.ZERO
+		
+		animation_library_name = texture_path.get_file()
+		
+		if animation_library != null:
+			anim_player.remove_animation_library(animation_library_name)
+		
+		animation_library = load(texture_path + "_lib.res")
+		anim_player.add_animation_library(animation_library_name, animation_library)
 	else:
 		sprite.texture = null
 
@@ -49,3 +65,9 @@ func set_weapon(weapon : Weapon):
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("attack") and can_attack:
 		attack()
+
+
+func _on_animation_finished(anim_name):
+	print("finished attack!!")
+	sprite.frame_coords = Vector2.ZERO
+	can_attack = true

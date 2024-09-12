@@ -48,7 +48,6 @@ func update_holder(tool : Tool, index : int = -1):
 
 	
 func select_tool(index : int):
-	print("Selected at:", index)
 	if index == -1 and curr_tool != null:
 		curr_tool.equipment_icon.texture = icon
 		curr_tool = null

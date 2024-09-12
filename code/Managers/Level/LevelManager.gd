@@ -9,7 +9,6 @@ var scene : Node
 
 func _ready():
 	scene = get_tree().current_scene
-	print("Scene:", scene)
 	
 	
 func spawn(node : Node, position : Vector2 = Vector2.ZERO):

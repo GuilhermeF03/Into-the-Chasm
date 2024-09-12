@@ -95,7 +95,6 @@ func add_tool(tool : Tool):
 
 
 func remove_tool(index : int = -1):
-	print("Removing tool...")
 	var idx = (
 		tools.size() if index not in range(curr_tools_size)
 		else index

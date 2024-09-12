@@ -60,7 +60,7 @@ func _physics_process(delta: float) -> void:
 		move()
 
 
-func handle_patrol_state(delta):
+func handle_patrol_state(_delta):
 	 # Reached previous patrol spot
 	if not moving_to_patrol_spot:
 		patrol_raycast.target_position = Vector2(

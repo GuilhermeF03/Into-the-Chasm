@@ -30,7 +30,6 @@ func _ready():
 		Vector2(randf_range(-1, 1), randf_range(-1, 1)) 
 		* randi_range(MIN_SPAWN_RANGE, MAX_SPAWN_RANGE)
 	)
-	print("Spawn_vector:", spawn_vector)
 
 	var tween = create_tween()
 	(

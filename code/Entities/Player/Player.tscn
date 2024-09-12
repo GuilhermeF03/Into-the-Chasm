@@ -331,7 +331,7 @@ one_shot = true
 [node name="Weapon" type="Node2D" parent="."]
 
 [node name="WeaponHandler" parent="Weapon" instance=ExtResource("7_cn85d")]
-position = Vector2(40, 2.84217e-14)
+position = Vector2(100, 0)
 
 [node name="UI" type="Node" parent="."]
 
