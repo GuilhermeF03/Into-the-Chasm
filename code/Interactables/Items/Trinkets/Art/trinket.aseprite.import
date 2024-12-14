@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://v3y2jcgtixrt"
+path="res://.godot/imported/trinket.aseprite-62fe0a77a8cfa2be57e6f02b15d3fd97.res"
+
+[deps]
+
+source_file="res://Interactables/Items/Trinkets/Art/trinket.aseprite"
+dest_files=["res://.godot/imported/trinket.aseprite-62fe0a77a8cfa2be57e6f02b15d3fd97.res"]
+
+[params]
+

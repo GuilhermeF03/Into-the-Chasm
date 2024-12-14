@@ -2,7 +2,7 @@ extends GridContainer
 class_name RecipesManager
 
 @export_category("Preloaded Nodes")
-var recipe_node : PackedScene = preload("res://Entities/Player/Inventory/Recipes/RecipeSlot.tscn")
+var recipe_node : PackedScene = preload("res://Entities/Player/Inventory/Recipes/Slot/RecipeSlot.tscn")
 
 @export_category("Data")
 var children : Array[Node]
@@ -13,19 +13,16 @@ func _ready():
 	InventoryManager.recipe_added.connect(equip)
 
 
-func equip(recipe : Recipe, _index : int):
+func equip(recipe : Recipe):
 	add_recipe_node(recipe)
 
 
 func add_recipe_node(recipe : Recipe):
 	var _recipe_node : RecipeSlot = recipe_node.instantiate()
-	self.add_child(_recipe_node)
-	_recipe_node.set_item(recipe)
-	
-	
-func remove_recipe_node(index : int):
-	self.get_child(index).queue_free()
+	add_child(_recipe_node)
+	var item_slot = _recipe_node.item_slot
+	item_slot.set_item(recipe, ItemSlot.ItemType.Recipe)
 
 
 func update_holder(recipe : Recipe, index : int):
-	self.get_child(index).set_item(recipe)
+	get_child(index).set_item(recipe, ItemSlot.ItemType.Recipe)

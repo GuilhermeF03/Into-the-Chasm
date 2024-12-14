@@ -41,7 +41,7 @@ func _process(_delta):
 	else:
 		if not start_follow:return
 
-		var player_pos = LevelManager.player.global_position
+		var player_pos = SceneManager.player.global_position
 
 		var tween = create_tween()
 		(

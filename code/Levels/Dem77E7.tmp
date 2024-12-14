@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://cxy1wsxu5cisv"]
+
+[ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://Entities/Player/Player.tscn" id="1_sl1di"]
+[ext_resource type="PackedScene" uid="uid://dje586mcin71p" path="res://Interactables/Items/Resources/PickableResource.tscn" id="2_af3nl"]
+[ext_resource type="PackedScene" uid="uid://cpa8ag7qoliw7" path="res://Interactables/Items/Tools/PickableTool.tscn" id="3_2xkeb"]
+[ext_resource type="Script" path="res://Interactables/Items/Tools/Healing/HealEffect.gd" id="4_b0h4k"]
+[ext_resource type="Texture2D" uid="uid://dw8y2vxonkiof" path="res://Interactables/Items/Tools/Healing/Small Jar/small_jar.png" id="5_7vvpy"]
+[ext_resource type="Texture2D" uid="uid://ci2fc814jymsq" path="res://Interactables/Items/Resources/Art/organics_icon.png" id="6_ml1g7"]
+[ext_resource type="PackedScene" uid="uid://dr5k3xeuoe3os" path="res://Interactables/Items/Recipes/PickableRecipe.tscn" id="7_tj26q"]
+[ext_resource type="PackedScene" uid="uid://d2at40xfyklc" path="res://Interactables/Items/Weapons/Sword/Sword.tscn" id="8_dl3lm"]
+[ext_resource type="PackedScene" uid="uid://cwseeacjaeuni" path="res://Entities/Mobs/Slime/Slime.tscn" id="9_xe6wp"]
+[ext_resource type="PackedScene" uid="uid://crl5owfklwshp" path="res://Interactables/Items/Trinkets/PickableTrinket.tscn" id="10_vabyw"]
+[ext_resource type="Texture2D" uid="uid://b7mmwj07seqca" path="res://Interactables/Items/Trinkets/trinket.png" id="11_yqf2n"]
+
+[node name="Demo" type="Node2D"]
+y_sort_enabled = true
+position = Vector2(0, 3)
+
+[node name="Player" parent="." instance=ExtResource("1_sl1di")]
+position = Vector2(638, -369)
+
+[node name="PickableResource" parent="." instance=ExtResource("2_af3nl")]
+position = Vector2(778, 7)
+ammount = 20
+type = 1
+
+[node name="PickableResource2" parent="." instance=ExtResource("2_af3nl")]
+position = Vector2(797, -182)
+ammount = 15
+type = 2
+
+[node name="PickableConsumable" parent="." instance=ExtResource("3_2xkeb")]
+position = Vector2(357, 37)
+effect = ExtResource("4_b0h4k")
+item_name = "Healing potion"
+texture = ExtResource("5_7vvpy")
+
+[node name="PickableConsumable2" parent="." instance=ExtResource("3_2xkeb")]
+position = Vector2(625, 30)
+effect = ExtResource("4_b0h4k")
+item_name = "Herb"
+texture = ExtResource("6_ml1g7")
+
+[node name="PickableConsumable3" parent="." instance=ExtResource("3_2xkeb")]
+position = Vector2(649, 193)
+effect = ExtResource("4_b0h4k")
+item_name = "Herb"
+texture = ExtResource("6_ml1g7")
+
+[node name="PickableRecipe" parent="." instance=ExtResource("7_tj26q")]
+position = Vector2(389, -158)
+minerals = 15
+crafted_item = ExtResource("8_dl3lm")
+item_name = "Sword"
+
+[node name="PickableRecipe12" parent="." instance=ExtResource("7_tj26q")]
+position = Vector2(323, -303)
+cristals = 15
+crafted_item = ExtResource("8_dl3lm")
+item_name = "Sword"
+
+[node name="PickableRecipe13" parent="." instance=ExtResource("7_tj26q")]
+position = Vector2(500, -135)
+organics = 15
+crafted_item = ExtResource("8_dl3lm")
+item_name = "DADASEAEDUWAOIEUAEOIAWUEOIJAOIFJOAIJFOAJFOHAOFHEOHFOIAJOFIHAEOHFAEHOUHFAYFYAOIFUIAUFUAFOIUFPAUFPOAPFAPOFPOAFP"
+
+[node name="Slime" parent="." instance=ExtResource("9_xe6wp")]
+position = Vector2(1049, -392)
+
+[node name="PickableTrinket" parent="." instance=ExtResource("10_vabyw")]
+position = Vector2(1255, 122)
+texture = ExtResource("11_yqf2n")

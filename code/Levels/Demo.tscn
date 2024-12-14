@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxy1wsxu5cisv"]
+[gd_scene load_steps=11 format=3 uid="uid://cxy1wsxu5cisv"]
 
 [ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://Entities/Player/Player.tscn" id="1_sl1di"]
 [ext_resource type="PackedScene" uid="uid://dje586mcin71p" path="res://Interactables/Items/Resources/PickableResource.tscn" id="2_af3nl"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dr5k3xeuoe3os" path="res://Interactables/Items/Recipes/PickableRecipe.tscn" id="7_tj26q"]
 [ext_resource type="PackedScene" uid="uid://d2at40xfyklc" path="res://Interactables/Items/Weapons/Sword/Sword.tscn" id="8_dl3lm"]
 [ext_resource type="PackedScene" uid="uid://cwseeacjaeuni" path="res://Entities/Mobs/Slime/Slime.tscn" id="9_xe6wp"]
+[ext_resource type="PackedScene" uid="uid://crl5owfklwshp" path="res://Interactables/Items/Trinkets/PickableTrinket.tscn" id="10_vabyw"]
 
 [node name="Demo" type="Node2D"]
 y_sort_enabled = true
@@ -65,3 +66,12 @@ item_name = "DADASEAEDUWAOIEUAEOIAWUEOIJAOIFJOAIJFOAJFOHAOFHEOHFOIAJOFIHAEOHFAEH
 
 [node name="Slime" parent="." instance=ExtResource("9_xe6wp")]
 position = Vector2(1049, -392)
+
+[node name="PickableTrinket" parent="." instance=ExtResource("10_vabyw")]
+position = Vector2(1255, 122)
+
+[node name="PickableTrinket2" parent="." instance=ExtResource("10_vabyw")]
+position = Vector2(1034, 439)
+
+[node name="PickableTrinket3" parent="." instance=ExtResource("10_vabyw")]
+position = Vector2(1493, 235)

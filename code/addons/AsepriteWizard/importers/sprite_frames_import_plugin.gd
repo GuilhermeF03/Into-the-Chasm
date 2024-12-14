@@ -8,6 +8,12 @@ var _aseprite_file_exporter = preload("../aseprite/file_exporter.gd").new()
 var _sf_creator = preload("../creators/sprite_frames/sprite_frames_creator.gd").new()
 var file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
 
+var file_system_helper
+
+func _init(fs_helper) -> void:
+	file_system_helper = fs_helper
+
+
 func _get_importer_name():
 	# ideally this should be called aseprite_wizard.plugin.spriteframes
 	# but I'm keeping it like this to avoid unnecessary breaking changes
@@ -57,6 +63,7 @@ func _get_import_options(_path, _i):
 			"property_hint": PROPERTY_HINT_ENUM,
 			"hint_string": get_sheet_type_hint_string()
 		},
+		{"name": "animation/round_fps", "default_value": true},
 	]
 
 
@@ -76,7 +83,7 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 	var absolute_source_file = ProjectSettings.globalize_path(source_file)
 	var absolute_save_path = ProjectSettings.globalize_path(save_path)
 
-	var source_path = source_file.substr(0, source_file.rfind('/'))
+	var source_path = source_file.get_base_dir()
 	var source_basename = source_file.substr(source_path.length()+1, -1)
 	source_basename = source_basename.substr(0, source_basename.rfind('.'))
 
@@ -97,19 +104,16 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 		return FAILED
 
 
-	var should_trigger_scan = false
-
 	for sf in source_files.content:
 		if sf.is_first_import:
 			file_system.update_file(sf.sprite_sheet)
 			append_import_external_resource(sf.sprite_sheet)
 		else:
-			should_trigger_scan = true
+			file_system_helper.schedule_file_system_scan()
 
-	if should_trigger_scan:
-		file_system.scan()
-
-	var resources = _sf_creator.create_resources(source_files.content)
+	var resources = _sf_creator.create_resources(source_files.content, {
+		"should_round_fps": options["animation/round_fps"]
+	})
 
 	if not resources.is_ok:
 		printerr("ERROR - Could not import aseprite file: %s" % result_codes.get_error_message(resources.code))
@@ -146,5 +150,4 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 func _remove_source_files(source_files: Array):
 	for s in source_files:
 		DirAccess.remove_absolute(s.data_file)
-
-	file_system.call_deferred("scan")
+		file_system_helper.schedule_file_system_scan()

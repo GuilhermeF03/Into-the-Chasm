@@ -46,7 +46,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	sight_raycast.look_at(LevelManager.player.global_position)
+	sight_raycast.look_at(SceneManager.player.global_position)
 
 	if sight_raycast.is_colliding():
 		state = EnemyState.CHASE
@@ -92,7 +92,7 @@ func handle_patrol_state(_delta):
 
 
 func handle_chase_state():
-	var player_pos = LevelManager.player.global_position
+	var player_pos = SceneManager.player.global_position
 	if not sight_raycast.is_colliding():
 		patrol_raycast.target_position = to_local(player_pos)
 		set_patrol_spot()

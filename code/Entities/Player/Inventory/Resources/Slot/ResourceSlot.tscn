@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://suvxlf36pnxb" path="res://Entities/Player/Inventory/Resources/Art/resource_slot.png" id="1_4wuur"]
 [ext_resource type="Script" path="res://Entities/Player/Inventory/Resources/Slot/ResourceSlot.gd" id="1_bnmne"]
-[ext_resource type="Texture2D" uid="uid://ekmbsrud0m58" path="res://Interactables/Items/Resources/Art/minerals_icon.png" id="2_xgibf"]
+[ext_resource type="Texture2D" uid="uid://cf22k8dv7sqdg" path="res://Interactables/Items/Resources/Art/cristals_icons.png" id="3_4y1fu"]
 [ext_resource type="Texture2D" uid="uid://dfebc0sobfqb6" path="res://Entities/Player/Inventory/Resources/Art/resource_counter_spot.png" id="3_618v7"]
 
 [node name="ResourceSlot" type="AspectRatioContainer"]
@@ -18,20 +18,22 @@ stretch_mode = 5
 [node name="Resource" type="AspectRatioContainer" parent="Slot Icon"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.35
-anchor_top = 0.35
-anchor_right = 0.65
-anchor_bottom = 0.65
+anchor_left = 0.31
+anchor_top = 0.31
+anchor_right = 0.72
+anchor_bottom = 0.72
 offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+pivot_offset = Vector2(25, 0)
 
 [node name="Icon" type="TextureRect" parent="Slot Icon/Resource"]
 layout_mode = 2
-texture = ExtResource("2_xgibf")
+texture = ExtResource("3_4y1fu")
 stretch_mode = 5
 
 [node name="Value Display" type="AspectRatioContainer" parent="Slot Icon"]
@@ -41,6 +43,7 @@ anchor_left = 0.5
 anchor_top = 0.55
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -1.6
 grow_horizontal = 0
 grow_vertical = 0
 
@@ -66,5 +69,9 @@ stretch_mode = 3
 
 [node name="Value" type="Label" parent="Slot Icon/Value Display/Icon/Text"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "74"
 horizontal_alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -59,21 +59,24 @@ func export_layers(file_name: String, output_folder: String, options: Dictionary
 
 	for layer in layers:
 		if layer != "" and (not exception_regex or exception_regex.search(layer) == null):
-			output.push_back(export_layer(file_name, layer, output_folder, options))
+			output.push_back(export_file_with_layers(file_name, [layer], output_folder, options))
 
 	return output
 
 
-func export_layer(file_name: String, layer_name: String, output_folder: String, options: Dictionary) -> Dictionary:
+func export_file_with_layers(file_name: String, layer_names: Array, output_folder: String, options: Dictionary) -> Dictionary:
 	var output_prefix = options.get('output_filename', "").strip_edges()
 	var output_dir = output_folder.replace("res://", "./").strip_edges()
-	var data_file = "%s/%s%s.json" % [output_dir, output_prefix, layer_name]
-	var sprite_sheet = "%s/%s%s.png" % [output_dir, output_prefix, layer_name]
+	var base_output_path = "%s/%s%s" % [output_dir, output_prefix, layer_names[0] if layer_names.size() == 1 else ""]
+	var data_file = "%s.json" % base_output_path
+	var sprite_sheet = "%s.png" % base_output_path
 	var first_frame_only = options.get("first_frame_only", false)
 	var output = []
 	var arguments = _export_command_common_arguments(file_name, data_file, sprite_sheet)
-	arguments.push_front(layer_name)
-	arguments.push_front("--layer")
+
+	for layer_name in layer_names:
+		arguments.push_front(layer_name)
+		arguments.push_front("--layer")
 
 	if first_frame_only:
 		arguments.push_front("'[0, 0]'")
@@ -104,7 +107,29 @@ func _add_ignore_layer_arguments(file_name: String, arguments: Array, exception_
 			arguments.push_front(l)
 			arguments.push_front('--ignore-layer')
 
+
 func _add_sheet_type_arguments(arguments: Array, options : Dictionary):
+	if options.has("column_count"):
+		_old_sheet_type_config(arguments, options)
+		return
+
+	var sheet_type = options.get("sheet_type", "packed")
+	var item_count = options.get("sheet_columns", 0)
+
+	if (sheet_type == "columns" or sheet_type == "rows") and item_count == 0:
+		sheet_type = "packed"
+	elif options.get("sheet_merge_duplicates", true):
+		arguments.push_back("--merge-duplicates")
+
+	if sheet_type == "columns":
+		arguments.push_back("--sheet-columns")
+		arguments.push_back(item_count)
+	else:
+		arguments.push_back("--sheet-type")
+		arguments.push_back(sheet_type)
+
+
+func _old_sheet_type_config(arguments: Array, options : Dictionary):
 	var column_count : int = options.get("column_count", 0)
 	if column_count > 0:
 		arguments.push_back("--merge-duplicates") # Yes, this is undocumented
@@ -265,6 +290,8 @@ func export_tileset_texture(file_name: String, output_folder: String, options: D
 
 	if not only_visible_layers:
 		arguments.push_front("--all-layers")
+
+	_add_sheet_type_arguments(arguments, options)
 
 	_add_ignore_layer_arguments(file_name, arguments, exception_pattern)
 

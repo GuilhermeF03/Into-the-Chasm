@@ -24,4 +24,4 @@ func craft():
 	InventoryManager.set_resource(InventoryManager.ResourceType.CRISTAL, -cristals)
 	
 	var item = crafted_item.instantiate()
-	LevelManager.spawn(item, LevelManager.player.global_position)
+	SceneManager.spawn(item, SceneManager.player.global_position)

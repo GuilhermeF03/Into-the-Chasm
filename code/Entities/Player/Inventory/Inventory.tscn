@@ -1,9 +1,13 @@
-[gd_scene load_steps=25 format=3 uid="uid://dd1bjjaxa7dur"]
+[gd_scene load_steps=29 format=3 uid="uid://dd1bjjaxa7dur"]
 
 [ext_resource type="Script" path="res://Entities/Player/Inventory/Inventory.gd" id="1_ildrf"]
 [ext_resource type="PackedScene" uid="uid://70somrqkb0mp" path="res://Entities/Player/Inventory/Resources/Slot/ResourceSlot.tscn" id="4_6vkx1"]
 [ext_resource type="Script" path="res://Entities/Player/Inventory/Resources/ResourcesManager.gd" id="4_wmraf"]
-[ext_resource type="PackedScene" uid="uid://okq1vurdbveb" path="res://Entities/Player/Inventory/Equipment/WeaponSlot.tscn" id="9_chcp0"]
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Equipment/WeaponManager.gd" id="5_clyu3"]
+[ext_resource type="Texture2D" uid="uid://6v3v0reidi10" path="res://Entities/Player/Inventory/Equipment/Tools/equipment_slot.png" id="6_h6tdn"]
+[ext_resource type="Texture2D" uid="uid://dfju6gbnxykt8" path="res://Interactables/Items/Weapons/Sword/Art/sword.png" id="7_ta7wd"]
+[ext_resource type="PackedScene" uid="uid://b5ote6c6nj3y5" path="res://Entities/Player/Inventory/Stats Panel/StatsPanel.tscn" id="8_2fb4d"]
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Trinkets/TrinketManager.gd" id="8_g7iot"]
 [ext_resource type="Script" path="res://Entities/Player/Inventory/Equipment/Tools/ToolsManager.gd" id="10_f3ohn"]
 [ext_resource type="Texture2D" uid="uid://dmnp2u754cari" path="res://Entities/Player/Inventory/Stats Panel/panel.png" id="11_g6ukt"]
 [ext_resource type="Texture2D" uid="uid://c3e7sbd48vvop" path="res://Entities/Player/Inventory/Art/inventory_book4.png" id="11_nkym1"]
@@ -173,15 +177,16 @@ region_rect = Rect2(8, 56, 240, 136)
 [node name="Content" type="MarginContainer" parent="Background Panel/Outer Margin/UI"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.09
-anchor_top = 0.15
-anchor_right = 0.92
-anchor_bottom = 0.8
+anchor_left = 0.083
+anchor_top = 0.147
+anchor_right = 0.925
+anchor_bottom = 0.808
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
 [node name="Pages-0" type="HBoxContainer" parent="Background Panel/Outer Margin/UI/Content"]
+visible = false
 layout_mode = 2
 
 [node name="Resources & Tools" type="VBoxContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-0"]
@@ -196,7 +201,7 @@ size_flags_stretch_ratio = 0.5
 
 [node name="Header" type="RichTextLabel" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Resources"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "[center] Resources"
 fit_content = true
@@ -205,6 +210,7 @@ fit_content = true
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 alignment = 1
 script = ExtResource("4_wmraf")
 
@@ -225,7 +231,7 @@ size_flags_vertical = 3
 
 [node name="Header" type="RichTextLabel" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Tools"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "[center] Equipment"
 fit_content = true
@@ -234,12 +240,42 @@ fit_content = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Weapon Slot" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Tools/Content" instance=ExtResource("9_chcp0")]
+[node name="Weapon Slot" type="MarginContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Tools/Content"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 0
 mouse_default_cursor_shape = 2
+script = ExtResource("5_clyu3")
+
+[node name="Slot" type="TextureRect" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Tools/Content/Weapon Slot"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_h6tdn")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Icon" type="AspectRatioContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Tools/Content/Weapon Slot/Slot"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(110, 0)
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Tools/Content/Weapon Slot/Slot/Icon"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("7_ta7wd")
+stretch_mode = 5
+
+[node name="Stats" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Tools/Content/Weapon Slot/Slot" instance=ExtResource("8_2fb4d")]
+visible = false
+layout_mode = 1
 
 [node name="Tool Slots" type="VBoxContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Tools/Content"]
 unique_name_in_owner = true
@@ -259,7 +295,7 @@ size_flags_horizontal = 3
 [node name="Header" type="RichTextLabel" parent="Background Panel/Outer Margin/UI/Content/Pages-0/Map"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "[center] <Level Name>"
 fit_content = true
@@ -274,7 +310,6 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
 [node name="Pages-1" type="HBoxContainer" parent="Background Panel/Outer Margin/UI/Content"]
-visible = false
 layout_mode = 2
 
 [node name="Inventory" type="VBoxContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1"]
@@ -283,42 +318,25 @@ size_flags_horizontal = 3
 
 [node name="Header" type="RichTextLabel" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Inventory"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "[center] Inventory"
 fit_content = true
 
-[node name="Content" type="PanelContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Inventory"]
+[node name="MarginContainer" type="MarginContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Inventory"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
-[node name="Break" type="Container" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Inventory"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.15
-
-[node name="Page-Break" type="Container" parent="Background Panel/Outer Margin/UI/Content/Pages-1"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
-
-[node name="Recipes" type="VBoxContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Header" type="RichTextLabel" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes"]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 24
-bbcode_enabled = true
-text = "[center] Recipes"
-fit_content = true
-
-[node name="Content" type="NinePatchRect" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes"]
+[node name="Content" type="NinePatchRect" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Inventory/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("11_g6ukt")
 
-[node name="Margin" type="MarginContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes/Content"]
+[node name="Margin" type="MarginContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Inventory/MarginContainer/Content"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -332,15 +350,90 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Scroll Container" type="ScrollContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes/Content/Margin"]
+[node name="Scroll Container" type="ScrollContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Inventory/MarginContainer/Content/Margin"]
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="Recipes Grid" type="GridContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes/Content/Margin/Scroll Container"]
+[node name="MarginContainer" type="MarginContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Inventory/MarginContainer/Content/Margin/Scroll Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Trinkets Grid" type="GridContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Inventory/MarginContainer/Content/Margin/Scroll Container/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 2
+size_flags_vertical = 0
+mouse_filter = 2
+columns = 4
+script = ExtResource("8_g7iot")
+
+[node name="Page-Break" type="Container" parent="Background Panel/Outer Margin/UI/Content/Pages-1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Recipes" type="VBoxContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Header" type="RichTextLabel" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center] Recipes"
+fit_content = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Content" type="NinePatchRect" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("11_g6ukt")
+
+[node name="Margin" type="MarginContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes/MarginContainer/Content"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Scroll Container" type="ScrollContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes/MarginContainer/Content/Margin"]
+visible = false
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes/MarginContainer/Content/Margin/Scroll Container"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Recipes Grid" type="GridContainer" parent="Background Panel/Outer Margin/UI/Content/Pages-1/Recipes/MarginContainer/Content/Margin/Scroll Container/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
 mouse_filter = 2
 columns = 3
 script = ExtResource("13_13q6j")
@@ -349,3 +442,6 @@ script = ExtResource("13_13q6j")
 libraries = {
 "": SubResource("AnimationLibrary_qjwj2")
 }
+
+[connection signal="mouse_entered" from="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Tools/Content/Weapon Slot" to="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Tools/Content/Weapon Slot" method="_on_mouse_enter"]
+[connection signal="mouse_exited" from="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Tools/Content/Weapon Slot" to="Background Panel/Outer Margin/UI/Content/Pages-0/Resources & Tools/Tools/Content/Weapon Slot" method="_on_mouse_exit"]

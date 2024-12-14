@@ -4,10 +4,8 @@ extends AspectRatioContainer
 @export_category("Nodes")
 @onready var slot_icon = $"Slot Icon/Resource/Icon"
 
-
 @export_category("Data")
 @export var type : InventoryManager.ResourceType
-
 
 @export_category("Textures")
 var mineral_icon : Texture2D = preload("res://Interactables/Items/Resources/Art/minerals_icon.png")

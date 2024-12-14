@@ -9,6 +9,7 @@ var selected_icon = preload("res://Entities/Player/Inventory/Equipment/Tools/equ
 @export_category("Data")
 var curr_tool : ToolSlot = null
 
+
 func _ready():
 	for x in InventoryManager.INITIAL_TOOLS: 
 		add_tool()
@@ -17,8 +18,8 @@ func _ready():
 	InventoryManager.tool_removed.connect(unequip)
 	InventoryManager.tool_selected.connect(select_tool)
 	InventoryManager.tool_slots_upgraded.connect(upgrade)
-	
-		
+
+
 func equip(tool : Tool, index : int = -1):
 	update_holder(tool, index)
 
@@ -34,7 +35,7 @@ func upgrade(ammount : int):
 
 
 func add_tool():
-	var tool = tool_slot_node.instantiate() as ToolSlot
+	var tool : ToolSlot = tool_slot_node.instantiate()
 	tool.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	tool.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
@@ -43,8 +44,8 @@ func add_tool():
 	
 	
 func update_holder(tool : Tool, index : int = -1):
-	var child = self.get_child(index) as ItemManager
-	child.set_item(tool)
+	var child = self.get_child(index) as ToolSlot
+	child.set_item(tool, ItemSlot.ItemType.Tool)
 
 	
 func select_tool(index : int):
@@ -53,7 +54,7 @@ func select_tool(index : int):
 		curr_tool = null
 		return
 	
-	var tool = self.get_child(index) as ToolSlot
+	var tool : ToolSlot = self.get_child(index)
 
 	if tool.item != null:
 		var prev_tool = curr_tool

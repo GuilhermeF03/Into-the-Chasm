@@ -23,7 +23,7 @@ var back_view = false
 
 func _ready():
 	dodge_timer.wait_time = DODGE_COOLDOWN
-	LevelManager.add_pause_trigger(inventory.on_handling_changed)
+	SceneManager.add_pause_trigger(inventory.on_handling_changed)
 
 
 func _physics_process(_delta):
@@ -54,7 +54,7 @@ func handle_weapon():
 func handle_camera():
 	if inventory.handling_input: return
 	
-	var player_pos = LevelManager.player.global_position
+	var player_pos = SceneManager.player.global_position
 	var mouse_pos = get_global_mouse_position()
 	var axis = (mouse_pos - player_pos) + Vector2.UP * 200 # Add offset to camera
 	

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://coqay0wj5t8fp"]
+
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Trinkets/Slot/TrinketSlot.gd" id="1_wvbxq"]
+[ext_resource type="PackedScene" uid="uid://bunwl8y8h0o3k" path="res://Entities/Player/Inventory/Item Slot/ItemSlot.tscn" id="2_t0nsv"]
+
+[node name="TrinketSlot" type="AspectRatioContainer"]
+custom_minimum_size = Vector2(112, 112)
+offset_right = 99.0
+offset_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_wvbxq")
+
+[node name="Item Slot" parent="." instance=ExtResource("2_t0nsv")]
+layout_mode = 2

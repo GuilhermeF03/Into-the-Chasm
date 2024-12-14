@@ -1,12 +1,23 @@
 [gd_scene load_steps=3 format=3 uid="uid://d1debc3b82q1e"]
 
 [ext_resource type="Script" path="res://Managers/Interaction/InteractionManager.gd" id="1_jkfn5"]
-[ext_resource type="Script" path="res://addons/awesome_input_icons/classes/InputIconSprite2D.gd" id="2_8oa3o"]
+[ext_resource type="Script" path="res://addons/awesome_input_icons/classes/InputIconTextureRect.gd" id="2_0crq0"]
 
 [node name="InteractionManager" type="Node2D"]
 script = ExtResource("1_jkfn5")
 
-[node name="icon" type="Sprite2D" parent="."]
-visible = false
-script = ExtResource("2_8oa3o")
+[node name="icon" type="TextureRect" parent="."]
+z_index = 1000
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_0crq0")
 action_name = &"interact"

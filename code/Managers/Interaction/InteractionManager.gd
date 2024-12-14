@@ -32,19 +32,19 @@ func _physics_process(_delta: float) -> void:
 	
 	if not on_interaction_mode:
 		if not interactable_queue.is_empty() && can_interact:
-			icon.visible = false
+			icon.hide()
 			interactable_queue.sort_custom(_sort_interactables)
 			var interactable = interactable_queue.front()
 			
 			icon.global_position = interactable.global_position
-			icon.z_index = 1000
-			icon.visible = true
+			icon.global_position.y -= 50
+			icon.show()
 			
-		else: icon.visible = false
+		else: icon.hide()
 
 
 func _sort_interactables(obj_a : InteractArea, obj_b : InteractArea):
-	var player = LevelManager.player
+	var player = SceneManager.player
 
 	var dist_a = abs(player.position - obj_a.global_position)
 	var dist_b = abs(player.global_position - obj_b.global_position)

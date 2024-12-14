@@ -67,7 +67,7 @@ func _input(event: InputEvent) -> void:
 		attack()
 
 
-func _on_animation_finished(anim_name):
+func _on_animation_finished(_anim_name):
 	print("finished attack!!")
 	sprite.frame_coords = Vector2.ZERO
 	can_attack = true

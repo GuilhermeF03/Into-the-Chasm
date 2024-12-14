@@ -14,12 +14,13 @@ func _on_mouse_enter():
 		UiManager.queue_dock(UiManager.DOCK.RIGHT, stats)
 
 
-func _ou_mouse_exit():
+func _on_mouse_exit():
 	UiManager.unqueue_dock(UiManager.DOCK.RIGHT, stats)
 
 
-func _on_item_set(_item: Item) -> void:
-	stats.set_stats(_item)
+func set_item(new_item: Item, type : ItemSlot.ItemType) -> void:
+	super.set_item(new_item, type)
+	stats.set_stats(item)
 
 
 func _on_gui_input(event: InputEvent) -> void:

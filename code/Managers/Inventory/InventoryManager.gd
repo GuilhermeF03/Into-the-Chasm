@@ -23,6 +23,9 @@ var curr_tool : Tool = null
 var tools : Array[Tool] = []
 var curr_tools_size = INITIAL_TOOLS
 
+@export_group("Trinkets")
+var trinkets : Array[Trinket]
+
 @export_category("Recipes")
 var recipes : Array[Recipe]
 
@@ -34,7 +37,10 @@ signal tool_selected(index : int)
 signal tool_slots_upgraded(ammount : int)
 signal tool_added(tool : Tool, index : int)
 
-signal recipe_added(recipe : Recipe, index : int)
+signal trinket_added(trinket : Trinket)
+signal trinket_removed(index : int)
+
+signal recipe_added(recipe : Recipe)
 
 signal resource_changed(resource : ResourceType, ammount : int)
 
@@ -107,7 +113,7 @@ func remove_tool(index : int = -1):
 	if tool != null:
 		var _tool_node : PickableTool = tool_node.instantiate()
 		_tool_node.set_data(tool)
-		LevelManager.spawn(_tool_node, LevelManager.player.global_position)
+		SceneManager.spawn(_tool_node, SceneManager.player.global_position)
 	
 	
 	# Dropped current selected tool -> defer to next available tool
@@ -150,10 +156,23 @@ func get_tools_size():
 #endregion
 
 
+#region Trinkets
+func add_trinket(trinket : Trinket):
+	trinkets.push_back(trinket)
+	trinket_added.emit(trinket)
+
+func remove_trinket(index):
+	var trinket = trinkets[index]
+	trinkets.remove_at(index)
+	trinket_removed.emit(trinket, index)
+
+#endregion
+
+
 #region Recipes
 func add_recipe(recipe : Recipe):
 	recipes.push_back(recipe)
-	recipe_added.emit(recipe, recipes.size() - 1)
+	recipe_added.emit(recipe)
 
 
 #endregion
