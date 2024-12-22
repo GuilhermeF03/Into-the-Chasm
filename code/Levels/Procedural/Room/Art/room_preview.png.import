@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7d5epdlrkvgc"
-path="res://.godot/imported/recipes_background.png-acbf0afa6bf9c9b9a8c1b9c4a692d5d8.ctex"
+uid="uid://dxtqcgbqr7gup"
+path="res://.godot/imported/room_preview.png-a07425395d8ed86c0458e817822b1eca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Player/Inventory/Recipes/Art/recipes_background.png"
-dest_files=["res://.godot/imported/recipes_background.png-acbf0afa6bf9c9b9a8c1b9c4a692d5d8.ctex"]
+source_file="res://Levels/Procedural/Room/Art/room_preview.png"
+dest_files=["res://.godot/imported/room_preview.png-a07425395d8ed86c0458e817822b1eca.ctex"]
 
 [params]
 

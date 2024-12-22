@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="GWJ 68 - Forge"
+config/name="Into the Chasm"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://title.png"
 

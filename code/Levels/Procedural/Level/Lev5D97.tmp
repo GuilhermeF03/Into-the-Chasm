@@ -6,7 +6,6 @@
 script = ExtResource("1_c7eyg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-3600, -1200)
 scale = Vector2(1200, 1200)
 anchor_mode = 0
-zoom = Vector2(0.15, 0.15)
+zoom = Vector2(0.25, 0.15)

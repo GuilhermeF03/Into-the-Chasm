@@ -8,23 +8,9 @@ class_name LevelData
 
 
 func _init(
-	_biome : LevelManager.Biome, 
-	_is_boss_level: bool,
-	_layout : LevelLayout
+	biome : LevelManager.Biome, 
+	is_boss_level: bool,
 ):
-	self.biome = _biome
-	self.is_boss_level = _is_boss_level
-	self.layout = _layout
-
-
-static func generate_level() -> LevelData:
-	# algorithm call goes here
-	var layout = LevelLayout.generate_layout();
-	
-	var level_data = LevelData.new(
-		LevelManager.biome,
-		LevelManager.area,
-		layout
-	)
-	
-	return level_data
+	self.biome = biome
+	self.is_boss_level = is_boss_level
+	self.layout = LevelLayout.new()

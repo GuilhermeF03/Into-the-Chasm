@@ -336,6 +336,7 @@ visible = false
 [node name="HUD" parent="UI" instance=ExtResource("9_hyecf")]
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+top_level = true
 script = ExtResource("7_ikipm")
 follow_mode = 2
 follow_target = NodePath("..")

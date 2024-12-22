@@ -6,17 +6,21 @@ class_name Level
 
 @export_category("Nodes")
 var room_node = preload("res://Levels/Procedural/Room/Room.tscn")
+@onready var preview_prefab = $preview_prefab
 
 
 func _ready(): 
 	# 1 - generate layout or use given data if provided
 	if data == null:
-		data = LevelData.generate_level()
+		data = LevelData.new(LevelManager.biome, LevelManager.is_boss_level)
+		
+	generate_rooms()
+
+
+func generate_rooms():
+	var layout = data.layout
+	var head_room = layout.curr_room_id
+	var rooms = layout.rooms
 	
-	# 2 - generate rooms
-	for room : LevelLayout.RoomNode in data.layout.nodes.values():
+	for room : LevelLayout.RoomNode in rooms.values():
 		pass
-		#var new_room = room_node.instantiate()
-		#add_child(new_room)
-		
-		
