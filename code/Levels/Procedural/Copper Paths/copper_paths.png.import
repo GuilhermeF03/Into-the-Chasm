@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dcq7rorm3octr"
-path="res://.godot/imported/copper_paths.png-eea77fc855efaf583197ef2e37b6f4c9.ctex"
+path="res://.godot/imported/copper_paths.png-314c7214f1b7f77fea472b273bcd2962.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/Dungeons/Copper Paths/copper_paths.png"
-dest_files=["res://.godot/imported/copper_paths.png-eea77fc855efaf583197ef2e37b6f4c9.ctex"]
+source_file="res://Levels/Procedural/Copper Paths/copper_paths.png"
+dest_files=["res://.godot/imported/copper_paths.png-314c7214f1b7f77fea472b273bcd2962.ctex"]
 
 [params]
 

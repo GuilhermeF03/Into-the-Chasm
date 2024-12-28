@@ -45,7 +45,7 @@ func available_tiles(
 	)
 	
 	for rule : LevelRule in rules:
-		adjacent_tiles = rule.get_valid_tiles(grid, adjacent_tiles)
+		adjacent_tiles = rule.validate_tiles(grid, adjacent_tiles)
 	
 	return adjacent_tiles.map(func(pos : Vector2):
 		return to_grid_idx(pos, grid_width)	
