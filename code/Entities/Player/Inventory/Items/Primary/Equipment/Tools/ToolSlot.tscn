@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckocjrsrqurep"]
+
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Primary/Equipment/Tools/ToolSlot.gd" id="1_ewxuh"]
+[ext_resource type="Texture2D" uid="uid://6v3v0reidi10" path="res://Entities/Player/Inventory/Items/Primary/Equipment/Art/EquipmentSlot.png" id="2_f5oaf"]
+[ext_resource type="PackedScene" uid="uid://bunwl8y8h0o3k" path="res://Entities/Player/Inventory/Items/Item Slot/ItemSlot.tscn" id="2_tyrxk"]
+
+[node name="Tool" type="AspectRatioContainer"]
+texture_filter = 1
+size_flags_horizontal = 3
+script = ExtResource("1_ewxuh")
+
+[node name="Item Slot" parent="." instance=ExtResource("2_tyrxk")]
+layout_mode = 2
+texture = ExtResource("2_f5oaf")
+container_texture = ExtResource("2_f5oaf")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_enter"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exit"]
+
+[editable path="Item Slot"]

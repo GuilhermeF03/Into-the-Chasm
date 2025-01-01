@@ -156,8 +156,10 @@ _data = {
 scale = Vector2(5, 5)
 script = ExtResource("1_gf03x")
 CHASE_SPEED = 150.0
+metadata/_edit_group_ = true
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_2geq6")
@@ -174,6 +176,11 @@ metadata/_aseprite_wizard_config_ = {
 "source": "res://Mobs/Slime/slime.aseprite"
 }
 metadata/_aseprite_wizard_source_file_hash_ = "b663b135c9fe0ab993d1bd7a6c6ddcaf"
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {
+"layers": []
+}
+}
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

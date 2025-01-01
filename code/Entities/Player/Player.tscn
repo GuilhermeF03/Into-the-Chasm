@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_3iq6n"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_fvu4l"]
 [ext_resource type="PackedScene" uid="uid://dd1bjjaxa7dur" path="res://Entities/Player/Inventory/Inventory.tscn" id="2_urbfw"]
-[ext_resource type="Texture2D" uid="uid://c43xb8p2q3io8" path="res://Entities/Player/player.png" id="3_w4srp"]
+[ext_resource type="Texture2D" uid="uid://ct15olca7m1sy" path="res://Entities/Player/Art/player.png" id="3_5x0oj"]
 [ext_resource type="PackedScene" uid="uid://ywpg5nkhidqk" path="res://Entities/Player/Weapon Handling/WeaponHandler.tscn" id="7_cn85d"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_ikipm"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_kuc5k"]
@@ -257,16 +257,16 @@ script = ExtResource("2_fvu4l")
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(5, 5)
-texture = ExtResource("3_w4srp")
+texture = ExtResource("3_5x0oj")
 hframes = 4
 vframes = 3
-frame = 2
+frame = 9
 metadata/_aseprite_wizard_config_ = {
 "i_mode": -1,
 "keep_anim_length": false,
-"layer": "",
+"layers": [],
 "o_ex_p": "",
-"o_folder": "",
+"o_folder": "res://Entities/Player/Art",
 "o_name": "",
 "only_visible": false,
 "player": "AnimationPlayer",
@@ -277,9 +277,10 @@ metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": false,
 "layer_section": false,
 "output_section": true,
+"pending_changes": {},
 "slice_section": false
 }
-metadata/_aseprite_wizard_source_file_hash_ = "508620da1326c00cf1dddb15e58cc1a7"
+metadata/_aseprite_wizard_source_file_hash_ = "3137d09611e5968759195980d6eab4b3"
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -331,6 +332,7 @@ position = Vector2(75, 0)
 [node name="UI" type="Node" parent="."]
 
 [node name="Inventory" parent="UI" instance=ExtResource("2_urbfw")]
+layer = 2
 visible = false
 
 [node name="HUD" parent="UI" instance=ExtResource("9_hyecf")]

@@ -5,8 +5,7 @@ class_name Level
 @export var data : LevelData
 
 @export_category("Nodes")
-var room_node = preload("res://Levels/Procedural/Room/Room.tscn")
-@onready var preview_prefab = $preview_prefab
+var room_node: PackedScene = preload("res://Levels/Procedural/Room/Room.tscn")
 
 
 func _ready(): 
@@ -18,9 +17,9 @@ func _ready():
 
 
 func generate_rooms():
-	var layout = data.layout
-	var head_room = layout.curr_room_id
-	var rooms = layout.rooms
+	var layout: LevelLayout   = data.layout
+	var head_room: StringName = layout.curr_room_id
+	var rooms: Dictionary     = layout.rooms
 	
 	for room : LevelLayout.RoomNode in rooms.values():
 		pass

@@ -13,3 +13,7 @@ data_*/
 
 /GWJ/68 - Forge/.idea
 /GWJ/68 - Forge/.vscode
+
+*.tmp
+
+.godot

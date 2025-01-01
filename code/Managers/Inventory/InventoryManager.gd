@@ -1,56 +1,79 @@
 extends Node
 
-@export_category("Nodes")
-var tool_node = preload("res://Interactables/Items/Tools/PickableTool.tscn")
+#region Constants
+@export_group("Constants")
 
-@export_category("Resources")
-var minerals : int
-var organics : int
-var cristals : int
-
+@export_subgroup("Resources")
 const RESOURCE_CAP : int = 80
-enum ResourceType{MINERAL, ORGANIC, CRISTAL}
-
-@export_group("Equipment")
-var weapon : Weapon
 
 @export_subgroup("Tools")
 const MAX_TOOLS : int = 4
 const INITIAL_TOOLS : int = 3
+#endregion
 
+#region Nodes
+@export_group("Nodes")
+var tool_node = preload("res://Interactables/Items/Tools/PickableTool.tscn")
+#endregion
+
+#region Data
+@export_group("Data")
+
+@export_subgroup("Resources")
+var minerals : int
+var organics : int
+var cristals : int
+
+enum ResourceType{MINERAL, ORGANIC, CRISTAL}
+
+@export_subgroup("Weapon")
+var weapon : Weapon
+
+@export_subgroup("Tools")
 var curr_tool_idx = -1
 var curr_tool : Tool = null
 var tools : Array[Tool] = []
 var curr_tools_size = INITIAL_TOOLS
 
-@export_group("Trinkets")
+@export_subgroup("Trinkets")
 var trinkets : Array[Trinket]
 
-@export_category("Recipes")
+@export_subgroup("Recipes")
 var recipes : Array[Recipe]
+#endregion
 
-@export_category("Signals")
+#region Signals
+@export_group("Signals")
+
+@export_subgroup("Resources")
+signal resource_changed(resource : ResourceType, ammount : int)
+
+@export_subgroup("Weapon")
 signal weapon_changed(weapon : Weapon)
 
+@export_subgroup("Tools")
 signal tool_removed(index : int)
 signal tool_selected(index : int)
 signal tool_slots_upgraded(ammount : int)
 signal tool_added(tool : Tool, index : int)
 
+@export_subgroup("Trinkets")
 signal trinket_added(trinket : Trinket)
 signal trinket_removed(index : int)
 
+@export_subgroup("Recipes")
 signal recipe_added(recipe : Recipe)
+#endregion
 
-signal resource_changed(resource : ResourceType, ammount : int)
 
-
+#region builtins
 func _enter_tree() -> void:
 	tools.resize(curr_tools_size)
 	tools.fill(null)
+#endregion
 
 
-#region Resources
+#region Setters
 func set_resource(resource : ResourceType, ammount : int, override : bool = false):
 	var resource_holder = (
 		minerals if resource == ResourceType.MINERAL
@@ -69,15 +92,9 @@ func set_resource(resource : ResourceType, ammount : int, override : bool = fals
 	resource_changed.emit(resource, new_amount)
 
 
-#endregion
-
-
-#region Weapons
 func set_weapon(new_weapon : Weapon):
 	weapon = new_weapon
 	weapon_changed.emit(weapon)
-
-
 #endregion
 
 
@@ -152,7 +169,6 @@ func add_tool_slots(ammount : int):
 
 func get_tools_size():
 	return tools.filter( func (a): return a != null).size()
-
 #endregion
 
 
@@ -165,7 +181,6 @@ func remove_trinket(index):
 	var trinket = trinkets[index]
 	trinkets.remove_at(index)
 	trinket_removed.emit(trinket, index)
-
 #endregion
 
 
@@ -173,6 +188,4 @@ func remove_trinket(index):
 func add_recipe(recipe : Recipe):
 	recipes.push_back(recipe)
 	recipe_added.emit(recipe)
-
-
 #endregion

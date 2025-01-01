@@ -9,6 +9,8 @@ class_name Recipe
 @export_category("Crafted Item")
 @export var crafted_item : PackedScene
 
+func _init():
+	item_type = ItemType.Recipe
 
 func can_craft() -> bool:
 	var _minerals = InventoryManager.minerals

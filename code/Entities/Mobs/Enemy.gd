@@ -1,105 +1,117 @@
 extends CharacterBody2D
 class_name Enemy
 
+#region Constants
+@export_group("Constants")
 
-@export_category("Speeds")
+@export_subgroup("Speeds")
 @export var PATROL_SPEED = 125.0
 @export var CHASE_SPEED = 200.0
 
-@export_category("Timers")
+@export_subgroup("Timers")
 @export var IDLE_WAIT_TIME = 1.2
 
-@export_category("Raycast")
+@export_subgroup("Raycast")
 @export var RAYCAST_DETECT_DIST = 75
 @export var RAYCAST_PATROL_DIST = 100
 
-@export_category("Movement")
-@export var PATH_CURVATURE = 0.5
-var moving_to_patrol_spot = false
-var patrol_spot : Vector2 = Vector2.ZERO
+@export_subgroup("Movement")
+@export var ANIMATION_PLAYER_SPEED = 0.7
+#endregion
 
-@export_category("Nodes")
+#region Nodes
+@export_group("Nodes")
 @onready var sprite = $Sprite2D
+@onready var sprite2 = $Sprite2D2
 @onready var player = $AnimationPlayer
 
 @onready var sight_raycast = $SightRayCast
 @onready var patrol_raycast = $PatrolRayCast
 
 @onready var idle_timer = $Timers/IdleTimer
+#endregion
 
-@export_category("Data")
+#region Data
+@export_group("Data")
+
+@export_subgroup("State")
 enum EnemyState {PATROL, CHASE, IDLE}
-
-var state = EnemyState.PATROL:
-	set(value):
-		prev_state = state
-		state = value
+var state = EnemyState.PATROL: set = set_state
 var prev_state : EnemyState = EnemyState.PATROL
 
-## Patrol
+@export_subgroup("Movement")
+var moving_to_patrol_spot = false
+var patrol_spot : Vector2 = Vector2.ZERO
+var player_pos : Vector2 = Vector2.ZERO
+#endregion
 
 
-
+#region builtins
 func _ready() -> void:
 	idle_timer.wait_time = IDLE_WAIT_TIME + player.get_animation("Search").length
 	sight_raycast.target_position = Vector2(RAYCAST_DETECT_DIST, 0)
 
 
-func _physics_process(delta: float) -> void:
-	sight_raycast.look_at(SceneManager.player.global_position)
+func _physics_process(_delta: float) -> void:
+	player_pos = SceneManager.player.global_position if SceneManager.player else Vector2.ZERO
+	sight_raycast.look_at(player_pos)
 
 	if sight_raycast.is_colliding():
 		state = EnemyState.CHASE
 
 	match state:
-		EnemyState.PATROL: handle_patrol_state(delta)
+		EnemyState.PATROL: handle_patrol_state()
 		EnemyState.CHASE: handle_chase_state()
 		EnemyState.IDLE: pass
 	
 	if velocity != Vector2.ZERO:
 		move()
+#endregion
 
 
-func handle_patrol_state(_delta):
-	 # Reached previous patrol spot
-	if not moving_to_patrol_spot:
-		patrol_raycast.target_position = Vector2(
-			randf_range(-1, 1), randf_range(-1, 1)
-		) * RAYCAST_PATROL_DIST
-		
-		set_patrol_spot()
-	else:
-		$Sprite2D2.global_position = patrol_spot
-		var vect = patrol_spot - global_position
-	
-		var mov_vect = vect.normalized() * PATROL_SPEED
-		var dist = global_position.distance_to(patrol_spot)
+#region setters
+func set_state(new_state: EnemyState) -> void:
+	prev_state = state
+	state = new_state
+#endregion
 
-		# Reached destination
-		if abs(dist) <= 1:
-			player.stop()
-			velocity = Vector2.ZERO
-			moving_to_patrol_spot = false
-			
-			# search
-			sprite.scale.x = 1
-			player.play("Search")
-			state = EnemyState.IDLE
-			idle_timer.start()
-			return
-		
+
+#region state handlers
+func handle_patrol_state():
+	var mov_vect = (patrol_spot - global_position).normalized() * PATROL_SPEED
+	var dist = global_position.distance_to(patrol_spot)
+
+	# Reached destination
+	if dist > 1:
 		velocity = mov_vect
+		return
+
+	player.stop()
+	velocity = Vector2.ZERO
+	moving_to_patrol_spot = false
+
+	# Search player
+	player.play("Search")
+	state = EnemyState.IDLE
+	idle_timer.start()
+
+	# Set new patrol spot
+	patrol_raycast.target_position = Vector2(
+			randf_range(-1, 1), randf_range(-1, 1)
+	) * RAYCAST_PATROL_DIST
+		
+	set_patrol_spot()
 
 
 func handle_chase_state():
-	var player_pos = SceneManager.player.global_position
-	if not sight_raycast.is_colliding():
-		patrol_raycast.target_position = to_local(player_pos)
-		set_patrol_spot()
-		state = EnemyState.PATROL
-	else:
+	if sight_raycast.is_colliding(): 
 		var mov_vect = global_position.direction_to(player_pos) * CHASE_SPEED
 		velocity = mov_vect
+		return
+
+	patrol_raycast.target_position = to_local(player_pos)
+	set_patrol_spot()
+	state = EnemyState.PATROL
 
 
 func set_patrol_spot():
@@ -108,10 +120,11 @@ func set_patrol_spot():
 		else to_global(patrol_raycast.target_position)
 	)
 	moving_to_patrol_spot = true
+#endregion
 
 
 func move():
-	player.speed_scale = 0.7 if state == EnemyState.PATROL else 1
+	player.speed_scale = ANIMATION_PLAYER_SPEED if state == EnemyState.PATROL else 1.0
 	
 	player.play(
 		"Walk" if state == EnemyState.PATROL
@@ -121,5 +134,5 @@ func move():
 	move_and_slide()
 
 
-func _on_idle_timer_timeout() -> void:
+func _on_idle_timer_timeout():
 	state = prev_state

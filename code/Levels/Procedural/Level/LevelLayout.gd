@@ -37,7 +37,6 @@ func generate_layout() -> void:
 	
 	var current_room : RoomNode = null
 	
-	var room_counter = 1
 	var max_rooms = randi_range(
 		LevelConfigConstants.LEVEL_MIN_ROOMS, 
 		LevelConfigConstants.LEVEL_MAX_ROOMS
@@ -84,6 +83,6 @@ class RoomNode:
 	var data : RoomData
 	
 	
-	func _init(tile : Vector2, data : RoomData):
-		self.tile = tile
-		self.data = data
+	func _init(_tile : Vector2, _data : RoomData):
+		self.tile = _tile
+		self.data = _data

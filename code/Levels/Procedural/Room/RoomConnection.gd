@@ -7,6 +7,6 @@ class_name RoomConnection
 @export var connect_to : StringName
 
 
-func _init(id : StringName, connect_to : StringName):
-	self.id = id
-	self.connect_to = connect_to
+func _init(_id : StringName, _connect_to : StringName):
+	self.id = _id
+	self.connect_to = _connect_to

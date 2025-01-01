@@ -1,19 +1,23 @@
-@tool
 extends Node2D
 class_name WeaponHandler
 
-@export_category("Nodes")
+#region Nodes
+@export_group("Nodes")
 @onready var sprite = $Sprite2D
 @onready var anim_player : AnimationPlayer = $AnimationPlayer
+#endregion
 
-@export_category("Data")
+#region Data
+@export_group("Data")
 var can_attack = true
 @export var texture : Texture2D
 
-@export_category("Animation")
+@export_subgroup("Animation")
 var animation_library : AnimationLibrary
 var animation_library_name : StringName
+#endregion
 
+#region builtins
 func _ready():
 	if Engine.is_editor_hint(): return
 
@@ -23,21 +27,18 @@ func _ready():
 
 func _process(_delta):
 	if not Engine.is_editor_hint(): return
-	if texture != null:
-		var texture_path = texture.resource_path.split(".png")[0]
-		sprite.texture = load(texture_path + "_attack.png")
-		
-		if animation_library != null:
-			anim_player.remove_animation_library(texture_path)
-		
-		animation_library = load(texture_path + "_lib.res")
-		anim_player.add_animation_library(texture_path, animation_library)
-	else:
-		sprite.texture = null
+	
+	update_sprite_and_animation()
 
+
+func _input(event: InputEvent) -> void:
+	if Engine.is_editor_hint(): return
+	if not event.is_action_pressed("attack") or not can_attack: return
+	
+	attack()
+#endregion
 
 func attack():
-	
 	if texture == null: return
 	
 	can_attack = false
@@ -46,25 +47,24 @@ func attack():
 
 func set_weapon(weapon : Weapon):
 	texture = weapon.texture if weapon != null else null
-	if texture != null:
-		var texture_path = texture.resource_path.split(".png")[0]
-		sprite.texture = load(texture_path + "_attack.png")
-		sprite.frame_coords = Vector2.ZERO
-		
-		animation_library_name = texture_path.get_file()
-		
-		if animation_library != null:
-			anim_player.remove_animation_library(animation_library_name)
-		
-		animation_library = load(texture_path + "_lib.res")
-		anim_player.add_animation_library(animation_library_name, animation_library)
-	else:
+	update_sprite_and_animation()
+
+
+func update_sprite_and_animation():
+	if texture == null:
 		sprite.texture = null
+		return
 
+	var texture_path = texture.resource_path.split(".png")[0]
+	sprite.texture = load(texture_path + "_attack.png")
+	sprite.frame_coords = Vector2.ZERO
+	animation_library_name = texture_path.get_file()
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("attack") and can_attack:
-		attack()
+	if animation_library != null:
+		anim_player.remove_animation_library(animation_library_name)
+	
+	animation_library = load(texture_path + "_lib.res")
+	anim_player.add_animation_library(animation_library_name, animation_library)
 
 
 func _on_animation_finished(_anim_name):

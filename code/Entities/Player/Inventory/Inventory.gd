@@ -1,33 +1,56 @@
 extends Node
 class_name Inventory
 
-@export_category("Nodes")
+## Inventory
+## This class is used to manage the inventory of the player
+## It handles the input and the pages of the inventory
+
+
+#region Nodes
+@export_group("Nodes")
+
+@export_subgroup("Children Nodes")
 @onready var player = $AnimationPlayer
 @onready var pages = $"Background Panel/Outer Margin/UI/Content"
-@onready var map_label = %"Header"
-@onready var weapon = %"Weapon Slot"
-@onready var resources = %"Slots"
-@onready var tools = %"Tool Slots"
-@onready var recipes = %"Recipes Grid"
+@onready var map : InventoryMap = %"Inventory Map"
+@onready var misc_items = %"Misc Items"
+@onready var recipes = %"Recipes"
+@onready var resources : ResourcesManager = %"Resources Manager"
+@onready var equpment : EquipmentManager = %"Equipment Manager"
 
-@export_category("Data")
+
+
+
+
+#endregion
+
+#region Data
+@export_group("Data")
 var current_page : int = 0
-var handling_input: set = set_handling_input;
+var handling_input: set = set_handling_input
+#endregion
 
-@export_category("Signals")
+#region Signals
+@export_group("Signals")
 signal on_handling_changed(value : bool)
+#endregion
 
 
+#region builtins
 func _ready():
-	tools = self.find_child("Tools Holders")
-	weapon = self.find_child("Weapon")
 	resources = self.find_child("ResourcesSlots")
+	map.header.text = "[center]Map - " + get_tree().current_scene.name
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("inventory"): toggle()
+	if not handling_input: return
 	
-	map_label.text = "[center]Map - " + get_tree().current_scene.name
+	handle_page_leaf(event)
+#endregion
 
 
 func toggle():
-	handling_input = !handling_input
+	handling_input = not handling_input
 	
 	if handling_input: open()
 	else: close()
@@ -70,13 +93,6 @@ func leaf(next_page : int):
 		page.visible = (page.name == page_name)
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("inventory"): toggle()
-	if not handling_input: return
-	
-	handle_page_leaf(event)
-	
-	
 func handle_page_leaf(event: InputEvent):
 	var next_page = 0
 	if event.is_action_pressed("next_page"):
@@ -94,9 +110,7 @@ func get_page(n: int):
 
 
 #region setters & getters
-
 func set_handling_input(new_value : bool):
 	handling_input = new_value
 	on_handling_changed.emit(new_value)
-
 #endregion

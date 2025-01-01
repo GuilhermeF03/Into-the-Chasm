@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bsnergde52kg7"
+path="res://.godot/imported/PlaceholderTiles.aseprite-5391d4ceb57be3e1ff092aac88d63450.res"
+
+[deps]
+
+source_file="res://Levels/Procedural/Placeholder/PlaceholderTiles.aseprite"
+dest_files=["res://.godot/imported/PlaceholderTiles.aseprite-5391d4ceb57be3e1ff092aac88d63450.res"]
+
+[params]
+

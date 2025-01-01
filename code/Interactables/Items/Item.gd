@@ -9,6 +9,15 @@ const MAX_SPAWN_RANGE = 150
 @onready var pickable = $PickableItem
 
 @export_category("Data")
+
+enum ItemType{
+	Item,
+	Recipe,
+	Tool,
+	Weapon,
+	Trinket
+}
+@export var item_type : ItemType
 @export var item_name : String
 @export var texture : Texture2D
 @export_multiline var item_description : String

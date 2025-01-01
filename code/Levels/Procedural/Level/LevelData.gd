@@ -8,9 +8,9 @@ class_name LevelData
 
 
 func _init(
-	biome : LevelManager.Biome, 
-	is_boss_level: bool,
+	_biome : LevelManager.Biome, 
+	_is_boss_level: bool,
 ):
-	self.biome = biome
-	self.is_boss_level = is_boss_level
+	self.biome = _biome
+	self.is_boss_level = _is_boss_level
 	self.layout = LevelLayout.new()

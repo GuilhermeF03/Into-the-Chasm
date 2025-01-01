@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cv3m0a2g3qke8"]
 
-[ext_resource type="Texture2D" uid="uid://dcq7rorm3octr" path="res://Levels/Dungeons/Copper Paths/copper_paths.png" id="1_3oqax"]
+[ext_resource type="Texture2D" uid="uid://dcq7rorm3octr" path="res://Levels/Procedural/Copper Paths/copper_paths.png" id="1_3oqax"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aqbw7"]
 resource_name = "Copper Paths"

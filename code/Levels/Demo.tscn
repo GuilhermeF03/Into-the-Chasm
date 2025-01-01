@@ -50,18 +50,21 @@ texture = ExtResource("6_ml1g7")
 position = Vector2(389, -158)
 minerals = 15
 crafted_item = ExtResource("8_dl3lm")
+item_type = 1
 item_name = "Sword"
 
 [node name="PickableRecipe12" parent="." instance=ExtResource("7_tj26q")]
 position = Vector2(323, -303)
 cristals = 15
 crafted_item = ExtResource("8_dl3lm")
+item_type = 1
 item_name = "Sword"
 
 [node name="PickableRecipe13" parent="." instance=ExtResource("7_tj26q")]
 position = Vector2(500, -135)
 organics = 15
 crafted_item = ExtResource("8_dl3lm")
+item_type = 1
 item_name = "DADASEAEDUWAOIEUAEOIAWUEOIJAOIFJOAIJFOAJFOHAOFHEOHFOIAJOFIHAEOHFAEHOUHFAYFYAOIFUIAUFUAFOIUFPAUFPOAPFAPOFPOAFP"
 
 [node name="Slime" parent="." instance=ExtResource("9_xe6wp")]
@@ -69,9 +72,12 @@ position = Vector2(1049, -392)
 
 [node name="PickableTrinket" parent="." instance=ExtResource("10_vabyw")]
 position = Vector2(1255, 122)
+item_type = 4
 
 [node name="PickableTrinket2" parent="." instance=ExtResource("10_vabyw")]
 position = Vector2(1034, 439)
+item_type = 4
 
 [node name="PickableTrinket3" parent="." instance=ExtResource("10_vabyw")]
 position = Vector2(1493, 235)
+item_type = 4

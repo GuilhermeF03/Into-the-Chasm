@@ -11,16 +11,16 @@ class_name RoomData
 
 
 func _init(
-	id : StringName = "", 
-	layout : String = "", 
-	rotation : int = 0, 
-	connections : Array[RoomConnection] = [], 
-	reward : int = 0,
-	mob_groups : Array = []
+	_id : StringName = "", 
+	_layout : String = "", 
+	_rotation : int = 0, 
+	_connections : Array[RoomConnection] = [], 
+	_reward : int = 0,
+	_mob_groups : Array = []
 ):
-	self.id = id
-	self.layout = layout
-	self.connections = connections
-	self.reward = reward
-	self.mob_groups = mob_groups
+	self.id = _id
+	self.layout = _layout
+	self.connections = _connections
+	self.reward = _reward
+	self.mob_groups = _mob_groups
 	

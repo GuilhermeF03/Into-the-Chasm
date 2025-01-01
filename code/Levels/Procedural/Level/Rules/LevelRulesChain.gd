@@ -59,4 +59,4 @@ func to_vector(idx : int, grid_width : int) -> Vector2:
 
 
 func to_grid_idx(vec : Vector2, grid_width : int) -> int:
-	return (vec.y * grid_width + vec.x)
+	return (int(vec.y) * grid_width + int(vec.x))

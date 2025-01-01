@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbrgln63xg7mu"]
+
+[ext_resource type="Script" path="res://Levels/Procedural/Placeholder/Door/Door.gd" id="1_qbhu0"]
+[ext_resource type="Texture2D" uid="uid://bfjp2efn7oi2" path="res://Levels/Procedural/Placeholder/Door/Art/Open.png" id="2_kuk6l"]
+
+[sub_resource type="Animation" id="Animation_ial82"]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_wi558"]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_sxj16"]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fukeq"]
+_data = {
+"Down": SubResource("Animation_ial82"),
+"Left": SubResource("Animation_wi558"),
+"Right": SubResource("Animation_sxj16")
+}
+
+[node name="Door" type="Node2D"]
+script = ExtResource("1_qbhu0")
+direction = 1
+animation = &"Down"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_kuk6l")
+hframes = 4
+vframes = 3
+metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": true,
+"layer_section": true,
+"output_section": true,
+"pending_changes": {},
+"slice_section": true
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layers": ["Open"],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"slice": "",
+"source": "res://Levels/Procedural/Placeholder/Door1.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "2d514580985204e657f7025a607a87ec"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fukeq")
+}

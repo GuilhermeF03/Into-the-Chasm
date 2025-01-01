@@ -21,8 +21,8 @@ InputManager="*res://Managers/Input/InputManager.tscn"
 UiManager="*res://Managers/UI/UiManager.tscn"
 InventoryManager="*res://Managers/Inventory/InventoryManager.gd"
 InteractionManager="*res://Managers/Interaction/InteractionManager.tscn"
-PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 SceneManager="*res://Managers/Scene/SceneManager.tscn"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [display]
 

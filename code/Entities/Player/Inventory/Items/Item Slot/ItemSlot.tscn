@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://bunwl8y8h0o3k"]
+
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Item Slot/ItemSlot.gd" id="1_ehwe6"]
+[ext_resource type="PackedScene" uid="uid://b5ote6c6nj3y5" path="res://Entities/Player/Inventory/Items/Stats Panel/StatsPanel.tscn" id="3_uf35y"]
+
+[node name="Item Slot" type="TextureRect" node_paths=PackedStringArray("icon")]
+texture_filter = 1
+clip_contents = true
+custom_minimum_size = Vector2(99, 80)
+offset_left = 52.2
+offset_right = 947.8
+offset_bottom = 895.6
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch_mode = 5
+script = ExtResource("1_ehwe6")
+icon = NodePath("Container/Icon")
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Entities/Player/Inventory/Items/Misc Slot/MiscSlot.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "438de4c03667bce903f082c24b401b6b"
+
+[node name="Container" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Container"]
+layout_mode = 2
+stretch_mode = 5
+
+[node name="Stats" parent="." instance=ExtResource("3_uf35y")]
+visible = false
+z_index = 1
+layout_mode = 1
+offset_left = -52.2
+offset_right = -52.2
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

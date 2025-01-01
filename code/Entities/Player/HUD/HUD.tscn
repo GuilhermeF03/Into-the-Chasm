@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://5xry0mnc8j7o"]
 
-[ext_resource type="PackedScene" uid="uid://okq1vurdbveb" path="res://Entities/Player/Inventory/Equipment/WeaponSlot.tscn" id="2_nolva"]
-[ext_resource type="Script" path="res://Entities/Player/Inventory/Equipment/Tools/ToolsManager.gd" id="3_qsm07"]
+[ext_resource type="PackedScene" uid="uid://okq1vurdbveb" path="res://Entities/Player/Inventory/Items/Primary/Equipment/Weapon/WeaponSlot.tscn" id="2_nolva"]
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Primary/Equipment/Tools/ToolsManager.gd" id="3_qsm07"]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -39,6 +39,12 @@ alignment = 1
 [node name="Weapon" parent="Container/Stats/Content/Equipment" instance=ExtResource("2_nolva")]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Item Slot" parent="Container/Stats/Content/Equipment/Weapon" index="0"]
+mouse_filter = 2
+
+[node name="Icon" parent="Container/Stats/Content/Equipment/Weapon/Item Slot/Container" index="0"]
 mouse_filter = 2
 
 [node name="Tool Holders" type="HBoxContainer" parent="Container/Stats/Content/Equipment"]
@@ -106,3 +112,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 mouse_filter = 2
+
+[editable path="Container/Stats/Content/Equipment/Weapon"]
+[editable path="Container/Stats/Content/Equipment/Weapon/Item Slot"]
