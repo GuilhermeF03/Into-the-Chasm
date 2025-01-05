@@ -25,7 +25,7 @@ signal interact(event: InputEvent)
 var item : Item = null : set = set_item
 @export var icon_texture : Texture2D : set = set_icon_texture
 @export var container_texture : Texture2D : set = set_container_texture
-var dock
+@export var dock : UiDock.DOCK = UiDock.DOCK.DYNAMIC
 #endregion
 
 
@@ -46,11 +46,12 @@ func _process(_delta):
 
 
 func _on_mouse_entered() -> void:
-	UiManager.queue_dock(UiManager.DOCK.DYNAMIC, stats)
+	if item == null: return
+	UiManager.queue_dock(dock, stats)
 
 
 func _on_mouse_exited() -> void:
-	UiManager.unqueue_dock(UiManager.DOCK.DYNAMIC, stats)
+	UiManager.unqueue_dock(dock, stats)
 
 
 func _on_gui_input(event: InputEvent) -> void:

@@ -40,6 +40,7 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
+dock = 1
 
 [node name="Item Slot" parent="Container/Stats/Content/Equipment/Weapon" index="0"]
 mouse_filter = 2
@@ -53,27 +54,24 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.3
 mouse_filter = 2
 script = ExtResource("3_qsm07")
+dock = 1
 
 [node name="Lives" type="VBoxContainer" parent="Container/Stats/Content"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 mouse_filter = 2
-
-[node name="Break2" type="Container" parent="Container/Stats/Content/Lives"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.3
+theme_override_constants/separation = 16
+alignment = 1
 
 [node name="Content" type="PanelContainer" parent="Container/Stats/Content/Lives"]
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.25
+size_flags_vertical = 6
 
-[node name="Break" type="Container" parent="Container/Stats/Content/Lives"]
+[node name="Bottom Break" type="Container" parent="Container/Stats/Content/Lives"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.75
+size_flags_stretch_ratio = 0.3
 
 [node name="Break" type="Container" parent="Container/Stats/Content"]
 layout_mode = 2

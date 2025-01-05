@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dsgmst01ich70"]
 
 [ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Trinkets & Recipes/MiscContainer.gd" id="1_3but5"]
-[ext_resource type="Texture2D" uid="uid://dmnp2u754cari" path="res://Entities/Player/Inventory/Items/Stats Panel/panel.png" id="2_jkkv8"]
+[ext_resource type="Texture2D" uid="uid://dmnp2u754cari" path="res://Entities/Player/Inventory/Items/Trinkets & Recipes/MiscContainer.png" id="2_jkkv8"]
 
 [node name="Misc Container" type="VBoxContainer"]
 size_flags_horizontal = 3

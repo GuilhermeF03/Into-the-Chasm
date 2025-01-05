@@ -18,13 +18,13 @@ custom_minimum_size = Vector2(99, 80)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-mouse_filter = 2
 texture = ExtResource("1_4wuur")
 stretch_mode = 5
 script = ExtResource("3_1kvtp")
 icon = NodePath("Container/VBoxContainer/Icon")
 icon_texture = ExtResource("3_4y1fu")
 container_texture = ExtResource("1_4wuur")
+dock = 0
 metadata/_aseprite_wizard_interface_config_ = {
 "output_section": true,
 "pending_changes": {}

@@ -7,10 +7,17 @@ class_name RecipeSlot
 var is_crafting : bool = false
 #endregion
 
+#region Data
+@export_group("Data")
+@export var dock : UiDock.DOCK
+#endregion
+
 
 #region builtins
 func _ready():
 	item_slot.interact.connect(on_gui_input)
+	if dock != null:
+		item_slot.dock = dock
 
 
 func _process(_delta: float) -> void:

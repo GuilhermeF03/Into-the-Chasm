@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dmnp2u754cari"
-path="res://.godot/imported/panel.png-de6c8e1ba8b367c6e1eacde4bf7c8040.ctex"
+path="res://.godot/imported/MiscContainer.png-5bb4af8f6871503e941909ee9f350024.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Player/Inventory/Items/Stats Panel/panel.png"
-dest_files=["res://.godot/imported/panel.png-de6c8e1ba8b367c6e1eacde4bf7c8040.ctex"]
+source_file="res://Entities/Player/Inventory/Items/Trinkets & Recipes/MiscContainer.png"
+dest_files=["res://.godot/imported/MiscContainer.png-5bb4af8f6871503e941909ee9f350024.ctex"]
 
 [params]
 

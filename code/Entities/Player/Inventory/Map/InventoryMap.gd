@@ -4,7 +4,7 @@ class_name InventoryMap
 #region Nodes
 @export_group("Nodes")
 @onready var header : RichTextLabel = $"Header"
-@onready var content : PanelContainer = $"Content"
+@onready var content : PanelContainer = $"MarginContainer/Content"
 #endregion
 
 

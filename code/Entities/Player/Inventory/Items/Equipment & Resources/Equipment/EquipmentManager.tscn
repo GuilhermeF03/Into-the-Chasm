@@ -20,9 +20,11 @@ size_flags_vertical = 3
 [node name="Weapon Slot" parent="Content" instance=ExtResource("1_e23pp")]
 layout_mode = 2
 size_flags_horizontal = 3
+dock = 1
 
 [node name="Tool Slots" type="VBoxContainer" parent="Content"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("5_btspa")
+dock = 1

@@ -8,20 +8,21 @@ var is_crafting : bool = false
 #endregion
 
 #region Signals
-@export_category("Signals")
+@export_group("Signals")
 signal strip_down(slot_name : StringName)
+#endregion
+
+#region Data
+@export_group("Data")
+@export var dock : UiDock.DOCK
 #endregion
 
 
 #region builtins
 func _ready():
 	item_slot.interact.connect(on_gui_input)
-
-
-func _process(_delta: float) -> void:
-	if is_crafting: return
-	#var item = item_slot.item
-	#var icon = item_slot.icon
+	if dock != null:
+		item_slot.dock = dock
 
 
 func on_gui_input(_event: InputEvent) -> void:

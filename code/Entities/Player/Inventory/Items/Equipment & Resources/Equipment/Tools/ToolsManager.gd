@@ -1,10 +1,12 @@
 extends BoxContainer
 class_name ToolsManager
 
-#region Nodes
-@export_group("Nodes")
+#region Data
+@export_group("Data")
+var curr_tool : ToolSlot = null
+@export var dock : UiDock.DOCK
 
-@export_subgroup("Preloaded Nodes")
+@export_subgroup("Preloads")
 var icon = preload(
 	"res://Entities/Player/Inventory/Items/Equipment & Resources/Equipment/Art/EquipmentSlot.png"
 )
@@ -13,11 +15,7 @@ var tool_slot_node = preload(
 )
 var selected_icon = preload(
 	"res://Entities/Player/Inventory/Items/Equipment & Resources/Equipment/Art/EquipmentSlotSelected.png")
-#endregion
 
-#region Data
-@export_group("Data")
-var curr_tool : ToolSlot = null
 #endregion
 
 #region builtins
@@ -50,6 +48,8 @@ func add_tool():
 	var tool : ToolSlot = tool_slot_node.instantiate()
 	tool.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	tool.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+	tool.dock = dock
 
 	self.add_child(tool)
 	tool.on_drop.connect(drop_tool)

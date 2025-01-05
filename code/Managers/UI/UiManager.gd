@@ -14,13 +14,11 @@ extends CanvasLayer
 #region Data
 @export_group("Data")
 @export_subgroup("Docks")
-enum DOCK {TOP, LEFT, RIGHT, BOTTOM, DYNAMIC}
-
 var dock_queues : Dictionary = {
-	DOCK.TOP: [],
-	DOCK.LEFT: [],
-	DOCK.RIGHT: [],
-	DOCK.BOTTOM: []
+	UiDock.DOCK.TOP: [],
+	UiDock.DOCK.LEFT: [],
+	UiDock.DOCK.RIGHT: [],
+	UiDock.DOCK.BOTTOM: []
 }
 #endregion
 
@@ -56,17 +54,17 @@ func _process(_delta: float) -> void:
 
 
 #region Docks Handling
-func queue_dock(dock : DOCK, content : Control):
-	var final_dock : DOCK = (
-		get_closest_dock(content) if dock == DOCK.DYNAMIC
+func queue_dock(dock : UiDock.DOCK, content : Control):
+	var final_dock : UiDock.DOCK = (
+		get_closest_dock(content) if dock == UiDock.DOCK.DYNAMIC
 		else dock
 	)
 	(dock_queues[final_dock] as Array).push_back(content)
 
 
-func unqueue_dock(dock : DOCK, content : Control):
-	var final_dock : DOCK = (
-		get_closest_dock(content) if dock == DOCK.DYNAMIC
+func unqueue_dock(dock : UiDock.DOCK, content : Control):
+	var final_dock : UiDock.DOCK = (
+		get_closest_dock(content) if dock == UiDock.DOCK.DYNAMIC
 		else dock
 	)
 	
@@ -79,28 +77,28 @@ func unqueue_dock(dock : DOCK, content : Control):
 
 
 #region Utils
-func to_dock_node(dock : DOCK) -> UiDock:
-	assert(dock != DOCK.DYNAMIC, "Invalid value passed: 'Dynamic'")
+func to_dock_node(dock : UiDock.DOCK) -> UiDock:
+	assert(dock != UiDock.DOCK.DYNAMIC, "Invalid value passed: 'Dynamic'")
 	
 	return (
-		top_dock if dock == DOCK.TOP else
-		left_dock if dock == DOCK.LEFT else
-		right_dock if dock == DOCK.RIGHT else
+		top_dock if dock == UiDock.DOCK.TOP else
+		left_dock if dock == UiDock.DOCK.LEFT else
+		right_dock if dock == UiDock.DOCK.RIGHT else
 		bottom_dock
 	)
 	
 
-func to_dock_enum(dck_node : UiDock) -> DOCK:
+func to_dock_enum(dck_node : UiDock) -> UiDock.DOCK:
 	return (
-		DOCK.TOP if dck_node == top_dock else
-		DOCK.LEFT if dck_node == left_dock else
-		DOCK.RIGHT if dck_node == right_dock else
-		DOCK.BOTTOM
+		UiDock.DOCK.TOP if dck_node == top_dock else
+		UiDock.DOCK.LEFT if dck_node == left_dock else
+		UiDock.DOCK.RIGHT if dck_node == right_dock else
+		UiDock.DOCK.BOTTOM
 	)
 
 
-func get_closest_dock(content : Control) -> DOCK:
-	var final_dock : DOCK
+func get_closest_dock(content : Control) -> UiDock.DOCK:
+	var final_dock : UiDock.DOCK
 	var content_screen_position = content.get_screen_position()
 	var closest_dist = null
 	

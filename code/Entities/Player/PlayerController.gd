@@ -18,8 +18,6 @@ extends CharacterBody2D
 @export var CAMERA_VERTICAL_OFFSET = 200
 @export var CAMERA_HORIZONTAL_OFFSET = 0
 @export_range(1, 20, 5) var CAMERA_AXIS_DRIFT = 10
-
-
 #endregion
 
 #region Nodes

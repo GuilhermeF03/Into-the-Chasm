@@ -1,12 +1,20 @@
 extends MarginContainer
 class_name UiDock
 
+#region Constants
 const MAX_WIDTH = 1024
 const MAX_HEIGHT = 256
+#endregion
 
+#region Node
 @onready var content_margin = $ContentMargin
+#endregion
 
+
+#region Data
+enum DOCK {TOP, LEFT, RIGHT, BOTTOM, DYNAMIC}
 const init_custom_minimum_size = Vector2(96,96)
+#endregion
 
 
 func _ready() -> void:

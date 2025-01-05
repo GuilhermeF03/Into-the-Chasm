@@ -11,10 +11,17 @@ var weapon_node = preload(
 )
 #endregion
 
+#region Data
+@export_group("Data")
+@export var dock : UiDock.DOCK
+#endregion
+
 
 #region builtins
 func _ready():
 	InventoryManager.weapon_changed.connect(equip)
+	if dock != null:
+		item_slot.dock = dock
 #endregion
 
 

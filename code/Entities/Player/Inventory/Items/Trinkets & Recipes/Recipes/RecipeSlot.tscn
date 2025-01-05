@@ -15,5 +15,6 @@ script = ExtResource("1_ik52h")
 layout_mode = 2
 texture = ExtResource("3_kvk1d")
 container_texture = ExtResource("3_kvk1d")
+dock = null
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
