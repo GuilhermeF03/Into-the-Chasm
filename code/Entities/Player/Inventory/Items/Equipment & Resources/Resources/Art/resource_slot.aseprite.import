@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cdlwg3ue6ig5"
+path="res://.godot/imported/resource_slot.aseprite-13544dffd1f583f75c74ca1b2ae267ad.res"
+
+[deps]
+
+source_file="res://Entities/Player/Inventory/Items/Equipment & Resources/Resources/Art/resource_slot.aseprite"
+dest_files=["res://.godot/imported/resource_slot.aseprite-13544dffd1f583f75c74ca1b2ae267ad.res"]
+
+[params]
+

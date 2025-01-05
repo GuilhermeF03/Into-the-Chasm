@@ -6,3 +6,9 @@ class_name InventoryMap
 @onready var header : RichTextLabel = $"Header"
 @onready var content : PanelContainer = $"Content"
 #endregion
+
+
+#region builtins
+func _ready():
+	header.text = "[center]Map - " + SceneManager.scene.name
+#endregion

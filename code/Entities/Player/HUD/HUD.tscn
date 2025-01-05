@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://5xry0mnc8j7o"]
 
-[ext_resource type="PackedScene" uid="uid://okq1vurdbveb" path="res://Entities/Player/Inventory/Items/Primary/Equipment/Weapon/WeaponSlot.tscn" id="2_nolva"]
-[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Primary/Equipment/Tools/ToolsManager.gd" id="3_qsm07"]
+[ext_resource type="PackedScene" uid="uid://okq1vurdbveb" path="res://Entities/Player/Inventory/Items/Equipment & Resources/Equipment/Weapon/WeaponSlot.tscn" id="2_nolva"]
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Equipment & Resources/Equipment/Tools/ToolsManager.gd" id="3_qsm07"]
 
 [node name="HUD" type="CanvasLayer"]
 

@@ -11,7 +11,7 @@ const ITEM_SCALE = 2
 
 #region Nodes
 @export_group("Nodes")
-@onready var stats : StatsPanel = $Stats
+@onready var stats : StatsPanel = $"Stats Panel"
 @export var icon : TextureRect
 #endregion
 
@@ -25,6 +25,7 @@ signal interact(event: InputEvent)
 var item : Item = null : set = set_item
 @export var icon_texture : Texture2D : set = set_icon_texture
 @export var container_texture : Texture2D : set = set_container_texture
+var dock
 #endregion
 
 
@@ -35,7 +36,7 @@ func _ready():
 		
 	icon.texture = icon_texture
 	texture = container_texture
-	
+
 	
 func _process(_delta):
 	if not Engine.is_editor_hint(): return
@@ -45,11 +46,11 @@ func _process(_delta):
 
 
 func _on_mouse_entered() -> void:
-	UiManager.queue_dock(UiManager.DOCK.RIGHT, stats)
+	UiManager.queue_dock(UiManager.DOCK.DYNAMIC, stats)
 
 
 func _on_mouse_exited() -> void:
-	UiManager.unqueue_dock(UiManager.DOCK.RIGHT, stats)
+	UiManager.unqueue_dock(UiManager.DOCK.DYNAMIC, stats)
 
 
 func _on_gui_input(event: InputEvent) -> void:

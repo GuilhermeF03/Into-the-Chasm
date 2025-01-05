@@ -1,8 +1,10 @@
 extends PanelContainer
 class_name StatsPanel
 
-@export_category("Nodes")
+#region Nodes
+@export_group("Nodes")
 @onready var label = $Label
+#endregion
 
 
 func set_stats(item : Item):

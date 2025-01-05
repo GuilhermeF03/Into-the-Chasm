@@ -1,12 +1,12 @@
 [gd_scene load_steps=25 format=3 uid="uid://dd1bjjaxa7dur"]
 
 [ext_resource type="Script" path="res://Entities/Player/Inventory/Inventory.gd" id="1_ildrf"]
-[ext_resource type="PackedScene" uid="uid://n441ae7rc4mf" path="res://Entities/Player/Inventory/Items/Primary/Resources/ResourcesManager.tscn" id="3_4ustp"]
-[ext_resource type="PackedScene" uid="uid://bsoybh7k8xrb3" path="res://Entities/Player/Inventory/Items/Primary/Equipment/EquipmentManager.tscn" id="4_8yuvl"]
+[ext_resource type="PackedScene" uid="uid://n441ae7rc4mf" path="res://Entities/Player/Inventory/Items/Equipment & Resources/Resources/ResourcesManager.tscn" id="3_4ustp"]
+[ext_resource type="PackedScene" uid="uid://bsoybh7k8xrb3" path="res://Entities/Player/Inventory/Items/Equipment & Resources/Equipment/EquipmentManager.tscn" id="4_8yuvl"]
 [ext_resource type="PackedScene" uid="uid://ciwd4xk1n0wwt" path="res://Entities/Player/Inventory/Map/InventoryMap.tscn" id="5_k1xai"]
-[ext_resource type="PackedScene" uid="uid://dsgmst01ich70" path="res://Entities/Player/Inventory/Items/Secondary/MiscContainer.tscn" id="6_i2mwl"]
-[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Secondary/Recipes/RecipesManager.gd" id="8_0vjyu"]
-[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Secondary/Trinkets/TrinketManager.gd" id="8_g7iot"]
+[ext_resource type="PackedScene" uid="uid://dsgmst01ich70" path="res://Entities/Player/Inventory/Items/Trinkets & Recipes/MiscContainer.tscn" id="6_i2mwl"]
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Trinkets & Recipes/Recipes/RecipesManager.gd" id="8_0vjyu"]
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Trinkets & Recipes/Trinkets/TrinketManager.gd" id="8_g7iot"]
 [ext_resource type="Texture2D" uid="uid://c3e7sbd48vvop" path="res://Entities/Player/Inventory/Art/inventory_book4.png" id="11_nkym1"]
 [ext_resource type="Texture2D" uid="uid://cdura015na1v" path="res://Entities/Player/Inventory/Art/inventory_book3.png" id="12_0oju1"]
 [ext_resource type="Texture2D" uid="uid://4qlqvtwm36fh" path="res://Entities/Player/Inventory/Art/inventory_book2.png" id="13_rrmk6"]
@@ -212,10 +212,11 @@ visible = false
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Misc Items" parent="Background Panel/Outer Margin/UI/Content/Pages-1" instance=ExtResource("6_i2mwl")]
+[node name="Trinkets" parent="Background Panel/Outer Margin/UI/Content/Pages-1" instance=ExtResource("6_i2mwl")]
 unique_name_in_owner = true
 layout_mode = 2
 grid_script = ExtResource("8_g7iot")
+break_ratio = 0.18
 
 [node name="Page-Break" type="Container" parent="Background Panel/Outer Margin/UI/Content/Pages-1"]
 layout_mode = 2

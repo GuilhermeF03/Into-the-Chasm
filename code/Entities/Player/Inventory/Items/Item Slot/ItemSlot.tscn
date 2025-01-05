@@ -48,12 +48,9 @@ mouse_filter = 2
 layout_mode = 2
 stretch_mode = 5
 
-[node name="Stats" parent="." instance=ExtResource("3_uf35y")]
+[node name="Stats Panel" parent="." instance=ExtResource("3_uf35y")]
 visible = false
-z_index = 1
 layout_mode = 1
-offset_left = -52.2
-offset_right = -52.2
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

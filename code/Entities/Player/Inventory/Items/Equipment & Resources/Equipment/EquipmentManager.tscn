@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsoybh7k8xrb3"]
+
+[ext_resource type="PackedScene" uid="uid://okq1vurdbveb" path="res://Entities/Player/Inventory/Items/Equipment & Resources/Equipment/Weapon/WeaponSlot.tscn" id="1_e23pp"]
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Equipment & Resources/Equipment/Tools/ToolsManager.gd" id="5_btspa"]
+
+[node name="Equipment" type="VBoxContainer"]
+size_flags_vertical = 3
+
+[node name="Header" type="RichTextLabel" parent="."]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center] Equipment"
+fit_content = true
+
+[node name="Content" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Weapon Slot" parent="Content" instance=ExtResource("1_e23pp")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Tool Slots" type="VBoxContainer" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("5_btspa")

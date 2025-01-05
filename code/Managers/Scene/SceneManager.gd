@@ -5,11 +5,13 @@ extends Node
 
 @export_category("Data")
 var scene : Node
+var screen_size : Vector2i
+
 
 
 func _ready():
 	scene = get_tree().current_scene
-	
+	screen_size = DisplayServer.screen_get_size()
 	
 func spawn(node : Node, position : Vector2 = Vector2.ZERO):
 	if node is Node2D:

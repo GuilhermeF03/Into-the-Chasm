@@ -12,16 +12,6 @@ class_name Inventory
 @export_subgroup("Children Nodes")
 @onready var player = $AnimationPlayer
 @onready var pages = $"Background Panel/Outer Margin/UI/Content"
-@onready var map : InventoryMap = %"Inventory Map"
-@onready var misc_items = %"Misc Items"
-@onready var recipes = %"Recipes"
-@onready var resources : ResourcesManager = %"Resources Manager"
-@onready var equpment : EquipmentManager = %"Equipment Manager"
-
-
-
-
-
 #endregion
 
 #region Data
@@ -37,10 +27,6 @@ signal on_handling_changed(value : bool)
 
 
 #region builtins
-func _ready():
-	resources = self.find_child("ResourcesSlots")
-	map.header.text = "[center]Map - " + get_tree().current_scene.name
-
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("inventory"): toggle()
 	if not handling_input: return
@@ -49,6 +35,7 @@ func _input(event: InputEvent) -> void:
 #endregion
 
 
+#region Page Handling
 func toggle():
 	handling_input = not handling_input
 	
@@ -107,6 +94,7 @@ func handle_page_leaf(event: InputEvent):
 
 func get_page(n: int):
 	return "Pages-" + str(n)
+#endregion
 
 
 #region setters & getters

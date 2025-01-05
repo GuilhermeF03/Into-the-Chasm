@@ -22,20 +22,24 @@ theme_override_constants/margin_bottom = 48
 metadata/_edit_use_anchors_ = true
 
 [node name="TopDock" parent="MarginContainer" instance=ExtResource("2_4bcfh")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 2
 
 [node name="LeftDock" parent="MarginContainer" instance=ExtResource("2_4bcfh")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
 [node name="RightDock" parent="MarginContainer" instance=ExtResource("2_4bcfh")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
 [node name="BottomDock" parent="MarginContainer" instance=ExtResource("2_4bcfh")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8

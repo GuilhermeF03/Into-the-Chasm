@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bv5h0t1jgi1eg"
+path="res://.godot/imported/resource_counter_spot.aseprite-4c617d6e70054fccf04e5c4c371429f3.res"
+
+[deps]
+
+source_file="res://Entities/Player/Inventory/Items/Equipment & Resources/Resources/Art/resource_counter_spot.aseprite"
+dest_files=["res://.godot/imported/resource_counter_spot.aseprite-4c617d6e70054fccf04e5c4c371429f3.res"]
+
+[params]
+

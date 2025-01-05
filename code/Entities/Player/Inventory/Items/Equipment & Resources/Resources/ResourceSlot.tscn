@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://70somrqkb0mp"]
+
+[ext_resource type="Texture2D" uid="uid://suvxlf36pnxb" path="res://Entities/Player/Inventory/Items/Equipment & Resources/Resources/Art/resource_slot.png" id="1_4wuur"]
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Equipment & Resources/Resources/ResourceSlot.gd" id="1_bnmne"]
+[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Item Slot/ItemSlot.gd" id="3_1kvtp"]
+[ext_resource type="Texture2D" uid="uid://cf22k8dv7sqdg" path="res://Interactables/Items/Resources/Art/cristals_icons.png" id="3_4y1fu"]
+[ext_resource type="PackedScene" uid="uid://b5ote6c6nj3y5" path="res://Entities/Player/Inventory/Items/Stats Panel/StatsPanel.tscn" id="4_d5rg6"]
+
+[node name="Resource Slot" type="AspectRatioContainer"]
+size_flags_horizontal = 3
+script = ExtResource("1_bnmne")
+type = 2
+
+[node name="Item Slot" type="TextureRect" parent="." node_paths=PackedStringArray("icon")]
+texture_filter = 1
+clip_contents = true
+custom_minimum_size = Vector2(99, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("1_4wuur")
+stretch_mode = 5
+script = ExtResource("3_1kvtp")
+icon = NodePath("Container/VBoxContainer/Icon")
+icon_texture = ExtResource("3_4y1fu")
+container_texture = ExtResource("1_4wuur")
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Entities/Player/Inventory/Items/Misc Slot/MiscSlot.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "438de4c03667bce903f082c24b401b6b"
+
+[node name="Container" type="MarginContainer" parent="Item Slot"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.12
+anchor_top = 0.03
+anchor_right = 0.904
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Item Slot/Container"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Item Slot/Container/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]75"
+scroll_active = false
+
+[node name="Icon" type="TextureRect" parent="Item Slot/Container/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_4y1fu")
+stretch_mode = 5
+
+[node name="Break" type="Container" parent="Item Slot/Container/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="Stats Panel" parent="Item Slot" instance=ExtResource("4_d5rg6")]
+visible = false
+z_index = 1
+layout_mode = 2
+anchors_preset = 0
+offset_left = -52.2
+offset_right = -52.2
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
