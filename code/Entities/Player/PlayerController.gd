@@ -4,8 +4,8 @@ extends CharacterBody2D
 @export_group("Constants")
 
 @export_subgroup("Speeds")
-@export_range(100, 500, 50) var MOV_SPEED = 300
-@export_range(200, 1000, 100) var DODGE_SPEED = 600
+@export_range(100, 1000, 50) var MOV_SPEED = 500
+@export_range(200, 1000, 100) var DODGE_SPEED = 800
 
 @export_subgroup("Timers")
 @export_range(0.5, 5) var DODGE_COOLDOWN : float = 0.5
