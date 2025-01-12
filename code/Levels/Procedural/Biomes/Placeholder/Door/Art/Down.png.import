@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcq7rorm3octr"
-path="res://.godot/imported/copper_paths.png-314c7214f1b7f77fea472b273bcd2962.ctex"
+uid="uid://4w7oyei7pbvv"
+path="res://.godot/imported/Down.png-48b9ae53ff5ac53fc5ea7ef1a7cf61b0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/Procedural/Copper Paths/copper_paths.png"
-dest_files=["res://.godot/imported/copper_paths.png-314c7214f1b7f77fea472b273bcd2962.ctex"]
+source_file="res://Levels/Procedural/Biomes/Placeholder/Door/Art/Down.png"
+dest_files=["res://.godot/imported/Down.png-48b9ae53ff5ac53fc5ea7ef1a7cf61b0.ctex"]
 
 [params]
 

@@ -32,7 +32,7 @@ func _process(_delta: float) -> void:
 	else: icon.modulate = item_slot.DARK_MODULATE
 
 
-func on_gui_input(event: InputEvent) -> void:
+func on_gui_input(_event: InputEvent) -> void:
 	var item = item_slot.item as Recipe
 	if item.can_craft(): item.craft()
 #endregion

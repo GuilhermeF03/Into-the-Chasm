@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cgdsdveuaw52k"
+path="res://.godot/imported/copper_paths.aseprite-25fa2b09503833adceefb75c59057cbb.res"
+
+[deps]
+
+source_file="res://Levels/Procedural/Biomes/Copper Paths/copper_paths.aseprite"
+dest_files=["res://.godot/imported/copper_paths.aseprite-25fa2b09503833adceefb75c59057cbb.res"]
+
+[params]
+

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuvqef0a6y5bm"
-path="res://.godot/imported/PlaceholderTiles.png-49cb884b029e9e79f13aa3ddf16cc200.ctex"
+uid="uid://dcq7rorm3octr"
+path="res://.godot/imported/copper_paths.png-a78361b27e8d3fa69f4cb4136ec69678.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/Procedural/Placeholder/PlaceholderTiles.png"
-dest_files=["res://.godot/imported/PlaceholderTiles.png-49cb884b029e9e79f13aa3ddf16cc200.ctex"]
+source_file="res://Levels/Procedural/Biomes/Copper Paths/copper_paths.png"
+dest_files=["res://.godot/imported/copper_paths.png-a78361b27e8d3fa69f4cb4136ec69678.ctex"]
 
 [params]
 

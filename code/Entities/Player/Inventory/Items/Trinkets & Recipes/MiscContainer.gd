@@ -26,7 +26,8 @@ func _ready():
 	if break_control == null: return
 	break_control.size_flags_stretch_ratio = break_ratio
 
-func _process(delta):
+
+func _process(_delta):
 	if not Engine.is_editor_hint(): return
 	
 	if break_control == null: return

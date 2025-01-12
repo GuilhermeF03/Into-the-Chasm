@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4w7oyei7pbvv"
-path="res://.godot/imported/Down.png-cb3367544c1c577b0b2a1bd2a71fe1e3.ctex"
+uid="uid://cb5nycskuv65p"
+path="res://.godot/imported/Right.png-82ddeff2cf759cae9c1fd63ccf514aea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/Procedural/Placeholder/Door/Art/Down.png"
-dest_files=["res://.godot/imported/Down.png-cb3367544c1c577b0b2a1bd2a71fe1e3.ctex"]
+source_file="res://Levels/Procedural/Biomes/Placeholder/Door/Art/Right.png"
+dest_files=["res://.godot/imported/Right.png-82ddeff2cf759cae9c1fd63ccf514aea.ctex"]
 
 [params]
 

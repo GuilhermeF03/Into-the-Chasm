@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bfjp2efn7oi2"
-path="res://.godot/imported/Open.png-1cec5062fa374162f416a8ca7345a34f.ctex"
+path="res://.godot/imported/Open.png-f727a2c35e77bf1f6056dce8edc17995.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/Procedural/Placeholder/Door/Art/Open.png"
-dest_files=["res://.godot/imported/Open.png-1cec5062fa374162f416a8ca7345a34f.ctex"]
+source_file="res://Levels/Procedural/Biomes/Placeholder/Door/Art/Open.png"
+dest_files=["res://.godot/imported/Open.png-f727a2c35e77bf1f6056dce8edc17995.ctex"]
 
 [params]
 

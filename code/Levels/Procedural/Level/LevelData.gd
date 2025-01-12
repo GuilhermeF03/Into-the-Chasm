@@ -6,11 +6,6 @@ class_name LevelData
 @export var biome : LevelManager.Biome
 @export var is_boss_level : bool
 
-
-func _init(
-	_biome : LevelManager.Biome, 
-	_is_boss_level: bool,
-):
-	self.biome = _biome
-	self.is_boss_level = _is_boss_level
-	self.layout = LevelLayout.new()
+func init():
+	if layout == null:
+		layout = LevelLayout.new()

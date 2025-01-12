@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb5nycskuv65p"
-path="res://.godot/imported/Right.png-095c8717f81c10367cd932e87cfd65af.ctex"
+uid="uid://cuvqef0a6y5bm"
+path="res://.godot/imported/PlaceholderTiles.png-4c0339908b0f71784026120baa85c1d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/Procedural/Placeholder/Door/Art/Right.png"
-dest_files=["res://.godot/imported/Right.png-095c8717f81c10367cd932e87cfd65af.ctex"]
+source_file="res://Levels/Procedural/Biomes/Placeholder/PlaceholderTiles.png"
+dest_files=["res://.godot/imported/PlaceholderTiles.png-4c0339908b0f71784026120baa85c1d6.ctex"]
 
 [params]
 
