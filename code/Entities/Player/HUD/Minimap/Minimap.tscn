@@ -24,5 +24,5 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="MarginContainer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(1048, 1048)
+size = Vector2i(2, 2)
 render_target_update_mode = 4

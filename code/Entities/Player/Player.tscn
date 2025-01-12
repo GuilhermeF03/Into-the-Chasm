@@ -232,11 +232,13 @@ ease = 2
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 process_mode = 3
+z_index = 1
 y_sort_enabled = true
 collision_layer = 34
 collision_mask = 33
 motion_mode = 1
 script = ExtResource("1_3iq6n")
+MOV_SPEED = 500
 DODGE_COOLDOWN = 0.7
 
 [node name="Camera" type="Camera2D" parent="."]

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="LevelData" load_steps=2 format=3 uid="uid://ranorrfcwq56"]
 
-[ext_resource type="Script" path="res://Levels/Procedural/Level/LevelData.gd" id="1_4cga6"]
+[ext_resource type="Script" path="res://Levels/Procedural/Level/LevelData.gd" id="1_whpby"]
 
 [resource]
-script = ExtResource("1_4cga6")
-biome = 0
+script = ExtResource("1_whpby")
+biome = 4
 is_boss_level = false
