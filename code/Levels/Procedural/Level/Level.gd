@@ -27,11 +27,11 @@ func _ready():
 	generate_rooms()
 	
 	var head_room : Room = get_node("./" + data.layout.curr_room_id)
-	SceneManager.player.global_position = (
-		head_room.global_position + (
-			Vector2.ONE * LevelConfigConstants.GRID_TILE_SIZE / 2
-		)
-	)
+	#SceneManager.player.global_position = (
+	#	head_room.global_position + (
+	#		Vector2.ONE * LevelConfigConstants.GRID_TILE_SIZE / 2
+	#	)
+	#)
 	
 
 func generate_rooms():
@@ -41,6 +41,8 @@ func generate_rooms():
 	# 1 - get layout path
 	var layout_path = room_root_path + LevelManager.biome_to_string(data.biome) + "/"
 	
+	var prev_room : LevelLayout.RoomNode = null
+	var prev_room_instance : Room = null
 	# 2 - load room layouts and create instances
 	for room : LevelLayout.RoomNode in rooms.values():
 		var room_layout : String = "Room" + Room.RoomLayout.keys().pick_random()
@@ -49,7 +51,29 @@ func generate_rooms():
 		# Config room
 		var room_instance : Room = room_node.instantiate()
 		room_instance.scale = Vector2.ONE * LevelConfigConstants.ROOM_SCALE
-		room_instance.position = room.tile * LevelConfigConstants.GRID_TILE_SIZE
+		
+		if prev_room != null:
+			var direction = (room.tile - prev_room.tile).normalized()
+
+			var room_pos = prev_room_instance.global_position
+		
+			var offset = (
+				LevelConfigConstants.GRID_TILE_SIZE - (
+					pow(LevelConfigConstants.INDIVIDUAL_TILE_SIZE, 1.85)
+					if direction == Vector2.UP or direction == Vector2.DOWN
+					else 0
+				)
+			)
+			room_pos += direction * offset
+			
+			room_instance.global_position = room_pos
+		else:
+			room_instance.global_position = (
+				room.tile * LevelConfigConstants.GRID_TILE_SIZE
+			)
+		
 		room_instance.data = room.data
 		room_instance.name = room.data.id
 		add_child(room_instance)
+		prev_room = room
+		prev_room_instance = room_instance
