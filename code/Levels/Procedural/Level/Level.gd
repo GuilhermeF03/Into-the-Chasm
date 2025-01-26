@@ -27,11 +27,11 @@ func _ready():
 	generate_rooms()
 	
 	var head_room : Room = get_node("./" + data.layout.curr_room_id)
-	#SceneManager.player.global_position = (
-	#	head_room.global_position + (
-	#		Vector2.ONE * LevelConfigConstants.GRID_TILE_SIZE / 2
-	#	)
-	#)
+	SceneManager.player.global_position = (
+		head_room.global_position + (
+			Vector2.ONE * LevelConfigConstants.GRID_TILE_SIZE / 2
+		)
+	)
 	
 
 func generate_rooms():
@@ -85,6 +85,5 @@ func _input(event):
 		for child in get_children():
 			if child.name.begins_with("A"):
 				remove_child(child)
-		
 		
 		generate_rooms()

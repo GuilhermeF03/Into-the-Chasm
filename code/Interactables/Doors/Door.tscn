@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbrgln63xg7mu"]
+[gd_scene load_steps=8 format=3 uid="uid://dbrgln63xg7mu"]
 
-[ext_resource type="Script" path="res://Levels/Procedural/Placeholder/Door/Door.gd" id="1_qbhu0"]
-[ext_resource type="Texture2D" uid="uid://bfjp2efn7oi2" path="res://Levels/Procedural/Placeholder/Door/Art/Open.png" id="2_kuk6l"]
+[ext_resource type="Script" path="res://Interactables/Doors/Door.gd" id="1_qbhu0"]
+[ext_resource type="Texture2D" uid="uid://bfjp2efn7oi2" path="res://Interactables/Doors/Art/Open.png" id="2_kuk6l"]
 
 [sub_resource type="Animation" id="Animation_ial82"]
 length = 0.4
@@ -55,16 +55,19 @@ _data = {
 "Right": SubResource("Animation_sxj16")
 }
 
-[node name="Door" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6cs1s"]
+size = Vector2(24, 24)
+
+[node name="Door" type="CharacterBody2D"]
 script = ExtResource("1_qbhu0")
 direction = 1
-animation = &"Down"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_kuk6l")
 hframes = 4
 vframes = 3
+frame = 4
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": true,
 "layer_section": true,
@@ -90,3 +93,6 @@ metadata/_aseprite_wizard_source_file_hash_ = "2d514580985204e657f7025a607a87ec"
 libraries = {
 "": SubResource("AnimationLibrary_fukeq")
 }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6cs1s")
