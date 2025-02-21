@@ -3,7 +3,7 @@ extends Node2D
 class_name Door
 
 enum Direction{
-	DOWN, LEFT, RIGHT
+	UP, DOWN, LEFT, RIGHT
 }
 
 #region Nodes
@@ -35,13 +35,13 @@ func _process(delta):
 
 func _set_direction():
 	sprite.frame = (
-		0 if direction == Direction.DOWN
+		0 if direction == Direction.DOWN or direction == Direction.UP
 		else sprite.hframes if direction == Direction.LEFT
-		else sprite.hframes * 2
+		else sprite.hframes * 2 - 1
 	)
 	
 	animation = (
-		"Down" if direction == Direction.DOWN
+		"Down" if direction == Direction.DOWN or direction == Direction.UP
 		else "Left" if direction == Direction.LEFT
 		else "Right"
 	)
@@ -59,5 +59,15 @@ func close():
 	player.speed_scale = -1
 	player.play(animation)
 	
-	await  player.animation_finished
+	await player.animation_finished
 	collision_shape.disabled = false
+	
+	
+	
+static func to_direction(direction : Vector2) -> Direction:
+	match direction:
+		Vector2.DOWN: return Direction.DOWN
+		Vector2.UP: return Direction.UP
+		Vector2.LEFT: return Direction.LEFT
+		Vector2.RIGHT: return Direction.RIGHT
+		_: return Direction.DOWN

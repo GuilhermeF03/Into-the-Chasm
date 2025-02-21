@@ -1,7 +1,6 @@
 extends GDScript
 class_name RoomConnection
 
-
 @export_category("Data")
 @export var id : StringName
 @export var connect_to : StringName

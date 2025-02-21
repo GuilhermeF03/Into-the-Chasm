@@ -6,10 +6,11 @@ class_name Level
 
 @export_category("Nodes")
 var room_root_path = "res://Levels/Procedural/Biomes/"
-
+var room_nodes : Dictionary = {}
 
 func _ready(): 
 	# 1 - generate layout or use given data if provided
+	print(data)
 	if data == null:
 		data = LevelData.new()
 		data.setup()
@@ -17,10 +18,10 @@ func _ready():
 		return
 
 	# Load data
-	if data.layout == null:
-		data.layout = LevelLayout.new()
 	if data.biome == null:
-		data.biome = LevelManager.biome
+		data.biome = LevelManager.biome as LevelData.Biome
+	if data.layout == null:
+		data.layout = LevelLayout.new(data.biome as LevelManager.Biome)
 	if data.is_boss_level == null:
 		data.is_boss_level = LevelManager.is_boss_level
 
@@ -33,13 +34,17 @@ func _ready():
 		)
 	)
 	
+	LevelManager.curr_level = self
+
 
 func generate_rooms():
 	var layout: LevelLayout = data.layout
 	var rooms: Dictionary = layout.rooms
 	
 	# 1 - get layout path
-	var layout_path = room_root_path + LevelManager.biome_to_string(data.biome) + "/"
+	var layout_path = room_root_path + LevelManager.biome_to_string(
+		data.biome as LevelManager.Biome
+	) + "/"
 	
 	var prev_room : LevelLayout.RoomNode = null
 	var prev_room_instance : Room = null
@@ -59,9 +64,9 @@ func generate_rooms():
 		
 			var offset = (
 				LevelConfigConstants.GRID_TILE_SIZE - (
-					LevelConfigConstants.to_real_size(2)
+					LevelConfigConstants.to_real_size(4)
 					if direction == Vector2.UP or direction == Vector2.DOWN
-					else 0
+					else LevelConfigConstants.to_real_size(2)
 				)
 			)
 			room_pos += direction * offset
@@ -74,16 +79,23 @@ func generate_rooms():
 		
 		room_instance.data = room.data
 		room_instance.name = room.data.id
+		
 		add_child(room_instance)
+		room_nodes[room_instance.name] = room_instance
+		
 		prev_room = room
 		prev_room_instance = room_instance
 		
 		
-func _input(event):
-	if event.is_action_pressed("interact"):
-		data.layout = LevelLayout.new()
-		for child in get_children():
-			if child.name.begins_with("A"):
-				remove_child(child)
-		
-		generate_rooms()
+#func _input(event):
+	#if event.is_action_pressed("interact"):
+		#data.layout = LevelLayout.new(LevelManager.biome)
+		#for child in get_children():
+			#if child.name.begins_with("A"):
+				#remove_child(child)
+		#
+		#generate_rooms()
+
+
+func get_room(id : StringName) -> Room:
+	return room_nodes.get(id)

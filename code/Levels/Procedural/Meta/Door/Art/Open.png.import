@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb5nycskuv65p"
-path="res://.godot/imported/Right.png-34d88dc2ec204126f13d8faf6cb312f7.ctex"
+uid="uid://bfjp2efn7oi2"
+path="res://.godot/imported/Open.png-fb75cc343fbabf966189ac745b8442c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Interactables/Doors/Art/Right.png"
-dest_files=["res://.godot/imported/Right.png-34d88dc2ec204126f13d8faf6cb312f7.ctex"]
+source_file="res://Levels/Procedural/Meta/Door/Art/Open.png"
+dest_files=["res://.godot/imported/Open.png-fb75cc343fbabf966189ac745b8442c6.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxtqcgbqr7gup"
-path="res://.godot/imported/room_preview.png-a07425395d8ed86c0458e817822b1eca.ctex"
+uid="uid://4w7oyei7pbvv"
+path="res://.godot/imported/Down.png-0f884e7c18ece147f0e204c5b593a679.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/Procedural/Room/Art/room_preview.png"
-dest_files=["res://.godot/imported/room_preview.png-a07425395d8ed86c0458e817822b1eca.ctex"]
+source_file="res://Levels/Procedural/Meta/Door/Art/Down.png"
+dest_files=["res://.godot/imported/Down.png-0f884e7c18ece147f0e204c5b593a679.ctex"]
 
 [params]
 

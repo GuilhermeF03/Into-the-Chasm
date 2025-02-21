@@ -7,16 +7,6 @@ var rules : Array[LevelRule]
 func _init():
 	# Insert rules here:
 	pass
-
-
-func insert_rule(rule : LevelRule):
-	rules.append(rule)
-
-
-func remove_rule(rule : LevelRule):
-	var idx = rules.find(rule)
-	if idx != -1:
-		rules.remove_at(idx)
 		
 		
 func available_tiles(

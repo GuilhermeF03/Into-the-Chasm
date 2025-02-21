@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://0lq07af0bve2"
+path="res://.godot/imported/room_preview.aseprite-b45e3c0aad45ba27b7321b83902db6d8.res"
+
+[deps]
+
+source_file="res://Levels/Procedural/Meta/Room/Art/room_preview.aseprite"
+dest_files=["res://.godot/imported/room_preview.aseprite-b45e3c0aad45ba27b7321b83902db6d8.res"]
+
+[params]
+

@@ -10,24 +10,42 @@ const GRID_HEIGHT = LevelConfigConstants.GRID_HEIGHT
 @export var rooms : Dictionary = {}
 
 
-func _init():
-	generate_layout()
+func _init(biome : LevelManager.Biome):
+	generate_layout(biome)
 	
 
 func connect_rooms(prev: RoomNode, curr : RoomNode):
 	if prev != null:
+		var prev_door_id : String = ""
+		var next_door_id : String = ""
+		var direction = Door.to_direction(curr.tile - prev.tile)
+		
+		match direction:
+			Door.Direction.LEFT:
+				prev_door_id = "A"
+				next_door_id = "C"
+			Door.Direction.UP:
+				prev_door_id = "B"
+				next_door_id = "D"
+			Door.Direction.RIGHT:
+				prev_door_id = "C"
+				next_door_id = "A"
+			Door.Direction.DOWN :
+				prev_door_id = "D"
+				next_door_id = "B"
+		
 		prev.data.connections.append(RoomConnection.new(
-			prev.data.id,
-			curr.data.id
+			prev.data.id + "_" + prev_door_id,
+			curr.data.id + "_" + next_door_id
 		))
 		
 		curr.data.connections.append(RoomConnection.new(
-			curr.data.id,
-			prev.data.id
+			curr.data.id + "_" + next_door_id,
+			prev.data.id + "_" + prev_door_id
 		))
 
 
-func generate_layout() -> void:
+func generate_layout(biome : LevelManager.Biome) -> void:
 	var rules_chain = LevelRulesChain.new()
 	
 	var grid : Array[String] = []
@@ -42,7 +60,7 @@ func generate_layout() -> void:
 		LevelConfigConstants.LEVEL_MAX_ROOMS
 	)
 	
-	for i in range(1, max_rooms + 1):
+	for i in range(0, max_rooms):
 		var prev_room = current_room
 		var possible_tiles = rules_chain.available_tiles(grid, current_room)
 		
@@ -50,16 +68,15 @@ func generate_layout() -> void:
 			break
 		
 		var room_tile : int = possible_tiles.pick_random()
+		
 		var room_id = "A" + str(room_tile)
 		grid[room_tile] = room_id
 		
-		var room_layout = next_layout()
-		var room_rotation = [0, 90, 180, 270].pick_random()
+		var room_layout = next_layout(biome)
 		
 		var room_data = RoomData.new(
 			room_id,
 			room_layout,
-			room_rotation,
 		)
 		
 		current_room = RoomNode.new(
@@ -74,14 +91,14 @@ func generate_layout() -> void:
 		if prev_room == null:
 			curr_room_id = current_room.data.id
 
-func next_layout() -> String:
+
+func next_layout(biome : LevelManager.Biome) -> String:
 	return "A"
 
 
 class RoomNode:
 	var tile: Vector2
 	var data : RoomData
-	
 	
 	func _init(_tile : Vector2, _data : RoomData):
 		self.tile = _tile

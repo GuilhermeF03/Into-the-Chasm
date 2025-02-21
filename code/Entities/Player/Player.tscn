@@ -242,12 +242,14 @@ DODGE_COOLDOWN = 0.7
 
 [node name="Camera" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
+zoom = Vector2(1.2, 1.2)
 process_callback = 0
 position_smoothing_speed = 1.0
 drag_left_margin = 0.3
 drag_top_margin = 0.3
 drag_right_margin = 0.3
-drag_bottom_margin = 0.4
+drag_bottom_margin = 0.3
+editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera"]
@@ -341,9 +343,11 @@ visible = false
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
 script = ExtResource("7_ikipm")
-follow_mode = 2
+follow_mode = 5
 follow_target = NodePath("..")
+zoom = Vector2(1.2, 1.2)
 tween_resource = SubResource("Resource_2evhq")
+draw_limits = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="area_entered" from="ItemCollect/Collect" to="." method="_on_item_collect"]

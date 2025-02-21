@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cp13unruyqdv3"]
 
-[ext_resource type="Script" path="res://Levels/Procedural/Room/Room.gd" id="1_rs1fr"]
+[ext_resource type="Script" path="res://Levels/Procedural/Meta/Room/Room.gd" id="1_rs1fr"]
 
 [node name="Room" type="Node2D"]
 script = ExtResource("1_rs1fr")

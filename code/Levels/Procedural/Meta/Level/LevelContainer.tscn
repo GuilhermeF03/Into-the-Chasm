@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b8d0q1n2fxirr"]
 
-[ext_resource type="PackedScene" uid="uid://b8om77y7wwhgt" path="res://Levels/Procedural/Level/Level.tscn" id="1_3s70p"]
+[ext_resource type="PackedScene" uid="uid://b8om77y7wwhgt" path="res://Levels/Procedural/Meta/Level/Level.tscn" id="1_3s70p"]
 [ext_resource type="Resource" uid="uid://ranorrfcwq56" path="res://Levels/Procedural/Biomes/Placeholder/PlaceholderLevelData.tres" id="2_ct7m4"]
 
 [node name="Level Container" type="Node2D"]
