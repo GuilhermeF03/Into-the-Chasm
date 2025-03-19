@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cpa8ag7qoliw7"]
 
-[ext_resource type="Script" path="res://Interactables/Items/Tools/PickableTool.gd" id="1_qq6hf"]
+[ext_resource type="Script" uid="uid://dc5rbt761juca" path="res://Interactables/Items/Tools/PickableTool.gd" id="1_qq6hf"]
 [ext_resource type="PackedScene" uid="uid://cte68dj3jl77y" path="res://Interactables/Items/PickableItem.tscn" id="2_su1dh"]
 
 [node name="PickableTool" type="Node2D"]

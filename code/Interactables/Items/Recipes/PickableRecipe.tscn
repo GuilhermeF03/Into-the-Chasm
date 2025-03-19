@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dr5k3xeuoe3os"]
 
-[ext_resource type="Script" path="res://Interactables/Items/Recipes/PickableRecipe.gd" id="1_6ruwl"]
+[ext_resource type="Script" uid="uid://dmxf434mlne3t" path="res://Interactables/Items/Recipes/PickableRecipe.gd" id="1_6ruwl"]
 [ext_resource type="PackedScene" uid="uid://cte68dj3jl77y" path="res://Interactables/Items/PickableItem.tscn" id="1_g1mqp"]
 [ext_resource type="Texture2D" uid="uid://b5w2esg5f6h5m" path="res://Interactables/Items/Recipes/Art/pickable_recipe.png" id="2_v0w1x"]
 

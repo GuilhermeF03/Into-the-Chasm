@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cte68dj3jl77y"]
 
-[ext_resource type="Script" path="res://Interactables/Items/PickableItem.gd" id="1_al5b1"]
+[ext_resource type="Script" uid="uid://gmmow4jf2du" path="res://Interactables/Items/PickableItem.gd" id="1_al5b1"]
 [ext_resource type="PackedScene" uid="uid://dh86htrmpu0mq" path="res://Interactables/InteractArea.tscn" id="2_coey2"]
 
 [sub_resource type="Animation" id="Animation_qqgpw"]
@@ -34,7 +34,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ujd57"]
 _data = {
-"hover": SubResource("Animation_qqgpw")
+&"hover": SubResource("Animation_qqgpw")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1tcku"]

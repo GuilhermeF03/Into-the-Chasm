@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d2at40xfyklc"]
 
-[ext_resource type="Script" path="res://Interactables/Items/Weapons/PickableWeapon.gd" id="1_esdyf"]
+[ext_resource type="Script" uid="uid://vqrocd37gf13" path="res://Interactables/Items/Weapons/PickableWeapon.gd" id="1_esdyf"]
 [ext_resource type="Texture2D" uid="uid://dfju6gbnxykt8" path="res://Interactables/Items/Weapons/Sword/Art/sword.png" id="2_6fnhg"]
 [ext_resource type="PackedScene" uid="uid://cte68dj3jl77y" path="res://Interactables/Items/PickableItem.tscn" id="2_mrba5"]
 

@@ -1,12 +1,12 @@
 [gd_scene load_steps=25 format=3 uid="uid://dd1bjjaxa7dur"]
 
-[ext_resource type="Script" path="res://Entities/Player/Inventory/Inventory.gd" id="1_ildrf"]
+[ext_resource type="Script" uid="uid://c6713snp6048p" path="res://Entities/Player/Inventory/Inventory.gd" id="1_ildrf"]
 [ext_resource type="PackedScene" uid="uid://n441ae7rc4mf" path="res://Entities/Player/Inventory/Items/Equipment & Resources/Resources/ResourcesManager.tscn" id="3_4ustp"]
 [ext_resource type="PackedScene" uid="uid://bsoybh7k8xrb3" path="res://Entities/Player/Inventory/Items/Equipment & Resources/Equipment/EquipmentManager.tscn" id="4_8yuvl"]
 [ext_resource type="PackedScene" uid="uid://ciwd4xk1n0wwt" path="res://Entities/Player/Inventory/Map/InventoryMap.tscn" id="5_k1xai"]
 [ext_resource type="PackedScene" uid="uid://dsgmst01ich70" path="res://Entities/Player/Inventory/Items/Trinkets & Recipes/MiscContainer.tscn" id="6_i2mwl"]
-[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Trinkets & Recipes/Recipes/RecipesManager.gd" id="8_0vjyu"]
-[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Trinkets & Recipes/Trinkets/TrinketManager.gd" id="8_g7iot"]
+[ext_resource type="Script" uid="uid://bpnyvmapdf5jf" path="res://Entities/Player/Inventory/Items/Trinkets & Recipes/Recipes/RecipesManager.gd" id="8_0vjyu"]
+[ext_resource type="Script" uid="uid://du78xqgjem1lo" path="res://Entities/Player/Inventory/Items/Trinkets & Recipes/Trinkets/TrinketManager.gd" id="8_g7iot"]
 [ext_resource type="Texture2D" uid="uid://c3e7sbd48vvop" path="res://Entities/Player/Inventory/Art/inventory_book4.png" id="11_nkym1"]
 [ext_resource type="Texture2D" uid="uid://cdura015na1v" path="res://Entities/Player/Inventory/Art/inventory_book3.png" id="12_0oju1"]
 [ext_resource type="Texture2D" uid="uid://4qlqvtwm36fh" path="res://Entities/Player/Inventory/Art/inventory_book2.png" id="13_rrmk6"]
@@ -136,10 +136,10 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qjwj2"]
 _data = {
-"Close": SubResource("Animation_nsqjg"),
-"Open": SubResource("Animation_kuv2n"),
-"leaf_left": SubResource("Animation_8b0dc"),
-"leaf_right": SubResource("Animation_mhrla")
+&"Close": SubResource("Animation_nsqjg"),
+&"Open": SubResource("Animation_kuv2n"),
+&"leaf_left": SubResource("Animation_8b0dc"),
+&"leaf_right": SubResource("Animation_mhrla")
 }
 
 [node name="Inventory" type="CanvasLayer"]
@@ -182,6 +182,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Pages-0" type="HBoxContainer" parent="Background Panel/Outer Margin/UI/Content"]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 
@@ -208,7 +209,6 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Pages-1" type="HBoxContainer" parent="Background Panel/Outer Margin/UI/Content"]
-visible = false
 layout_mode = 2
 mouse_filter = 2
 
@@ -231,5 +231,5 @@ title = "Recipes"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_qjwj2")
+&"": SubResource("AnimationLibrary_qjwj2")
 }

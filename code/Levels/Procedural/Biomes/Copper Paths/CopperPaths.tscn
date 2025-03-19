@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=4 uid="uid://clwu0cuplqr13"]
 
-[ext_resource type="TileSet" uid="uid://cv3m0a2g3qke8" path="res://Levels/Dungeons/Copper Paths/CopperPaths.tres" id="1_61rdh"]
+[ext_resource type="TileSet" uid="uid://cv3m0a2g3qke8" path="res://Levels/Procedural/Biomes/Copper Paths/CopperPaths.tres" id="1_61rdh"]
 [ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://Entities/Player/Player.tscn" id="2_8b4em"]
 [ext_resource type="PackedScene" uid="uid://dje586mcin71p" path="res://Interactables/Items/Resources/PickableResource.tscn" id="3_2xjc7"]
 

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Into the Chasm"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://title.png"
 
 [autoload]
@@ -23,6 +23,7 @@ InventoryManager="*res://Managers/Inventory/InventoryManager.gd"
 InteractionManager="*res://Managers/Interaction/InteractionManager.tscn"
 SceneManager="*res://Managers/Scene/SceneManager.tscn"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+PlayerManager="*res://Managers/Player/PlayerManager.gd"
 
 [display]
 

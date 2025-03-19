@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://de0lpjgy4vlql"]
 
-[ext_resource type="Script" path="res://Managers/Inventory/InventoryManager.gd" id="1_s78wo"]
+[ext_resource type="Script" uid="uid://c1ev3iufbv2t6" path="res://Managers/Inventory/InventoryManager.gd" id="1_s78wo"]
 
 [node name="InventoryManager" type="Node"]
 process_mode = 3

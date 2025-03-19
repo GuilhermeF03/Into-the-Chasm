@@ -29,6 +29,7 @@ extends CharacterBody2D
 @onready var inventory : Inventory = $UI/Inventory
 @onready var animation_player = $AnimationPlayer
 @onready var weapon_handler : WeaponHandler = $Weapon/WeaponHandler
+@onready var hitbox : Area2D = $Hitbox
 #endregion
 
 #region Data
@@ -44,6 +45,8 @@ var back_view = false
 func _ready():
 	dodge_timer.wait_time = DODGE_COOLDOWN
 	SceneManager.add_pause_trigger(inventory.on_handling_changed)
+	
+	hitbox.body_entered.connect(on_hitbox_enter)
 
 
 func _physics_process(_delta):
@@ -152,4 +155,13 @@ func handle_animation(input):
 	var animation = "idle_" if input == Vector2.ZERO else "walk_"
 	
 	animation_player.play(animation + animation_side)	
+#endregion
+
+
+#region Hitbox
+func on_hitbox_enter(body : Node2D):
+	print(body)
+	PlayerManager.data.life -= 1
+	if PlayerManager.data.life == 0:
+		print("Dead")
 #endregion

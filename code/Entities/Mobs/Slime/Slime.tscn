@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cwseeacjaeuni"]
+[gd_scene load_steps=12 format=3 uid="uid://cwseeacjaeuni"]
 
-[ext_resource type="Script" path="res://Entities/Mobs/Enemy.gd" id="1_gf03x"]
-[ext_resource type="Texture2D" uid="uid://dpluhx8mta40i" path="res://Entities/Mobs/Slime/slime.png" id="2_d4hhx"]
+[ext_resource type="Script" uid="uid://6bdvq6vmgmb" path="res://Entities/Mobs/Enemy.gd" id="1_gf03x"]
+[ext_resource type="Texture2D" uid="uid://dpluhx8mta40i" path="res://Entities/Mobs/Slime/Art/slime.png" id="2_d4hhx"]
 [ext_resource type="Texture2D" uid="uid://b7wvexlb5dars" path="res://icon.svg" id="3_2geq6"]
 
 [sub_resource type="Animation" id="Animation_vcn6l"]
@@ -145,15 +145,22 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c7awx"]
 _data = {
-"Chase": SubResource("Animation_vcn6l"),
-"Idle": SubResource("Animation_804y1"),
-"Search": SubResource("Animation_xryky"),
-"Walk": SubResource("Animation_3p6cb"),
-"idle": SubResource("Animation_538ks")
+&"Chase": SubResource("Animation_vcn6l"),
+&"Idle": SubResource("Animation_804y1"),
+&"Search": SubResource("Animation_xryky"),
+&"Walk": SubResource("Animation_3p6cb"),
+&"idle": SubResource("Animation_538ks")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ctdae"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yf3bw"]
+radius = 6.21289
 
 [node name="Slime" type="CharacterBody2D"]
 scale = Vector2(5, 5)
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("1_gf03x")
 CHASE_SPEED = 150.0
 metadata/_edit_group_ = true
@@ -207,7 +214,7 @@ metadata/_aseprite_wizard_interface_config_ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_c7awx")
+&"": SubResource("AnimationLibrary_c7awx")
 }
 autoplay = "idle"
 
@@ -223,5 +230,15 @@ hit_from_inside = true
 
 [node name="IdleTimer" type="Timer" parent="Timers"]
 one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_ctdae")
+
+[node name="Hurtbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.8)
+shape = SubResource("CircleShape2D_yf3bw")
 
 [connection signal="timeout" from="Timers/IdleTimer" to="." method="_on_idle_timer_timeout"]

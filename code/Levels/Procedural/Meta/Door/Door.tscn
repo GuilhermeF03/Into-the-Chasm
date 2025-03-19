@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dbrgln63xg7mu"]
 
-[ext_resource type="Script" path="res://Levels/Procedural/Meta/Door/Door.gd" id="1_qbhu0"]
+[ext_resource type="Script" uid="uid://bni4g81sd0onp" path="res://Levels/Procedural/Meta/Door/Door.gd" id="1_qbhu0"]
 [ext_resource type="Texture2D" uid="uid://dgw7hdrvl3olv" path="res://Levels/Procedural/Meta/Door/Open.png" id="2_cbdea"]
 
 [sub_resource type="Animation" id="Animation_ial82"]
@@ -50,9 +50,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fukeq"]
 _data = {
-"Down": SubResource("Animation_ial82"),
-"Left": SubResource("Animation_wi558"),
-"Right": SubResource("Animation_sxj16")
+&"Down": SubResource("Animation_ial82"),
+&"Left": SubResource("Animation_wi558"),
+&"Right": SubResource("Animation_sxj16")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6cs1s"]
@@ -86,11 +86,11 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Levels/Procedural/Meta/Door/Art/Door1.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "160f118a41b7a0f6472be209acdf9a2e"
+metadata/_aseprite_wizard_source_file_hash_ = "cf9c5201541a8e2807339138cf0c4c72"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_fukeq")
+&"": SubResource("AnimationLibrary_fukeq")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

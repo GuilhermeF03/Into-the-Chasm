@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://crl5owfklwshp"]
 
-[ext_resource type="Script" path="res://Interactables/Items/Trinkets/PickableTrinket.gd" id="1_wg1ar"]
+[ext_resource type="Script" uid="uid://cvauy6amef76v" path="res://Interactables/Items/Trinkets/PickableTrinket.gd" id="1_wg1ar"]
 [ext_resource type="Texture2D" uid="uid://b7mmwj07seqca" path="res://Interactables/Items/Trinkets/Art/trinket.png" id="2_6qawr"]
 [ext_resource type="PackedScene" uid="uid://cte68dj3jl77y" path="res://Interactables/Items/PickableItem.tscn" id="2_i6tvj"]
 

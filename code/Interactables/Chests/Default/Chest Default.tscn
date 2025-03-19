@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcqhmokw2vldx"]
+[gd_scene load_steps=8 format=3 uid="uid://dcqhmokw2vldx"]
 
 [ext_resource type="PackedScene" uid="uid://dh86htrmpu0mq" path="res://Interactables/InteractArea.tscn" id="1_frivs"]
-[ext_resource type="Script" path="res://Interactables/Chests/Chest.gd" id="1_h3mpe"]
+[ext_resource type="Script" uid="uid://dq1g6wuvb8unm" path="res://Interactables/Chests/Chest.gd" id="1_h3mpe"]
 [ext_resource type="Texture2D" uid="uid://dt4j2jwgpt4c2" path="res://Interactables/Chests/Default/chest_default.png" id="2_xym2m"]
 
 [sub_resource type="Animation" id="Animation_fgwef"]
-length = 0.3
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -13,27 +13,33 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [1, 2, 3]
+"values": [1, 2, 3, 4, 5]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y2hbv"]
 _data = {
-"Open": SubResource("Animation_fgwef")
+&"Open": SubResource("Animation_fgwef")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lv22j"]
 radius = 12.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aebtn"]
+size = Vector2(10.6667, 6.66667)
+
 [node name="ChestDefault" type="Node2D"]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_h3mpe")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
 texture_filter = 1
 texture = ExtResource("2_xym2m")
-hframes = 2
+hframes = 3
 vframes = 2
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": false,
@@ -52,15 +58,22 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Interactables/Chests/Default/chest_default.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "9662cd565aa69215e0418ea8c2c8eb3b"
+metadata/_aseprite_wizard_source_file_hash_ = "407327f5141a163d9313bf0b04eb5b6e"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_y2hbv")
+&"": SubResource("AnimationLibrary_y2hbv")
 }
 
 [node name="InteractArea" parent="." instance=ExtResource("1_frivs")]
+visible = false
 toggle_only = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
 shape = SubResource("CircleShape2D_lv22j")
+
+[node name="StaticBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_aebtn")

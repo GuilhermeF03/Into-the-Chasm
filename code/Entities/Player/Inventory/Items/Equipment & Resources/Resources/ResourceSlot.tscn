@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://70somrqkb0mp"]
 
 [ext_resource type="Texture2D" uid="uid://suvxlf36pnxb" path="res://Entities/Player/Inventory/Items/Equipment & Resources/Resources/Art/resource_slot.png" id="1_4wuur"]
-[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Equipment & Resources/Resources/ResourceSlot.gd" id="1_bnmne"]
-[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Item Slot/ItemSlot.gd" id="3_1kvtp"]
+[ext_resource type="Script" uid="uid://btjunal3klmo8" path="res://Entities/Player/Inventory/Items/Equipment & Resources/Resources/ResourceSlot.gd" id="1_bnmne"]
+[ext_resource type="Script" uid="uid://qb2yduqim4ok" path="res://Entities/Player/Inventory/Items/Item Slot/ItemSlot.gd" id="3_1kvtp"]
 [ext_resource type="Texture2D" uid="uid://cf22k8dv7sqdg" path="res://Interactables/Items/Resources/Art/cristals_icons.png" id="3_4y1fu"]
 [ext_resource type="PackedScene" uid="uid://b5ote6c6nj3y5" path="res://Entities/Player/Inventory/Items/Stats Panel/StatsPanel.tscn" id="4_d5rg6"]
 

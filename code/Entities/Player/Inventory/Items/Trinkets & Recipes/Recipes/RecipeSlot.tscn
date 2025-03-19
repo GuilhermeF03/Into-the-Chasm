@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://yy0f8a0w6wut"]
 
-[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Trinkets & Recipes/Recipes/RecipeSlot.gd" id="1_ik52h"]
+[ext_resource type="Script" uid="uid://bxkt3gdlyjh65" path="res://Entities/Player/Inventory/Items/Trinkets & Recipes/Recipes/RecipeSlot.gd" id="1_ik52h"]
 [ext_resource type="PackedScene" uid="uid://bunwl8y8h0o3k" path="res://Entities/Player/Inventory/Items/Item Slot/ItemSlot.tscn" id="2_0spbw"]
 [ext_resource type="Texture2D" uid="uid://kpkujmugia3d" path="res://Entities/Player/Inventory/Items/Trinkets & Recipes/Misc Slot/MiscSlot.png" id="3_kvk1d"]
 

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://Entities/Player/Player.tscn" id="1_sl1di"]
 [ext_resource type="PackedScene" uid="uid://dje586mcin71p" path="res://Interactables/Items/Resources/PickableResource.tscn" id="2_af3nl"]
 [ext_resource type="PackedScene" uid="uid://cpa8ag7qoliw7" path="res://Interactables/Items/Tools/PickableTool.tscn" id="3_2xkeb"]
-[ext_resource type="Script" path="res://Interactables/Items/Tools/Healing/HealEffect.gd" id="4_b0h4k"]
+[ext_resource type="Script" uid="uid://d37v58sckiugo" path="res://Interactables/Items/Tools/Healing/HealEffect.gd" id="4_b0h4k"]
 [ext_resource type="Texture2D" uid="uid://dw8y2vxonkiof" path="res://Interactables/Items/Tools/Healing/Small Jar/small_jar.png" id="5_7vvpy"]
 [ext_resource type="Texture2D" uid="uid://ci2fc814jymsq" path="res://Interactables/Items/Resources/Art/organics_icon.png" id="6_ml1g7"]
 [ext_resource type="PackedScene" uid="uid://dr5k3xeuoe3os" path="res://Interactables/Items/Recipes/PickableRecipe.tscn" id="7_tj26q"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bunwl8y8h0o3k"]
 
-[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Item Slot/ItemSlot.gd" id="1_ehwe6"]
+[ext_resource type="Script" uid="uid://qb2yduqim4ok" path="res://Entities/Player/Inventory/Items/Item Slot/ItemSlot.gd" id="1_ehwe6"]
 [ext_resource type="PackedScene" uid="uid://b5ote6c6nj3y5" path="res://Entities/Player/Inventory/Items/Stats Panel/StatsPanel.tscn" id="3_uf35y"]
 
 [node name="Item Slot" type="TextureRect" node_paths=PackedStringArray("icon")]

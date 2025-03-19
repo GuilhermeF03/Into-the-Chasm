@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dbhvg24jk3sr"]
 
-[ext_resource type="Script" path="res://Managers/UI/UiManager.gd" id="1_jsen6"]
+[ext_resource type="Script" uid="uid://c2pxk0uvrox3j" path="res://Managers/UI/UiManager.gd" id="1_jsen6"]
 [ext_resource type="PackedScene" uid="uid://cvdk27u0hk664" path="res://Managers/UI/UiDock.tscn" id="2_4bcfh"]
 
 [node name="UiManager" type="CanvasLayer"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cdvv3bgj8fab6"]
 
-[ext_resource type="Script" path="res://Interactables/Items/Weapons/PickableWeapon.gd" id="1_olvi3"]
+[ext_resource type="Script" uid="uid://vqrocd37gf13" path="res://Interactables/Items/Weapons/PickableWeapon.gd" id="1_olvi3"]
 [ext_resource type="PackedScene" uid="uid://cte68dj3jl77y" path="res://Interactables/Items/PickableItem.tscn" id="2_k6ker"]
 
 [node name="PickableWeapon" type="Node2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dje586mcin71p"]
 
-[ext_resource type="Script" path="res://Interactables/Items/Resources/PickableResource.gd" id="1_udx31"]
+[ext_resource type="Script" uid="uid://dut7qifndq4u0" path="res://Interactables/Items/Resources/PickableResource.gd" id="1_udx31"]
 [ext_resource type="Texture2D" uid="uid://ekmbsrud0m58" path="res://Interactables/Items/Resources/Art/minerals_icon.png" id="2_tcby1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rck3t"]
@@ -37,7 +37,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dcoea"]
 _data = {
-"hover": SubResource("Animation_fpw6r")
+&"hover": SubResource("Animation_fpw6r")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kvaxt"]

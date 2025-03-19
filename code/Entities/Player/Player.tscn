@@ -1,12 +1,12 @@
 [gd_scene load_steps=21 format=3 uid="uid://d0mst4eki2yyd"]
 
-[ext_resource type="Script" path="res://Entities/Player/PlayerController.gd" id="1_3iq6n"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_fvu4l"]
+[ext_resource type="Script" uid="uid://b1wm3dahmoc0q" path="res://Entities/Player/PlayerController.gd" id="1_3iq6n"]
+[ext_resource type="Script" uid="uid://oss17n4fgvn0" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_fvu4l"]
 [ext_resource type="PackedScene" uid="uid://dd1bjjaxa7dur" path="res://Entities/Player/Inventory/Inventory.tscn" id="2_urbfw"]
 [ext_resource type="Texture2D" uid="uid://ct15olca7m1sy" path="res://Entities/Player/Art/player.png" id="3_5x0oj"]
 [ext_resource type="PackedScene" uid="uid://ywpg5nkhidqk" path="res://Entities/Player/Weapon Handling/WeaponHandler.tscn" id="7_cn85d"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_ikipm"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_kuc5k"]
+[ext_resource type="Script" uid="uid://bh465lhhgwjxm" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_ikipm"]
+[ext_resource type="Script" uid="uid://5uqnfk0k7he8" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_kuc5k"]
 [ext_resource type="PackedScene" uid="uid://5xry0mnc8j7o" path="res://Entities/Player/HUD/HUD.tscn" id="9_hyecf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0n3kf"]
@@ -205,12 +205,12 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4p46q"]
 _data = {
-"idle_down": SubResource("Animation_gdeu0"),
-"idle_up": SubResource("Animation_u0rdc"),
-"roll_down": SubResource("Animation_mxlqg"),
-"roll_up": SubResource("Animation_eqvl6"),
-"walk_down": SubResource("Animation_oxrd0"),
-"walk_up": SubResource("Animation_yushi")
+&"idle_down": SubResource("Animation_gdeu0"),
+&"idle_up": SubResource("Animation_u0rdc"),
+&"roll_down": SubResource("Animation_mxlqg"),
+&"roll_up": SubResource("Animation_eqvl6"),
+&"walk_down": SubResource("Animation_oxrd0"),
+&"walk_up": SubResource("Animation_yushi")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5tmpo"]
@@ -242,7 +242,7 @@ DODGE_COOLDOWN = 0.7
 
 [node name="Camera" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-zoom = Vector2(1.2, 1.2)
+zoom = Vector2(1.5, 1.5)
 process_callback = 0
 position_smoothing_speed = 1.0
 drag_left_margin = 0.3
@@ -291,7 +291,7 @@ shape = SubResource("CapsuleShape2D_0n3kf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_4p46q")
+&"": SubResource("AnimationLibrary_4p46q")
 }
 
 [node name="ItemCollect" type="Node2D" parent="."]
@@ -314,8 +314,8 @@ monitoring = false
 shape = SubResource("CircleShape2D_3xweo")
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 0
+collision_layer = 8
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 8)
@@ -345,7 +345,7 @@ top_level = true
 script = ExtResource("7_ikipm")
 follow_mode = 5
 follow_target = NodePath("..")
-zoom = Vector2(1.2, 1.2)
+zoom = Vector2(1.5, 1.5)
 tween_resource = SubResource("Resource_2evhq")
 draw_limits = true
 

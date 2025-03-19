@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cvdk27u0hk664"]
 
-[ext_resource type="Script" path="res://Managers/UI/UiDock.gd" id="1_rawhj"]
+[ext_resource type="Script" uid="uid://qsq28ks4f0ew" path="res://Managers/UI/UiDock.gd" id="1_rawhj"]
 [ext_resource type="Texture2D" uid="uid://e73uv0hphi1k" path="res://Managers/UI/Art/ui_dock.png" id="2_qfy5p"]
 
 [node name="UiDock" type="MarginContainer"]

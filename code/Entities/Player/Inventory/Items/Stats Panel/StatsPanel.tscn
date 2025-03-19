@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b5ote6c6nj3y5"]
 
-[ext_resource type="Script" path="res://Entities/Player/Inventory/Items/Stats Panel/StatsPanel.gd" id="1_yo74b"]
+[ext_resource type="Script" uid="uid://dwh30r5o6fwbx" path="res://Entities/Player/Inventory/Items/Stats Panel/StatsPanel.gd" id="1_yo74b"]
 
 [node name="Stats Panel" type="PanelContainer"]
 anchors_preset = 15

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d1debc3b82q1e"]
 
-[ext_resource type="Script" path="res://Managers/Interaction/InteractionManager.gd" id="1_jkfn5"]
-[ext_resource type="Script" path="res://addons/awesome_input_icons/classes/InputIconTextureRect.gd" id="2_0crq0"]
+[ext_resource type="Script" uid="uid://bbj0o4vjakyes" path="res://Managers/Interaction/InteractionManager.gd" id="1_jkfn5"]
+[ext_resource type="Script" uid="uid://cyoe2vg5s24vy" path="res://addons/awesome_input_icons/classes/InputIconTextureRect.gd" id="2_0crq0"]
 
 [node name="InteractionManager" type="Node2D"]
 script = ExtResource("1_jkfn5")
