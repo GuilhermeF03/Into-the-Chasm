@@ -5,8 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://kpkujmugia3d" path="res://Entities/Player/Inventory/Items/Trinkets & Recipes/Misc Slot/MiscSlot.png" id="3_kvk1d"]
 
 [node name="RecipeSlot" type="AspectRatioContainer"]
-offset_right = 99.0
-offset_bottom = 80.0
+custom_minimum_size = Vector2(112, 112)
+offset_right = 112.0
+offset_bottom = 112.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_ik52h")
@@ -15,6 +16,5 @@ script = ExtResource("1_ik52h")
 layout_mode = 2
 texture = ExtResource("3_kvk1d")
 container_texture = ExtResource("3_kvk1d")
-dock = null
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

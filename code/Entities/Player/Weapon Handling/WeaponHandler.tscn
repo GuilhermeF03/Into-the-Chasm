@@ -37,15 +37,15 @@ metadata/_aseprite_wizard_interface_config_ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
 
-[node name="HitBox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(13, 2)
 scale = Vector2(1.065, 1.5)
-collision_layer = 0
-collision_mask = 8
+collision_layer = 4
+collision_mask = 0
 monitoring = false
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CapsuleShape2D_ep44c")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

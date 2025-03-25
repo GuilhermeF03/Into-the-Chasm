@@ -28,12 +28,9 @@ func _ready():
 	if Engine.is_editor_hint(): return
 	sprite.texture = get_texture()
 
-	
-	if not $InnerBody.body_entered.is_connected(_on_collected):
-		$InnerBody.body_entered.connect(_on_collected)
-
 	if not area_entered.is_connected(_on_player_enter):
 		area_entered.connect(_on_player_enter)
+
 
 func _process(_delta):
 	if Engine.is_editor_hint():
@@ -69,8 +66,3 @@ static func spawn(_type : InventoryManager.ResourceType, _ammount : int):
 
 func _on_player_enter(_area : Area2D):
 	start_follow = true
-	
-
-func _on_collected(_body):
-	InventoryManager.set_resource(type, ammount)
-	self.queue_free()

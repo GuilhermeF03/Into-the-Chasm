@@ -115,11 +115,12 @@ drop_item={
 
 [layer_names]
 
-2d_physics/layer_1="item"
-2d_physics/layer_2="player_collect"
-2d_physics/layer_3="player"
-2d_physics/layer_4="player_hitbox"
-2d_physics/layer_5="mob"
+2d_physics/layer_1="Collectable_Item"
+2d_physics/layer_2="Player_Collect"
+2d_physics/layer_3="Player_Hitbox"
+2d_physics/layer_4="Player_Hurtbox"
+2d_physics/layer_5="Mob_Hitbox"
+2d_physics/layer_6="Mob_HurtBox"
 
 [physics]
 

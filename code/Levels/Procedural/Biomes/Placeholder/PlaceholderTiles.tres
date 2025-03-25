@@ -1187,7 +1187,8 @@ texture = ExtResource("1_mvvla")
 12:14/0/terrains_peering_bit/top_right_corner = 2
 
 [resource]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 64
+physics_layer_0/collision_mask = 64
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Wall"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)

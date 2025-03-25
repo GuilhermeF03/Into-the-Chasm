@@ -3,7 +3,7 @@ extends VBoxContainer
 
 #region Nodes
 @export_group("Nodes")
-@onready var grid = $"MarginContainer/Content/Margin/Scroll Container/MarginContainer/Trinkets Grid"
+@onready var grid = $"MarginContainer/Content/Margin/Scroll Container/MarginContainer/Inner Grid"
 @onready var header = $"Header"
 @onready var break_control = $"Break"
 #endregion

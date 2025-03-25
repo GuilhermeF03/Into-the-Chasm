@@ -159,8 +159,8 @@ radius = 6.21289
 
 [node name="Slime" type="CharacterBody2D"]
 scale = Vector2(5, 5)
-collision_layer = 16
-collision_mask = 16
+collision_layer = 32
+collision_mask = 4
 script = ExtResource("1_gf03x")
 CHASE_SPEED = 150.0
 metadata/_edit_group_ = true
@@ -220,7 +220,7 @@ autoplay = "idle"
 
 [node name="SightRayCast" type="RayCast2D" parent="."]
 target_position = Vector2(75, 0)
-collision_mask = 2
+collision_mask = 8
 
 [node name="PatrolRayCast" type="RayCast2D" parent="."]
 collision_mask = 0
@@ -233,6 +233,8 @@ one_shot = true
 
 [node name="Hitbox" type="Area2D" parent="."]
 visible = false
+collision_layer = 16
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_ctdae")

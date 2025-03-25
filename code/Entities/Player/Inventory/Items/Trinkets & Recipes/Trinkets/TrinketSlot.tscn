@@ -17,4 +17,3 @@ script = ExtResource("1_wvbxq")
 layout_mode = 2
 texture = ExtResource("3_jyfgc")
 container_texture = ExtResource("3_jyfgc")
-dock = null
