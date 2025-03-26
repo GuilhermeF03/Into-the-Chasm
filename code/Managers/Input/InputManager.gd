@@ -1,10 +1,7 @@
 extends Node2D
 
+@export_group("Data")
+enum INPUT_LEVEL {NONE, NO_MOVEMENT, ALL}
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+var input_level : INPUT_LEVEL = INPUT_LEVEL.ALL;

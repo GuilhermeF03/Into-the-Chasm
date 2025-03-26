@@ -40,31 +40,37 @@ var dodging = false
 var back_view = false
 #endregion
 
+var tween : Tween
+
 
 #region builtins
 func _ready():
 	dodge_timer.wait_time = DODGE_COOLDOWN
 	SceneManager.add_pause_trigger(inventory.on_handling_changed)
-	
-	hurtbox.body_entered.connect(on_hitbox_enter)
 
 
 func _physics_process(_delta):
 	if inventory.handling_input: return
 	
+	if InputManager.input_level == InputManager.INPUT_LEVEL.NONE: 
+		return
+	
 	var movement = Input.get_vector(
 		"move_left", "move_right", 
 		"move_up", "move_down"
 	)
-
-	handle_movement(movement)
-	handle_animation(movement)
-	handle_weapon()
-	handle_camera()
+	
+	if InputManager.input_level == InputManager.INPUT_LEVEL.ALL:
+		handle_animation(movement)
+		handle_movement(movement)
+		handle_weapon()
+		handle_camera()
 
 
 func _input(event : InputEvent):
 	if inventory.handling_input: return
+	if InputManager.input_level == InputManager.INPUT_LEVEL.NONE: 
+		return
 	handle_dodge_input(event)
 	handle_tool_selection(event)
 #endregion
@@ -158,15 +164,54 @@ func handle_animation(input):
 #endregion
 
 
-#region Hitbox
-func on_hitbox_enter(body : Node2D):
-	print(body)
-	PlayerManager.data.life -= 1
-	if PlayerManager.data.life == 0:
-		print("Dead")
-#endregion
+
 
 
 func _on_item_collect(item : Area2D):
 	InventoryManager.set_resource(item.type, item.ammount)
 	item.queue_free()
+
+#region HurtBox
+func _on_player_hit(area):
+	knockback(area)
+
+
+
+func _on_hurtbox_body_entered(body : PhysicsBody2D):
+	knockback(body)
+
+
+func knockback(body : Node2D):
+	InputManager.input_level = InputManager.INPUT_LEVEL.NONE
+	
+	var curr_animation : String = animation_player.current_animation
+	var dir = (
+		"down" if curr_animation.contains("down") 
+		else "up"
+	)
+	animation_player.play("idle_" + dir)
+	await animation_player.animation_finished
+	animation_player.play("hit")
+	
+	var push_vector = (
+		(global_position - body.global_position).normalized()
+		* 200
+	)
+
+	var tween = create_tween()
+	(
+	tween.tween_property(self, "position", global_position + push_vector, 0.5)
+	.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	)
+	await tween.finished
+	InputManager.input_level = InputManager.INPUT_LEVEL.ALL
+	
+	await animation_player.animation_finished
+	
+	
+	print(body)
+	PlayerManager.data.life -= 1
+	if PlayerManager.data.life == 0:
+		print("Dead")
+		
+#endregion

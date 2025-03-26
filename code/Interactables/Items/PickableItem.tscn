@@ -38,7 +38,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1tcku"]
-radius = 11.2
+radius = 4.51774
 
 [node name="PickableItem" type="Node2D"]
 scale = Vector2(5, 5)
@@ -50,7 +50,7 @@ position = Vector2(0, 4.76837e-07)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ujd57")
+&"": SubResource("AnimationLibrary_ujd57")
 }
 
 [node name="InteractArea" parent="." instance=ExtResource("2_coey2")]

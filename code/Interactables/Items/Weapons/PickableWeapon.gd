@@ -13,6 +13,7 @@ func _ready() -> void:
 
 func _on_get_picked():
 	InventoryManager.set_weapon(self as Weapon)
+	queue_free()
 
 
 func set_data(data : Weapon):

@@ -121,6 +121,7 @@ drop_item={
 2d_physics/layer_4="Player_Hurtbox"
 2d_physics/layer_5="Mob_Hitbox"
 2d_physics/layer_6="Mob_HurtBox"
+2d_physics/layer_7="Collisions"
 
 [physics]
 

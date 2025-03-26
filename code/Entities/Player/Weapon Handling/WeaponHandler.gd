@@ -41,6 +41,8 @@ func _input(event: InputEvent) -> void:
 func attack():
 	if texture == null: return
 	
+	print($Hitbox.monitorable)
+	
 	can_attack = false
 	anim_player.play(animation_library_name + "/attack")	
 
@@ -68,6 +70,7 @@ func update_sprite_and_animation():
 
 
 func _on_animation_finished(_anim_name):
+	print($Hitbox.monitorable)
 	print("finished attack!!")
 	sprite.frame_coords = Vector2.ZERO
 	can_attack = true
