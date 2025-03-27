@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ekmbsrud0m58" path="res://Interactables/Items/Resources/Art/minerals_icon.png" id="2_tcby1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rck3t"]
-radius = 36.0
+radius = 64.0
 
 [sub_resource type="Animation" id="Animation_fpw6r"]
 resource_name = "hover"
@@ -45,8 +45,8 @@ _data = {
 [node name="PickableResource" type="Area2D"]
 y_sort_enabled = true
 scale = Vector2(2, 2)
+collision_layer = 0
 collision_mask = 2
-monitoring = false
 script = ExtResource("1_udx31")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -65,7 +65,6 @@ autoplay = "hover"
 
 [node name="InnerBody" type="Area2D" parent="."]
 collision_mask = 2
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InnerBody"]
 shape = SubResource("CircleShape2D_kvaxt")

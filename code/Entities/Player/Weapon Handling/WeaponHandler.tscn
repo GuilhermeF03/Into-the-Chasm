@@ -40,12 +40,11 @@ metadata/_aseprite_wizard_interface_config_ = {
 root_node = NodePath("../Sprite2D")
 
 [node name="Hitbox" type="Area2D" parent="."]
+process_mode = 4
 position = Vector2(13, 2)
 scale = Vector2(1.065, 1.5)
 collision_layer = 4
 collision_mask = 0
-monitoring = false
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CapsuleShape2D_ep44c")

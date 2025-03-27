@@ -29,6 +29,7 @@ class_name Enemy
 @onready var patrol_raycast = $PatrolRayCast
 
 @onready var idle_timer = $Timers/IdleTimer
+@onready var hurtbox = $Hurtbox
 #endregion
 
 #region Data
@@ -51,8 +52,10 @@ func _ready() -> void:
 	idle_timer.wait_time = IDLE_WAIT_TIME + player.get_animation("Search").length
 	sight_raycast.target_position = Vector2(RAYCAST_DETECT_DIST, 0)
 
+	hurtbox.area_entered.connect(on_player_damage)
 
 func _physics_process(_delta: float) -> void:
+	if state == EnemyState.IDLE: return
 	player_pos = SceneManager.player.global_position if SceneManager.player else Vector2.ZERO
 	sight_raycast.look_at(player_pos)
 
@@ -136,3 +139,26 @@ func move():
 
 func _on_idle_timer_timeout():
 	state = prev_state
+
+
+func on_player_damage(area : Area2D):
+	state = EnemyState.IDLE
+	var push_vector = (
+		(global_position - area.global_position).normalized()
+		* 200
+	)
+	
+	var curr_animation : String = player.current_animation
+
+	player.stop()
+	sprite.frame = 0
+	player.play("hit")
+
+	var tween = create_tween()
+	(
+	tween.tween_property(self, "position", global_position + push_vector, 0.5)
+	.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	)
+	await tween.finished
+	state = prev_state
+	await player.animation_finished

@@ -1,13 +1,13 @@
 [gd_scene load_steps=25 format=3 uid="uid://d0mst4eki2yyd"]
 
 [ext_resource type="Script" uid="uid://b1wm3dahmoc0q" path="res://Entities/Player/PlayerController.gd" id="1_3iq6n"]
-[ext_resource type="Script" uid="uid://oss17n4fgvn0" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_fvu4l"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_fvu4l"]
 [ext_resource type="PackedScene" uid="uid://dd1bjjaxa7dur" path="res://Entities/Player/Inventory/Inventory.tscn" id="2_urbfw"]
 [ext_resource type="Texture2D" uid="uid://ct15olca7m1sy" path="res://Entities/Player/Art/player.png" id="3_5x0oj"]
 [ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Entities/damage.gdshader" id="3_761t5"]
 [ext_resource type="PackedScene" uid="uid://ywpg5nkhidqk" path="res://Entities/Player/Weapon Handling/WeaponHandler.tscn" id="7_cn85d"]
-[ext_resource type="Script" uid="uid://bh465lhhgwjxm" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_ikipm"]
-[ext_resource type="Script" uid="uid://5uqnfk0k7he8" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_kuc5k"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_ikipm"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_kuc5k"]
 [ext_resource type="PackedScene" uid="uid://5xry0mnc8j7o" path="res://Entities/Player/HUD/HUD.tscn" id="9_hyecf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hacra"]
@@ -18,6 +18,38 @@ shader_parameter/flash_value = 0.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0n3kf"]
 radius = 16.0
 height = 48.0
+
+[sub_resource type="Animation" id="Animation_lmeus"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_jynvv"]
+resource_name = "hit"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0, 1.0, 0.0]
+}
 
 [sub_resource type="Animation" id="Animation_gdeu0"]
 length = 0.1
@@ -205,38 +237,6 @@ tracks/1/keys = {
 "values": [3, 4, 5]
 }
 
-[sub_resource type="Animation" id="Animation_jynvv"]
-resource_name = "hit"
-length = 0.5
-step = 0.025
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:material:shader_parameter/flash_value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 1.0, 0.0, 1.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_lmeus"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:material:shader_parameter/flash_value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4p46q"]
 _data = {
 &"RESET": SubResource("Animation_lmeus"),
@@ -254,7 +254,7 @@ radius = 16.0
 height = 64.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3xweo"]
-radius = 80.0
+radius = 96.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_brdpf"]
 radius = 24.0
@@ -364,7 +364,7 @@ one_shot = true
 [node name="Weapon" type="Node2D" parent="."]
 
 [node name="WeaponHandler" parent="Weapon" instance=ExtResource("7_cn85d")]
-position = Vector2(75, 0)
+position = Vector2(40, 0)
 
 [node name="UI" type="Node" parent="."]
 

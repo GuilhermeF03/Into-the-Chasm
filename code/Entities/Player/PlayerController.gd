@@ -164,12 +164,11 @@ func handle_animation(input):
 #endregion
 
 
-
-
-
-func _on_item_collect(item : Area2D):
+func _on_item_collect(area : Area2D):
+	var item : PickableResource = area.get_parent() 
 	InventoryManager.set_resource(item.type, item.ammount)
 	item.queue_free()
+
 
 #region HurtBox
 func _on_player_hit(area):
