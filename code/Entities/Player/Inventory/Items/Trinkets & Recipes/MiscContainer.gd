@@ -15,7 +15,6 @@ extends VBoxContainer
 @export_range(0, 1) var break_ratio : float = 0
 #endregion
 
-
 #region builtins
 func _ready():
 	if Engine.is_editor_hint(): return

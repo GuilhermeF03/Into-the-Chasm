@@ -24,21 +24,27 @@ ammount = 15
 type = 2
 
 [node name="PickableConsumable" parent="." instance=ExtResource("3_2xkeb")]
+process_mode = 4
 position = Vector2(357, 37)
 
 [node name="PickableConsumable2" parent="." instance=ExtResource("3_2xkeb")]
+process_mode = 4
 position = Vector2(625, 30)
 
 [node name="PickableConsumable3" parent="." instance=ExtResource("3_2xkeb")]
+process_mode = 4
 position = Vector2(649, 193)
 
 [node name="PickableTrinket" parent="." instance=ExtResource("10_vabyw")]
+process_mode = 4
 position = Vector2(1255, 122)
 
 [node name="PickableTrinket2" parent="." instance=ExtResource("10_vabyw")]
+process_mode = 4
 position = Vector2(1034, 439)
 
 [node name="PickableTrinket3" parent="." instance=ExtResource("10_vabyw")]
+process_mode = 4
 position = Vector2(1493, 235)
 
 [node name="Slime" parent="." instance=ExtResource("10_y0xif")]

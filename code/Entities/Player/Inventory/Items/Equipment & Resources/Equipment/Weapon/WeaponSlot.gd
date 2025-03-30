@@ -16,7 +16,6 @@ var weapon_node = preload(
 @export var dock : UiDock.DOCK
 #endregion
 
-
 #region builtins
 func _ready():
 	InventoryManager.weapon_changed.connect(equip)
@@ -24,8 +23,8 @@ func _ready():
 		item_slot.dock = dock
 #endregion
 
-
-func equip(weapon : Weapon):
+#region equipment management
+func equip(weapon : WeaponData):
 	var _old_weapon = item_slot.item as WeaponData
 	
 	if _old_weapon != null:
@@ -33,6 +32,7 @@ func equip(weapon : Weapon):
 		_weapon.set_data(_old_weapon)
 		SceneManager.spawn(_weapon, SceneManager.player.global_position)
 
-	item_slot.item = weapon.data
-	item_slot.stats.set_stats(weapon.data)
+	item_slot.item = weapon
+	item_slot.stats.set_stats(weapon)
 	#holder.pivot_offset = holder.size / 2
+#endregion

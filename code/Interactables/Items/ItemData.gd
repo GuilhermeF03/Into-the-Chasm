@@ -2,6 +2,7 @@ extends Resource
 class_name ItemData
 
 
+#region Data
 @export_group("Data")
 enum ItemType{
 	Item,
@@ -15,3 +16,4 @@ enum ItemType{
 @export var type : ItemType
 @export_multiline var description : String
 @export var texture : Texture2D
+#endregion

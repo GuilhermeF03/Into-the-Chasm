@@ -2,25 +2,34 @@
 extends Node2D
 class_name PickableItem
 
+#region Constants
 @export_category("Constants")
 const MIN_WAIT_TIME = 0.1
 const MAX_WAIT_TIME = 1
 const MAX_SPAWN_RANGE = 125
 const MIN_SPAWN_RANGE = 75
+#endregion
 
+#region Nodes
 @export_category("Nodes")
 @onready var sprite = $Sprite2D
 @onready var interact_area = $InteractArea
 @onready var animation_player = $AnimationPlayer
+#endregion
 
+#region Data
 @export_category("Data")
 @export var texture : Texture2D
 @onready var hovered_texture
+#endregion
 
+#region Signals
 @export_category("Signals")
 signal get_picked
+#endregion
 
 
+#region builtins
 func _ready():
 	if Engine.is_editor_hint(): return
 	
@@ -66,3 +75,4 @@ func _on_interact_area_area_entered(_area):
 
 func _on_interact_area_area_exited(_area):
 	sprite.texture = texture
+#endregion

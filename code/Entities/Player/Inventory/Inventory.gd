@@ -8,8 +8,6 @@ class_name Inventory
 
 #region Nodes
 @export_group("Nodes")
-
-@export_subgroup("Children Nodes")
 @onready var player = $AnimationPlayer
 @onready var pages = $"Background Panel/Outer Margin/UI/Content"
 #endregion
@@ -28,7 +26,8 @@ signal on_handling_changed(value : bool)
 
 #region builtins
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("inventory"): toggle()
+	if event.is_action_pressed("inventory"): 
+		toggle()
 	if not handling_input: return
 	
 	handle_page_leaf(event)

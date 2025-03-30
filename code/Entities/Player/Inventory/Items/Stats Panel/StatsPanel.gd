@@ -6,7 +6,7 @@ class_name StatsPanel
 @onready var label = $Label
 #endregion
 
-
+#region functions
 func set_stats(item : ItemData):
 	if item == null: 
 		label.text = ""
@@ -18,3 +18,4 @@ func set_stats(item : ItemData):
 	if item is WeaponData:
 		print("Weapon")
 	label.text = item.name
+#endregion

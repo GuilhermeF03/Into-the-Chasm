@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+## Player Controller
+## This class controls the player movement and main mechanics
+
+
 #region Constants
 @export_group("Constants")
 
@@ -40,8 +44,6 @@ var dodging = false
 var back_view = false
 #endregion
 
-var tween : Tween
-
 
 #region builtins
 func _ready():
@@ -50,10 +52,10 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if inventory.handling_input: return
-	
-	if InputManager.input_level == InputManager.INPUT_LEVEL.NONE: 
-		return
+	if (
+		inventory.handling_input ||
+		InputManager.input_level == InputManager.INPUT_LEVEL.NONE
+	): return
 	
 	var movement = Input.get_vector(
 		"move_left", "move_right", 
@@ -68,9 +70,10 @@ func _physics_process(_delta):
 
 
 func _input(event : InputEvent):
-	if inventory.handling_input: return
-	if InputManager.input_level == InputManager.INPUT_LEVEL.NONE: 
-		return
+	if (
+		inventory.handling_input ||
+		InputManager.input_level == InputManager.INPUT_LEVEL.NONE
+	): return
 	handle_dodge_input(event)
 	handle_tool_selection(event)
 #endregion
@@ -78,14 +81,17 @@ func _input(event : InputEvent):
 
 #region Handlers
 func handle_movement(input):
-	velocity = input.normalized() * (DODGE_SPEED if dodging else MOV_SPEED)
+	velocity = (
+		input.normalized() * (DODGE_SPEED if dodging else MOV_SPEED)
+	)
 	move_and_slide()
 
 
 func handle_weapon():
 	weapon.look_at(get_global_mouse_position())
-	weapon_handler.scale.y = -5 if get_local_mouse_position().x < 0 else 5
-
+	weapon_handler.scale.y = (
+		-5 if get_local_mouse_position().x < 0 else 5
+	)
 
 func handle_camera():
 	if inventory.handling_input: return
@@ -99,8 +105,14 @@ func handle_camera():
 	var axis_normalized = (axis * CAMERA_AXIS_DRIFT).normalized()
 	var mouse_drift = axis_normalized * MAX_MOUSE_DRIFT
 	
-	var lower_bound = axis_normalized if axis_normalized < mouse_drift else mouse_drift
-	var upper_bound = axis_normalized if axis_normalized > mouse_drift else mouse_drift 
+	var lower_bound = (
+		axis_normalized if axis_normalized < mouse_drift 
+		else mouse_drift
+	)
+	var upper_bound = (
+		axis_normalized if axis_normalized > mouse_drift 
+		else mouse_drift
+	) 
 	
 	camera.follow_offset = clamp(
 		axis / MOUSE_DRIFT_FACTOR,
@@ -109,7 +121,6 @@ func handle_camera():
 	)
 	
 	sprite.flip_h = (axis / MOUSE_DRIFT_FACTOR).x < 0
-	
 	back_view = mouse_pos.y < global_position.y
 #endregion
 
@@ -122,7 +133,9 @@ func handle_dodge_input(event : InputEvent):
 		or not velocity != Vector2.ZERO
 	): return 
 	
-	animation_player.play("roll_" + ("up" if back_view else "down"));
+	animation_player.play(
+		"roll_" + ("up" if back_view else "down")
+	);
 	dodging = true
 	dodge_timer.start()
 
@@ -137,7 +150,9 @@ func handle_tool_selection(event: InputEvent) -> void:
 	): return
 	
 	var curr_tool_idx = InventoryManager.curr_tool_idx
-	var tools_size = InventoryManager.tools.filter(func(value): return value != null).size()
+	var tools_size = InventoryManager.tools.filter(func(value): 
+		return value != null
+	).size()
 	
 	if tools_size == 0: return
 	
@@ -148,7 +163,10 @@ func handle_tool_selection(event: InputEvent) -> void:
 	)
 		
 	if idx != curr_tool_idx:
-		idx = tools_size - 1 if idx == -1 else idx % InventoryManager.get_tools_size()
+		idx = (
+			tools_size - 1 if idx == -1 
+			else idx % InventoryManager.get_tools_size()
+		)
 		InventoryManager.select_tool(idx)
 #endregion
 
@@ -173,7 +191,6 @@ func _on_item_collect(area : Area2D):
 #region HurtBox
 func _on_player_hit(area):
 	knockback(area)
-
 
 
 func _on_hurtbox_body_entered(body : PhysicsBody2D):

@@ -28,7 +28,6 @@ var item : ItemData = null : set = set_item
 @export var dock : UiDock.DOCK = UiDock.DOCK.DYNAMIC
 #endregion
 
-
 #region builtins
 func _ready():
 	if icon == null:

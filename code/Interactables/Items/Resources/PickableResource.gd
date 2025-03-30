@@ -1,29 +1,34 @@
 @tool
-
 extends Area2D
 class_name PickableResource
 
-@export_category("Constants")
+#region Constants
+@export_group("Constants")
 const MIN_SPAWN_RANGE = 75
 const MAX_SPAWN_RANGE = 150
+#endregion
 
-@export_category("Info")
+#region Data
+@export_group("Data")
+
+@export_subgroup("Info")
 @export_range(0, 80, 5) var ammount : int
 @export var type : InventoryManager.ResourceType
+var start_follow : bool = false
 
-@export_category("Nodes")
-@onready var sprite = $Sprite2D
-@onready var player = $AnimationPlayer
-
-@export_category("Textures")
+@export_subgroup("Preloads")
 var mineral_icon : Texture2D = preload("res://Interactables/Items/Resources/Art/minerals_icon.png")
 var organic_icon : Texture2D = preload("res://Interactables/Items/Resources/Art/organics_icon.png")
 var cristal_icon : Texture2D = preload("res://Interactables/Items/Resources/Art/cristals_icons.png")
+#endregion
 
-@export_category("Data")
-var start_follow : bool = false
+#region Nodes
+@export_category("Nodes")
+@onready var sprite = $Sprite2D
+@onready var player = $AnimationPlayer
+#endregion
 
-
+#region builtins
 func _ready():
 	if Engine.is_editor_hint(): return
 	sprite.texture = get_texture()
@@ -45,7 +50,7 @@ func _process(_delta):
 			tween.tween_property(self, "position", player_pos, 1)
 			.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
 		)
-
+#endregion
 
 func get_texture():
 	match type:
@@ -57,7 +62,10 @@ func get_texture():
 			return cristal_icon
 		
 
-static func spawn(_type : InventoryManager.ResourceType, _ammount : int):
+static func spawn(
+	_type : InventoryManager.ResourceType, 
+	_ammount : int
+):
 	var pickable = PickableResource.new()
 	pickable.type = _type
 	pickable.ammount = _ammount

@@ -17,7 +17,6 @@ signal strip_down(slot_name : StringName)
 @export var dock : UiDock.DOCK
 #endregion
 
-
 #region builtins
 func _ready():
 	item_slot.interact.connect(on_gui_input)
@@ -29,6 +28,7 @@ func on_gui_input(_event: InputEvent) -> void:
 	strip_item()
 #endregion
 
-
+#region item strip
 func strip_item():
 	strip_down.emit(self.name)
+#endregion

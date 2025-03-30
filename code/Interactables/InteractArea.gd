@@ -1,6 +1,7 @@
 extends Area2D
 class_name InteractArea
 
+#region Signals
 @export_category("Signals")
 ## Called when player interacts with this interactable
 signal _on_interaction_enter
@@ -8,12 +9,14 @@ signal _on_interaction_enter
 signal _on_interaction_exit
 ## An handler for handling continuos interaction beetween player and interactable
 signal _on_interaction
+#endregion
 
-
+#region Data
 @export_category("Data")
 @export var toggle_only : bool
+#endregion
 
-
+#region interact
 ## Signals player entered interaction
 func interact(): _on_interaction_enter.emit()
 
@@ -34,3 +37,4 @@ func _on_interaction_zone_entered(_area):
 ## Player exited interaction zone
 func _on_interaction_zone_exited(_area):
 	InteractionManager.unregister_interaction(self)
+#endregion

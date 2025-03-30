@@ -1,19 +1,22 @@
 extends Node
 class_name ResourcesManager
 
+#region Nodes
 @export_category("Nodes")
 @onready var minerals_holder = $Slots/Minerals.holder_label
 @onready var organics_holder = $Slots/Organics.holder_label
 @onready var cristals_holder = $Slots/Cristals.holder_label
-
 @onready var slots = $"Slots"
+#endregion
 
+#region Data
 @export_category("Data")
 var minerals : int = 0
 var organics : int = 0
 var cristals : int = 0
+#endregion
 
-
+#region builtins
 func _ready():
 	# Set initial values
 	update_holder(InventoryManager.ResourceType.MINERAL, InventoryManager.minerals)
@@ -22,8 +25,9 @@ func _ready():
 	
 	# Connect signals
 	InventoryManager.resource_changed.connect(set_resource)
+#endregion
 
-
+#region resources management
 func set_resource(type : InventoryManager.ResourceType, value : int):
 	update_holder(type, value)
 
@@ -37,9 +41,11 @@ func update_holder(type : InventoryManager.ResourceType, value : int):
 	
 	holder.text = render_resource_value(value)
 
+
 func render_resource_value(value : int):
 	return (
 		"[center]" 
 		+ str(value) 
 		+ ("+" if value > InventoryManager.RESOURCE_CAP else "")
 	) 
+#endregion

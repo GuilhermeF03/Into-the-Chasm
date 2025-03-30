@@ -1,9 +1,16 @@
 @tool
-extends Weapon
+extends Node
 class_name PickableWeapon
 
+#region Nodes
 @export_group("Nodes")
 @onready var pickable : PickableItem = $PickableItem
+#endregion
+
+#region Data
+@export_group("Data")
+@export var data : WeaponData
+#endregion
 
 
 func _ready() -> void:
@@ -15,7 +22,7 @@ func _ready() -> void:
 	
 
 func _on_get_picked():
-	InventoryManager.set_weapon(self)
+	InventoryManager.set_weapon(data)
 	queue_free()
 
 

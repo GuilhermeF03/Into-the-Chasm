@@ -1,10 +1,18 @@
 @tool
-extends Tool
+extends Node
 class_name PickableTool
 
+#region Nodes
 @export_group("Nodes")
 @onready var pickable :PickableItem = $PickableItem
+#endregion
 
+#region Data
+@export_group("Data")
+@export var data : ToolData
+#endregion
+
+#region builtins
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	if data != null:
@@ -15,4 +23,5 @@ func _ready() -> void:
 
 
 func _on_get_picked():
-	InventoryManager.add_tool(self as Tool)
+	InventoryManager.add_tool(data as ToolData)
+#endregion

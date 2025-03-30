@@ -47,8 +47,8 @@ func attack():
 	anim_player.play(animation_library_name + "/attack")	
 
 
-func set_weapon(weapon : Weapon):
-	texture = weapon.data.texture if weapon != null else null
+func set_weapon(weapon : WeaponData):
+	texture = weapon.texture if weapon != null else null
 	update_sprite_and_animation()
 
 

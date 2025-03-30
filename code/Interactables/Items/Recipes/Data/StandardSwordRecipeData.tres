@@ -6,9 +6,9 @@
 
 [resource]
 script = ExtResource("1_45tm5")
-minerals = 0
-organics = 10
-cristals = 10
+minerals_cost = 0
+organics_cost = 15
+cristals_cost = 15
 crafted_item = ExtResource("1_577bg")
 name = "Standard Sword"
 type = 1

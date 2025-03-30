@@ -14,8 +14,8 @@ var tool_slot_node = preload(
 	"res://Entities/Player/Inventory/Items/Equipment & Resources/Equipment/Tools/ToolSlot.tscn"
 )
 var selected_icon = preload(
-	"res://Entities/Player/Inventory/Items/Equipment & Resources/Equipment/Art/EquipmentSlotSelected.png")
-
+	"res://Entities/Player/Inventory/Items/Equipment & Resources/Equipment/Art/EquipmentSlotSelected.png"
+)
 #endregion
 
 #region builtins
@@ -26,11 +26,11 @@ func _ready():
 	InventoryManager.tool_added.connect(equip)
 	InventoryManager.tool_removed.connect(unequip)
 	InventoryManager.tool_selected.connect(select_tool)
-	InventoryManager.tool_slots_upgraded.connect(upgrade)
+	InventoryManager.tool_slots_upgraded.connect(add_slots)
 #endregion
 
-
-func equip(tool : Tool, index : int = -1):
+#region equipment management
+func equip(tool : ToolData, index : int = -1):
 	update_holder(tool, index)
 
 
@@ -38,7 +38,7 @@ func unequip(index : int = -1):
 	update_holder(null, index)
 
 
-func upgrade(ammount : int):
+func add_slots(ammount : int):
 	InventoryManager.add_consumable_slots(ammount)
 	for i in ammount:
 		add_tool()
@@ -55,7 +55,7 @@ func add_tool():
 	tool.on_drop.connect(drop_tool)
 	
 	
-func update_holder(tool : Tool, index : int = -1):
+func update_holder(tool : ToolData, index : int = -1):
 	var child = self.get_child(index) as ToolSlot
 	child.item_slot.item = tool.data
 
@@ -83,3 +83,4 @@ func drop_tool(slot : ToolSlot):
 	var index = self.get_children().find(slot)
 	if index in range(InventoryManager.tools.size()):
 		InventoryManager.remove_tool(index)
+#endregion

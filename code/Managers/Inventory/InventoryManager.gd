@@ -27,19 +27,19 @@ var cristals : int
 enum ResourceType{MINERAL, ORGANIC, CRISTAL}
 
 @export_subgroup("Weapon")
-var weapon : Weapon
+var weapon : WeaponData
 
 @export_subgroup("Tools")
 var curr_tool_idx = -1
-var curr_tool : Tool = null
-var tools : Array[Tool] = []
+var curr_tool : ToolData = null
+var tools : Array[ToolData] = []
 var curr_tools_size = INITIAL_TOOLS
 
 @export_subgroup("Trinkets")
-var trinkets : Array[Trinket]
+var trinkets : Array[TrinketData]
 
 @export_subgroup("Recipes")
-var recipes : Array[Recipe]
+var recipes : Array[RecipeData]
 #endregion
 
 #region Signals
@@ -49,20 +49,20 @@ var recipes : Array[Recipe]
 signal resource_changed(resource : ResourceType, ammount : int)
 
 @export_subgroup("Weapon")
-signal weapon_changed(weapon : Weapon)
+signal weapon_changed(weapon : WeaponData)
 
 @export_subgroup("Tools")
 signal tool_removed(index : int)
 signal tool_selected(index : int)
 signal tool_slots_upgraded(ammount : int)
-signal tool_added(tool : Tool, index : int)
+signal tool_added(tool : ToolData, index : int)
 
 @export_subgroup("Trinkets")
-signal trinket_added(trinket : Trinket)
+signal trinket_added(trinket : TrinketData)
 signal trinket_removed(index : int)
 
 @export_subgroup("Recipes")
-signal recipe_added(recipe : Recipe)
+signal recipe_added(recipe : RecipeData)
 #endregion
 
 
@@ -92,14 +92,14 @@ func set_resource(resource : ResourceType, ammount : int, override : bool = fals
 	resource_changed.emit(resource, new_amount)
 
 
-func set_weapon(new_weapon : Weapon):
+func set_weapon(new_weapon : WeaponData):
 	weapon = new_weapon
 	weapon_changed.emit(weapon)
 #endregion
 
 
 #region Tools
-func add_tool(tool : Tool):
+func add_tool(tool : ToolData):
 	var available_slot = tools.find(null)
 	
 	# Find next available spot
@@ -173,9 +173,10 @@ func get_tools_size():
 
 
 #region Trinkets
-func add_trinket(trinket : Trinket):
+func add_trinket(trinket : TrinketData):
 	trinkets.push_back(trinket)
 	trinket_added.emit(trinket)
+
 
 func remove_trinket(index):
 	var trinket = trinkets[index]
@@ -185,7 +186,7 @@ func remove_trinket(index):
 
 
 #region Recipes
-func add_recipe(recipe : Recipe):
+func add_recipe(recipe : RecipeData):
 	recipes.push_back(recipe)
 	recipe_added.emit(recipe)
 #endregion

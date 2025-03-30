@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dfju6gbnxykt8" path="res://Interactables/Items/Weapons/Data/Sword/Art/sword.png" id="2_6fnhg"]
 [ext_resource type="PackedScene" uid="uid://cte68dj3jl77y" path="res://Interactables/Items/PickableItem.tscn" id="2_mrba5"]
 
-[node name="Sword" type="Node2D"]
+[node name="Standard Sword" type="Node2D"]
 z_index = 1
 y_sort_enabled = true
 position = Vector2(0, -1)

@@ -10,7 +10,7 @@ var is_crafting : bool = false
 #region Data
 @export_group("Data")
 @export var dock : UiDock.DOCK
-@export var recipe : Recipe
+@export var recipe : RecipeData
 #endregion
 
 
@@ -21,8 +21,7 @@ func _ready():
 		item_slot.dock = dock
 	
 	if item_slot.item != null:
-		recipe = Recipe.new()
-		recipe.data = item_slot.item as RecipeData
+		recipe = item_slot.item as RecipeData
 
 
 func _process(_delta: float) -> void:
