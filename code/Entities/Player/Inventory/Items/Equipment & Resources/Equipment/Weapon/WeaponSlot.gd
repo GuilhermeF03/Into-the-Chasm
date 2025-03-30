@@ -26,13 +26,13 @@ func _ready():
 
 
 func equip(weapon : Weapon):
-	var _old_weapon = item_slot.item as Weapon
+	var _old_weapon = item_slot.item as WeaponData
 	
 	if _old_weapon != null:
 		var _weapon : PickableWeapon = weapon_node.instantiate()
 		_weapon.set_data(_old_weapon)
 		SceneManager.spawn(_weapon, SceneManager.player.global_position)
 
-	item_slot.item = weapon
-	item_slot.stats.set_stats(weapon)
+	item_slot.item = weapon.data
+	item_slot.stats.set_stats(weapon.data)
 	#holder.pivot_offset = holder.size / 2

@@ -23,11 +23,11 @@ extends CharacterBody2D
 #region Nodes
 @export_group("Nodes")
 @onready var sprite = $Sprite
-@onready var weapon = $Weapon
 @onready var camera = $PhantomCamera2D
 @onready var dodge_timer = $Timers/DodgeTimer
 @onready var inventory : Inventory = $UI/Inventory
 @onready var animation_player = $AnimationPlayer
+@onready var weapon = $Weapon
 @onready var weapon_handler : WeaponHandler = $Weapon/WeaponHandler
 @onready var hurtbox : Area2D = $Hurtbox
 #endregion

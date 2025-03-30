@@ -28,9 +28,11 @@ func equip(recipe : Recipe):
 
 func add_recipe_node(recipe : Recipe):
 	var _recipe_node : RecipeSlot = recipe_node.instantiate()
+	_recipe_node.recipe = recipe
+	
 	add_child(_recipe_node)
 	var item_slot = _recipe_node.item_slot
-	item_slot.item = recipe
+	item_slot.item = recipe.data
 
 
 func update_holder(recipe : Recipe, index : int):

@@ -2,10 +2,14 @@
 extends Trinket
 class_name PickableTrinket
 
+@export_group("Nodes")
+@onready var pickable : PickableItem = $PickableItem
+
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
-	pickable.texture = texture
+	if data != null:
+		pickable.texture = data.texture
 
 	if not $PickableItem.get_picked.is_connected(_on_get_picked):
 		$PickableItem.get_picked.connect(_on_get_picked)

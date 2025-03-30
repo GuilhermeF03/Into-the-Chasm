@@ -1,10 +1,9 @@
-extends Item
+extends Node
 class_name Tool
 
 @export_category("Data")
-@export var tool_usage : int
-@export var effect : GDScript
+@export var data : ToolData
 
 
 func consume() -> void:
-	(effect as ToolEffect).act()
+	(data.effect as ToolEffect).act()

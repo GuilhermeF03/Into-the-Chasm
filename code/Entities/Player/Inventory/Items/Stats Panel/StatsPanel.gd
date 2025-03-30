@@ -7,14 +7,14 @@ class_name StatsPanel
 #endregion
 
 
-func set_stats(item : Item):
+func set_stats(item : ItemData):
 	if item == null: 
 		label.text = ""
 		return
-	if item is Recipe:
+	if item is RecipeData:
 		print("Recipe")
-	if item is Tool:
+	if item is ToolData:
 		print("Tool")
-	if item is Weapon:
+	if item is WeaponData:
 		print("Weapon")
-	label.text = item.item_name
+	label.text = item.name

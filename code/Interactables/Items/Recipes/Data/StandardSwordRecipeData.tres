@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=4 format=3 uid="uid://c82s1o4ttqg4j"]
+
+[ext_resource type="Script" uid="uid://cyutrqecprrax" path="res://Interactables/Items/Recipes/Data/RecipeData.gd" id="1_45tm5"]
+[ext_resource type="PackedScene" uid="uid://d2at40xfyklc" path="res://Interactables/Items/Weapons/Data/Sword/StandardSword.tscn" id="1_577bg"]
+[ext_resource type="Texture2D" uid="uid://b5w2esg5f6h5m" path="res://Interactables/Items/Recipes/Art/pickable_recipe.png" id="2_s8d1l"]
+
+[resource]
+script = ExtResource("1_45tm5")
+minerals = 0
+organics = 10
+cristals = 10
+crafted_item = ExtResource("1_577bg")
+name = "Standard Sword"
+type = 1
+description = ""
+texture = ExtResource("2_s8d1l")
+metadata/_custom_type_script = "uid://cyutrqecprrax"

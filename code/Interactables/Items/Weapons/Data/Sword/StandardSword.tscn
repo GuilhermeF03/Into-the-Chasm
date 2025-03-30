@@ -1,16 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2at40xfyklc"]
+[gd_scene load_steps=5 format=3 uid="uid://d2at40xfyklc"]
 
 [ext_resource type="Script" uid="uid://vqrocd37gf13" path="res://Interactables/Items/Weapons/PickableWeapon.gd" id="1_esdyf"]
-[ext_resource type="Texture2D" uid="uid://dfju6gbnxykt8" path="res://Interactables/Items/Weapons/Sword/Art/sword.png" id="2_6fnhg"]
+[ext_resource type="Resource" uid="uid://dhttrgpwb2622" path="res://Interactables/Items/Weapons/Data/Sword/StandardSwordData.tres" id="2_6f0n8"]
+[ext_resource type="Texture2D" uid="uid://dfju6gbnxykt8" path="res://Interactables/Items/Weapons/Data/Sword/Art/sword.png" id="2_6fnhg"]
 [ext_resource type="PackedScene" uid="uid://cte68dj3jl77y" path="res://Interactables/Items/PickableItem.tscn" id="2_mrba5"]
 
 [node name="Sword" type="Node2D"]
+z_index = 1
 y_sort_enabled = true
+position = Vector2(0, -1)
 script = ExtResource("1_esdyf")
-damage = 15
-item_name = "Sword"
-texture = ExtResource("2_6fnhg")
-item_description = "Close combat weapon"
+data = ExtResource("2_6f0n8")
 
 [node name="PickableItem" parent="." instance=ExtResource("2_mrba5")]
 texture = ExtResource("2_6fnhg")

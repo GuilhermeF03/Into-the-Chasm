@@ -2,10 +2,13 @@
 extends Recipe
 class_name PickableRecipe
 
+@export_group("Nodes")
+@onready var pickable :PickableItem = $PickableItem
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
-	pickable.texture = texture
+	if data != null:
+		pickable.texture = data.texture
 
 	if not $PickableItem.get_picked.is_connected(get_picked):
 		$PickableItem.get_picked.connect(get_picked)
@@ -13,7 +16,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
-		pickable.texture = texture
+		pickable.texture = data.texture
 
 
 func get_picked():

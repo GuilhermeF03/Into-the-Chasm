@@ -156,7 +156,7 @@ func on_player_damage(area : Area2D):
 
 	var tween = create_tween()
 	(
-	tween.tween_property(self, "position", global_position + push_vector, 0.5)
+	tween.tween_property(self, "global_position", global_position + push_vector, 0.5)
 	.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	)
 	await tween.finished

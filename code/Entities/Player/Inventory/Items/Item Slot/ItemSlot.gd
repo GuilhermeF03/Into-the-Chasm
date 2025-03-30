@@ -22,7 +22,7 @@ signal interact(event: InputEvent)
 
 #region Data
 @export_group("Data")
-var item : Item = null : set = set_item
+var item : ItemData = null : set = set_item
 @export var icon_texture : Texture2D : set = set_icon_texture
 @export var container_texture : Texture2D : set = set_container_texture
 @export var dock : UiDock.DOCK = UiDock.DOCK.DYNAMIC
@@ -64,7 +64,7 @@ func _on_gui_input(event: InputEvent) -> void:
 
 
 #region setters
-func set_item(data : Item):
+func set_item(data : ItemData):
 	item = data
 
 	if data == null:

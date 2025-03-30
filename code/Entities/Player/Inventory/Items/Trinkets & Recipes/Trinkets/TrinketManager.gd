@@ -27,7 +27,7 @@ func add_trinket_node(trinket : Trinket):
 	var _trinket_node : TrinketSlot = trinket_node.instantiate()
 	self.add_child(_trinket_node)
 	var item_slot = _trinket_node.item_slot
-	item_slot.item = trinket
+	item_slot.item = trinket.data
 	_trinket_node.strip_down.connect(_on_strip_down)
 	
 	

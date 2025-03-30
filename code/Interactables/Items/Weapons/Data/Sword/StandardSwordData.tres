@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://dhttrgpwb2622"]
+
+[ext_resource type="Script" uid="uid://krr24qxu0rho" path="res://Interactables/Items/Weapons/Data/WeaponData.gd" id="1_d5jx0"]
+[ext_resource type="Texture2D" uid="uid://dfju6gbnxykt8" path="res://Interactables/Items/Weapons/Data/Sword/Art/sword.png" id="2_ujsig"]
+
+[resource]
+script = ExtResource("1_d5jx0")
+damage_dict = Dictionary[String, int]({
+"max": 14,
+"min": 8,
+"step": 4
+})
+crit_damage = 18
+crit_chance = 0.11
+weapon_type = 0
+name = "Standard sword"
+type = 3
+description = ""
+texture = ExtResource("2_ujsig")
+metadata/_custom_type_script = "uid://krr24qxu0rho"

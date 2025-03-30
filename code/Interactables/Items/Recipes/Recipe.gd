@@ -1,29 +1,35 @@
-extends Item
+extends Node
 class_name Recipe
 
-@export_category("Ingredients")
-@export_range(0, 100) var minerals : int
-@export_range(0,100) var organics : int
-@export_range(0,100) var cristals : int
+@export_group("Data")
+@export var data : RecipeData
 
-@export_category("Crafted Item")
-@export var crafted_item : PackedScene
-
-func _init():
-	item_type = ItemType.Recipe
 
 func can_craft() -> bool:
-	var _minerals = InventoryManager.minerals
-	var _organics = InventoryManager.organics
-	var _cristals = InventoryManager.cristals
+	var minerals = InventoryManager.minerals
+	var organics = InventoryManager.organics
+	var cristals = InventoryManager.cristals
 	
-	return _minerals >= minerals && _organics >= organics && _cristals >= cristals
+	return (
+		minerals >= data.minerals && 
+		organics >= data.organics && 
+		cristals >= data.cristals
+	)
 
 
 func craft():
-	InventoryManager.set_resource(InventoryManager.ResourceType.MINERAL, -minerals)
-	InventoryManager.set_resource(InventoryManager.ResourceType.ORGANIC, -organics)
-	InventoryManager.set_resource(InventoryManager.ResourceType.CRISTAL, -cristals)
+	InventoryManager.set_resource(
+		InventoryManager.ResourceType.MINERAL, 
+		-data.minerals
+	)
+	InventoryManager.set_resource(
+		InventoryManager.ResourceType.ORGANIC, 
+		-data.organics
+	)
+	InventoryManager.set_resource(
+		InventoryManager.ResourceType.CRISTAL, 
+		-data.cristals
+	)
 	
-	var item = crafted_item.instantiate()
+	var item = data.crafted_item.instantiate()
 	SceneManager.spawn(item, SceneManager.player.global_position)

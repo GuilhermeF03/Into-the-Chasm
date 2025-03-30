@@ -1,8 +1,5 @@
-extends Item
+extends Node
 class_name Trinket
 
-@export_category("Market")
-@export var market_value : int
-
-func _init():
-	item_type = ItemType.Trinket
+@export_category("Data")
+@export var data : TrinketData

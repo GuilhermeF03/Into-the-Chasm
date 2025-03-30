@@ -48,7 +48,7 @@ func attack():
 
 
 func set_weapon(weapon : Weapon):
-	texture = weapon.texture if weapon != null else null
+	texture = weapon.data.texture if weapon != null else null
 	update_sprite_and_animation()
 
 

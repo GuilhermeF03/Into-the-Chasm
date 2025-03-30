@@ -57,7 +57,7 @@ func add_tool():
 	
 func update_holder(tool : Tool, index : int = -1):
 	var child = self.get_child(index) as ToolSlot
-	child.item_slot.item = tool
+	child.item_slot.item = tool.data
 
 	
 func select_tool(index : int):

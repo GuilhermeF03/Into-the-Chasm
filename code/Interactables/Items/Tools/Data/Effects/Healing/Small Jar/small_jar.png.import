@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://choippwuu8xad"
-path="res://.godot/imported/sword_hovered.png-898433ef5cf4829cf3e03e3498e60e0e.ctex"
+uid="uid://dw8y2vxonkiof"
+path="res://.godot/imported/small_jar.png-2f8b0e5d504810819c43f700174726f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Interactables/Items/Weapons/Sword/Art/sword_hovered.png"
-dest_files=["res://.godot/imported/sword_hovered.png-898433ef5cf4829cf3e03e3498e60e0e.ctex"]
+source_file="res://Interactables/Items/Tools/Data/Effects/Healing/Small Jar/small_jar.png"
+dest_files=["res://.godot/imported/small_jar.png-2f8b0e5d504810819c43f700174726f4.ctex"]
 
 [params]
 
