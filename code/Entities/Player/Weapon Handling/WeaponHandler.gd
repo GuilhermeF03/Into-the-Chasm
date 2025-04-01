@@ -3,8 +3,7 @@ class_name WeaponHandler
 
 #region Nodes
 @export_group("Nodes")
-@onready var sprite = $Sprite2D
-@onready var anim_player : AnimationPlayer = $AnimationPlayer
+@onready var weapon : HandledWeapon
 #endregion
 
 #region Data
@@ -23,6 +22,8 @@ func _ready():
 
 	set_weapon(InventoryManager.weapon) # To avoid having weapon already set before connecting signals
 	InventoryManager.weapon_changed.connect(set_weapon)
+	
+	
 
 
 func _process(_delta):
@@ -38,7 +39,22 @@ func _input(event: InputEvent) -> void:
 	attack()
 #endregion
 
+#region weapon handling
+func set_weapon(weapon : WeaponData):
+	
+	
+	
+	texture = weapon.texture if weapon != null else null
+	update_sprite_and_animation()
+
+#endregion
+
+
+
+
 func attack():
+	weapon.attack()
+	
 	if texture == null: return
 	
 	print($Hitbox.monitorable)
@@ -47,9 +63,6 @@ func attack():
 	anim_player.play(animation_library_name + "/attack")	
 
 
-func set_weapon(weapon : WeaponData):
-	texture = weapon.texture if weapon != null else null
-	update_sprite_and_animation()
 
 
 func update_sprite_and_animation():
