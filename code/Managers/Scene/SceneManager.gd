@@ -1,7 +1,5 @@
 extends Node
 
-@export_category("Nodes")
-@onready var player : Node2D = get_tree().get_first_node_in_group("Player")
 
 @export_category("Data")
 var scene : Node

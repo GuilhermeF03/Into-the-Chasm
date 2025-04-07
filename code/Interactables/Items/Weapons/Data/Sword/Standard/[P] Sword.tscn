@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2at40xfyklc"]
+
+[ext_resource type="Script" uid="uid://vqrocd37gf13" path="res://Interactables/Items/Weapons/PickableWeapon.gd" id="1_gckml"]
+[ext_resource type="Resource" uid="uid://dhttrgpwb2622" path="res://Interactables/Items/Weapons/Data/Sword/Standard/[D] Sword.tres" id="2_0bxi8"]
+[ext_resource type="PackedScene" uid="uid://cte68dj3jl77y" path="res://Interactables/Items/PickableItem.tscn" id="3_x6q16"]
+[ext_resource type="Texture2D" uid="uid://bdwu0d0xst86k" path="res://Interactables/Items/Weapons/Data/Sword/Standard/Art/icon.png" id="4_gckml"]
+
+[node name="Standard Sword" type="Node2D"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -1)
+script = ExtResource("1_gckml")
+data = ExtResource("2_0bxi8")
+
+[node name="PickableItem" parent="." instance=ExtResource("3_x6q16")]
+texture = ExtResource("4_gckml")
+
+[connection signal="get_picked" from="PickableItem" to="." method="_on_get_picked"]

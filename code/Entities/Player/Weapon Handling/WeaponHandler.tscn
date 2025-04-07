@@ -1,50 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ywpg5nkhidqk"]
+[gd_scene load_steps=2 format=3 uid="uid://ywpg5nkhidqk"]
 
 [ext_resource type="Script" uid="uid://dgsc24vwamctl" path="res://Entities/Player/Weapon Handling/WeaponHandler.gd" id="1_uqibm"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ep44c"]
-radius = 4.0
-height = 14.0
 
 [node name="WeaponHandler" type="Node2D"]
 scale = Vector2(5, 5)
 script = ExtResource("1_uqibm")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-hframes = 4
-metadata/_aseprite_wizard_config_ = {
-"i_mode": -1,
-"keep_anim_length": false,
-"layers": [],
-"o_ex_p": "",
-"o_folder": "res://interactables/items/weapons/sword",
-"o_name": "sword_attack",
-"only_visible": false,
-"player": "AnimationPlayer",
-"slice": "",
-"source": "res://interactables/items/weapons/sword/sword.aseprite"
-}
-metadata/_aseprite_wizard_source_file_hash_ = "e3be9e06ad5c10fe8d908403981af8d9"
-metadata/_aseprite_wizard_interface_config_ = {
-"animation_section": false,
-"layer_section": false,
-"output_section": true,
-"pending_changes": {},
-"slice_section": false
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
-
-[node name="Hitbox" type="Area2D" parent="."]
-process_mode = 4
-position = Vector2(13, 2)
-scale = Vector2(1.065, 1.5)
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("CapsuleShape2D_ep44c")
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

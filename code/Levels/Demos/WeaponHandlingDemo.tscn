@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://cisp2x0ixh5pj"]
+
+[ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://Entities/Player/Player.tscn" id="1_lvshm"]
+[ext_resource type="PackedScene" uid="uid://d2at40xfyklc" path="res://Interactables/Items/Weapons/Data/Sword/Standard/[P] Sword.tscn" id="2_8yit7"]
+[ext_resource type="PackedScene" uid="uid://b2u0wimnxxcnc" path="res://Entities/Dummy/Dummy.tscn" id="3_6fqqn"]
+[ext_resource type="PackedScene" uid="uid://t46adtsu5cpo" path="res://Interactables/Items/Weapons/Data/Pickaxe/Standard/[P] Pickaxe.tscn" id="3_gtsal"]
+
+[node name="WeaponHandlingDemo" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_lvshm")]
+
+[node name="Standard Sword" parent="." instance=ExtResource("2_8yit7")]
+position = Vector2(322, 115)
+
+[node name="Standard Pickaxe" parent="." instance=ExtResource("3_gtsal")]
+position = Vector2(298, -151)
+
+[node name="Dummy" parent="." instance=ExtResource("3_6fqqn")]
+position = Vector2(627, 68)

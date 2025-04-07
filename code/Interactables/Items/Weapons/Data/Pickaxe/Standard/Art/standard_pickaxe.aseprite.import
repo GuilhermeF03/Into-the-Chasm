@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bmhc12pi02qe1"
+path="res://.godot/imported/standard_pickaxe.aseprite-74c0d60dc301431d34faa2f65c6ba3d2.res"
+
+[deps]
+
+source_file="res://Interactables/Items/Weapons/Data/Pickaxe/Standard/Art/standard_pickaxe.aseprite"
+dest_files=["res://.godot/imported/standard_pickaxe.aseprite-74c0d60dc301431d34faa2f65c6ba3d2.res"]
+
+[params]
+

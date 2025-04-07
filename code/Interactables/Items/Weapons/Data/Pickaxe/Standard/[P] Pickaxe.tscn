@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://t46adtsu5cpo"]
+
+[ext_resource type="Script" uid="uid://vqrocd37gf13" path="res://Interactables/Items/Weapons/PickableWeapon.gd" id="1_4x432"]
+[ext_resource type="Resource" uid="uid://dm8rltybtbs27" path="res://Interactables/Items/Weapons/Data/Pickaxe/Standard/[D] Pickaxe.tres" id="2_6g3bl"]
+[ext_resource type="PackedScene" uid="uid://cte68dj3jl77y" path="res://Interactables/Items/PickableItem.tscn" id="3_ltn47"]
+[ext_resource type="Texture2D" uid="uid://r5uwc3rx82ya" path="res://Interactables/Items/Weapons/Data/Pickaxe/Standard/Art/icon.png" id="4_6g3bl"]
+
+[node name="Standard Pickaxe" type="Node2D"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -1)
+script = ExtResource("1_4x432")
+data = ExtResource("2_6g3bl")
+
+[node name="PickableItem" parent="." instance=ExtResource("3_ltn47")]
+texture = ExtResource("4_6g3bl")
+
+[connection signal="get_picked" from="PickableItem" to="." method="_on_get_picked"]

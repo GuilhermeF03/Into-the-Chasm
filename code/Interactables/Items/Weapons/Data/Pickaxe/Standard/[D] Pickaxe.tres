@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=4 format=3 uid="uid://dm8rltybtbs27"]
+
+[ext_resource type="PackedScene" uid="uid://dlph307samicy" path="res://Interactables/Items/Weapons/Data/Pickaxe/Standard/[H] Pickaxe.tscn" id="1_gua0v"]
+[ext_resource type="Script" uid="uid://krr24qxu0rho" path="res://Interactables/Items/Weapons/Data/WeaponData.gd" id="2_jcwng"]
+[ext_resource type="Texture2D" uid="uid://r5uwc3rx82ya" path="res://Interactables/Items/Weapons/Data/Pickaxe/Standard/Art/icon.png" id="3_gua0v"]
+
+[resource]
+script = ExtResource("2_jcwng")
+damage_dict = Dictionary[String, int]({
+"max": 14,
+"min": 8,
+"step": 4
+})
+crit_multiplier = 0
+crit_chance = 0.11
+weapon_type = 0
+handled_weapon = ExtResource("1_gua0v")
+name = "Standard Pickaxe"
+type = 3
+description = ""
+texture = ExtResource("3_gua0v")
+metadata/_custom_type_script = "uid://krr24qxu0rho"

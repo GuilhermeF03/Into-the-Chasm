@@ -29,7 +29,7 @@ func _ready():
 	
 func _process(_delta):
 	if not Engine.is_editor_hint(): return
-	item_slot.icon_texture = get_texture()
+	item_slot.icon.texture = get_texture()
 #endregion
 
 

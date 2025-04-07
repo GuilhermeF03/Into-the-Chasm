@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxy1wsxu5cisv"]
+
+[ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://Entities/Player/Player.tscn" id="1_2xywp"]
+[ext_resource type="PackedScene" uid="uid://dje586mcin71p" path="res://Interactables/Items/Resources/PickableResource.tscn" id="2_waivb"]
+[ext_resource type="PackedScene" uid="uid://cpa8ag7qoliw7" path="res://Interactables/Items/Tools/PickableTool.tscn" id="3_5fvn0"]
+[ext_resource type="PackedScene" uid="uid://crl5owfklwshp" path="res://Interactables/Items/Trinkets/PickableTrinket.tscn" id="4_xrbet"]
+[ext_resource type="PackedScene" uid="uid://cwseeacjaeuni" path="res://Entities/Mobs/Slime/Slime.tscn" id="5_2edra"]
+[ext_resource type="PackedScene" uid="uid://wdwtlaklhvrn" path="res://Interactables/Items/Recipes/Data/StandardSwordRecipe.tscn" id="6_7wko3"]
+
+[node name="Demo" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_2xywp")]
+position = Vector2(638, -369)
+
+[node name="PickableResource" parent="." instance=ExtResource("2_waivb")]
+position = Vector2(778, 7)
+ammount = 20
+type = 1
+
+[node name="PickableResource2" parent="." instance=ExtResource("2_waivb")]
+position = Vector2(797, -182)
+ammount = 15
+type = 2
+
+[node name="PickableConsumable" parent="." instance=ExtResource("3_5fvn0")]
+process_mode = 4
+position = Vector2(357, 37)
+
+[node name="PickableConsumable2" parent="." instance=ExtResource("3_5fvn0")]
+process_mode = 4
+position = Vector2(625, 30)
+
+[node name="PickableConsumable3" parent="." instance=ExtResource("3_5fvn0")]
+process_mode = 4
+position = Vector2(649, 193)
+
+[node name="PickableTrinket" parent="." instance=ExtResource("4_xrbet")]
+process_mode = 4
+position = Vector2(1255, 122)
+
+[node name="PickableTrinket2" parent="." instance=ExtResource("4_xrbet")]
+process_mode = 4
+position = Vector2(1034, 439)
+
+[node name="PickableTrinket3" parent="." instance=ExtResource("4_xrbet")]
+process_mode = 4
+position = Vector2(1493, 235)
+
+[node name="Slime" parent="." instance=ExtResource("5_2edra")]
+
+[node name="PickableRecipe" parent="." instance=ExtResource("6_7wko3")]
+position = Vector2(276, -240)
+
+[node name="PickableRecipe2" parent="." instance=ExtResource("6_7wko3")]
+position = Vector2(360, -126)
+
+[node name="PickableRecipe3" parent="." instance=ExtResource("6_7wko3")]
+position = Vector2(432, -203)

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name PlayerController
 
 ## Player Controller
 ## This class controls the player movement and main mechanics
@@ -94,34 +95,24 @@ func handle_weapon():
 	)
 
 func handle_camera():
-	if inventory.handling_input: return
-	
+	if inventory.handling_input:
+		return
+
 	var mouse_pos = get_global_mouse_position()
-	var axis = (mouse_pos - global_position) + Vector2(
-		CAMERA_HORIZONTAL_OFFSET, 
-		CAMERA_VERTICAL_OFFSET
-	) # Add offset to camera
-	
-	var axis_normalized = (axis * CAMERA_AXIS_DRIFT).normalized()
+	var offset = Vector2(CAMERA_HORIZONTAL_OFFSET, CAMERA_VERTICAL_OFFSET)
+	var axis = (mouse_pos - global_position) + offset
+	var axis_drift = axis * CAMERA_AXIS_DRIFT
+	var axis_normalized = axis_drift.normalized()
 	var mouse_drift = axis_normalized * MAX_MOUSE_DRIFT
-	
-	var lower_bound = (
-		axis_normalized if axis_normalized < mouse_drift 
-		else mouse_drift
-	)
-	var upper_bound = (
-		axis_normalized if axis_normalized > mouse_drift 
-		else mouse_drift
-	) 
-	
-	camera.follow_offset = clamp(
-		axis / MOUSE_DRIFT_FACTOR,
-		lower_bound,
-		upper_bound
-	)
-	
-	sprite.flip_h = (axis / MOUSE_DRIFT_FACTOR).x < 0
+
+	var clamped_offset = axis / MOUSE_DRIFT_FACTOR
+	clamped_offset.x = clamp(clamped_offset.x, -abs(mouse_drift.x), abs(mouse_drift.x))
+	clamped_offset.y = clamp(clamped_offset.y, -abs(mouse_drift.y), abs(mouse_drift.y))
+
+	camera.follow_offset = clamped_offset
+	sprite.flip_h = clamped_offset.x < 0
 	back_view = mouse_pos.y < global_position.y
+
 #endregion
 
 
@@ -223,11 +214,21 @@ func knockback(body : Node2D):
 	InputManager.input_level = InputManager.INPUT_LEVEL.ALL
 	
 	await animation_player.animation_finished
-	
-	
-	print(body)
+
 	PlayerManager.data.life -= 1
 	if PlayerManager.data.life == 0:
 		print("Dead")
 		
+		
+func on_attack_registered(area : Area2D):
+	var push_vector = (
+		(global_position - area.global_position).normalized()
+		* 10
+	)
+	var tween = create_tween()
+	(
+	tween.tween_property(self, "position", global_position + push_vector, 0.5)
+	.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	)
+	await tween.finished
 #endregion

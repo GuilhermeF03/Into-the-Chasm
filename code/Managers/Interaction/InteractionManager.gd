@@ -44,7 +44,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _sort_interactables(obj_a : InteractArea, obj_b : InteractArea):
-	var player = SceneManager.player
+	var player = PlayerManager.player
 
 	var dist_a = abs(player.position - obj_a.global_position)
 	var dist_b = abs(player.global_position - obj_b.global_position)

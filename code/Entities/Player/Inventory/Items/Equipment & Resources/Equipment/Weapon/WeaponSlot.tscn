@@ -12,6 +12,9 @@ layout_mode = 2
 texture = ExtResource("2_vbdqn")
 container_texture = ExtResource("2_vbdqn")
 
+[node name="Icon" parent="Item Slot/Container" index="0"]
+stretch_mode = 6
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_enter"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exit"]
 

@@ -22,8 +22,7 @@ signal interact(event: InputEvent)
 
 #region Data
 @export_group("Data")
-var item : ItemData = null : set = set_item
-@export var icon_texture : Texture2D : set = set_icon_texture
+@export var item_data : ItemData = null : set = set_item
 @export var container_texture : Texture2D : set = set_container_texture
 @export var dock : UiDock.DOCK = UiDock.DOCK.DYNAMIC
 #endregion
@@ -33,19 +32,19 @@ func _ready():
 	if icon == null:
 		icon = $"Container/Icon" # default value
 		
-	icon.texture = icon_texture
 	texture = container_texture
 
 	
 func _process(_delta):
 	if not Engine.is_editor_hint(): return
 	
-	icon.texture = icon_texture
+	if item_data != null:
+		icon.texture = item_data.texture
 	texture = container_texture
 
 
 func _on_mouse_entered() -> void:
-	if item == null: return
+	if item_data == null: return
 	UiManager.queue_dock(dock, stats)
 
 
@@ -64,22 +63,16 @@ func _on_gui_input(event: InputEvent) -> void:
 
 #region setters
 func set_item(data : ItemData):
-	item = data
+	item_data = data
 
 	if data == null:
 		icon.texture = null
 		return
 
-	icon.texture = data.texture
+	icon.texture = item_data.texture
 	icon.scale = Vector2.ONE * ITEM_SCALE
 	
-	stats.set_stats(item)
-
-	
-func set_icon_texture(value : Texture2D):
-	if icon == null: return
-	icon_texture = value
-	icon.texture = value
+	stats.set_stats(item_data)
 
 
 func set_container_texture(value : Texture2D):

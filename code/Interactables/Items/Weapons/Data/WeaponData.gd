@@ -20,7 +20,6 @@ enum WEAPON_TYPE{CLOSE_COMBAT, RANGED}
 
 func get_damage() -> DamageInfo :
 	var rng = RandomNumberGenerator.new()
-	rng.seed = seed  # Set a seed for reproducibility (optional)
 
 	# Roll for critical hit
 	var is_crit = rng.randf() < crit_chance

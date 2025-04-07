@@ -13,7 +13,8 @@ const INITIAL_TOOLS : int = 3
 
 #region Nodes
 @export_group("Nodes")
-var tool_node = preload("res://Interactables/Items/Tools/PickableTool.tscn")
+var tool_node = preload("uid://cpa8ag7qoliw7")
+var weapon_node = preload("uid://cdvv3bgj8fab6")
 #endregion
 
 #region Data
@@ -93,6 +94,12 @@ func set_resource(resource : ResourceType, ammount : int, override : bool = fals
 
 
 func set_weapon(new_weapon : WeaponData):
+	# drop old weapon
+	if weapon != null:
+		var _weapon = weapon_node.instantiate()
+		_weapon.set_data(weapon)
+		SceneManager.spawn(_weapon, SceneManager.player.global_position)
+
 	weapon = new_weapon
 	weapon_changed.emit(weapon)
 #endregion

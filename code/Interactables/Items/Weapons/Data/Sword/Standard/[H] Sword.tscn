@@ -1,0 +1,121 @@
+[gd_scene load_steps=8 format=4 uid="uid://c3vj8y2bl8orp"]
+
+[ext_resource type="Script" uid="uid://ds55ikcrjl2rq" path="res://Entities/Player/Weapon Handling/HandledWeapon.gd" id="1_sd21j"]
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_sd21j"]
+_data = PackedByteArray("AAADAAUAAAABAAAAMAAAADAAAAD8AAAAUklGRvQAAABXRUJQVlA4TOcAAAAvL8ALEE+gNAASNksjgtrXM6qJJIVN0sWOxwASIpkGZNhnXhL4ZTD/AYLvlUun5d9VZVghCkEmOK217Wnen46ELEBRcZQFUMkIsb2NEIdERrV125uXMkBE/xW4baPkIMf4C0wgBDLtRHWhdIzbileZrg6nI17iD8waCXdhsWzLbKc2oUiZkxmr5MYi7C1GzNzcCz6NOQTQBd9wQ+T4MZT6CxB78Aq1On6sEmDEEMi0E9LESfgZbLBgMwrDiCCeIbLoGSpGDfEM67ktnmHhQDvDK4R2hmYP8QzwqD31g0NwwjcBxNAOBwAA")
+size_override = Vector2(48, 48)
+
+[sub_resource type="Animation" id="Animation_r0xgc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox:process_mode")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_2odlq"]
+length = 0.06
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox:process_mode")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_hd3u5"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o1pqm"]
+_data = {
+&"RESET": SubResource("Animation_r0xgc"),
+&"attack": SubResource("Animation_2odlq"),
+&"idle": SubResource("Animation_hd3u5")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ylxgb"]
+size = Vector2(7, 24)
+
+[node name="StandardSword" type="Node2D"]
+script = ExtResource("1_sd21j")
+metadata/_custom_type_script = "uid://ds55ikcrjl2rq"
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("PortableCompressedTexture2D_sd21j")
+hframes = 2
+vframes = 2
+frame = 1
+metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": true,
+"layer_section": true,
+"output_section": true,
+"pending_changes": {},
+"slice_section": false
+}
+metadata/_aseprite_wizard_config_ = {
+"embed_tex": true,
+"i_mode": -1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "Player",
+"slice": "",
+"source": "res://Interactables/Items/Weapons/Data/Sword/Standard/Art/standard_sword.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "3768c21c8d0da88d9bf6d021465072c6"
+
+[node name="Player" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_o1pqm")
+}
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(9.5, 0)
+shape = SubResource("RectangleShape2D_ylxgb")
