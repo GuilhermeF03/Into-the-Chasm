@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://d0mst4eki2yyd"]
+[gd_scene load_steps=26 format=3 uid="uid://d0mst4eki2yyd"]
 
 [ext_resource type="Script" uid="uid://b1wm3dahmoc0q" path="res://Entities/Player/PlayerController.gd" id="1_3iq6n"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_fvu4l"]
+[ext_resource type="Script" uid="uid://d2uhr5myy182" path="res://Entities/Player/CameraController.gd" id="2_hacra"]
 [ext_resource type="PackedScene" uid="uid://dd1bjjaxa7dur" path="res://Entities/Player/Inventory/Inventory.tscn" id="2_urbfw"]
 [ext_resource type="Texture2D" uid="uid://ct15olca7m1sy" path="res://Entities/Player/Art/player.png" id="3_5x0oj"]
 [ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Entities/damage.gdshader" id="3_761t5"]
@@ -276,7 +277,7 @@ motion_mode = 1
 script = ExtResource("1_3iq6n")
 DODGE_COOLDOWN = 0.7
 
-[node name="Camera" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("camera")]
 physics_interpolation_mode = 1
 zoom = Vector2(1.5, 1.5)
 process_callback = 0
@@ -287,6 +288,8 @@ drag_right_margin = 0.3
 drag_bottom_margin = 0.3
 editor_draw_limits = true
 editor_draw_drag_margin = true
+script = ExtResource("2_hacra")
+camera = NodePath("../PhantomCamera2D")
 
 [node name="PhantomCameraHost" type="Node" parent="Camera"]
 process_priority = 300

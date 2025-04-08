@@ -1,5 +1,5 @@
 extends Node
-class_name  Chest
+class_name Chest
 
 @export_group("Data")
 var room_id : StringName 

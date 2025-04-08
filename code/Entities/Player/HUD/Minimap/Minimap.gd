@@ -12,5 +12,5 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	camera.global_position = SceneManager.player.global_position
+	camera.global_position = PlayerManager.player.global_position
 #endregion

@@ -3,8 +3,6 @@ class_name PlayerController
 
 ## Player Controller
 ## This class controls the player movement and main mechanics
-
-
 #region Constants
 @export_group("Constants")
 
@@ -18,17 +16,12 @@ class_name PlayerController
 @export_subgroup("Mouse")
 @export_range(10, 500) var MAX_MOUSE_DRIFT = 250
 @export_range(1, 10) var MOUSE_DRIFT_FACTOR : float = 3.25
-
-@export_subgroup("Camera")
-@export var CAMERA_VERTICAL_OFFSET = 200
-@export var CAMERA_HORIZONTAL_OFFSET = 0
-@export_range(1, 20, 5) var CAMERA_AXIS_DRIFT = 10
 #endregion
 
 #region Nodes
 @export_group("Nodes")
 @onready var sprite = $Sprite
-@onready var camera = $PhantomCamera2D
+@onready var camera : CameraController = $Camera
 @onready var dodge_timer = $Timers/DodgeTimer
 @onready var inventory : Inventory = $UI/Inventory
 @onready var animation_player = $AnimationPlayer
@@ -49,21 +42,19 @@ var back_view = false
 #region builtins
 func _ready():
 	dodge_timer.wait_time = DODGE_COOLDOWN
-	SceneManager.add_pause_trigger(inventory.on_handling_changed)
+	LevelManager.add_pause_trigger(inventory.on_handling_changed)
 
 
 func _physics_process(_delta):
-	if (
-		inventory.handling_input ||
-		InputManager.input_level == InputManager.INPUT_LEVEL.NONE
-	): return
+	if inventory.handling_input or InputManager.is_no_input_allowed(): 
+		return
 	
 	var movement = Input.get_vector(
 		"move_left", "move_right", 
 		"move_up", "move_down"
 	)
 	
-	if InputManager.input_level == InputManager.INPUT_LEVEL.ALL:
+	if InputManager.is_all_input_allowed():
 		handle_animation(movement)
 		handle_movement(movement)
 		handle_weapon()
@@ -97,21 +88,18 @@ func handle_weapon():
 func handle_camera():
 	if inventory.handling_input:
 		return
-
+	# Update the camera position based on the player's position and mouse position
 	var mouse_pos = get_global_mouse_position()
-	var offset = Vector2(CAMERA_HORIZONTAL_OFFSET, CAMERA_VERTICAL_OFFSET)
-	var axis = (mouse_pos - global_position) + offset
-	var axis_drift = axis * CAMERA_AXIS_DRIFT
-	var axis_normalized = axis_drift.normalized()
-	var mouse_drift = axis_normalized * MAX_MOUSE_DRIFT
-
-	var clamped_offset = axis / MOUSE_DRIFT_FACTOR
-	clamped_offset.x = clamp(clamped_offset.x, -abs(mouse_drift.x), abs(mouse_drift.x))
-	clamped_offset.y = clamp(clamped_offset.y, -abs(mouse_drift.y), abs(mouse_drift.y))
-
-	camera.follow_offset = clamped_offset
-	sprite.flip_h = clamped_offset.x < 0
-	back_view = mouse_pos.y < global_position.y
+	var vertical_diff = camera.update_camera(
+		global_position,
+		mouse_pos,
+		MOUSE_DRIFT_FACTOR,
+		MAX_MOUSE_DRIFT,
+		inventory.handling_input
+	)
+	# Update the sprite flip based on the mouse position, and whether the player is facing up or down
+	sprite.flip_h = mouse_pos.x < global_position.x
+	back_view = vertical_diff < 0
 
 #endregion
 
@@ -163,7 +151,7 @@ func handle_tool_selection(event: InputEvent) -> void:
 
 
 #region Animation
-func handle_animation(input):
+func handle_animation(input : Vector2):
 	if dodging or inventory.handling_input: return
 	
 	var animation_side = "up" if back_view else "down"

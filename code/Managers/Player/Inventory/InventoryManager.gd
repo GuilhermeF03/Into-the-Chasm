@@ -98,7 +98,7 @@ func set_weapon(new_weapon : WeaponData):
 	if weapon != null:
 		var _weapon = weapon_node.instantiate()
 		_weapon.set_data(weapon)
-		SceneManager.spawn(_weapon, SceneManager.player.global_position)
+		LevelManager.spawn(_weapon, PlayerManager.player.global_position, true)
 
 	weapon = new_weapon
 	weapon_changed.emit(weapon)
@@ -137,7 +137,7 @@ func remove_tool(index : int = -1):
 	if tool != null:
 		var _tool_node : PickableTool = tool_node.instantiate()
 		_tool_node.set_data(tool)
-		SceneManager.spawn(_tool_node, SceneManager.player.global_position)
+		LevelManager.spawn(_tool_node, PlayerManager.player.global_position, true)
 	
 	
 	# Dropped current selected tool -> defer to next available tool

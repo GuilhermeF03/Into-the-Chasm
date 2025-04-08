@@ -39,6 +39,7 @@ class_name Enemy
 enum EnemyState {PATROL, CHASE, IDLE}
 var state = EnemyState.PATROL: set = set_state
 var prev_state : EnemyState = EnemyState.PATROL
+var is_hit : bool = false
 
 @export_subgroup("Movement")
 var moving_to_patrol_spot = false
@@ -54,9 +55,15 @@ func _ready() -> void:
 
 	hurtbox.area_entered.connect(on_player_damage)
 
+
 func _physics_process(_delta: float) -> void:
-	if state == EnemyState.IDLE: return
-	player_pos = SceneManager.player.global_position if SceneManager.player else Vector2.ZERO
+	if is_hit:
+		print(global_position)
+	if is_hit: return
+	player_pos = (
+		PlayerManager.player.global_position if PlayerManager.player 
+		else Vector2.ZERO
+	)
 	sight_raycast.look_at(player_pos)
 
 	if sight_raycast.is_colliding():
@@ -153,12 +160,16 @@ func on_player_damage(area : Area2D):
 	player.stop()
 	sprite.frame = 0
 	player.play("hit")
+	is_hit = true
 
 	var tween = create_tween()
 	(
-	tween.tween_property(self, "global_position", global_position + push_vector, 0.5)
+	tween.tween_property(
+		self, "global_position", global_position + push_vector, 0.5
+	)
 	.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	)
 	await tween.finished
+	
 	state = prev_state
-	await player.animation_finished
+	is_hit = false

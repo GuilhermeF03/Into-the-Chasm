@@ -1,12 +1,16 @@
 extends Node2D
 class_name Level
 
-@export_category("Data")
+#region Data
+@export_group("Data")
 @export var data : LevelData
+#endregion
 
+#region Nodes
 @export_category("Nodes")
 var room_root_path = "res://Levels/Procedural/Biomes/"
-var room_nodes : Dictionary = {}
+var room_nodes : Dictionary[StringName, Room] = {}
+#endregion
 
 func _ready(): 
 	# 1 - generate layout or use given data if provided
@@ -28,13 +32,13 @@ func _ready():
 	generate_rooms()
 	
 	var head_room : Room = get_node("./" + data.layout.curr_room_id)
-	SceneManager.player.global_position = (
+	PlayerManager.player.global_position = (
 		head_room.global_position + (
 			Vector2.ONE * LevelConfigConstants.GRID_TILE_SIZE / 2
 		)
 	)
 	
-	LevelManager.curr_level = self
+	LevelManager.level = self
 
 
 func generate_rooms():

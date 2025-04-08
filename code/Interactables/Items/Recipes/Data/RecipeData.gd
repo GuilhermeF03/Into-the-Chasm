@@ -41,5 +41,8 @@ func craft():
 	)
 	
 	var item = crafted_item.instantiate()
-	SceneManager.spawn(item, SceneManager.player.global_position)
+	LevelManager.spawn(
+		item, 
+		PlayerManager.player.global_position
+	)
 #endregion

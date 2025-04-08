@@ -25,6 +25,10 @@ signal on_handling_changed(value : bool)
 
 
 #region builtins
+func _ready():
+	handling_input = false
+
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("inventory"): 
 		toggle()

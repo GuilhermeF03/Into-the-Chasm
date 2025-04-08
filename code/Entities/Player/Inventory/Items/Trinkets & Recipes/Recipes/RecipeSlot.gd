@@ -20,14 +20,14 @@ func _ready():
 	if dock != null:
 		item_slot.dock = dock
 	
-	if item_slot.item != null:
-		recipe = item_slot.item as RecipeData
+	if item_slot.item_data != null:
+		recipe = item_slot.item_data as RecipeData
 
 
 func _process(_delta: float) -> void:
 	if is_crafting: return
 	
-	var item = item_slot.item
+	var item = item_slot.item_data
 	if item == null: return
 	
 	var icon = item_slot.icon

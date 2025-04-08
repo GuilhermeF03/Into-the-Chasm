@@ -10,5 +10,5 @@ class_name InventoryMap
 
 #region builtins
 func _ready():
-	header.text = "[center]" + SceneManager.scene.name
+	header.text = "[center]" + LevelManager.scene.name
 #endregion

@@ -31,9 +31,9 @@ func add_recipe_node(recipe : RecipeData):
 	
 	add_child(_recipe_node)
 	var item_slot = _recipe_node.item_slot
-	item_slot.item = recipe
+	item_slot.item_data = recipe
 
 
 func update_holder(recipe : RecipeData, index : int):
-	get_child(index).item = recipe
+	(get_child(index) as ItemSlot).item_data = recipe
 #endregion

@@ -2,5 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bixtufwpd27pd" path="res://Managers/Level/LevelManager.gd" id="1_0jf31"]
 
+
 [node name="LevelManager" type="Node"]
 script = ExtResource("1_0jf31")
