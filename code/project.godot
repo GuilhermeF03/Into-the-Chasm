@@ -12,6 +12,8 @@ config_version=5
 
 config/name="Into the Chasm"
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/use_filter=false
+boot_splash/image="uid://cpra3180kwt1r"
 config/icon="res://title.png"
 
 [autoload]

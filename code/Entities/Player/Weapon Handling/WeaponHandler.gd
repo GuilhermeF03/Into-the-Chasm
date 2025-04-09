@@ -1,8 +1,9 @@
 extends Node2D
-class_name WeaponHandler
+class_name WeaponController
 
 #region Nodes
 @export_group("Nodes")
+@onready var handler : Node2D = $WeaponHandler
 @onready var handled_weapon : HandledWeapon
 #endregion
 
@@ -30,7 +31,6 @@ func _ready():
 func _process(_delta):
 	if not Engine.is_editor_hint(): return
 
-
 func _input(event: InputEvent) -> void:
 	if Engine.is_editor_hint(): return
 	if not can_attack: return
@@ -40,6 +40,13 @@ func _input(event: InputEvent) -> void:
 #endregion
 
 #region weapon handling
+func handle_weapon():
+	look_at(get_global_mouse_position())
+	handler.scale.y = (
+		-5 if get_local_mouse_position().x < 0 else 5
+	)
+
+
 func set_weapon(weapon : WeaponData):
 	# Replace weapon
 	if weapon:
@@ -47,10 +54,10 @@ func set_weapon(weapon : WeaponData):
 		new_weapon_scene.weapon_data = weapon
 		
 		if handled_weapon != null:
-			remove_child(handled_weapon)
+			handler.remove_child(handled_weapon)
 		
 		handled_weapon = new_weapon_scene
-		add_child(handled_weapon)
+		handler.add_child(handled_weapon)
 		handled_weapon.z_index = 1
 			
 		# Connect signals

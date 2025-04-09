@@ -75,6 +75,14 @@ func _enter_tree() -> void:
 
 
 #region Setters
+func set_resource_and_queue(item : PickableResource, override : bool = false):
+	var resource = item.type
+	var ammount = item.ammount
+	
+	set_resource(resource, ammount)
+	item.queue_free()
+
+
 func set_resource(resource : ResourceType, ammount : int, override : bool = false):
 	var resource_holder = (
 		minerals if resource == ResourceType.MINERAL
@@ -90,8 +98,8 @@ func set_resource(resource : ResourceType, ammount : int, override : bool = fals
 		ResourceType.ORGANIC: organics = new_amount
 		ResourceType.CRISTAL: cristals = new_amount
 	
+	
 	resource_changed.emit(resource, new_amount)
-
 
 func set_weapon(new_weapon : WeaponData):
 	# drop old weapon

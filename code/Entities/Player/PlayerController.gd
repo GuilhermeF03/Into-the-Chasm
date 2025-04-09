@@ -5,29 +5,24 @@ class_name PlayerController
 ## This class controls the player movement and main mechanics
 #region Constants
 @export_group("Constants")
-
-@export_subgroup("Speeds")
-@export_range(100, 1000, 50) var MOV_SPEED = 500
-@export_range(200, 1000, 100) var DODGE_SPEED = 800
-
 @export_subgroup("Timers")
 @export_range(0.5, 5) var DODGE_COOLDOWN : float = 0.5
 
-@export_subgroup("Mouse")
-@export_range(10, 500) var MAX_MOUSE_DRIFT = 250
-@export_range(1, 10) var MOUSE_DRIFT_FACTOR : float = 3.25
+
 #endregion
 
 #region Nodes
 @export_group("Nodes")
 @onready var sprite = $Sprite
-@onready var camera : CameraController = $Camera
 @onready var dodge_timer = $Timers/DodgeTimer
 @onready var inventory : Inventory = $UI/Inventory
-@onready var animation_player = $AnimationPlayer
-@onready var weapon = $Weapon
-@onready var weapon_handler : WeaponHandler = $Weapon/WeaponHandler
 @onready var hurtbox : Area2D = $Hurtbox
+
+@export_subgroup("Controllers")
+@onready var animation_controller : AnimationController = $Controllers/Animation
+@onready var camera_controller : CameraController = $Controllers/Camera
+@onready var movement_controller : MovementController = $Controllers/Movement
+@onready var weapon_controller : WeaponController = $Controllers/Weapon
 #endregion
 
 #region Data
@@ -49,17 +44,17 @@ func _physics_process(_delta):
 	if inventory.handling_input or InputManager.is_no_input_allowed(): 
 		return
 	
-	var movement = Input.get_vector(
+	var input = Input.get_vector(
 		"move_left", "move_right", 
 		"move_up", "move_down"
 	)
 	
 	if InputManager.is_all_input_allowed():
-		handle_animation(movement)
-		handle_movement(movement)
-		handle_weapon()
-		handle_camera()
-
+		weapon_controller.handle_weapon()
+		animation_controller.handle_animation(input)
+		movement_controller.handle_movement(input)
+		camera_controller.handle_camera()
+		
 
 func _input(event : InputEvent):
 	if (
@@ -70,40 +65,6 @@ func _input(event : InputEvent):
 	handle_tool_selection(event)
 #endregion
 
-
-#region Handlers
-func handle_movement(input):
-	velocity = (
-		input.normalized() * (DODGE_SPEED if dodging else MOV_SPEED)
-	)
-	move_and_slide()
-
-
-func handle_weapon():
-	weapon.look_at(get_global_mouse_position())
-	weapon_handler.scale.y = (
-		-5 if get_local_mouse_position().x < 0 else 5
-	)
-
-func handle_camera():
-	if inventory.handling_input:
-		return
-	# Update the camera position based on the player's position and mouse position
-	var mouse_pos = get_global_mouse_position()
-	var vertical_diff = camera.update_camera(
-		global_position,
-		mouse_pos,
-		MOUSE_DRIFT_FACTOR,
-		MAX_MOUSE_DRIFT,
-		inventory.handling_input
-	)
-	# Update the sprite flip based on the mouse position, and whether the player is facing up or down
-	sprite.flip_h = mouse_pos.x < global_position.x
-	back_view = vertical_diff < 0
-
-#endregion
-
-
 #region Input Handlers
 func handle_dodge_input(event : InputEvent):
 	if (
@@ -112,13 +73,11 @@ func handle_dodge_input(event : InputEvent):
 		or not velocity != Vector2.ZERO
 	): return 
 	
-	animation_player.play(
-		"roll_" + ("up" if back_view else "down")
-	);
+	animation_controller.play_roll_animation(back_view)
 	dodging = true
 	dodge_timer.start()
 
-	await animation_player.animation_finished
+	await animation_controller.animation_finished
 	dodging = false
 
 
@@ -150,21 +109,9 @@ func handle_tool_selection(event: InputEvent) -> void:
 #endregion
 
 
-#region Animation
-func handle_animation(input : Vector2):
-	if dodging or inventory.handling_input: return
-	
-	var animation_side = "up" if back_view else "down"
-	var animation = "idle_" if input == Vector2.ZERO else "walk_"
-	
-	animation_player.play(animation + animation_side)
-#endregion
-
-
 func _on_item_collect(area : Area2D):
 	var item : PickableResource = area.get_parent() 
-	InventoryManager.set_resource(item.type, item.ammount)
-	item.queue_free()
+	InventoryManager.set_resource_and_queue(item)
 
 
 #region HurtBox
@@ -179,15 +126,13 @@ func _on_hurtbox_body_entered(body : PhysicsBody2D):
 func knockback(body : Node2D):
 	InputManager.input_level = InputManager.INPUT_LEVEL.NONE
 	
-	var curr_animation : String = animation_player.current_animation
+	var curr_animation : String = animation_controller.current_animation
 	var dir = (
 		"down" if curr_animation.contains("down") 
 		else "up"
 	)
-	animation_player.play("idle_" + dir)
-	await animation_player.animation_finished
-	animation_player.play("hit")
-	
+	animation_controller.play_animation("idle_" + dir)
+	animation_controller.play("hit")
 	var push_vector = (
 		(global_position - body.global_position).normalized()
 		* 200
@@ -201,7 +146,7 @@ func knockback(body : Node2D):
 	await tween.finished
 	InputManager.input_level = InputManager.INPUT_LEVEL.ALL
 	
-	await animation_player.animation_finished
+	animation_controller.wait()
 
 	PlayerManager.data.life -= 1
 	if PlayerManager.data.life == 0:
