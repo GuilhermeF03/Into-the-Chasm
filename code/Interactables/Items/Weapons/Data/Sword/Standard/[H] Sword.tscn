@@ -1,10 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://c3vj8y2bl8orp"]
+[gd_scene load_steps=9 format=4 uid="uid://c3vj8y2bl8orp"]
 
-[ext_resource type="Script" uid="uid://ds55ikcrjl2rq" path="res://Entities/Player/Weapon Handling/HandledWeapon.gd" id="1_sd21j"]
+[ext_resource type="Script" uid="uid://ds55ikcrjl2rq" path="res://Entities/Player/Controllers/Weapon/HandledWeapon.gd" id="1_sd21j"]
 
-[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_sd21j"]
-_data = PackedByteArray("AAADAAUAAAABAAAAMAAAADAAAAD8AAAAUklGRvQAAABXRUJQVlA4TOcAAAAvL8ALEE+gNAASNksjgtrXM6qJJIVN0sWOxwASIpkGZNhnXhL4ZTD/AYLvlUun5d9VZVghCkEmOK217Wnen46ELEBRcZQFUMkIsb2NEIdERrV125uXMkBE/xW4baPkIMf4C0wgBDLtRHWhdIzbileZrg6nI17iD8waCXdhsWzLbKc2oUiZkxmr5MYi7C1GzNzcCz6NOQTQBd9wQ+T4MZT6CxB78Aq1On6sEmDEEMi0E9LESfgZbLBgMwrDiCCeIbLoGSpGDfEM67ktnmHhQDvDK4R2hmYP8QzwqD31g0NwwjcBxNAOBwAA")
-size_override = Vector2(48, 48)
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_irj05"]
+_data = PackedByteArray("AAADAAUAAAABAAAAYAAAAGAAAAAoAgAAUklGRiACAABXRUJQVlA4TBQCAAAvX8AXEF+gJgDQhF707+AwPfVcE8VtIynbf5N0jD8mqW0jSbn+m7yI75k/m/8AANPQv75VslWyXYtEhH/QYEiLlovXLkiStr1tm5+qBOhuH4CDG/gGvW5zgXoAZmUOV9rlH6842fVeWE5g63aigA//n7qM6D8Et20kSUzXevpOLao/Qf9tNcJ9iOW4j79QYMeQk9p5hCcujcMZ5oT5jGQ+xaQQGeATztoiS0J1g9L0BlhaOI2e0DzvCXgNs80scGGBo88GeUBtPD6ogeczEtZFQkRu5NtN8MBJYY8vSOosQet2IrYbuQxz0bYKNwpJpJ9VXOZyowj/M8WrUt4WzI32waYi9Z9W/4ZUXZcp7za3Vjtuf6bKyjvW3mWhlzFrRbbtxGhkuy/KCNXPgE8mIgvoE5chdYYzJai4C+4s4Rzw+dquMDf+eEOoKpSmN6sd5tLzGo66h/O8Hy7pfEefDdJmFnB2beH6h5/PCHlAbeSuHv74dhOSlhvR2s76eHwRMXB669DLiUICiUZ6tL47N0I0shg0nZZiTvMhq59a+1SsHystqRZzo5X+uzilP6jYWzK6/5hG+2BTkfpPq39Dqq7LlHebufquPlK/mf5r6q0Ny+1bK5O/aU24DfeqNbLhvmThLtzQh4RzbgS7EB51DnVNJDVCfZC4wrP+vb+MBXP6e2s6ZYvqp3JyaZUHN6nu04Z7fssi")
+size_override = Vector2(96, 96)
 
 [sub_resource type="Animation" id="Animation_r0xgc"]
 length = 0.001
@@ -65,11 +65,40 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_4qv6b"]
+length = 0.2
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox:process_mode")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 0, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o1pqm"]
 _data = {
 &"RESET": SubResource("Animation_r0xgc"),
 &"attack": SubResource("Animation_2odlq"),
-&"idle": SubResource("Animation_hd3u5")
+&"idle": SubResource("Animation_hd3u5"),
+&"special": SubResource("Animation_4qv6b")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ylxgb"]
@@ -81,10 +110,10 @@ metadata/_custom_type_script = "uid://ds55ikcrjl2rq"
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = SubResource("PortableCompressedTexture2D_sd21j")
-hframes = 2
-vframes = 2
-frame = 1
+texture = SubResource("PortableCompressedTexture2D_irj05")
+hframes = 3
+vframes = 3
+frame = 4
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": true,
 "layer_section": true,
@@ -105,7 +134,7 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://Interactables/Items/Weapons/Data/Sword/Standard/Art/standard_sword.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "3768c21c8d0da88d9bf6d021465072c6"
+metadata/_aseprite_wizard_source_file_hash_ = "5d81181841fc51f9bebcfaabb130b52c"
 
 [node name="Player" type="AnimationPlayer" parent="."]
 libraries = {
@@ -113,9 +142,9 @@ libraries = {
 }
 
 [node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(6, 0)
 collision_layer = 4
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(9.5, 0)
 shape = SubResource("RectangleShape2D_ylxgb")

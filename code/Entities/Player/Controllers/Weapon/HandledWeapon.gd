@@ -9,6 +9,7 @@ class_name HandledWeapon
 @export_group("Data")
 @export var weapon_data : WeaponData
 var temp_damage : WeaponData.DamageInfo
+var last_attack_was_special : bool
 
 var hitbox_layers = [4, 32]
 
@@ -32,15 +33,16 @@ func _ready():
 	hitbox.area_entered.connect(_on_area_entered)
 
 func attack():
+	last_attack_was_special = false
 	can_attack.emit(false)
 	temp_damage = weapon_data.get_damage()
-	
 	anim_player.play("attack")
 	
 
 func special_attack():
+	last_attack_was_special = true
 	can_attack.emit(false)
-	anim_player.play("special_attack")
+	anim_player.play("special")
 
 
 func _on_attack_finished(anim_name : String):

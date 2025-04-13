@@ -9,6 +9,9 @@ const RESOURCE_CAP : int = 80
 @export_subgroup("Tools")
 const MAX_TOOLS : int = 4
 const INITIAL_TOOLS : int = 3
+
+@export_subgroup("Weapons")
+const REGISTERED_ATTACK_PROGRESS_AMOUNT = 20
 #endregion
 
 #region Nodes
@@ -29,6 +32,7 @@ enum ResourceType{MINERAL, ORGANIC, CRISTAL}
 
 @export_subgroup("Weapon")
 var weapon : WeaponData
+var weapon_ability_progress : float = 0
 
 @export_subgroup("Tools")
 var curr_tool_idx = -1
@@ -51,6 +55,7 @@ signal resource_changed(resource : ResourceType, ammount : int)
 
 @export_subgroup("Weapon")
 signal weapon_changed(weapon : WeaponData)
+signal weapon_ability_progress_changed(value : float)
 
 @export_subgroup("Tools")
 signal tool_removed(index : int)
@@ -101,6 +106,7 @@ func set_resource(resource : ResourceType, ammount : int, override : bool = fals
 	
 	resource_changed.emit(resource, new_amount)
 
+
 func set_weapon(new_weapon : WeaponData):
 	# drop old weapon
 	if weapon != null:
@@ -110,6 +116,19 @@ func set_weapon(new_weapon : WeaponData):
 
 	weapon = new_weapon
 	weapon_changed.emit(weapon)
+	
+	
+func register_attack():
+	weapon_ability_progress = clamp(
+		weapon_ability_progress + REGISTERED_ATTACK_PROGRESS_AMOUNT,
+		0, 100
+	)
+	weapon_ability_progress_changed.emit(weapon_ability_progress)
+
+
+func register_special():
+	weapon_ability_progress = 0
+	weapon_ability_progress_changed.emit(weapon_ability_progress)
 #endregion
 
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=4 uid="uid://dlph307samicy"]
 
-[ext_resource type="Script" uid="uid://ds55ikcrjl2rq" path="res://Entities/Player/Weapon Handling/HandledWeapon.gd" id="1_haxx0"]
+[ext_resource type="Script" uid="uid://ds55ikcrjl2rq" path="res://Entities/Player/Controllers/Weapon/HandledWeapon.gd" id="1_haxx0"]
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_awgmg"]
 _data = PackedByteArray("AAADAAUAAAABAAAAQAAAAEAAAABaAQAAUklGRlIBAABXRUJQVlA4TEYBAAAvP8APED+gqJEU5v5UC9UJ/l2gAiOKGklhTgTP3qQhFSn4UNRGEnL0IhGo4/wLOR/zHwC4/7vHORCpPzGzIhLgSJLsKur5AtzXxgf3Iw4gD6DBfWhXY6+6v7Mww6x0I/o/Afiz0y2IF+gnbvQKFNVtt/U5kKzaqMFuy6MPhnXDECBF1ftYPooA2omlnERFkWPYg6WXHTSVYTsFgqozRtTkgxYsrQzIH8TXQROWcgztgQuYkBmWuc1Y57JyB8+O29oRAJ8HHCpAoDh8DoQzxSm4UeBLwX+bbkG8QLcvGPzkwSGa8jvK2y4aCrHUWSxV26Ji4agQzaG2hzFykUHF6XCKqWo5hfqFi+ak2UwU2GVjFTgryx7Uy7KXqYoljIclSl3c5QYIyqYKoWI5AK2x6na0fG6q7tNQPuELBnEKhLd8Mwp8KfipAQ==")
@@ -84,7 +84,7 @@ texture_filter = 1
 texture = SubResource("PortableCompressedTexture2D_awgmg")
 hframes = 2
 vframes = 2
-frame = 3
+frame = 1
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": true,
 "layer_section": true,
@@ -113,9 +113,9 @@ libraries = {
 }
 
 [node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(6, 0)
 collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(9.5, 0)
 shape = SubResource("RectangleShape2D_ylxgb")

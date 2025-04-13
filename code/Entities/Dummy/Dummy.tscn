@@ -27,7 +27,7 @@ _data = {
 size = Vector2(13, 14.4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxowk"]
-size = Vector2(11, 19)
+size = Vector2(13, 14.4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo3c1"]
 size = Vector2(13, 14.4)
@@ -70,7 +70,6 @@ libraries = {
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 3)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_xbvns")
 
 [node name="Hitbox" type="Area2D" parent="."]
@@ -78,7 +77,8 @@ collision_layer = 16
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0.5, -1.5)
+position = Vector2(0.5, 3)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_sxowk")
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -87,7 +87,6 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0.5, 3)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_fo3c1")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://t46adtsu5cpo" path="res://Interactables/Items/Weapons/Data/Pickaxe/Standard/[P] Pickaxe.tscn" id="3_gtsal"]
 
 [node name="WeaponHandlingDemo" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_lvshm")]
+ATTACK_KNOCKBACK = 5
 
 [node name="Standard Sword" parent="." instance=ExtResource("2_8yit7")]
 position = Vector2(322, 115)

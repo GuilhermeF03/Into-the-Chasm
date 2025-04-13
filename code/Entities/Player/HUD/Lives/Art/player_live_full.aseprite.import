@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://beom2ku3flihx"
+path="res://.godot/imported/player_live_full.aseprite-4cdc4a470314c4ef2ba0a2010add3344.res"
+
+[deps]
+
+source_file="res://Entities/Player/HUD/Lives/Art/player_live_full.aseprite"
+dest_files=["res://.godot/imported/player_live_full.aseprite-4cdc4a470314c4ef2ba0a2010add3344.res"]
+
+[params]
+

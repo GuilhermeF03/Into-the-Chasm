@@ -5,10 +5,13 @@ class_name PlayerController
 ## This class controls the player movement and main mechanics
 #region Constants
 @export_group("Constants")
+
+@export_group("Knockback")
+@export var HURT_KNOCKBACK = 200
+@export var ATTACK_KNOCKBACK = 10
+
 @export_subgroup("Timers")
 @export_range(0.5, 5) var DODGE_COOLDOWN : float = 0.5
-
-
 #endregion
 
 #region Nodes
@@ -33,11 +36,12 @@ var dodging = false
 var back_view = false
 #endregion
 
-
 #region builtins
 func _ready():
 	dodge_timer.wait_time = DODGE_COOLDOWN
 	LevelManager.add_pause_trigger(inventory.on_handling_changed)
+	hurtbox.area_entered.connect(_on_enemy_attack)
+	hurtbox.body_entered.connect(_on_enemy_attack)
 
 
 func _physics_process(_delta):
@@ -58,7 +62,7 @@ func _physics_process(_delta):
 
 func _input(event : InputEvent):
 	if (
-		inventory.handling_input ||
+		inventory.handling_input or
 		InputManager.input_level == InputManager.INPUT_LEVEL.NONE
 	): return
 	handle_dodge_input(event)
@@ -114,16 +118,10 @@ func _on_item_collect(area : Area2D):
 	InventoryManager.set_resource_and_queue(item)
 
 
-#region HurtBox
-func _on_player_hit(area):
-	knockback(area)
-
-
-func _on_hurtbox_body_entered(body : PhysicsBody2D):
-	knockback(body)
-
-
-func knockback(body : Node2D):
+#region Combat
+func _on_enemy_attack(enemy : Node2D):
+	print("Hurt")
+	PlayerManager.damage_player(1)
 	InputManager.input_level = InputManager.INPUT_LEVEL.NONE
 	
 	var curr_animation : String = animation_controller.current_animation
@@ -133,35 +131,31 @@ func knockback(body : Node2D):
 	)
 	animation_controller.play_animation("idle_" + dir)
 	animation_controller.play("hit")
-	var push_vector = (
-		(global_position - body.global_position).normalized()
-		* 200
-	)
-
-	var tween = create_tween()
-	(
-	tween.tween_property(self, "position", global_position + push_vector, 0.5)
-	.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	)
-	await tween.finished
+	
+	knockback(enemy, HURT_KNOCKBACK)
+	await  animation_controller.animation_finished
+	
 	InputManager.input_level = InputManager.INPUT_LEVEL.ALL
 	
 	animation_controller.wait()
 
-	PlayerManager.data.life -= 1
-	if PlayerManager.data.life == 0:
-		print("Dead")
-		
-		
-func on_attack_registered(area : Area2D):
+
+func on_attack_registered(enemy : Area2D):
+	knockback(enemy, ATTACK_KNOCKBACK)
+	
+	if not weapon_controller.handled_weapon.last_attack_was_special:
+		InventoryManager.register_attack()
+
+
+func knockback(body : Node2D, intensity : int):
 	var push_vector = (
-		(global_position - area.global_position).normalized()
-		* 10
+		(global_position - body.global_position).normalized()
+		* intensity
 	)
+
 	var tween = create_tween()
 	(
 	tween.tween_property(self, "position", global_position + push_vector, 0.5)
 	.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	)
-	await tween.finished
 #endregion

@@ -1,9 +1,9 @@
-extends MarginContainer
+extends AspectRatioContainer
 class_name WeaponSlot
 
 #region Nodes
 @export_group("Nodes")
-@onready var item_slot : ItemSlot = $"Item Slot"
+@onready var ability_progress : TextureProgressBar = $"Weapon Ability Progress"
 #endregion
 
 #region Data
@@ -14,12 +14,22 @@ class_name WeaponSlot
 #region builtins
 func _ready():
 	InventoryManager.weapon_changed.connect(equip)
+	InventoryManager.weapon_ability_progress_changed.connect(update_ability_progress)
 	if dock != null:
-		item_slot.dock = dock
+		pass
+		#ability_progress.dock = dock
 #endregion
 
-#region equipment management
+#region Weapon Management
 func equip(weapon : WeaponData):
-	item_slot.item_data = weapon
-	item_slot.stats.set_stats(weapon)
+	#ability_progress.item_data = weapon
+	#ability_progress.stats.set_stats(weapon)
+	ability_progress.texture_over = weapon.texture
+
+
+func update_ability_progress(value : float):
+	var tween = create_tween()
+	(
+	tween.tween_property(ability_progress, "value", value, 0.6)
+	).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 #endregion

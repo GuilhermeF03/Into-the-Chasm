@@ -1,8 +1,8 @@
 extends Resource
 class_name PlayerData
 
-@export_group("Resources")
-
-
-@export_group("Misc")
-var life : int = 3
+#region Data
+@export_group("Data")
+var max_lives : int = 4
+var curr_lives : int = 3
+#endregion
