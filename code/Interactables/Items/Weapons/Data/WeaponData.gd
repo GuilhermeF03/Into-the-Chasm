@@ -2,6 +2,8 @@ extends ItemData
 class_name WeaponData
 
 @export_group("Data")
+enum WEAPON_TYPE{CLOSE_COMBAT, RANGED}
+@export var weapon_type : WEAPON_TYPE
 
 @export_subgroup("Damage")
 @export var damage_dict : Dictionary[String, int] = {
@@ -9,17 +11,13 @@ class_name WeaponData
 	"max": 0,
 	"step": 0,
 }
+@export_range(0.05, 0.7) var attack_cooldown : float = 0.15
 @export var crit_multiplier : int
 @export_range(0.01, 1) var crit_chance : float
 
-@export_subgroup("Special")
-@export var effect : ItemEffect
-
-enum WEAPON_TYPE{CLOSE_COMBAT, RANGED}
-@export var weapon_type : WEAPON_TYPE
-
 @export_group("Preloads")
 @export var handled_weapon : PackedScene
+@export var effect : PackedScene
 
 
 func get_damage() -> DamageInfo :

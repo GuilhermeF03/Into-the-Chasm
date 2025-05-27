@@ -73,6 +73,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_gdeu0"]
 length = 0.1
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -100,6 +101,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_u0rdc"]
 length = 0.1
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -205,6 +207,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_oxrd0"]
 length = 0.3
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -232,6 +235,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_yushi"]
 length = 0.3
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -285,9 +289,10 @@ material = SubResource("ShaderMaterial_hacra")
 scale = Vector2(5, 5)
 texture = ExtResource("3_5x0oj")
 hframes = 4
-vframes = 3
-frame = 3
+vframes = 4
+frame = 9
 metadata/_aseprite_wizard_config_ = {
+"embed_tex": false,
 "i_mode": -1,
 "keep_anim_length": false,
 "layers": [],
@@ -295,7 +300,7 @@ metadata/_aseprite_wizard_config_ = {
 "o_folder": "res://Entities/Player/Art",
 "o_name": "",
 "only_visible": false,
-"player": "AnimationPlayer",
+"player": "Controllers/Animation",
 "slice": "",
 "source": "res://Entities/Player/Art/player.aseprite"
 }
@@ -306,7 +311,7 @@ metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {},
 "slice_section": false
 }
-metadata/_aseprite_wizard_source_file_hash_ = "3137d09611e5968759195980d6eab4b3"
+metadata/_aseprite_wizard_source_file_hash_ = "86cf4bab82009ad414faec216bd874d6"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -319,6 +324,7 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_brdpf")
+disabled = true
 
 [node name="ItemCollect" type="Node2D" parent="."]
 

@@ -8,6 +8,7 @@ class_name HandledWeapon
 
 @export_group("Data")
 @export var weapon_data : WeaponData
+@export var effect : WeaponEffect
 var temp_damage : WeaponData.DamageInfo
 var last_attack_was_special : bool
 
@@ -19,9 +20,16 @@ signal attack_registered(area : Area2D)
 
 
 func _ready():
-	weapon_data = InventoryManager.weapon
-	# Emits "can_attack" signal on end of animation
-	anim_player.animation_finished.connect(_on_attack_finished)
+	if weapon_data != null:
+		weapon_data = InventoryManager.weapon
+		# Has special effect
+		if weapon_data.effect != null:
+			var effect_node = weapon_data.effect.instantiate()
+			effect = effect_node
+			add_child(effect_node)
+			effect.finished_special.connect(_on_special_finished)
+		
+	anim_player.animation_finished.connect(_on_animation_finished)
 	
 	# Makes sure the hitbox is disabled when being instantiated
 	if hitbox.process_mode != ProcessMode.PROCESS_MODE_DISABLED:
@@ -32,26 +40,36 @@ func _ready():
 
 	hitbox.area_entered.connect(_on_area_entered)
 
+
 func attack():
 	last_attack_was_special = false
 	can_attack.emit(false)
 	temp_damage = weapon_data.get_damage()
 	anim_player.play("attack")
+	var timer = get_tree().create_timer(weapon_data.attack_cooldown)
+	timer.timeout.connect(_on_timeout)
 	
 
 func special_attack():
+	if effect == null : return
 	last_attack_was_special = true
 	can_attack.emit(false)
-	anim_player.play("special")
+	effect.call_effect()
 
 
-func _on_attack_finished(anim_name : String):
+func _on_animation_finished(anim : StringName):
+	anim_player.play("idle")
+
+func _on_timeout():
 	# Reset animation
-	if anim_name != "idle":
-		anim_player.play("idle")
-		temp_damage = null
-		can_attack.emit(true)
-		
+	
+	temp_damage = null
+	can_attack.emit(true)
+	
+	
+func _on_special_finished():
+	can_attack.emit(true)
+
 
 func _on_area_entered(area : Area2D):
 	attack_registered.emit(area)

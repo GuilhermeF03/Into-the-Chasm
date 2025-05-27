@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj3qo2ysxs57v"]
+
+[ext_resource type="Script" uid="uid://c8gnd7m6ors3u" path="res://Interactables/Items/Weapons/Data/Effects/BoomerangEffect.gd" id="1_0e22q"]
+
+[node name="Boomerang" type="Node2D"]
+script = ExtResource("1_0e22q")

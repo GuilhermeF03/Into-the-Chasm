@@ -34,6 +34,7 @@ func _process(_delta):
 
 func _input(event: InputEvent) -> void:
 	if Engine.is_editor_hint(): return
+	print("[Weapon Handler] Can attack: ", can_attack)
 	if not can_attack: return
 	
 	if event.is_action_pressed("attack") and handled_weapon:
@@ -77,6 +78,7 @@ func attack():
 
 
 func special_attack():
+	if handled_weapon.effect == null: return
 	if InventoryManager.weapon_ability_progress == 100:
 		handled_weapon.special_attack()
 		InventoryManager.register_special()

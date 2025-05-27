@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_d5jx0")
+weapon_type = 0
 damage_dict = Dictionary[String, int]({
 "max": 14,
 "min": 8,
@@ -13,7 +14,6 @@ damage_dict = Dictionary[String, int]({
 })
 crit_multiplier = 0
 crit_chance = 0.11
-weapon_type = 0
 handled_weapon = ExtResource("1_gsdur")
 name = "Standard sword"
 type = 3

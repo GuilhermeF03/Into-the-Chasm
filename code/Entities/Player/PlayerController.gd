@@ -20,6 +20,7 @@ class_name PlayerController
 @onready var dodge_timer = $Timers/DodgeTimer
 @onready var inventory : Inventory = $UI/Inventory
 @onready var hurtbox : Area2D = $Hurtbox
+@onready var collision : CollisionShape2D = $Collision
 
 @export_subgroup("Controllers")
 @onready var animation_controller : AnimationController = $Controllers/Animation
@@ -78,11 +79,18 @@ func handle_dodge_input(event : InputEvent):
 	): return 
 	
 	animation_controller.play_roll_animation(back_view)
+	
+	hurtbox.monitoring = false
+	collision.disabled = true
+	
 	dodging = true
 	dodge_timer.start()
 
 	await animation_controller.animation_finished
 	dodging = false
+	
+	hurtbox.monitoring = true
+	collision.disabled = false
 
 
 func handle_tool_selection(event: InputEvent) -> void:
@@ -133,7 +141,7 @@ func _on_enemy_attack(enemy : Node2D):
 	animation_controller.play("hit")
 	
 	knockback(enemy, HURT_KNOCKBACK)
-	await  animation_controller.animation_finished
+	await animation_controller.animation_finished
 	
 	InputManager.input_level = InputManager.INPUT_LEVEL.ALL
 	
@@ -143,7 +151,10 @@ func _on_enemy_attack(enemy : Node2D):
 func on_attack_registered(enemy : Area2D):
 	knockback(enemy, ATTACK_KNOCKBACK)
 	
-	if not weapon_controller.handled_weapon.last_attack_was_special:
+	if (
+		not weapon_controller.handled_weapon.last_attack_was_special
+		and weapon_controller.handled_weapon.effect != null
+	):
 		InventoryManager.register_attack()
 
 
@@ -153,9 +164,12 @@ func knockback(body : Node2D, intensity : int):
 		* intensity
 	)
 
-	var tween = create_tween()
-	(
-	tween.tween_property(self, "position", global_position + push_vector, 0.5)
-	.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	var tween = (
+		create_tween()
+		.tween_property(self, 
+			"position", 
+			global_position + push_vector, 
+			0.075
+		).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	)
 #endregion
