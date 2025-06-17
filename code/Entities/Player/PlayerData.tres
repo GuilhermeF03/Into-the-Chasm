@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlayerData" load_steps=2 format=3 uid="uid://cwsp5bk7qm4i3"]
+
+[ext_resource type="Script" uid="uid://dmo6r8lf7yvts" path="res://Entities/Player/PlayerData.gd" id="1_alyre"]
+
+[resource]
+script = ExtResource("1_alyre")
+max_lives = 4
+curr_lives = 4
+metadata/_custom_type_script = "uid://dmo6r8lf7yvts"

@@ -403,7 +403,7 @@ scale = Vector2(5, 5)
 [node name="Movement" type="Node2D" parent="Controllers"]
 script = ExtResource("12_lmeus")
 
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_player_hit"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_enemy_attack"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="area_entered" from="ItemCollect/Collect" to="." method="_on_item_collect"]
 [connection signal="animation_finished" from="Controllers/Animation" to="." method="_on_animation_finished"]

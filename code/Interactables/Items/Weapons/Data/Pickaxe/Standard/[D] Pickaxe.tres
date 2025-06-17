@@ -13,7 +13,7 @@ damage_dict = Dictionary[String, int]({
 "min": 8,
 "step": 4
 })
-attack_cooldown = 0.5
+attack_cooldown = 0.1
 crit_multiplier = 0
 crit_chance = 0.11
 handled_weapon = ExtResource("1_gua0v")

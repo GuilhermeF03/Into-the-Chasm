@@ -7,7 +7,7 @@ extends Node
 
 #region Data
 @export_group("Data")
-var data : PlayerData
+@export var data : PlayerData
 #endregion
 
 #region Signals
@@ -19,7 +19,7 @@ signal max_lives_changed(value : int)
 #region _builtins
 func _init():
 	if data == null:
-		data = PlayerData.new()
+		data = load("uid://cwsp5bk7qm4i3")
 #endregion
 
 #region Combat
