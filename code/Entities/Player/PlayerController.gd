@@ -41,7 +41,7 @@ var back_view = false
 func _ready():
 	dodge_timer.wait_time = DODGE_COOLDOWN
 	LevelManager.add_pause_trigger(inventory.on_handling_changed)
-	hurtbox.area_entered.connect(_on_enemy_attack)
+	#hurtbox.area_entered.connect(_on_enemy_attack)
 	hurtbox.body_entered.connect(_on_enemy_attack)
 
 
@@ -169,7 +169,8 @@ func knockback(body : Node2D, intensity : int):
 		.tween_property(self, 
 			"position", 
 			global_position + push_vector, 
-			0.075
+			0.2
 		).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	)
+	await  tween.finished
 #endregion

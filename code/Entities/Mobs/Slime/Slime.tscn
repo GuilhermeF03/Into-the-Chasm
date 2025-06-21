@@ -1,14 +1,23 @@
-[gd_scene load_steps=17 format=3 uid="uid://cwseeacjaeuni"]
+[gd_scene load_steps=20 format=3 uid="uid://cwseeacjaeuni"]
 
 [ext_resource type="Script" uid="uid://6bdvq6vmgmb" path="res://Entities/Mobs/Enemy.gd" id="1_gf03x"]
 [ext_resource type="Texture2D" uid="uid://dpluhx8mta40i" path="res://Entities/Mobs/Slime/Art/slime.png" id="2_d4hhx"]
-[ext_resource type="Texture2D" uid="uid://b7wvexlb5dars" path="res://icon.svg" id="3_2geq6"]
+[ext_resource type="Texture2D" uid="uid://5n8gmsiph3eg" path="res://icon.svg" id="3_2geq6"]
 [ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Entities/damage.gdshader" id="3_yf3bw"]
+[ext_resource type="BehaviorTree" uid="uid://diet7kvlie40v" path="res://Entities/Mobs/AI/Trees/Basic_Melee_BT.tres" id="5_042f5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_042f5"]
 shader = ExtResource("3_yf3bw")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_value = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ctdae"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_042f5"]
+radius = 6.4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s0vdw"]
+radius = 192.0
 
 [sub_resource type="Animation" id="Animation_vcn6l"]
 length = 0.5
@@ -190,13 +199,34 @@ _data = {
 &"idle": SubResource("Animation_538ks")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ctdae"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_yf3bw"]
 radius = 6.21289
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_042f5"]
-radius = 6.4
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_yf3bw"]
+var/pursue_speed/name = &"pursue_speed"
+var/pursue_speed/type = 3
+var/pursue_speed/value = 200.0
+var/pursue_speed/hint = 0
+var/pursue_speed/hint_string = ""
+var/patrol_speed/name = &"patrol_speed"
+var/patrol_speed/type = 3
+var/patrol_speed/value = 125.0
+var/patrol_speed/hint = 0
+var/patrol_speed/hint_string = ""
+var/range_min/name = &"range_min"
+var/range_min/type = 3
+var/range_min/value = 100.0
+var/range_min/hint = 0
+var/range_min/hint_string = ""
+var/attack_speed/name = &"attack_speed"
+var/attack_speed/type = 3
+var/attack_speed/value = 600.0
+var/attack_speed/hint = 0
+var/attack_speed/hint_string = ""
+binding/pursue_speed = NodePath("..:CHASE_SPEED")
+binding/patrol_speed = NodePath("..:PATROL_SPEED")
+binding/patrol_spot = NodePath("..:patrol_spot")
+binding/range_max = NodePath("..:RAYCAST_PATROL_DIST")
 
 [node name="Slime" type="CharacterBody2D"]
 z_index = 1
@@ -206,6 +236,7 @@ collision_layer = 64
 collision_mask = 4
 script = ExtResource("1_gf03x")
 CHASE_SPEED = 150.0
+RAYCAST_PATROL_DIST = 300.0
 metadata/_edit_group_ = true
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
@@ -228,6 +259,7 @@ metadata/_aseprite_wizard_config_ = {
 metadata/_aseprite_wizard_source_file_hash_ = "b663b135c9fe0ab993d1bd7a6c6ddcaf"
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {
+"embed_tex": false,
 "layers": []
 }
 }
@@ -238,6 +270,7 @@ material = SubResource("ShaderMaterial_042f5")
 texture = ExtResource("2_d4hhx")
 hframes = 4
 vframes = 4
+frame = 5
 metadata/_aseprite_wizard_config_ = {
 "i_mode": -1,
 "keep_anim_length": false,
@@ -253,8 +286,44 @@ metadata/_aseprite_wizard_config_ = {
 metadata/_aseprite_wizard_source_file_hash_ = "0aa7062e147a0355ef1e38073f525581"
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": false,
-"pending_changes": {}
+"pending_changes": {
+"embed_tex": false
 }
+}
+
+[node name="SightRayCast" type="RayCast2D" parent="."]
+scale = Vector2(1, 1)
+target_position = Vector2(75, 0)
+collision_mask = 8
+
+[node name="PatrolRayCast" type="RayCast2D" parent="."]
+scale = Vector2(1, 1)
+collision_mask = 0
+hit_from_inside = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+scale = Vector2(1, 1)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_ctdae")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+scale = Vector2(1, 1)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_042f5")
+
+[node name="Attack Area" type="Area2D" parent="."]
+scale = Vector2(0.2, 0.2)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Area"]
+shape = SubResource("CircleShape2D_s0vdw")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -262,37 +331,14 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="SightRayCast" type="RayCast2D" parent="."]
-target_position = Vector2(75, 0)
-collision_mask = 8
-
-[node name="PatrolRayCast" type="RayCast2D" parent="."]
-collision_mask = 0
-hit_from_inside = true
-
-[node name="Timers" type="Node" parent="."]
-
-[node name="IdleTimer" type="Timer" parent="Timers"]
-one_shot = true
-
-[node name="Hitbox" type="Area2D" parent="."]
-visible = false
-collision_layer = 16
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("CircleShape2D_ctdae")
-
 [node name="Body" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(0, -0.8)
 shape = SubResource("CircleShape2D_yf3bw")
 
-[node name="Hurtbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
+[node name="Behaviour Tree" type="BTPlayer" parent="."]
+behavior_tree = ExtResource("5_042f5")
+blackboard_plan = SubResource("BlackboardPlan_yf3bw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-shape = SubResource("CircleShape2D_042f5")
-
-[connection signal="timeout" from="Timers/IdleTimer" to="." method="_on_idle_timer_timeout"]
+[node name="Attack timer" type="Timer" parent="."]
+one_shot = true

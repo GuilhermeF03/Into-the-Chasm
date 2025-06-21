@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cpa8ag7qoliw7" path="res://Interactables/Items/Tools/PickableTool.tscn" id="3_5fvn0"]
 [ext_resource type="PackedScene" uid="uid://crl5owfklwshp" path="res://Interactables/Items/Trinkets/PickableTrinket.tscn" id="4_xrbet"]
 [ext_resource type="PackedScene" uid="uid://cwseeacjaeuni" path="res://Entities/Mobs/Slime/Slime.tscn" id="5_2edra"]
-[ext_resource type="PackedScene" uid="uid://wdwtlaklhvrn" path="res://Interactables/Items/Recipes/Data/StandardSwordRecipe.tscn" id="6_7wko3"]
+[ext_resource type="PackedScene" uid="uid://wdwtlaklhvrn" path="res://Interactables/Items/Recipes/Data/Sword/StandardSwordRecipe.tscn" id="6_7wko3"]
 
 [node name="Demo" type="Node2D"]
 y_sort_enabled = true

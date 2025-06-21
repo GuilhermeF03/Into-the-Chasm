@@ -33,9 +33,7 @@ func _process(_delta):
 
 
 func _input(event: InputEvent) -> void:
-	if Engine.is_editor_hint(): return
-	print("[Weapon Handler] Can attack: ", can_attack)
-	if not can_attack: return
+	if Engine.is_editor_hint() or not can_attack: return
 	
 	if event.is_action_pressed("attack") and handled_weapon:
 		attack()

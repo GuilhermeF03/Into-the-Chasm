@@ -9,11 +9,11 @@ class_name Enemy
 @export var CHASE_SPEED = 200.0
 
 @export_subgroup("Timers")
-@export var IDLE_WAIT_TIME = 1.2
+@export var ATTACK_WAIT_TIME = 1.2
 
 @export_subgroup("Raycast")
-@export var RAYCAST_DETECT_DIST = 75
-@export var RAYCAST_PATROL_DIST = 100
+@export var RAYCAST_DETECT_DIST = 75.0
+@export var RAYCAST_PATROL_DIST = 100.0
 
 @export_subgroup("Movement")
 @export var ANIMATION_PLAYER_SPEED = 0.7
@@ -28,35 +28,40 @@ class_name Enemy
 @onready var sight_raycast = $SightRayCast
 @onready var patrol_raycast = $PatrolRayCast
 
-@onready var idle_timer = $Timers/IdleTimer
+@onready var attack_timer = $"Attack timer"
 @onready var hurtbox = $Hurtbox
+
+@onready var attack_area = $"Attack Area"
+
+@onready var bt_player = $"Behaviour Tree"
 #endregion
 
 #region Data
 @export_group("Data")
 
-@export_subgroup("State")
-enum EnemyState {PATROL, CHASE, IDLE}
-var state = EnemyState.PATROL: set = set_state
-var prev_state : EnemyState = EnemyState.PATROL
-var is_hit : bool = false
-
 @export_subgroup("Movement")
 var moving_to_patrol_spot = false
-var patrol_spot : Vector2 = Vector2.ZERO
+@export var patrol_spot : Vector2 = Vector2.ZERO
 var player_pos : Vector2 = Vector2.ZERO
 #endregion
 
 
 #region builtins
 func _ready() -> void:
-	idle_timer.wait_time = IDLE_WAIT_TIME + player.get_animation("Search").length
+	attack_timer.timeout.connect(on_attack_timer_finished)
 	sight_raycast.target_position = Vector2(RAYCAST_DETECT_DIST, 0)
 
 	hurtbox.area_entered.connect(on_player_damage)
+	attack_area.area_entered.connect(on_player_entered_attack_area)
+	attack_area.area_exited.connect(on_player_exited_attack_area)
+	
+	
+	var blackboard : Blackboard = bt_player.blackboard
+	blackboard.set_var("player", PlayerManager.player)
 
 
 func _physics_process(_delta: float) -> void:
+	var is_hit = bt_player.blackboard.get_var(&"hit")
 	if is_hit:
 		print(global_position)
 	if is_hit: return
@@ -65,91 +70,29 @@ func _physics_process(_delta: float) -> void:
 		else Vector2.ZERO
 	)
 	sight_raycast.look_at(player_pos)
-
-	if sight_raycast.is_colliding():
-		state = EnemyState.CHASE
-
-	match state:
-		EnemyState.PATROL: handle_patrol_state()
-		EnemyState.CHASE: handle_chase_state()
-		EnemyState.IDLE: pass
-	
-	if velocity != Vector2.ZERO:
-		move()
 #endregion
 
 
-#region setters
-func set_state(new_state: EnemyState) -> void:
-	prev_state = state
-	state = new_state
-#endregion
-
-
-#region state handlers
-func handle_patrol_state():
-	var mov_vect = (patrol_spot - global_position).normalized() * PATROL_SPEED
-	var dist = global_position.distance_to(patrol_spot)
-
-	# Reached destination
-	if dist > 1:
-		velocity = mov_vect
-		return
-
-	player.stop()
-	velocity = Vector2.ZERO
-	moving_to_patrol_spot = false
-
-	# Search player
-	player.play("Search")
-	state = EnemyState.IDLE
-	idle_timer.start()
-
-	# Set new patrol spot
-	patrol_raycast.target_position = Vector2(
-			randf_range(-1, 1), randf_range(-1, 1)
-	) * RAYCAST_PATROL_DIST
-		
-	set_patrol_spot()
-
-
-func handle_chase_state():
-	if sight_raycast.is_colliding(): 
-		var mov_vect = global_position.direction_to(player_pos) * CHASE_SPEED
-		velocity = mov_vect
-		return
-
-	patrol_raycast.target_position = to_local(player_pos)
-	set_patrol_spot()
-	state = EnemyState.PATROL
-
-
-func set_patrol_spot():
-	patrol_spot = (
-		patrol_raycast.get_collision_point() if patrol_raycast.is_colliding()
-		else to_global(patrol_raycast.target_position)
-	)
-	moving_to_patrol_spot = true
-#endregion
-
-
-func move():
-	player.speed_scale = ANIMATION_PLAYER_SPEED if state == EnemyState.PATROL else 1.0
-	
-	player.play(
-		"Walk" if state == EnemyState.PATROL
-		else "Chase"
-	)
-	sprite.scale.x = -1 if velocity.x < 0 else 1
+#region Behaviour tree
+func move(target_pos : Vector2):
+	velocity = target_pos
 	move_and_slide()
+	
+	
+func update_facing():
+	sprite.scale.x = -1 if velocity.x < 0 else 1
 
 
-func _on_idle_timer_timeout():
-	state = prev_state
+func is_good_position(pos : Vector2):
+	patrol_raycast.target_position = pos
+	return not patrol_raycast.is_colliding()
+#endregion
 
 
+#region Behaviour tree - Hit
 func on_player_damage(area : Area2D):
-	state = EnemyState.IDLE
+	bt_player.blackboard.set_var(&"hit", true)
+	
 	var push_vector = (
 		(global_position - area.global_position).normalized()
 		* 200
@@ -160,7 +103,6 @@ func on_player_damage(area : Area2D):
 	player.stop()
 	sprite.frame = 0
 	player.play("hit")
-	is_hit = true
 
 	var tween = create_tween()
 	(
@@ -171,5 +113,26 @@ func on_player_damage(area : Area2D):
 	)
 	await tween.finished
 	
-	state = prev_state
-	is_hit = false
+	bt_player.blackboard.set_var(&"hit", false)
+#endregion
+	
+	
+#region Behaviour tree - Attack
+func on_player_entered_attack_area(_area):
+	sight_raycast.enabled = false
+	bt_player.blackboard.set_var(&"on_attack_range", true)
+	
+	
+func on_player_exited_attack_area(_area):
+	sight_raycast.enabled = true
+	bt_player.blackboard.set_var(&"on_attack_range", false)
+	
+	
+func attack():
+	attack_timer.start(ATTACK_WAIT_TIME)
+	bt_player.blackboard.set_var(&"on_attack_cooldown", true)
+	
+	
+func on_attack_timer_finished():
+	bt_player.blackboard.set_var(&"on_attack_cooldown", false)
+#endregion
