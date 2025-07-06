@@ -1,11 +1,21 @@
 extends WeaponEffect
 
+#region Constants
+@export_group("Constants")
+@export var MAX_THROW_DISTANCE = 500
+@export var RETURN_SPEED = 5
+#endregion
+
+
 #region Nodes
 @export_group("Nodes")
+@onready var hitbox = $Hitbox
+
 var anim_player : AnimationPlayer
 var weapon : HandledWeapon
 var original_pos : Vector2
 var player : PlayerController
+var tween : Tween
 #endregion
 
 #region Data
@@ -13,33 +23,37 @@ var player : PlayerController
 @export_subgroup("State")
 enum STATE{THROWN, RETURNING, CAUGHT}
 var state = STATE.CAUGHT
-var thrown_distance : float = 0
 #endregion
 
 #region builtins
 func _ready():
+	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	player = PlayerManager.player
-	anim_player = get_parent().find_child("Player")
 	weapon = get_parent()
+	anim_player = weapon.find_child("Player")
+	hitbox.area_entered.connect(on_boomerang_hit)
+	hitbox.body_entered.connect(on_boomerang_hit)
 
 
 func _physics_process(delta):
 	if state != STATE.RETURNING: return
-	
-	return_to_player(delta)
-	
+	return_to_player(delta)	
 #endregion
 
 
 #region Effect
 func call_effect():
-	state = STATE.THROWN
-	var target_pos = get_global_mouse_position()
+	player.weapon_controller.lock_movement = true
+	hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 	
+	state = STATE.THROWN
+	var target_dir = global_position.direction_to(get_global_mouse_position())
+	var target_pos = global_position + (target_dir * MAX_THROW_DISTANCE)
+ 	
 	anim_player.play("special_begin")
 	anim_player.queue("special")
 	
-	var tween = create_tween()
+	tween = create_tween()
 	tween.tween_property(
 		weapon, 
 		"global_position",
@@ -48,51 +62,28 @@ func call_effect():
 	).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	
 	# Return to player
-	await tween.finished
-	thrown_distance = (
-		player.global_position + original_pos
-	).distance_to(target_pos) 
-	
-	state = STATE.RETURNING
+	tween.finished.connect(on_no_hit)
 
 
 func return_to_player(delta):
 	var start_pos = weapon.global_position
 	var end_pos = player.weapon_controller.handler.global_position
-
 	var to_target = end_pos - start_pos
 	var distance = to_target.length()
-
-	# Calculate perpendicular vector for arch control points
-	var perpendicular = Vector2(-to_target.y, to_target.x).normalized()
-
-	# Use a fixed arch height based on thrown_distance for smooth arc
-	var arch_height = thrown_distance * randf_range(0.1, 0.5)
-
-	# Place control points at 1/3 and 2/3 between start and end, offset by perpendicular vector
-	var control_point1 = start_pos + to_target * (1.0 / 3.0) + perpendicular * arch_height
-	var control_point2 = start_pos + to_target * (2.0 / 3.0) + perpendicular * arch_height
-
-	# Progress parameter along curve (t from 0 to 1)
+	var thrown_distance = (player.global_position + original_pos).distance_to(global_position)
 	var travelled_ratio = clampf(1 - (distance / thrown_distance), 0.05, 1)
+	var t = (travelled_ratio / 2) + (RETURN_SPEED * delta) # Optional: apply easing here
 
-	var t = travelled_ratio / 5
-	# Optional easing (uncomment if desired)
-	#t = t * t * (3 - 2 * t)  # Smoothstep easing
+	var perpendicular = Vector2(-to_target.y, to_target.x).normalized()
+	var arch = perpendicular * thrown_distance * randf_range(0.1, 0.5)
+	var control1 = start_pos + to_target * (1.0 / 3.0) + arch
+	var control2 = start_pos + to_target * (2.0 / 3.0) + arch
 
-	# Compute bezier interpolation point
-	#print("Old pos: ", weapon.global_position)
-	var new_pos = start_pos.cubic_interpolate(
-		end_pos, 
-		control_point1, 
-		control_point2, 
-		t
-	)
-	#print("New pos: ", new_pos)
-	weapon.global_position = new_pos
+	weapon.global_position = start_pos.cubic_interpolate(end_pos, control1, control2, t)
 
-	# When close to end or t reaches 1, snap and change state
 	if t >= 1.0 or travelled_ratio >= 0.9:
+		hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+		player.weapon_controller.lock_movement = false
 		weapon.global_position = end_pos
 		state = STATE.CAUGHT
 		anim_player.play("special_end")
@@ -100,4 +91,16 @@ func return_to_player(delta):
 		await anim_player.animation_finished
 		finished_special.emit()
 
+#endregion
+
+
+#region Signals
+func on_boomerang_hit(_other : Node):
+	print("[Boomerang] hit midway, returnin...")
+	state = STATE.RETURNING
+	tween.kill()
+	
+
+func on_no_hit():
+	state = STATE.RETURNING
 #endregion

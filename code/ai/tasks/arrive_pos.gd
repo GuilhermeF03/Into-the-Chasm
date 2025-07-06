@@ -64,6 +64,6 @@ func _tick(_delta: float) -> Status:
 				dir += avoidance
 
 	var desired_velocity: Vector2 = dir.normalized() * speed
-	agent.move(desired_velocity)
+	agent.chase(desired_velocity)
 	agent.update_facing()
 	return RUNNING

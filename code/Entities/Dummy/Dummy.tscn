@@ -30,7 +30,7 @@ size = Vector2(13, 14.4)
 size = Vector2(13, 14.4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fo3c1"]
-size = Vector2(13, 14.4)
+size = Vector2(13.8, 14.4)
 
 [node name="Dummy" type="CharacterBody2D"]
 z_index = 1
@@ -73,6 +73,7 @@ position = Vector2(0.5, 3)
 shape = SubResource("RectangleShape2D_xbvns")
 
 [node name="Hitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 collision_mask = 8
 
@@ -86,6 +87,7 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0.5, 3)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_fo3c1")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

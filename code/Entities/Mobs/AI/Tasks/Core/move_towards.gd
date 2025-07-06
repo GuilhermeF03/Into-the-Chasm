@@ -47,6 +47,7 @@ func _enter() -> void:
 # Called each time this task is ticked (aka executed).
 func _tick(_delta: float) -> Status:
 	var target: Node2D = blackboard.get_var(target_var, null)
+	
 	if not is_instance_valid(target):
 		return FAILURE
 
@@ -59,7 +60,7 @@ func _tick(_delta: float) -> Status:
 
 	var speed: float = blackboard.get_var(speed_var, 200.0)
 	var desired_velocity: Vector2 = agent.global_position.direction_to(_waypoint) * speed
-	agent.move(desired_velocity)
+	agent.chase(desired_velocity)
 	agent.update_facing()
 	return RUNNING # this is not supposed to block the sequence
 

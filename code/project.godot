@@ -26,10 +26,6 @@ InteractionManager="*res://Managers/Interaction/InteractionManager.tscn"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 PlayerManager="*res://Managers/Player/PlayerManager.gd"
 
-[debug]
-
-settings/stdout/verbose_stdout=true
-
 [display]
 
 window/size/viewport_width=1920
@@ -130,7 +126,7 @@ special_attack={
 
 [limbo_ai]
 
-behavior_tree/user_task_dirs=PackedStringArray("res://ai/tasks", "res://Entities/Mobs/AI")
+behavior_tree/user_task_dirs=PackedStringArray("res://ai/tasks", "res://Entities/Mobs/AI/Tasks/", "res://Entities/Mobs/AI/Tasks/CopperPaths")
 
 [physics]
 

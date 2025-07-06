@@ -1,17 +1,18 @@
-[gd_scene load_steps=20 format=4 uid="uid://cwseeacjaeuni"]
+[gd_scene load_steps=21 format=4 uid="uid://bhfnet3505a6n"]
 
-[ext_resource type="Script" uid="uid://6bdvq6vmgmb" path="res://Entities/Mobs/Enemy.gd" id="1_gf03x"]
-[ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Entities/damage.gdshader" id="3_yf3bw"]
-[ext_resource type="BehaviorTree" uid="uid://diet7kvlie40v" path="res://Entities/Mobs/AI/Trees/Basic_Melee_BT.tres" id="5_042f5"]
+[ext_resource type="Script" uid="uid://6bdvq6vmgmb" path="res://Entities/Mobs/Enemy.gd" id="1_t3phh"]
+[ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Entities/damage.gdshader" id="2_8nujx"]
+[ext_resource type="Resource" uid="uid://d8iax4t60i1t" path="res://Entities/Mobs/Copper Paths/Drillwing/Drillwing_D.tres" id="2_bb3cr"]
+[ext_resource type="BehaviorTree" uid="uid://diet7kvlie40v" path="res://Entities/Mobs/AI/Trees/Basic_Melee_BT.tres" id="3_06ngx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_042f5"]
-shader = ExtResource("3_yf3bw")
+shader = ExtResource("2_8nujx")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_value = 0.0
 
-[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_ctdae"]
-_data = PackedByteArray("AAADAAUAAAABAAAAoAAAAKAAAABWBAAAUklGRk4EAABXRUJQVlA4TEIEAAAvn8AnED+gGJIkZlfpUM7/cRI5eBgJgIT/N5hCJZNRF/hAUds2UA82ZVT2RbHfpPkPAKyrLg9Q9v+EUXdAydn2um3F0NA8Fy1ApYByqhNC6DgAIU8NHXABAYxP40qB//2byveHdO/tIKL/Etw2kiRJgc29dxkx/Qrzp37cc6jbEJwtqxORAy/0rqxNxJfttS6A5y4RsSV7dbLgYikz72V5x/P0xh2i7RVExFH3AqU17+X5nsfX6SuFbYtSJwKIpWeMiF5j4gMdqGO63snSs2uH2NCi9crZFVe3c7IGmZQ7rct0RvS0/HBmRHzjCSA09dmW6RWt1+6q9IKWZjYR+WLUuxaURhGRmXTKbPEN/Q33HA6slGHeULcCP6UQnEusMTvmxqjDnGPo3cxKIfQKPF2HstNuqLzYkZIK3zPVvVSIcibduYP/XZ+H2t3fVe+hPH2v6j18+337dy93lj/f2+fMPYe6ew3B2TJlJyIHXuhdmXMT8WV7rQvguUtEbMlenSy4WMrMe1lePMc37hBtryAijroXKK15L8/3PL5OXylsW5Q6EUAscx/jFL3GxAc6UEe+k6Vnj+cpsja0aL1y9nwoDXJhDTIpd1qX6fUKp0VEz9eMiJEngCidJ/psegsA3vSC9s0qnzv5Yli7O/HA4WkUEZlJp8wW39DfcM/hwEoZ5g11K/BTCsG5xBqzY26MOsw5ht7NrBRCr8DTdSg77YbKix0pqfA9U91LhShn0p07+F/tuX8od9V23Jk7tQ+4yh3feKb4J+ahuuOuuLsKjm9ufrDPEJz9thybiL+pY8gOy+pEcFEdwh0LRHHIojjX7PB0L4mIljugOIeIyBuOZ8W5LQBoq7zghTuWa9zRohXumF7RenomQFl8yw9tO541R364Y1Jcg2SHEgDeojoAKEFxjftnft9pk+VaQx3AhTsWXERzqE4R6jJjdsym1PF/ges0huDczErZkcwtHXmo45QZzTfg0BYz9R3/NswQyl21Hb2z5a7KjqfHcldtR/+p3FXbMfSm3FXsKP669z+cf8vZwkLv6jo2EV+0Vwgi4kocg+roZMHFUlfeiztEANiaDgCgrXkvT88AwDmrOPDZsu+RYax1ioienn0BoDvgazrQovXK2YGLvWnKM0iMiJHdNffZOfJlVR0h55jjtNvLNyxozyB5ajrGzJgN2ys72F5GvMtrV3SkEJxLrDE75sbcbk7pOpSddmPqjwb/yF7/NM0Qgla4db2zSp2zN+7p0WmQx8Otn09W67+b/3KvQg4/3I+ds/WdZY5NxNf9lp22xNHJgoutmVuvTgpfJTvoXgBQtRAAUPe2aI51ioi+OO2MoIfsBIrDbGjR+qq/EyNiJA0ynRGVKj/D/g7ufePeMb/vtL97U69TCCLiU0PcIiLUPWbHbCo2huDcnBrNwUrZkUzFSbtpVAdddMeq2ancvWP9HRoD")
-size_override = Vector2(160, 160)
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_bb3cr"]
+_data = PackedByteArray("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")
+size_override = Vector2(192, 160)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ctdae"]
 
@@ -21,23 +22,8 @@ radius = 6.4
 [sub_resource type="CircleShape2D" id="CircleShape2D_s0vdw"]
 radius = 192.0
 
-[sub_resource type="Animation" id="Animation_sndiv"]
-length = 0.375
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.175),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [20, 21, 22]
-}
-
-[sub_resource type="Animation" id="Animation_042f5"]
-length = 0.675
+[sub_resource type="Animation" id="Animation_nh7oy"]
+length = 0.25
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -46,14 +32,15 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.475),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [17, 18, 19, 20, 21, 22]
+"values": [16, 17, 18, 19, 20]
 }
 
-[sub_resource type="Animation" id="Animation_yf3bw"]
-length = 0.3
+[sub_resource type="Animation" id="Animation_rovmp"]
+length = 0.5
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -61,14 +48,30 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [15, 16]
+"values": [21, 22, 23, 24, 25]
+}
+
+[sub_resource type="Animation" id="Animation_yf3bw"]
+length = 0.35
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13, 14, 15]
 }
 
 [sub_resource type="Animation" id="Animation_vcn6l"]
-length = 0.5
+length = 0.3
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -89,10 +92,10 @@ tracks/1/path = NodePath("Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = false
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [5, 6, 7, 8, 9]
+"values": [3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_fcule"]
@@ -111,7 +114,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_xryky"]
-length = 1.15
+length = 0.3
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -132,14 +135,14 @@ tracks/1/path = NodePath("Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = false
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.075, 0.475, 0.55, 0.95),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [10, 11, 12, 13, 14]
+"values": [6, 7, 8]
 }
 
 [sub_resource type="Animation" id="Animation_3p6cb"]
-length = 0.5
+length = 0.3
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -160,10 +163,10 @@ tracks/1/path = NodePath("Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = false
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4]
+"values": [0, 1, 2]
 }
 
 [sub_resource type="Animation" id="Animation_s0vdw"]
@@ -184,8 +187,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c7awx"]
 _data = {
-&"Attack_landing": SubResource("Animation_sndiv"),
-&"Attack_leap": SubResource("Animation_042f5"),
+&"Attack": SubResource("Animation_nh7oy"),
+&"Attack_cleanup": SubResource("Animation_rovmp"),
 &"Attack_setup": SubResource("Animation_yf3bw"),
 &"Chase": SubResource("Animation_vcn6l"),
 &"RESET": SubResource("Animation_fcule"),
@@ -217,24 +220,26 @@ binding/pursue_speed = NodePath("..:CHASE_SPEED")
 binding/patrol_speed = NodePath("..:PATROL_SPEED")
 binding/patrol_spot = NodePath("..:patrol_spot")
 binding/range_max = NodePath("..:RAYCAST_PATROL_DIST")
+binding/attack_speed = NodePath("..:ATTACK_SPEED")
 
-[node name="Slime" type="CharacterBody2D"]
+[node name="Drillwing" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
 scale = Vector2(5, 5)
 collision_layer = 64
 collision_mask = 4
-script = ExtResource("1_gf03x")
+script = ExtResource("1_t3phh")
 ATTACK_SPEED = 600.0
+data = ExtResource("2_bb3cr")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_042f5")
-texture = SubResource("PortableCompressedTexture2D_ctdae")
-hframes = 5
+texture = SubResource("PortableCompressedTexture2D_bb3cr")
+hframes = 6
 vframes = 5
-frame = 5
+frame = 16
 metadata/_aseprite_wizard_config_ = {
 "embed_tex": true,
 "i_mode": -1,
@@ -246,13 +251,13 @@ metadata/_aseprite_wizard_config_ = {
 "only_visible": false,
 "player": "AnimationPlayer",
 "slice": "",
-"source": "res://Entities/Mobs/Slime/Art/slime.aseprite"
+"source": "res://Entities/Mobs/Copper Paths/Drillwing/drillwing.aseprite"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "b19d8bf5af51746727caf133dd4ea052"
+metadata/_aseprite_wizard_source_file_hash_ = "8c5310a90ae3c2eb7133a7e8d56f9cbf"
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": false,
 "layer_section": false,
-"output_section": false,
+"output_section": true,
 "pending_changes": {},
 "slice_section": false
 }
@@ -260,6 +265,7 @@ metadata/_aseprite_wizard_interface_config_ = {
 [node name="SightRayCast" type="RayCast2D" parent="."]
 target_position = Vector2(75, 0)
 collision_mask = 8
+collide_with_areas = true
 
 [node name="PatrolRayCast" type="RayCast2D" parent="."]
 collision_mask = 0
@@ -299,8 +305,10 @@ position = Vector2(0, -0.8)
 shape = SubResource("CircleShape2D_yf3bw")
 
 [node name="Behaviour Tree" type="BTPlayer" parent="."]
-behavior_tree = ExtResource("5_042f5")
+behavior_tree = ExtResource("3_06ngx")
 blackboard_plan = SubResource("BlackboardPlan_042f5")
 
 [node name="Attack timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

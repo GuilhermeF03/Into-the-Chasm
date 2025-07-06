@@ -57,7 +57,7 @@ func special_attack():
 	effect.call_effect()
 
 
-func _on_animation_finished(anim : StringName):
+func _on_animation_finished(_anim : StringName):
 	anim_player.play("idle")
 
 func _on_timeout():

@@ -28,7 +28,7 @@ func _ready():
 
 
 
-func _process(delta):
+func _process(_delta):
 	if  not Engine.is_editor_hint(): return
 	_set_direction()
 
@@ -64,8 +64,8 @@ func close():
 	
 	
 	
-static func to_direction(direction : Vector2) -> Direction:
-	match direction:
+static func to_direction(dir : Vector2) -> Direction:
+	match dir:
 		Vector2.DOWN: return Direction.DOWN
 		Vector2.UP: return Direction.UP
 		Vector2.LEFT: return Direction.LEFT

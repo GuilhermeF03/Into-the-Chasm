@@ -8,11 +8,11 @@ class_name AnimationController
 #endregion
 
 #region Animation Handling
-func play_animation(name: String) -> void:
-	current_animation = name
-	play(name)
+func play_animation(anim_name: String) -> void:
+	current_animation = anim_name
+	play(anim_name)
 	await animation_finished
-	animation_finished.emit(name)
+	animation_finished.emit(anim_name)
 
 
 func play_idle(direction: String) -> void:

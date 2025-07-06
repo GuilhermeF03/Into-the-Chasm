@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3 uid="uid://bk12ad6pejafj"]
+
+[ext_resource type="Script" uid="uid://dih5uka4r4nol" path="res://Entities/Mobs/EnemyData.gd" id="1_rlrb6"]
+
+[resource]
+script = ExtResource("1_rlrb6")
+damage = 1
+lifes = 3
+metadata/_custom_type_script = "uid://dih5uka4r4nol"

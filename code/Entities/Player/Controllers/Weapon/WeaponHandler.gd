@@ -10,6 +10,7 @@ class_name WeaponController
 #region Data
 @export_group("Data")
 var can_attack = true
+var lock_movement = false
 @export var texture : Texture2D
 
 @export_subgroup("Animation")
@@ -43,6 +44,8 @@ func _input(event: InputEvent) -> void:
 
 #region weapon handling
 func handle_weapon():
+	if lock_movement:
+		return
 	look_at(get_global_mouse_position())
 	handler.scale.y = (
 		-5 if get_local_mouse_position().x < 0 else 5
