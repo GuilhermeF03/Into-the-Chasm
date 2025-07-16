@@ -1,7 +1,6 @@
-[gd_resource type="BehaviorTree" load_steps=58 format=3 uid="uid://b6mjhiku7448"]
+[gd_resource type="BehaviorTree" load_steps=61 format=3 uid="uid://b6mjhiku7448"]
 
 [ext_resource type="Script" uid="uid://dlc06guf1no2t" path="res://Entities/Mobs/AI/Tasks/CopperPaths/Driftskin/DriftskinSwapDirtpile.gd" id="1_sc660"]
-[ext_resource type="Script" uid="uid://caluc4yqvkpfd" path="res://Entities/Mobs/AI/Tasks/CopperPaths/Driftskin/DriftskinAttack.gd" id="2_sv6gs"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_042f5"]
 var/player_detected/name = &"player_detected"
@@ -210,7 +209,7 @@ resource_name = "<null>"
 variable = &"player_detected"
 value = SubResource("BBVariant_3jaeu")
 
-[sub_resource type="BTSequence" id="BTSequence_kn5qw"]
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_egkqs"]
 custom_name = "Yes - turn off 'player detected' var and reset"
 children = [SubResource("BTCheckVar_nmya8"), SubResource("BTSetVar_jf3la")]
 
@@ -262,29 +261,45 @@ custom_name = "Reappear"
 custom_name = "Yes - swap dirtpiles"
 children = [SubResource("BTCheckVar_sv6gs"), SubResource("BTPlayAnimation_sv6gs"), SubResource("BTAction_ndd77"), SubResource("BTPlayAnimation_0i4v1")]
 
-[sub_resource type="BTAction" id="BTAction_guxfm"]
-script = ExtResource("2_sv6gs")
-target_var = &"target"
+[sub_resource type="BBNode" id="BBNode_daapm"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_tsjmc"]
+await_completion = 0.5
+animation_player = SubResource("BBNode_daapm")
+animation_name = &"Attack"
+
+[sub_resource type="BBNode" id="BBNode_tsjmc"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_4s11a"]
+node = SubResource("BBNode_tsjmc")
+method = &"attack"
+
+[sub_resource type="BTWait" id="BTWait_sc660"]
+duration = 2.5
 
 [sub_resource type="BTSequence" id="BTSequence_jf3la"]
 custom_name = "No - shoot arrow"
-children = [SubResource("BTAction_guxfm")]
+children = [SubResource("BTPlayAnimation_tsjmc"), SubResource("BTCallMethod_4s11a"), SubResource("BTWait_sc660")]
 
-[sub_resource type="BTSelector" id="BTSelector_kn5qw"]
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_0i4v1"]
 custom_name = "Closer than minimum range?"
 children = [SubResource("BTSequence_3jaeu"), SubResource("BTSequence_jf3la")]
 
-[sub_resource type="BTSequence" id="BTSequence_iq8d0"]
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_rothb"]
 custom_name = "No - handle combat"
-children = [SubResource("BTCallMethod_nmya8"), SubResource("BTSelector_kn5qw")]
+children = [SubResource("BTCallMethod_nmya8"), SubResource("BTDynamicSelector_0i4v1")]
 
-[sub_resource type="BTSelector" id="BTSelector_dopm8"]
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_daapm"]
 custom_name = "Outside of max range?"
-children = [SubResource("BTSequence_kn5qw"), SubResource("BTSequence_iq8d0")]
+children = [SubResource("BTDynamicSequence_egkqs"), SubResource("BTDynamicSequence_rothb")]
 
 [sub_resource type="BTDynamicSequence" id="BTDynamicSequence_l5267"]
 custom_name = "Yes - combat"
-children = [SubResource("BTCheckVar_1cfxe"), SubResource("BTEvaluateExpression_lyttq"), SubResource("BTSelector_dopm8")]
+children = [SubResource("BTCheckVar_1cfxe"), SubResource("BTEvaluateExpression_lyttq"), SubResource("BTDynamicSelector_daapm")]
 
 [sub_resource type="BTDynamicSelector" id="BTDynamicSelector_sc660"]
 custom_name = "In range / already detected?"

@@ -60,6 +60,7 @@ func special_attack():
 func _on_animation_finished(_anim : StringName):
 	anim_player.play("idle")
 
+
 func _on_timeout():
 	# Reset animation
 	

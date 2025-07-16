@@ -19,7 +19,7 @@ const MIN_SPAWN_RANGE = 75
 
 #region Data
 @export_category("Data")
-@export var texture : Texture2D
+@export var data : ItemData
 @onready var hovered_texture
 #endregion
 
@@ -32,8 +32,6 @@ signal get_picked
 #region builtins
 func _ready():
 	if Engine.is_editor_hint(): return
-	
-	var parent = self.get_parent()
 
 	var spawn_vector = (
 		Vector2(randf_range(-1, 1), randf_range(-1, 1)) 
@@ -42,7 +40,7 @@ func _ready():
 
 	var tween = create_tween()
 	(
-	tween.tween_property(parent, "position", global_position + spawn_vector, 1.5)
+	tween.tween_property(self, "global_position", global_position + spawn_vector, 1.5)
 	.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	)
 
@@ -55,11 +53,12 @@ func _ready():
 	
 func _process(_delta):
 	if Engine.is_editor_hint():
-		sprite.texture = texture
+		if data == null: return
+		sprite.texture = data.texture
 	else:
-		sprite.texture = texture
-		if texture == null: return
-		var _hov_texture = texture.resource_path.split(".png")[0] + "_hovered.png"
+		if data == null: return
+		sprite.texture = data.texture
+		var _hov_texture = data.texture.resource_path.split(".png")[0] + "_hovered.png"
 		if FileAccess.file_exists(_hov_texture):
 			hovered_texture = load(_hov_texture)
 
@@ -74,5 +73,6 @@ func _on_interact_area_area_entered(_area):
 
 
 func _on_interact_area_area_exited(_area):
-	sprite.texture = texture
+	if data == null: return
+	sprite.texture = data.texture
 #endregion

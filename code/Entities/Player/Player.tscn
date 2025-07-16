@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://d0mst4eki2yyd"]
+[gd_scene load_steps=29 format=3 uid="uid://d0mst4eki2yyd"]
 
 [ext_resource type="Script" uid="uid://b1wm3dahmoc0q" path="res://Entities/Player/PlayerController.gd" id="1_3iq6n"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_fvu4l"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://dgsc24vwamctl" path="res://Entities/Player/Controllers/Weapon/WeaponHandler.gd" id="7_jynvv"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_kuc5k"]
 [ext_resource type="PackedScene" uid="uid://5xry0mnc8j7o" path="res://Entities/Player/HUD/HUD.tscn" id="9_hyecf"]
+[ext_resource type="Script" uid="uid://cyqxjwgjfm1yp" path="res://Entities/Player/Controllers/Tool/ToolsController.gd" id="12_061yh"]
 [ext_resource type="Script" uid="uid://ch2eolfscg1qq" path="res://Entities/Player/Controllers/MovementController.gd" id="12_lmeus"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hacra"]
@@ -398,6 +399,9 @@ script = ExtResource("7_jynvv")
 [node name="WeaponHandler" type="Node2D" parent="Controllers/Weapon"]
 position = Vector2(50, 0)
 scale = Vector2(5, 5)
+
+[node name="Tools" type="Node2D" parent="Controllers"]
+script = ExtResource("12_061yh")
 
 [node name="Movement" type="Node2D" parent="Controllers"]
 script = ExtResource("12_lmeus")

@@ -13,8 +13,12 @@ var DIRTPILE_Y_OFFSET = 50
 #region Nodes
 @export_group("Nodes")
 
+@export_subgroup("Raycasts")
 @onready var follow_raycast = $"Follow RayCast"
 @onready var detect_raycast = $"Detect RayCast"
+
+@export_subgroup("Combat")
+@onready var arrow : DriftskinArrow= $DriftskinArrow
 #endregion
 
 #region Data
@@ -42,6 +46,10 @@ func _ready():
 	## Set raycasts
 	follow_raycast.target_position = Vector2(FOLLOW_RAYCAST_DIST, 0)
 	detect_raycast.target_position = Vector2(DETECT_RAYCAST_DIST, 0)
+	
+	#arrow.process_mode = Node.PROCESS_MODE_DISABLED
+	arrow.sprite.visible = false
+	arrow.on_destruction.connect(reset_arrow)
 
 
 func _physics_process(_delta):
@@ -56,11 +64,26 @@ func _physics_process(_delta):
 
 
 #region Combat
-func on_player_damage(_area : Area2D):
-	player.stop()
-	sprite.frame = 0
-	player.play("hit")
-	bt_player.blackboard.set_var(&"hit", true)
+func attack(_attack_dir : Vector2 = Vector2.ZERO):
+	super.attack(_attack_dir)
+	arrow.sprite.visible = true
+	arrow.process_mode = Node.PROCESS_MODE_INHERIT
+	
+	var attack_dir = global_position.direction_to(
+		PlayerManager.player.global_position
+	)
+	
+	arrow.direction = attack_dir
+	arrow.fly()
+#endregion
+
+
+#region Signal handlers
+func reset_arrow():
+	arrow.reset()
+	#arrow.sprite.visible = false
+	arrow.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
+	arrow.global_position = global_position
 #endregion
 
 

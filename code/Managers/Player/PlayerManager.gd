@@ -32,3 +32,19 @@ func heal(ammount : int):
 	data.curr_lives += ammount
 	curr_lives_changed.emit(data.curr_lives)
 #endregion
+
+
+#region Layers
+func get_player_combat_layers() -> Array[int]:
+	var collision_layer = (
+		ProjectSettings.get_setting("layer_names/2d_physics/layer_3")
+	)
+	var mask_layer = (
+		ProjectSettings.get_setting("layer_names/2d_physics/layer_6")
+	)
+	
+	return [
+		PhysicsLayers.get_layer_value(collision_layer),
+		PhysicsLayers.get_layer_value(mask_layer)
+	]
+#endregion

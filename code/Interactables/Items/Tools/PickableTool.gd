@@ -1,5 +1,5 @@
 @tool
-extends Node2D
+extends PickableItem
 class_name PickableTool
 
 #region Nodes
@@ -7,21 +7,9 @@ class_name PickableTool
 @onready var pickable :PickableItem = $PickableItem
 #endregion
 
-#region Data
-@export_group("Data")
-@export var data : ToolData
-#endregion
 
 #region builtins
-func _ready() -> void:
-	if Engine.is_editor_hint(): return
-	if data != null:
-		pickable.texture = data.texture
-	
-	if not $PickableItem.get_picked.is_connected(_on_get_picked):
-		$PickableItem.get_picked.connect(_on_get_picked)
-
-
 func _on_get_picked():
 	InventoryManager.add_tool(data as ToolData)
+	super._on_get_picked()
 #endregion

@@ -17,7 +17,7 @@ const REGISTERED_ATTACK_PROGRESS_AMOUNT = 20
 #region Nodes
 @export_group("Nodes")
 var tool_node = preload("uid://cpa8ag7qoliw7")
-var weapon_node = preload("uid://cdvv3bgj8fab6")
+var weapon_node := preload("uid://c37sltcpyvs3r")
 #endregion
 
 #region Data
@@ -203,6 +203,12 @@ func add_tool_slots(ammount : int):
 
 func get_tools_size():
 	return tools.filter( func (a): return a != null).size()
+	
+	
+func consume_tool():
+	curr_tool.tool_usage -= 1
+	if curr_tool.tool_usage <= 0:
+		remove_tool(curr_tool_idx)
 #endregion
 
 

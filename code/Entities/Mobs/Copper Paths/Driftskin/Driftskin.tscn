@@ -1,7 +1,9 @@
-[gd_scene load_steps=17 format=4 uid="uid://dr5ax58ns4c7k"]
+[gd_scene load_steps=19 format=4 uid="uid://dr5ax58ns4c7k"]
 
 [ext_resource type="Script" uid="uid://dqfwhr1avmrn7" path="res://Entities/Mobs/Copper Paths/Driftskin/Driftskin.gd" id="1_8d8is"]
 [ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Entities/damage.gdshader" id="2_4pept"]
+[ext_resource type="Resource" uid="uid://bk12ad6pejafj" path="res://Entities/Mobs/Copper Paths/Driftskin/Driftskin_D.tres" id="2_fxeid"]
+[ext_resource type="PackedScene" uid="uid://buqri2j1vwbe0" path="res://Entities/Mobs/Copper Paths/Driftskin/Driftskin Arrow.tscn" id="3_6krr8"]
 [ext_resource type="BehaviorTree" uid="uid://b6mjhiku7448" path="res://Entities/Mobs/AI/Trees/CopperPaths/Driftskin/Driftskin_BT.tres" id="3_sabak"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ctdae"]
@@ -23,7 +25,6 @@ size_override = Vector2(128, 128)
 
 [sub_resource type="Animation" id="Animation_nh7oy"]
 length = 0.6
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -144,20 +145,23 @@ script = ExtResource("1_8d8is")
 FOLLOW_RAYCAST_DIST = 200
 DETECT_RAYCAST_DIST = 60
 ATTACK_SPEED = 600.0
+data = ExtResource("2_fxeid")
 metadata/_edit_group_ = true
 
 [node name="-- Raycasts --" type="Node" parent="."]
 
 [node name="Follow RayCast" type="RayCast2D" parent="."]
 target_position = Vector2(200, 0)
-collision_mask = 8
+collision_mask = 2
 collide_with_areas = true
 
 [node name="Detect RayCast" type="RayCast2D" parent="."]
-collision_mask = 8
+collision_mask = 2
 collide_with_areas = true
 
 [node name="-- Combat --" type="Node" parent="."]
+
+[node name="DriftskinArrow" parent="." instance=ExtResource("3_6krr8")]
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 16
@@ -189,7 +193,7 @@ material = SubResource("ShaderMaterial_042f5")
 texture = SubResource("PortableCompressedTexture2D_sabak")
 hframes = 4
 vframes = 4
-frame = 1
+frame = 11
 metadata/_aseprite_wizard_config_ = {
 "embed_tex": true,
 "i_mode": -1,
@@ -201,7 +205,7 @@ metadata/_aseprite_wizard_config_ = {
 "only_visible": false,
 "player": "AnimationPlayer",
 "slice": "",
-"source": "res://Entities/Mobs/Copper Paths/Driftskin/Driftskin.aseprite"
+"source": "res://Entities/Mobs/Copper Paths/Driftskin/Art/Driftskin.aseprite"
 }
 metadata/_aseprite_wizard_source_file_hash_ = "f65d75ee9f2debdcbba3e742fdc8292e"
 metadata/_aseprite_wizard_interface_config_ = {
