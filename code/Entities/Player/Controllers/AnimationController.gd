@@ -7,6 +7,7 @@ class_name AnimationController
 @onready var player : PlayerController = PlayerManager.player
 #endregion
 
+
 #region Animation Handling
 func play_animation(anim_name: String) -> void:
 	current_animation = anim_name

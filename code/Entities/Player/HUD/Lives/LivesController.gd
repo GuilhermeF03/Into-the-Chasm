@@ -24,11 +24,11 @@ func init_lives():
 		content.add_child(_slot)
 
 
-func on_lives_changed(ammount : int):
+func on_lives_changed(amount: int):
 	var max_lives = PlayerManager.data.max_lives
 
-	for i in range(0, max_lives):
-		if i < ammount: continue
-		var slot : LifeSlot = content.get_children()[i]
-		slot.is_full = false
+	for i in range(max_lives):
+		var slot: LifeSlot = content.get_children()[i]
+		slot.is_full = i < amount
+
 		

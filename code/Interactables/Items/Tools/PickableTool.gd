@@ -2,11 +2,6 @@
 extends PickableItem
 class_name PickableTool
 
-#region Nodes
-@export_group("Nodes")
-@onready var pickable :PickableItem = $PickableItem
-#endregion
-
 
 #region builtins
 func _on_get_picked():

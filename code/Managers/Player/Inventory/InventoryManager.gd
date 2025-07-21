@@ -16,7 +16,7 @@ const REGISTERED_ATTACK_PROGRESS_AMOUNT = 20
 
 #region Nodes
 @export_group("Nodes")
-var tool_node = preload("uid://cpa8ag7qoliw7")
+var tool_node = preload("uid://hvirmd1rmgea")
 var weapon_node := preload("uid://c37sltcpyvs3r")
 #endregion
 
@@ -62,6 +62,7 @@ signal tool_removed(index : int)
 signal tool_selected(index : int)
 signal tool_slots_upgraded(ammount : int)
 signal tool_added(tool : ToolData, index : int)
+signal tool_used(tool : ToolData)
 
 @export_subgroup("Trinkets")
 signal trinket_added(trinket : TrinketData)
@@ -151,7 +152,7 @@ func add_tool(tool : ToolData):
 		tool_added.emit(tool, idx)
 
 
-func remove_tool(index : int = -1):
+func remove_tool(index : int = -1, was_consumed : bool = false):
 	var idx = (
 		tools.size() if index not in range(curr_tools_size)
 		else index
@@ -161,7 +162,7 @@ func remove_tool(index : int = -1):
 	tools[index] = null
 	tool_removed.emit(idx)
 	
-	if tool != null:
+	if tool != null and not was_consumed:
 		var _tool_node : PickableTool = tool_node.instantiate()
 		_tool_node.set_data(tool)
 		LevelManager.spawn(_tool_node, PlayerManager.player.global_position, true)
@@ -206,9 +207,10 @@ func get_tools_size():
 	
 	
 func consume_tool():
-	curr_tool.tool_usage -= 1
-	if curr_tool.tool_usage <= 0:
-		remove_tool(curr_tool_idx)
+	curr_tool.usage -= 1
+	tool_used.emit(curr_tool)
+	if curr_tool.usage <= 0:
+		remove_tool(curr_tool_idx, true)
 #endregion
 
 

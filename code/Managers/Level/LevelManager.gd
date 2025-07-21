@@ -93,6 +93,10 @@ func add_pause_trigger(sig : Signal):
 	)
 
 
+func set_timer(time : float, callback : Callable):
+	get_tree().create_timer(time).timeout.connect(callback)
+
+
 func biome_to_string(_biome : Biome):
 	match _biome:
 		Biome.COPPER_PATHS:

@@ -14,6 +14,7 @@ extends Node
 @export_group("Signals")
 signal curr_lives_changed(value : int)
 signal max_lives_changed(value : int)
+signal on_heal
 #endregion
 
 #region _builtins
@@ -31,6 +32,7 @@ func damage_player(ammount : int):
 func heal(ammount : int):
 	data.curr_lives += ammount
 	curr_lives_changed.emit(data.curr_lives)
+	on_heal.emit()
 #endregion
 
 

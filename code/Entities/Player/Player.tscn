@@ -1,23 +1,19 @@
-[gd_scene load_steps=29 format=3 uid="uid://d0mst4eki2yyd"]
+[gd_scene load_steps=30 format=3 uid="uid://d0mst4eki2yyd"]
 
 [ext_resource type="Script" uid="uid://b1wm3dahmoc0q" path="res://Entities/Player/PlayerController.gd" id="1_3iq6n"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_fvu4l"]
 [ext_resource type="Script" uid="uid://d2uhr5myy182" path="res://Entities/Player/Controllers/CameraController.gd" id="2_hacra"]
 [ext_resource type="PackedScene" uid="uid://dd1bjjaxa7dur" path="res://Entities/Player/Inventory/Inventory.tscn" id="2_urbfw"]
+[ext_resource type="Material" uid="uid://b10lp1h4nbjjq" path="res://Materials/Hit/hit_shader_material.tres" id="2_uw7o4"]
 [ext_resource type="Texture2D" uid="uid://ct15olca7m1sy" path="res://Entities/Player/Art/player.png" id="3_5x0oj"]
-[ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Entities/damage.gdshader" id="3_761t5"]
 [ext_resource type="Script" uid="uid://b1rk8c57ikqu0" path="res://Entities/Player/Controllers/AnimationController.gd" id="6_jynvv"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_ikipm"]
-[ext_resource type="Script" uid="uid://dgsc24vwamctl" path="res://Entities/Player/Controllers/Weapon/WeaponHandler.gd" id="7_jynvv"]
+[ext_resource type="Script" uid="uid://dgsc24vwamctl" path="res://Entities/Player/Controllers/WeaponHandler.gd" id="7_jynvv"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_kuc5k"]
+[ext_resource type="Material" uid="uid://p258o30kdie5" path="res://Materials/Heal/heal_shader_material.tres" id="8_uw7o4"]
 [ext_resource type="PackedScene" uid="uid://5xry0mnc8j7o" path="res://Entities/Player/HUD/HUD.tscn" id="9_hyecf"]
-[ext_resource type="Script" uid="uid://cyqxjwgjfm1yp" path="res://Entities/Player/Controllers/Tool/ToolsController.gd" id="12_061yh"]
+[ext_resource type="Script" uid="uid://cyqxjwgjfm1yp" path="res://Entities/Player/Controllers/ToolsController.gd" id="12_061yh"]
 [ext_resource type="Script" uid="uid://ch2eolfscg1qq" path="res://Entities/Player/Controllers/MovementController.gd" id="12_lmeus"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hacra"]
-shader = ExtResource("3_761t5")
-shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/flash_value = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0n3kf"]
 radius = 16.0
@@ -54,6 +50,35 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_uw7o4")]
+}
+
+[sub_resource type="Animation" id="Animation_061yh"]
+resource_name = "heal"
+length = 5.0
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("8_uw7o4"), null]
+}
 
 [sub_resource type="Animation" id="Animation_jynvv"]
 resource_name = "hit"
@@ -70,6 +95,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 1.0, 0.0, 1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_uw7o4"), null]
 }
 
 [sub_resource type="Animation" id="Animation_gdeu0"]
@@ -265,6 +302,7 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4p46q"]
 _data = {
 &"RESET": SubResource("Animation_lmeus"),
+&"heal": SubResource("Animation_061yh"),
 &"hit": SubResource("Animation_jynvv"),
 &"idle_down": SubResource("Animation_gdeu0"),
 &"idle_up": SubResource("Animation_u0rdc"),
@@ -286,7 +324,7 @@ DODGE_COOLDOWN = 0.7
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
-material = SubResource("ShaderMaterial_hacra")
+material = ExtResource("2_uw7o4")
 scale = Vector2(5, 5)
 texture = ExtResource("3_5x0oj")
 hframes = 4
@@ -319,6 +357,7 @@ position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_0n3kf")
 
 [node name="Hurtbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 16
 
@@ -327,6 +366,7 @@ position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_brdpf")
 
 [node name="ItemCollect" type="Node2D" parent="."]
+visible = false
 
 [node name="Collect" type="Area2D" parent="ItemCollect"]
 collision_layer = 2
@@ -405,6 +445,7 @@ script = ExtResource("12_061yh")
 
 [node name="Movement" type="Node2D" parent="Controllers"]
 script = ExtResource("12_lmeus")
+DODGE_SPEED = 1000
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_enemy_attack"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

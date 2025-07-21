@@ -43,12 +43,13 @@ func _ready():
 	LevelManager.add_pause_trigger(inventory.on_handling_changed)
 	#hurtbox.area_entered.connect(_on_enemy_attack)
 	hurtbox.body_entered.connect(_on_enemy_attack)
+	
+	#sprite.material = load("res://Entities/Player/Materials/heal_material.tres")
 
 
 func _physics_process(_delta):
 	if inventory.handling_input or InputManager.is_no_input_allowed(): 
 		return
-	
 	var input = Input.get_vector(
 		"move_left", "move_right", 
 		"move_up", "move_down"

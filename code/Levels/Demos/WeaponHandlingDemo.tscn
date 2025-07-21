@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cisp2x0ixh5pj"]
+[gd_scene load_steps=8 format=3 uid="uid://cisp2x0ixh5pj"]
 
 [ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://Entities/Player/Player.tscn" id="1_lvshm"]
 [ext_resource type="PackedScene" uid="uid://dbvl2aq745kyx" path="res://Interactables/Items/Weapons/Data/Sword/Standard/[P] Sword.tscn" id="2_8yit7"]
 [ext_resource type="PackedScene" uid="uid://b2u0wimnxxcnc" path="res://Entities/Dummy/Dummy.tscn" id="3_6fqqn"]
 [ext_resource type="PackedScene" uid="uid://qn4tkrelxuep" path="res://Interactables/Items/Weapons/Data/Pickaxe/Standard/[P] Pickaxe.tscn" id="3_gtsal"]
 [ext_resource type="PackedScene" uid="uid://dr5ax58ns4c7k" path="res://Entities/Mobs/Copper Paths/Driftskin/Driftskin.tscn" id="6_6r841"]
+[ext_resource type="PackedScene" uid="uid://dvo2pao4k66g8" path="res://Interactables/Items/Tools/Data/Heal/[P] Healing Potion.tscn" id="7_77utl"]
 [ext_resource type="PackedScene" uid="uid://dhpbsgiao8ia3" path="res://Entities/Mobs/Copper Paths/Driftskin/Dirtpile.tscn" id="7_onbv1"]
 
 [node name="WeaponHandlingDemo" type="Node2D"]
@@ -37,3 +38,6 @@ position = Vector2(-352, 144)
 position = Vector2(456, 120)
 
 [node name="[P] Pickaxe" parent="." instance=ExtResource("3_gtsal")]
+
+[node name="[P] Healing Potion" parent="." instance=ExtResource("7_77utl")]
+position = Vector2(0, 328)

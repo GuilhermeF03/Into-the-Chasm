@@ -1,5 +1,2 @@
-extends GDScript
+extends Effect
 class_name ToolEffect
-
-func act():
-	print("Tool used")

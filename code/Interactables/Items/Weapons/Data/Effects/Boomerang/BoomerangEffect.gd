@@ -89,7 +89,7 @@ func return_to_player(delta):
 		anim_player.play("special_end")
 		anim_player.queue("idle")
 		await anim_player.animation_finished
-		finished_special.emit()
+		finished.emit()
 
 #endregion
 

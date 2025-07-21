@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=4 uid="uid://cwseeacjaeuni"]
 
 [ext_resource type="Script" uid="uid://6bdvq6vmgmb" path="res://Entities/Mobs/Enemy.gd" id="1_gf03x"]
-[ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Entities/damage.gdshader" id="3_yf3bw"]
+[ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Materials/Hit/hit_shader.gdshader" id="3_yf3bw"]
 [ext_resource type="BehaviorTree" uid="uid://diet7kvlie40v" path="res://Entities/Mobs/AI/Trees/Basic_Melee_BT.tres" id="5_042f5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_042f5"]

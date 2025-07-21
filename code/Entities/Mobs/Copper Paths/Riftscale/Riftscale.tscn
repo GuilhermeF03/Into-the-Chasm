@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=4 uid="uid://c4y8344kdlqw4"]
 
 [ext_resource type="Script" uid="uid://dxcto8012ry2m" path="res://Entities/Mobs/Burrower.gd" id="1_3n21y"]
-[ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Entities/damage.gdshader" id="2_15f7h"]
+[ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Materials/Hit/hit_shader.gdshader" id="2_15f7h"]
 [ext_resource type="BehaviorTree" uid="uid://cf1ceygyqtm7v" path="res://Entities/Mobs/AI/Trees/Basic_Burrower_BT.tres" id="3_jdivn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_042f5"]

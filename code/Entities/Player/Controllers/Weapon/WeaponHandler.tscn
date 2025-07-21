@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ywpg5nkhidqk"]
-
-[ext_resource type="Script" uid="uid://dgsc24vwamctl" path="res://Entities/Player/Controllers/Weapon/WeaponHandler.gd" id="1_uqibm"]
-
-
-[node name="WeaponHandler" type="Node2D"]
-scale = Vector2(5, 5)
-script = ExtResource("1_uqibm")

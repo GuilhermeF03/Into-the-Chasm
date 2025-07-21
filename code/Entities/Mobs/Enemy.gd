@@ -19,7 +19,7 @@ class_name Enemy
 @onready var sprite = $Sprite2D
 @onready var player : AnimationPlayer = $AnimationPlayer
 
-@onready var attack_timer = $"Attack timer"
+@onready var attack_timer : Timer = $"Attack timer"
 @onready var hurtbox = $Hurtbox
 
 @onready var attack_area = $"Attack Area"
@@ -97,8 +97,7 @@ func get_damage(object : Node2D) -> int:
 func die():
 	if data.loot != null:
 		var reward := data.loot.instantiate()
-		reward.global_position = self.global_position
-		LevelManager.scene.add_child(reward)
+		LevelManager.spawn(reward, self.global_position, true)
 	
 	self.queue_free()
 #endregion

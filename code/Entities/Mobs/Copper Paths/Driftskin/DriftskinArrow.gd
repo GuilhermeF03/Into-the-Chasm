@@ -20,7 +20,7 @@ class_name DriftskinArrow
 
 #region Signals
 @export_group("Signals")
-signal on_destruction()
+signal on_destruction(arrow : DriftskinArrow)
 #endregion
 
 
@@ -61,6 +61,7 @@ func _physics_process(_delta):
 func fly():
 	animation_player.play("Fly")
 	despawn_timer.start(DESPAWN_TIME)
+	print("started timer")
 	global_rotation = get_rotation_to(direction)
 	velocity = direction * MOVEMENT_SPEED
 
@@ -76,6 +77,7 @@ func reset():
 	velocity = Vector2.ZERO
 	hitbox.collision_layer = hitbox_initial_layer
 	hitbox.collision_mask = hitbox_initial_mask
+	despawn_timer.stop()
 #endregion
 
 
@@ -92,7 +94,9 @@ func on_parry(other):
 
 
 func on_destroy(_other = null):
-	on_destruction.emit()
+	on_destruction.emit(self)
+	print("destroyed")
+	
 	
 func on_world_collision(_other):
 	pass

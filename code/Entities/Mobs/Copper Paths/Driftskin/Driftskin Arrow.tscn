@@ -82,3 +82,4 @@ libraries = {
 [node name="World detection zone" type="Area2D" parent="."]
 
 [node name="De-spawn timer" type="Timer" parent="."]
+one_shot = true

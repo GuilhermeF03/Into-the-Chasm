@@ -44,12 +44,12 @@ func _input(event: InputEvent) -> void:
 
 #region weapon handling
 func handle_weapon():
+	var player_scale = PlayerManager.player.sprite.scale.x
+
 	if lock_movement:
 		return
 	look_at(get_global_mouse_position())
-	handler.scale.y = (
-		-5 if get_local_mouse_position().x < 0 else 5
-	)
+	handler.global_rotation = rotate_toward(handler.global_rotation, global_rotation, 0.1)
 
 
 func set_weapon(weapon : WeaponData):
@@ -66,7 +66,7 @@ func set_weapon(weapon : WeaponData):
 		handled_weapon.z_index = 1
 			
 		# Connect signals
-		handled_weapon.can_attack.connect(_on_can_attack_changed)
+		handled_weapon.can_use.connect(_on_can_attack_changed)
 		handled_weapon.attack_registered.connect(
 			PlayerManager.player.on_attack_registered
 		)
@@ -75,7 +75,7 @@ func set_weapon(weapon : WeaponData):
 
 
 func attack():
-	handled_weapon.attack()
+	handled_weapon.use()
 
 
 func special_attack():
