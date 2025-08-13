@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://xnh687700ape" path="res://Entities/Player/Inventory/Items/Equipment & Resources/Equipment/Weapon/WeaponAbilityProgress.png" id="4_38nb5"]
 [ext_resource type="PackedScene" uid="uid://b5ote6c6nj3y5" path="res://Entities/Player/Inventory/Items/Stats Panel/StatsPanel.tscn" id="7_twjkh"]
 
+
 [node name="Weapon Slot" type="AspectRatioContainer"]
 script = ExtResource("1_v3x2f")
 

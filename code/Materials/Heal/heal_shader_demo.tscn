@@ -1,9 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://bnlq8ilitlqr0"]
 
 [ext_resource type="Shader" uid="uid://u6yvla6j137" path="res://Materials/Heal/heal_shader.gdshader" id="1_qsbtk"]
-[ext_resource type="Script" uid="uid://bowwk17m8fjin" path="res://Entities/Dummy/Dummy.gd" id="2_wctro"]
+[ext_resource type="Script" uid="uid://bowwk17m8fjin" path="res://Entities/Neutral/Dummy/Dummy.gd" id="2_wctro"]
 [ext_resource type="Material" uid="uid://p258o30kdie5" path="res://Materials/Heal/heal_shader_material.tres" id="3_if4hv"]
-[ext_resource type="Texture2D" uid="uid://dd0ev3s6uyahk" path="res://Entities/Dummy/Dummy.png" id="4_6b64x"]
+[ext_resource type="Texture2D" uid="uid://dd0ev3s6uyahk" path="res://Entities/Neutral/Dummy/Dummy.png" id="4_6b64x"]
+
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gycfc"]
 shader = ExtResource("1_qsbtk")

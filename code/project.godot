@@ -11,20 +11,21 @@ config_version=5
 [application]
 
 config/name="Into the Chasm"
+config/version="0.0.3"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/use_filter=false
 boot_splash/image="uid://cpra3180kwt1r"
-config/icon="res://title.png"
+config/icon="uid://cpra3180kwt1r"
 
 [autoload]
 
-LevelManager="*res://Managers/Level/LevelManager.tscn"
-InputManager="*res://Managers/Input/InputManager.tscn"
-UiManager="*res://Managers/UI/UiManager.tscn"
-InventoryManager="*res://Managers/Player/Inventory/InventoryManager.gd"
-InteractionManager="*res://Managers/Interaction/InteractionManager.tscn"
+LevelManager="*res://Autoloads/Level/LevelManager.tscn"
+InputManager="*res://Autoloads/Input/InputManager.tscn"
+UiManager="*res://Autoloads/UI/UiManager.tscn"
+InventoryManager="*res://Autoloads/Player/Inventory/InventoryManager.gd"
+InteractionManager="*res://Autoloads/Interaction/InteractionManager.tscn"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
-PlayerManager="*res://Managers/Player/PlayerManager.gd"
+PlayerManager="*res://Autoloads/Player/PlayerManager.gd"
 
 [display]
 
@@ -126,7 +127,7 @@ special_attack={
 
 [limbo_ai]
 
-behavior_tree/user_task_dirs=PackedStringArray("res://ai/tasks", "res://Entities/Mobs/AI/Tasks/", "res://Entities/Mobs/AI/Tasks/CopperPaths")
+behavior_tree/user_task_dirs=PackedStringArray("res://Entities/Mob/AI/Tasks", "res://Entities/Mob/Copper Paths")
 
 [physics]
 

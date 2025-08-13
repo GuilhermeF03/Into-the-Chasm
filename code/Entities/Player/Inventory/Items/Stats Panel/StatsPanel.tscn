@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dwh30r5o6fwbx" path="res://Entities/Player/Inventory/Items/Stats Panel/StatsPanel.gd" id="1_yo74b"]
 
+
 [node name="Stats Panel" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0

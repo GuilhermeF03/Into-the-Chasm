@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cacdgfg81uevr"]
+
+[ext_resource type="Script" uid="uid://d37v58sckiugo" path="res://Items/Tools/Effects/Heal/HealEffect.gd" id="1_j4vi4"]
+
+
+[node name="HealEffect" type="Node2D"]
+script = ExtResource("1_j4vi4")
+HEAL_SHADER_TIME = 2.0
+effect_name = "Heal"
+effect_args = Dictionary[StringName, Variant]({
+&"ammount": 1
+})
+metadata/_custom_type_script = "uid://gy7ursc72px"

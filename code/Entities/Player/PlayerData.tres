@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dmo6r8lf7yvts" path="res://Entities/Player/PlayerData.gd" id="1_alyre"]
 
+
 [resource]
 script = ExtResource("1_alyre")
 max_lives = 4

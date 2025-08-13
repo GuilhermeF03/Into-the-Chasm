@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cenpns61ybr7o" path="res://Entities/Player/HUD/Lives/LivesController.gd" id="1_6bx41"]
 
+
 [node name="Lives" type="VBoxContainer"]
 offset_right = 99.0
 offset_bottom = 84.0

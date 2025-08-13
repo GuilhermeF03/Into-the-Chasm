@@ -1,0 +1,333 @@
+[gd_resource type="BehaviorTree" load_steps=64 format=3 uid="uid://b6mjhiku7448"]
+
+[ext_resource type="Script" uid="uid://dlc06guf1no2t" path="res://Entities/Mob/AI/Tasks/CopperPaths/Driftskin/DriftskinSwapDirtpile.gd" id="1_sc660"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_042f5"]
+var/player_detected/name = &"player_detected"
+var/player_detected/type = 1
+var/player_detected/value = false
+var/player_detected/hint = 0
+var/player_detected/hint_string = ""
+var/player_in_range/name = &"player_in_range"
+var/player_in_range/type = 1
+var/player_in_range/value = false
+var/player_in_range/hint = 0
+var/player_in_range/hint_string = ""
+var/player_in_minimum_range/name = &"player_in_minimum_range"
+var/player_in_minimum_range/type = 3
+var/player_in_minimum_range/value = 0.0
+var/player_in_minimum_range/hint = 0
+var/player_in_minimum_range/hint_string = ""
+var/player/name = &"player"
+var/player/type = 24
+var/player/hint = 0
+var/player/hint_string = ""
+var/range_min/name = &"range_min"
+var/range_min/type = 3
+var/range_min/value = 10.0
+var/range_min/hint = 0
+var/range_min/hint_string = ""
+var/range_max/name = &"range_max"
+var/range_max/type = 3
+var/range_max/value = 0.0
+var/range_max/hint = 0
+var/range_max/hint_string = ""
+var/hit/name = &"hit"
+var/hit/type = 1
+var/hit/value = false
+var/hit/hint = 0
+var/hit/hint_string = ""
+var/on_attack_range/name = &"on_attack_range"
+var/on_attack_range/type = 1
+var/on_attack_range/value = false
+var/on_attack_range/hint = 0
+var/on_attack_range/hint_string = ""
+var/attack_speed/name = &"attack_speed"
+var/attack_speed/type = 3
+var/attack_speed/value = 300.0
+var/attack_speed/hint = 0
+var/attack_speed/hint_string = ""
+var/on_attack_cooldown/name = &"on_attack_cooldown"
+var/on_attack_cooldown/type = 1
+var/on_attack_cooldown/value = false
+var/on_attack_cooldown/hint = 0
+var/on_attack_cooldown/hint_string = ""
+
+[sub_resource type="BBVariant" id="BBVariant_uhhso"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_hx8oo"]
+variable = &"hit"
+value = SubResource("BBVariant_uhhso")
+custom_name = "Check if was hit"
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_qxci2"]
+text = "[Driftskin - Behaviour Tree] Hit!"
+custom_name = "Log Hit"
+
+[sub_resource type="BBNode" id="BBNode_0i4v1"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTAwaitAnimation" id="BTAwaitAnimation_rothb"]
+animation_player = SubResource("BBNode_0i4v1")
+animation_name = &"hit"
+max_time = 0.3
+
+[sub_resource type="BBNode" id="BBNode_sv6gs"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_egkqs"]
+await_completion = 0.25
+animation_player = SubResource("BBNode_sv6gs")
+animation_name = &"Pop"
+speed = -1.0
+from_end = true
+custom_name = "Hide"
+
+[sub_resource type="BTAction" id="BTAction_0i4v1"]
+script = ExtResource("1_sc660")
+
+[sub_resource type="BBNode" id="BBNode_rothb"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_daapm"]
+await_completion = 0.5
+animation_player = SubResource("BBNode_rothb")
+animation_name = &"Pop"
+custom_name = "Reappear"
+
+[sub_resource type="BBVariant" id="BBVariant_egkqs"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTSetVar" id="BTSetVar_0i4v1"]
+variable = &"player_detected"
+value = SubResource("BBVariant_egkqs")
+
+[sub_resource type="BBVariant" id="BBVariant_sv6gs"]
+type = 1
+saved_value = false
+resource_name = "<null>"
+
+[sub_resource type="BTSetVar" id="BTSetVar_egkqs"]
+variable = &"hit"
+value = SubResource("BBVariant_sv6gs")
+
+[sub_resource type="BTSequence" id="BTSequence_uhhso"]
+custom_name = "Hit"
+children = [SubResource("BTCheckVar_hx8oo"), SubResource("BTConsolePrint_qxci2"), SubResource("BTAwaitAnimation_rothb"), SubResource("BTPlayAnimation_egkqs"), SubResource("BTAction_0i4v1"), SubResource("BTPlayAnimation_daapm"), SubResource("BTSetVar_0i4v1"), SubResource("BTSetVar_egkqs")]
+
+[sub_resource type="BBVariant" id="BBVariant_8qu5j"]
+type = 1
+saved_value = false
+resource_name = "false"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_t56y7"]
+variable = &"player_detected"
+value = SubResource("BBVariant_8qu5j")
+
+[sub_resource type="BBNode" id="BBNode_lyttq"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTEvaluateExpression" id="BTEvaluateExpression_7opfi"]
+node = SubResource("BBNode_lyttq")
+expression_string = "detect_raycast.is_colliding()"
+result_var = &"player_detected"
+custom_name = "Evaluate detect_raycast"
+
+[sub_resource type="BTSequence" id="BTSequence_lyttq"]
+custom_name = "No - do check"
+children = [SubResource("BTCheckVar_t56y7"), SubResource("BTEvaluateExpression_7opfi")]
+
+[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_sc660"]
+custom_name = "Was already detected?"
+children = [SubResource("BTSequence_lyttq")]
+
+[sub_resource type="BBVariant" id="BBVariant_jf3la"]
+type = 1
+saved_value = false
+resource_name = "<null>"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_kn5qw"]
+variable = &"player_detected"
+value = SubResource("BBVariant_jf3la")
+
+[sub_resource type="BBNode" id="BBNode_8qu5j"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_t56y7"]
+animation_player = SubResource("BBNode_8qu5j")
+animation_name = &"Scavenge"
+custom_name = "Play animation: Scavenge"
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_sv6gs"]
+custom_name = "No - scavenge"
+children = [SubResource("BTCheckVar_kn5qw"), SubResource("BTPlayAnimation_t56y7")]
+
+[sub_resource type="BBVariant" id="BBVariant_jksde"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_1cfxe"]
+variable = &"player_detected"
+value = SubResource("BBVariant_jksde")
+
+[sub_resource type="BBNode" id="BBNode_t56y7"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTEvaluateExpression" id="BTEvaluateExpression_lyttq"]
+node = SubResource("BBNode_t56y7")
+expression_string = "follow_raycast.is_colliding()"
+result_var = &"player_in_range"
+custom_name = "Evaluate if player on range"
+
+[sub_resource type="BBVariant" id="BBVariant_7opfi"]
+type = 1
+saved_value = false
+resource_name = "<null>"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_nmya8"]
+variable = &"player_in_range"
+value = SubResource("BBVariant_7opfi")
+
+[sub_resource type="BBVariant" id="BBVariant_3jaeu"]
+type = 1
+saved_value = false
+resource_name = "<null>"
+
+[sub_resource type="BTSetVar" id="BTSetVar_jf3la"]
+variable = &"player_detected"
+value = SubResource("BBVariant_3jaeu")
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_egkqs"]
+custom_name = "Yes - turn off 'player detected' var and reset"
+children = [SubResource("BTCheckVar_nmya8"), SubResource("BTSetVar_jf3la")]
+
+[sub_resource type="BBNode" id="BBNode_7opfi"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_nmya8"]
+node = SubResource("BBNode_7opfi")
+method = &"closer_than_minimum_distance"
+result_var = &"player_in_minimum_range"
+custom_name = "Check if player closer than minimum distance"
+
+[sub_resource type="BBVariant" id="BBVariant_sc660"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_sv6gs"]
+variable = &"player_in_minimum_range"
+value = SubResource("BBVariant_sc660")
+
+[sub_resource type="BBNode" id="BBNode_sc660"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_sv6gs"]
+await_completion = 0.25
+animation_player = SubResource("BBNode_sc660")
+animation_name = &"Pop"
+speed = -1.0
+from_end = true
+custom_name = "Hide"
+
+[sub_resource type="BTAction" id="BTAction_ndd77"]
+script = ExtResource("1_sc660")
+
+[sub_resource type="BBNode" id="BBNode_egkqs"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_0i4v1"]
+await_completion = 0.25
+animation_player = SubResource("BBNode_egkqs")
+animation_name = &"Pop"
+custom_name = "Reappear"
+
+[sub_resource type="BTSequence" id="BTSequence_3jaeu"]
+custom_name = "Yes - swap dirtpiles"
+children = [SubResource("BTCheckVar_sv6gs"), SubResource("BTPlayAnimation_sv6gs"), SubResource("BTAction_ndd77"), SubResource("BTPlayAnimation_0i4v1")]
+
+[sub_resource type="BBNode" id="BBNode_6ujwv"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTEvaluateExpression" id="BTEvaluateExpression_sc660"]
+node = SubResource("BBNode_6ujwv")
+expression_string = "!attack_timer.is_stopped()"
+result_var = &"on_attack_cooldown"
+
+[sub_resource type="BBVariant" id="BBVariant_6ujwv"]
+type = 1
+saved_value = false
+resource_name = "false"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_sc660"]
+variable = &"on_attack_cooldown"
+value = SubResource("BBVariant_6ujwv")
+
+[sub_resource type="BBNode" id="BBNode_daapm"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_tsjmc"]
+await_completion = 1.0
+animation_player = SubResource("BBNode_daapm")
+animation_name = &"Attack"
+
+[sub_resource type="BBNode" id="BBNode_tsjmc"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_4s11a"]
+node = SubResource("BBNode_tsjmc")
+method = &"attack"
+
+[sub_resource type="BTSequence" id="BTSequence_jf3la"]
+custom_name = "No - shoot arrow"
+children = [SubResource("BTEvaluateExpression_sc660"), SubResource("BTCheckVar_sc660"), SubResource("BTPlayAnimation_tsjmc"), SubResource("BTCallMethod_4s11a")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_0i4v1"]
+custom_name = "Closer than minimum range?"
+children = [SubResource("BTSequence_3jaeu"), SubResource("BTSequence_jf3la")]
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_rothb"]
+custom_name = "No - handle combat"
+children = [SubResource("BTCallMethod_nmya8"), SubResource("BTDynamicSelector_0i4v1")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_daapm"]
+custom_name = "Outside of max range?"
+children = [SubResource("BTDynamicSequence_egkqs"), SubResource("BTDynamicSequence_rothb")]
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_l5267"]
+custom_name = "Yes - combat"
+children = [SubResource("BTCheckVar_1cfxe"), SubResource("BTEvaluateExpression_lyttq"), SubResource("BTDynamicSelector_daapm")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_sc660"]
+custom_name = "In range / already detected?"
+children = [SubResource("BTDynamicSequence_sv6gs"), SubResource("BTDynamicSequence_l5267")]
+
+[sub_resource type="BTDynamicSequence" id="BTDynamicSequence_sc660"]
+custom_name = "Normal behaviour"
+children = [SubResource("BTAlwaysSucceed_sc660"), SubResource("BTDynamicSelector_sc660")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_aenk5"]
+custom_name = "Driftskin"
+children = [SubResource("BTSequence_uhhso"), SubResource("BTDynamicSequence_sc660")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_042f5")
+root_task = SubResource("BTDynamicSelector_aenk5")

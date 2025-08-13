@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bunwl8y8h0o3k" path="res://Entities/Player/Inventory/Items/Item Slot/ItemSlot.tscn" id="2_t0nsv"]
 [ext_resource type="Texture2D" uid="uid://kpkujmugia3d" path="res://Entities/Player/Inventory/Items/Trinkets & Recipes/Misc Slot/MiscSlot.png" id="3_jyfgc"]
 
+
 [node name="TrinketSlot" type="AspectRatioContainer"]
 custom_minimum_size = Vector2(112, 112)
 offset_right = 99.0

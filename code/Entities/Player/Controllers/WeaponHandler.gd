@@ -44,8 +44,6 @@ func _input(event: InputEvent) -> void:
 
 #region weapon handling
 func handle_weapon():
-	var player_scale = PlayerManager.player.sprite.scale.x
-
 	if lock_movement:
 		return
 	look_at(get_global_mouse_position())

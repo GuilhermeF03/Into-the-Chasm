@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://7denhqr6pych" path="res://Entities/Player/HUD/Lives/LiveSlot.gd" id="1_loud7"]
 
+
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_gg2wt"]
 _data = PackedByteArray("AAADAAUAAAABAAAAIAAAACAAAACqAAAAUklGRqIAAABXRUJQVlA4TJYAAAAvH8AHEF+gqG0bqBjKoQUxjT+d/U8cZhog4SQIOWhNFV9TMD+noG0bNmQ0+wQmICjyf7QAEP8IgKZ0+fO/ap2uOLcV4Da2baVCIolI3d2lEEogkpwGmNcJ+i1yLc89juj/BEB/YVAVmhQl6PNSFZS5FmHPE8DhfD7byPPqw4IiySXxvGx30eAvGE/0awQwnZ8WFvK8/xY=")
 size_override = Vector2(32, 32)

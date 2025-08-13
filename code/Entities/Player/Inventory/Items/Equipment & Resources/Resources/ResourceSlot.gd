@@ -13,9 +13,9 @@ extends AspectRatioContainer
 @export var dock : UiDock.DOCK
 
 @export_subgroup("Textures")
-var mineral_icon : Texture2D = preload("res://Interactables/Items/Resources/Art/minerals_icon.png")
-var organic_icon : Texture2D = preload("res://Interactables/Items/Resources/Art/organics_icon.png")
-var cristal_icon : Texture2D = preload("res://Interactables/Items/Resources/Art/cristals_icons.png")
+var mineral_icon : Texture2D = preload("uid://ekmbsrud0m58")
+var organic_icon : Texture2D = preload("uid://ci2fc814jymsq")
+var cristal_icon : Texture2D = preload("uid://cf22k8dv7sqdg")
 #endregion
 
 

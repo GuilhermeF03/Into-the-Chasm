@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dc6yjs1x2qbeb"
+path="res://.godot/imported/organics_icon.aseprite-8aa55f0b3689eb0a9fc2c6e1d564b105.res"
+
+[deps]
+
+source_file="res://Items/Resources/Art/organics_icon.aseprite"
+dest_files=["res://.godot/imported/organics_icon.aseprite-8aa55f0b3689eb0a9fc2c6e1d564b105.res"]
+
+[params]
+

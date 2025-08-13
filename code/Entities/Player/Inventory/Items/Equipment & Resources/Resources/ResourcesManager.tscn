@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://8uktk63ob88s" path="res://Entities/Player/Inventory/Items/Equipment & Resources/Resources/ResourcesManager.gd" id="1_assmp"]
 [ext_resource type="PackedScene" uid="uid://70somrqkb0mp" path="res://Entities/Player/Inventory/Items/Equipment & Resources/Resources/ResourceSlot.tscn" id="2_js4kg"]
 
+
 [node name="Resources" type="VBoxContainer"]
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://de3l7navsarjg"
+path="res://.godot/imported/Dummy.aseprite-866ef23e2eb5f50d77d68781eeafbf09.res"
+
+[deps]
+
+source_file="res://Entities/Neutral/Dummy/Dummy.aseprite"
+dest_files=["res://.godot/imported/Dummy.aseprite-866ef23e2eb5f50d77d68781eeafbf09.res"]
+
+[params]
+

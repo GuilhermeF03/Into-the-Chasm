@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8d0q1n2fxirr"]
+
+[ext_resource type="PackedScene" uid="uid://b8om77y7wwhgt" path="res://World/Procedural/Meta/Level/Level.tscn" id="1_3s70p"]
+[ext_resource type="Resource" uid="uid://ranorrfcwq56" path="res://World/Procedural/Biomes/Placeholder/PlaceholderLevelData.tres" id="2_ct7m4"]
+
+
+[node name="Level Container" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Level" parent="." instance=ExtResource("1_3s70p")]
+data = ExtResource("2_ct7m4")
