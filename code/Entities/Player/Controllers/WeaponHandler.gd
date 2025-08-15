@@ -18,7 +18,7 @@ var animation_library : AnimationLibrary
 var animation_library_name : StringName
 
 @export_group("Signals")
-signal attack_registered
+#signal attack_registered
 #endregion
 
 #region builtins

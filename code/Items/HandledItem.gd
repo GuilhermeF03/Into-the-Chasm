@@ -7,7 +7,7 @@ class_name HandledItem
 
 @export_group("Signals")
 signal can_use(value: bool)
-signal item_used(area: Area2D)
+#signal item_used(area: Area2D)
 
 func _ready():
 	anim_player.animation_finished.connect(_on_animation_finished)

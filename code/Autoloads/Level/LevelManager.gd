@@ -1,5 +1,18 @@
 extends Node
 
+
+## ================
+##  Level Manager
+## ================
+
+## Responsible for handling object spawning and interaction between rooms of
+## a level
+
+#region Nodes
+@export_group("Nodes")
+@onready var bullets := $Bullets
+#endregion
+
 #region Data
 @export_group("Data")
 
@@ -79,6 +92,11 @@ func spawn(
 	else:
 		node.global_position = position
 		scene.add_child(node)
+
+
+func spawn_bullet(bullet : Node2D, position : Vector2 = Vector2.ZERO):
+	bullet.global_position = position
+	bullets.add_child(bullet)
 #endregion
 
 #region Helpers

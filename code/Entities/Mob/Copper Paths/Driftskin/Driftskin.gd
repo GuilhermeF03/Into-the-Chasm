@@ -22,7 +22,7 @@ var arrow_node: PackedScene = preload("uid://buqri2j1vwbe0")
 
 @export_subgroup("Combat")
 ## Maps arrow instance to 'in use' flag
-var arrows: Dictionary[DriftskinArrow, bool] = {}  # Key: DriftskinArrow, Value: bool
+var bullet_pool : BulletPool
 #endregion
 
 #region Data
@@ -50,6 +50,15 @@ func _ready():
 	follow_raycast.target_position = Vector2(FOLLOW_RAYCAST_DIST, 0)
 	detect_raycast.target_position = Vector2(DETECT_RAYCAST_DIST, 0)
 
+
+	# Create bullet pool
+	bullet_pool = BulletPool.new()
+	bullet_pool.bullet_scene = arrow_node
+	bullet_pool.enemy = self
+	bullet_pool.bullet_attack_speed = ATTACK_SPEED
+	
+
+
 func _physics_process(_delta):
 	var player_pos = (
 		PlayerManager.player.global_position
@@ -67,62 +76,28 @@ func attack(_attack_dir: Vector2 = Vector2.ZERO):
 	if PlayerManager.player == null:
 		return
 
-	var arrow = get_next_free_arrow()
+	var arrow = await bullet_pool.get_next_free_bullet()
 	if arrow == null:
 		return
 
-	arrows[arrow] = true  # mark as in use
-
-	if arrow.has_node("Sprite2D"):
-		arrow.get_node("Sprite2D").visible = true
+	bullet_pool.pool[arrow] = true  # mark as in use
 
 	arrow.process_mode = Node.PROCESS_MODE_INHERIT
+	arrow.sprite.visible = true
 
 	var attack_dir = global_position.direction_to(PlayerManager.player.global_position)
 	arrow.direction = attack_dir
 	arrow.fly()
 
 	attack_timer.start(ATTACK_WAIT_TIME)
-#endregion
-
-#region Signal Handlers
-func reset_arrow(arrow: DriftskinArrow):
-	arrow.reset()
-
-	if arrow.has_node("Sprite2D"):
-		arrow.get_node("Sprite2D").visible = false
-
-	arrow.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
-	arrow.global_position = global_position
-
-	arrows[arrow] = false  # mark as reusable
-#endregion
-
-#region Aux
-func get_next_free_arrow() -> DriftskinArrow:
-	for arrow in arrows.keys():
-		if not arrows[arrow]:
-			return arrow
-
-	instance_new_arrow()
-
-	# Try again after creating
-	for arrow in arrows.keys():
-		if not arrows[arrow]:
-			return arrow
-
-	push_error("[Driftskin] No arrow available after instancing")
-	return null
-
-func instance_new_arrow():
-	var instanced_arrow: DriftskinArrow = arrow_node.instantiate()
-	add_child(instanced_arrow, true)
-	arrows[instanced_arrow] = false
-
-	instanced_arrow.MOVEMENT_SPEED = ATTACK_SPEED
 	
-	instanced_arrow.on_destruction.connect(reset_arrow)
-	call_deferred("reset_arrow", instanced_arrow)
+	
+func die():
+	bullet_pool.clean_pool()
+	super.die()
+#endregion
+
+
 
 func spawn_at_random_dirtpile():
 	if dirtpiles.is_empty():
@@ -132,6 +107,7 @@ func spawn_at_random_dirtpile():
 	curr_dirtpile = dirtpiles.pick_random()
 	global_position = curr_dirtpile.global_position + (Vector2.UP * DIRTPILE_Y_OFFSET)
 
+
 func closer_than_minimum_distance() -> bool:
 	return detect_raycast.is_colliding()
 #endregion
@@ -140,4 +116,12 @@ func closer_than_minimum_distance() -> bool:
 func swap_dirtpile(target_dirtpile: StaticBody2D):
 	curr_dirtpile = target_dirtpile
 	global_position = target_dirtpile.global_position + (Vector2.UP * DIRTPILE_Y_OFFSET)
+	
+	# Pull un-shot arrows to driftskin's position
+	var unused_arrows = (
+		bullet_pool.pool.keys()
+		.filter(func (it): return bullet_pool.pool[it] == false)
+	)
+	for arrow : DriftskinArrow in unused_arrows:
+		arrow.set_deferred("global_position", global_position)
 #endregion

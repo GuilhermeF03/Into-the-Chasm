@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dws3xtfxp3ils"
+path="res://.godot/imported/Dirtpile.aseprite-a1848f946b81c9e0684ffa5cf5b114c6.res"
+
+[deps]
+
+source_file="res://Entities/Mob/Copper Paths/Driftskin/Dirtpile/Dirtpile.aseprite"
+dest_files=["res://.godot/imported/Dirtpile.aseprite-a1848f946b81c9e0684ffa5cf5b114c6.res"]
+
+[params]
+

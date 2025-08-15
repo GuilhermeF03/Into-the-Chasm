@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name DriftskinArrow
+class_name Bullet
 
 
 #region Constants
@@ -10,7 +10,11 @@ class_name DriftskinArrow
 
 #region Nodes
 @export_group("Nodes")
-@onready var hitbox = $Hitbox
+
+@export_subgroup("Hitboxes")
+@onready var player_hitbox = $"Player Hitbox"
+@onready var enemy_hitbox = $"Enemy Hitbox"
+
 @onready var sprite = $Sprite2D
 @onready var parry_area = $Parry
 @onready var world_detection_zone = $"World detection zone"
@@ -20,7 +24,11 @@ class_name DriftskinArrow
 
 #region Signals
 @export_group("Signals")
-signal on_destruction(arrow : DriftskinArrow)
+signal on_destruction(arrow : Bullet)
+#endregion
+
+#region Enums
+enum HITBOX_INDEX {PLAYER, ENEMY}
 #endregion
 
 
@@ -28,9 +36,6 @@ signal on_destruction(arrow : DriftskinArrow)
 @export_group("Data")
 var direction : Vector2
 var tween : Tween
-
-var hitbox_initial_layer : int
-var hitbox_initial_mask : int
 #endregion
 
 
@@ -40,17 +45,18 @@ func _ready():
 	parry_area.area_entered.connect(on_parry)
 	parry_area.body_entered.connect(on_parry)
 	
-	hitbox.area_entered.connect(on_destroy)
-	hitbox.body_entered.connect(on_destroy)
+	## Connect hitboxes
+	player_hitbox.area_entered.connect(on_destroy)
+	player_hitbox.body_entered.connect(on_destroy)
+	
+	enemy_hitbox.area_entered.connect(on_destroy)
+	enemy_hitbox.body_entered.connect(on_destroy)
 	
 	world_detection_zone.area_entered.connect(on_world_collision)
 	world_detection_zone.body_entered.connect(on_world_collision)
 	
 	## On timeout, despawn
 	despawn_timer.timeout.connect(on_destroy)
-	
-	hitbox_initial_layer = hitbox.collision_layer
-	hitbox_initial_mask = hitbox.collision_mask
 
 
 func _physics_process(_delta):
@@ -69,14 +75,16 @@ func fly():
 #region Aux
 func get_rotation_to(dir : Vector2):
 	var angle = dir.angle()
-	print("[Driftskin Arrow] angle: %s" % [rad_to_deg(angle)])
+	print("[%s] angle: %s" % [get_class() , rad_to_deg(angle)])
 	return angle
 	
 	
 func reset():
 	velocity = Vector2.ZERO
-	hitbox.collision_layer = hitbox_initial_layer
-	hitbox.collision_mask = hitbox_initial_mask
+	
+	set_hitbox(player_hitbox, true)
+	set_hitbox(enemy_hitbox, false)
+	
 	despawn_timer.stop()
 #endregion
 
@@ -85,18 +93,10 @@ func reset():
 func on_parry(_other):
 	velocity = -direction * MOVEMENT_SPEED
 	
-	var layers = PlayerManager.get_player_combat_layers()
+	set_hitbox(player_hitbox, false)
+	set_hitbox(enemy_hitbox, true)
 	
-	hitbox.set_deferred("collision_layer", layers[0])
-	hitbox.set_deferred("collision_mask", layers[1])
 	global_rotation = get_rotation_to(-direction)
-	
-	await get_tree().process_frame
-	hitbox.area_entered.disconnect(on_destroy)
-	hitbox.body_entered.disconnect(on_destroy)
-	
-	hitbox.area_entered.connect(on_destroy)
-	hitbox.body_entered.connect(on_destroy)
 
 
 func on_destroy(other = null):
@@ -108,4 +108,9 @@ func on_destroy(other = null):
 	
 func on_world_collision(_other):
 	pass
+	
+	
+func set_hitbox(hitbox : Area2D, value : bool):
+	hitbox.set_deferred("monitorable", value)
+	hitbox.set_deferred("monitoring", value)
 #endregion

@@ -1,6 +1,7 @@
 extends Resource
 class_name EnemyData
 
+#region Data
 @export_group("Data")
 
 @export_subgroup("Combat")
@@ -12,6 +13,7 @@ class_name EnemyData
 @export_subgroup("Loot")
 ## Array of possible loot items for this enemy
 @export var loot_table: Array[LootEntry] = []
+#endregion
 
 ## Rolls loot for this enemy
 func get_drops() -> Array[PackedScene]:

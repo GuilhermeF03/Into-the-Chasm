@@ -1,7 +1,6 @@
 [gd_scene load_steps=6 format=4 uid="uid://buqri2j1vwbe0"]
 
-[ext_resource type="Script" uid="uid://dav83yp8tmbct" path="res://Entities/Mob/Copper Paths/Driftskin/DriftskinArrow.gd" id="1_prpcs"]
-
+[ext_resource type="Script" uid="uid://dav83yp8tmbct" path="res://Entities/Mob/Copper Paths/Driftskin/Arrow/DriftskinArrow.gd" id="1_6icgg"]
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_234kk"]
 _data = PackedByteArray("AAADAAUAAAABAAAAQAAAAEAAAACoAAAAUklGRqAAAABXRUJQVlA4TJMAAAAvP8APEEegqG0kZ3+9M9glc/ypHBo1AUAwEuxVgEsA/TMoZCYAGQG4qODXZOnXZ/4DAPYWkaLiz5OV9+e6Rg1Oa9uWms2M/aQCeB18GsjoxwJwREZG0r9jxUT0P+3HpQO4Ax2A92Gecvw6gGsa0jx9AO5gawGABUDtP7oBAL4tgFukMccK4J1jGGMFOAI9wBHo7WMA")
@@ -33,7 +32,7 @@ _data = {
 }
 
 [node name="DriftskinArrow" type="CharacterBody2D"]
-script = ExtResource("1_prpcs")
+script = ExtResource("1_6icgg")
 MOVEMENT_SPEED = 400
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -59,11 +58,21 @@ metadata/_aseprite_wizard_config_ = {
 }
 metadata/_aseprite_wizard_source_file_hash_ = "0c4c98c89e28782a9291ff824891c0ac"
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Player Hitbox" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player Hitbox"]
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_234kk")
+
+[node name="Enemy Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 32
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Hitbox"]
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_234kk")
 
