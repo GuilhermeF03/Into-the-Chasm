@@ -1,6 +1,12 @@
 extends CharacterBody2D
 class_name Enemy
 
+## ========
+##  Enemy
+## ========
+##
+## Base class for every mob
+
 #region Constants
 @export_group("Constants")
 

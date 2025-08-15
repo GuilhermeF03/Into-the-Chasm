@@ -1,16 +1,34 @@
 extends Node2D
 
-@export_category("Nodes")
-@onready var icon = $icon
+## =====================
+##  Interaction Manager
+## =====================
+##
+## Responsible for:
+##
+## * Handling interaction registration
+##
+## * Handling current interaction if the interacted object has a 
+##   "continuous interaction" mode
+##
+## * De-registering old interactions
 
-@export_category("Data")
+
+#region Nodes
+@export_group("Nodes")
+@onready var icon = $icon
+#endregion
+
+#region Data
+@export_group("Data")
 var can_interact: bool = true
 var curr_interactable : InteractArea
 var on_interaction_mode: bool = false
 var interactable_queue : Array[InteractArea] = []
 var interact_action =  InputMap.action_get_events("interact")[0].as_text()[0]
+#endregion
 
-
+#region Interaction Handling
 func register_interaction(interactable : InteractArea):
 	interactable_queue.push_back(interactable)
 
@@ -23,24 +41,26 @@ func unregister_interaction(interactable : InteractArea):
 
 func start_interaction_mode(interactable : InteractArea):
 	on_interaction_mode = true
-	#InputManager.setLimit(InputManager.PlayerInputLimit.CONTROL_ONLY)
+	InputManager.setLimit(InputManager.INPUT_LEVEL.NO_MOVEMENT)
 	curr_interactable = interactable
+#endregion
 
-
+#region builtins
 func _physics_process(_delta: float) -> void:
-	if on_interaction_mode: curr_interactable.handle_interaction()
+	if on_interaction_mode: 
+		curr_interactable.handle_interaction()
+		return
 	
-	if not on_interaction_mode:
-		if not interactable_queue.is_empty() && can_interact:
-			icon.hide()
-			interactable_queue.sort_custom(_sort_interactables)
-			var interactable = interactable_queue.front()
-			
-			icon.global_position = interactable.global_position
-			icon.global_position.y -= 50
-			icon.show()
-			
-		else: icon.hide()
+	if not interactable_queue.is_empty() && can_interact:
+		icon.hide()
+		interactable_queue.sort_custom(_sort_interactables)
+		var interactable = interactable_queue.front()
+		
+		icon.global_position = interactable.global_position
+		icon.global_position.y -= 50
+		icon.show()
+		
+	else: icon.hide()
 
 
 func _sort_interactables(obj_a : InteractArea, obj_b : InteractArea):
@@ -76,3 +96,4 @@ func _input(event):
 			
 		await interactable.interact()
 		can_interact = true
+#endregion

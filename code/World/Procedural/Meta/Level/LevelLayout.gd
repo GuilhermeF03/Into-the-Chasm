@@ -92,7 +92,7 @@ func generate_layout(biome : LevelManager.Biome) -> void:
 			curr_room_id = current_room.data.id
 
 
-func next_layout(biome : LevelManager.Biome) -> String:
+func next_layout(_biome : LevelManager.Biome) -> String:
 	return "A"
 
 

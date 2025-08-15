@@ -43,8 +43,9 @@ func available_tiles(
 
 
 func to_vector(idx : int, grid_width : int) -> Vector2:
-	var x = idx % grid_width
-	var y = idx / grid_width  # Integer division
+	var x := idx % grid_width
+	@warning_ignore("integer_division")
+	var y := idx / grid_width  # Integer division
 	return Vector2(x, y)
 
 

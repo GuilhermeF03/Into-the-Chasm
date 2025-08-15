@@ -1,5 +1,12 @@
 extends Node
 
+## ================
+##  Player Manager
+## ================
+##
+## Handles player metadata
+
+
 #region Nodes
 @export_category("Nodes")
 @onready var player : PlayerController = get_tree().get_first_node_in_group("Player")
@@ -13,7 +20,7 @@ extends Node
 #region Signals
 @export_group("Signals")
 signal curr_lives_changed(value : int)
-signal max_lives_changed(value : int)
+#signal max_lives_changed(value : int)
 signal on_heal
 #endregion
 
@@ -33,20 +40,4 @@ func heal(ammount : int):
 	data.curr_lives += ammount
 	curr_lives_changed.emit(data.curr_lives)
 	on_heal.emit()
-#endregion
-
-
-#region Layers
-func get_player_combat_layers() -> Array[int]:
-	var collision_layer = (
-		ProjectSettings.get_setting("layer_names/2d_physics/layer_3")
-	)
-	var mask_layer = (
-		ProjectSettings.get_setting("layer_names/2d_physics/layer_6")
-	)
-	
-	return [
-		PhysicsLayers.get_layer_value(collision_layer),
-		PhysicsLayers.get_layer_value(mask_layer)
-	]
 #endregion

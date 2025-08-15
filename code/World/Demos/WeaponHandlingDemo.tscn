@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://Entities/Player/Player.tscn" id="1_it1xi"]
 [ext_resource type="PackedScene" uid="uid://b2u0wimnxxcnc" path="res://Entities/Neutral/Dummy/Dummy.tscn" id="2_7rb17"]
-[ext_resource type="PackedScene" uid="uid://dhpbsgiao8ia3" path="res://Entities/Mob/Copper Paths/Driftskin/Dirtpile.tscn" id="3_rne0o"]
+[ext_resource type="PackedScene" uid="uid://dhpbsgiao8ia3" path="res://Entities/Mob/Copper Paths/Driftskin/Dirtpile/Dirtpile.tscn" id="3_rne0o"]
 [ext_resource type="PackedScene" uid="uid://dr5ax58ns4c7k" path="res://Entities/Mob/Copper Paths/Driftskin/Driftskin.tscn" id="4_6saph"]
 [ext_resource type="PackedScene" uid="uid://dbvl2aq745kyx" path="res://Items/Weapons/Data/Sword/Standard/[P] Sword.tscn" id="5_uvjpj"]
 [ext_resource type="PackedScene" uid="uid://qn4tkrelxuep" path="res://Items/Weapons/Data/Pickaxe/Standard/[P] Pickaxe.tscn" id="6_q5c44"]

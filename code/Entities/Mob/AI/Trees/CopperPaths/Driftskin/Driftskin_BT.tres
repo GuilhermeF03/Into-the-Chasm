@@ -1,6 +1,6 @@
 [gd_resource type="BehaviorTree" load_steps=64 format=3 uid="uid://b6mjhiku7448"]
 
-[ext_resource type="Script" uid="uid://dlc06guf1no2t" path="res://Entities/Mob/AI/Tasks/CopperPaths/Driftskin/DriftskinSwapDirtpile.gd" id="1_sc660"]
+[ext_resource type="Script" uid="uid://dlc06guf1no2t" path="res://Entities/Mob/Copper Paths/Driftskin/AI/DriftskinSwapDirtpile.gd" id="1_sc660"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_042f5"]
 var/player_detected/name = &"player_detected"

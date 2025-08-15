@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dw12iqpt1disf"
+path="res://.godot/imported/Driftskin.aseprite-f8a4c07ca881b29d489f0275691355ab.res"
+
+[deps]
+
+source_file="res://Entities/Mob/Copper Paths/Driftskin/Driftskin.aseprite"
+dest_files=["res://.godot/imported/Driftskin.aseprite-f8a4c07ca881b29d489f0275691355ab.res"]
+
+[params]
+

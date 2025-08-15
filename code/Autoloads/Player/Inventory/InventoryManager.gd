@@ -1,5 +1,12 @@
 extends Node
 
+## ===================
+##  Inventory Manager
+## ===================
+##
+## Handles player inventory metadata
+
+
 #region Constants
 @export_group("Constants")
 
@@ -85,7 +92,7 @@ func set_resource_and_queue(item : PickableResource, override : bool = false):
 	var resource = item.type
 	var ammount = item.ammount
 	
-	set_resource(resource, ammount)
+	set_resource(resource, ammount, override)
 	item.queue_free()
 
 
@@ -103,7 +110,6 @@ func set_resource(resource : ResourceType, ammount : int, override : bool = fals
 		ResourceType.MINERAL: minerals = new_amount
 		ResourceType.ORGANIC: organics = new_amount
 		ResourceType.CRISTAL: cristals = new_amount
-	
 	
 	resource_changed.emit(resource, new_amount)
 
