@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://te7jbuj5q5f" path="res://Items/Tools/HandledTool.gd" id="1_wy8ax"]
 
-
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_f2quj"]
 _data = PackedByteArray("AAADAAUAAAABAAAAYAAAAEAAAACoAQAAUklGRqABAABXRUJQVlA4TJMBAAAvX8APEG+gKJKk5o74xr8hHOScLfDChtJItppXzlex/zISQeFQtICaSFar1/Gr8C8HB3QIgJYkBkIQCJpLZoId9jgA8P8fAAUgbe/NSPuOx02fQMLEVy4e6USRAxz7/xQn/+AywVuXbksOECtxiF1gKxxKLfcGedyAlyvAvofrxNPt/C4T+U9mKqSJ6L8Dt20cicH23TtdeQX91sa71XcYy+s7DEWSyd4OOszmLGvW8UB0PWCBYAiKeN6QYE1tNRh1RJJ5euAkxseTLKHtIIrmkqzI+PjCQi9pO/jl+GaZiLXEEx10TK3sbLNeVp0nZ89Ch+AUVGGftVZQhT2Tjjrggwf42NN26EALgGC+VtXSUWBEEAB9xHYFgGRCHuAHjUWwwHuAbCwuk6EKCpD83yoBuMRJJCS30IOgBylJM25z4cNd+u+e6wHLIp43ZNFDQzJveRXNJUnY3KyefzrapWxmuqAKwubqBQD2uI4whQ1fRfmAj4LFKwDuUBBceAC/bLKowj0g2aUuX+TbvgFBD1LSD30IAA==")
 size_override = Vector2(96, 64)
@@ -52,6 +51,7 @@ metadata/_custom_type_script = "uid://te7jbuj5q5f"
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
+scale = Vector2(2.5, 2.5)
 texture = SubResource("PortableCompressedTexture2D_f2quj")
 hframes = 3
 vframes = 2

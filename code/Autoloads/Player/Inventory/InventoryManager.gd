@@ -213,6 +213,7 @@ func get_tools_size():
 	
 	
 func consume_tool():
+	if curr_tool == null: return
 	curr_tool.usage -= 1
 	tool_used.emit(curr_tool)
 	if curr_tool.usage <= 0:
@@ -227,7 +228,7 @@ func add_trinket(trinket : TrinketData):
 
 
 func remove_trinket(index):
-	var trinket = trinkets[index]
+	var trinket: TrinketData = trinkets[index]
 	trinkets.remove_at(index)
 	trinket_removed.emit(trinket, index)
 #endregion

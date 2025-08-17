@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cisp2x0ixh5pj"]
+[gd_scene load_steps=9 format=3 uid="uid://cisp2x0ixh5pj"]
 
 [ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://Entities/Player/Player.tscn" id="1_it1xi"]
 [ext_resource type="PackedScene" uid="uid://b2u0wimnxxcnc" path="res://Entities/Neutral/Dummy/Dummy.tscn" id="2_7rb17"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dbvl2aq745kyx" path="res://Items/Weapons/Data/Sword/Standard/[P] Sword.tscn" id="5_uvjpj"]
 [ext_resource type="PackedScene" uid="uid://qn4tkrelxuep" path="res://Items/Weapons/Data/Pickaxe/Standard/[P] Pickaxe.tscn" id="6_q5c44"]
 [ext_resource type="PackedScene" uid="uid://dvo2pao4k66g8" path="res://Items/Tools/Data/Potions/Healing Potion/[P] Healing Potion.tscn" id="7_jtesj"]
+[ext_resource type="PackedScene" uid="uid://cghwksc0im8av" path="res://Items/Tools/Data/Potions/Poison Vial/[P] Poison Vial.tscn" id="8_7rb17"]
 
 [node name="WeaponHandlingDemo" type="Node2D"]
 y_sort_enabled = true
@@ -41,3 +42,6 @@ position = Vector2(456, 120)
 
 [node name="[P] Healing Potion" parent="." instance=ExtResource("7_jtesj")]
 position = Vector2(0, 328)
+
+[node name="[P] Poison Vial" parent="." instance=ExtResource("8_7rb17")]
+position = Vector2(378, -119)

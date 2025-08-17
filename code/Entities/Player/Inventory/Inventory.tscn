@@ -20,7 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://dk4hy76pvns6p" path="res://Entities/Player/Inventory/Art/inventory_book7.png" id="19_wu4re"]
 [ext_resource type="Texture2D" uid="uid://boajpui177h8" path="res://Entities/Player/Inventory/Art/inventory_book12.png" id="20_68m23"]
 
-
 [sub_resource type="Animation" id="Animation_nsqjg"]
 resource_name = "Close"
 length = 0.4

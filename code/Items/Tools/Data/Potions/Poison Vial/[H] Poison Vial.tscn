@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=4 uid="uid://cay01r5qgatkf"]
+
+[ext_resource type="Script" uid="uid://k5ua88ec851g" path="res://Items/Tools/Data/Potions/Poison Vial/HandledPoison.gd" id="1_bu5l7"]
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_bu5l7"]
+_data = PackedByteArray("AAADAAUAAAABAAAAYAAAAEAAAABEAQAAUklGRjwBAABXRUJQVlA4TDABAAAvX8APEGegIADIxkuhnZqisP9qrIaZNlJOxecV/Ipu/LDhAQsYiSTl/LuXH4o0tCQBKYgAQbZNneZwtHMHgP8/gObePRbgAelCI+WWVVNH1wAcybZVK+e7Ra/+DD6Qe27rvNjO1/jCFBgKRe5kZBYyt3Pr4hZE9J+B27aN2L3u/A75qZXTs1d3/so2n59Hr1xfHuSdG9+/sp0se37dm1k2mYxe19orq/c2qo1LT9HpFJ1OPIfP1C5cbVPrpOQ4goAPAp1ojhiiwA2mAJh3hRyGHiWHqRs75GAdF76CaaSpKUzdhezAnXhEplPxdKSYTiVS7u7kP0kp5I1K5zWHTqfoRNt+mrapdV61A3BbW9qJNEDAXnc8wbxhMyfspzS1Y5i67WhaT1cXKa+lmE7lm14E")
+size_override = Vector2(96, 64)
+
+[sub_resource type="Animation" id="Animation_85m7d"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ex6qy"]
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dmwnh"]
+_data = {
+&"idle": SubResource("Animation_85m7d"),
+&"use": SubResource("Animation_ex6qy")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bu5l7"]
+
+[node name="[H] PoisonVial" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_bu5l7")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("PortableCompressedTexture2D_bu5l7")
+hframes = 3
+vframes = 2
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"embed_tex": true,
+"i_mode": 0,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"slice": "",
+"source": "res://Items/Tools/Data/Potions/Poison Vial/Art/poison-vial.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "07a49fb6cdb3117920e75a26dae36d4a"
+
+[node name="Player" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dmwnh")
+}
+
+[node name="Collision Detection" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 96
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision Detection"]
+shape = SubResource("CircleShape2D_bu5l7")

@@ -9,7 +9,7 @@ func _ready():
 	super._ready()
 
 	if tool_data.effect != null:
-		var effect_node = tool_data.effect.instantiate()
+		var effect_node: Node = tool_data.effect.instantiate()
 		effect = effect_node
 		add_child(effect_node)
 		effect.finished.connect(_on_use_finished)

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dwk6651qcqp6w"
+path="res://.godot/imported/poison-area.aseprite-6d4576d1e5af3d402356ca5bd8ec531a.res"
+
+[deps]
+
+source_file="res://Items/Tools/Data/Potions/Poison Vial/Art/poison-area.aseprite"
+dest_files=["res://.godot/imported/poison-area.aseprite-6d4576d1e5af3d402356ca5bd8ec531a.res"]
+
+[params]
+
