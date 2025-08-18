@@ -7,7 +7,7 @@ extends ToolEffect
 #endregion
 
 #region Nodes
-var shader_material : ShaderMaterial = preload("")
+var shader_material : ShaderMaterial = preload("uid://x7pdkt7h284e")
 #endregion
 
 
