@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi78dep1ixjpi"]
+
+[ext_resource type="Script" uid="uid://cov1ax7d5y8qu" path="res://Autoloads/Status/StatusManager.gd" id="1_dguxl"]
+
+[node name="StatusManager" type="Node2D"]
+script = ExtResource("1_dguxl")

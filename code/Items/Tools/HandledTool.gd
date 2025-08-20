@@ -3,7 +3,8 @@ class_name HandledTool
 
 @export_group("Data")
 @export var tool_data: ToolData
-@export var effect: ToolEffect
+@export var effect: Effect
+@export var auto_call_effect : bool = true
 
 func _ready():
 	super._ready()
@@ -13,8 +14,9 @@ func _ready():
 		effect = effect_node
 		add_child(effect_node)
 		effect.finished.connect(_on_use_finished)
-		
-	use()
+	
+	if auto_call_effect:
+		use()
 
 func use():
 	super.use()

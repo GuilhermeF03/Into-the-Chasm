@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cacdgfg81uevr"]
 
-[ext_resource type="Script" uid="uid://d37v58sckiugo" path="res://Items/Tools/Effects/Heal/HealEffect.gd" id="1_j4vi4"]
+[ext_resource type="Script" uid="uid://d37v58sckiugo" path="res://Effects&Statuses/Effects/Core/Heal/HealEffect.gd" id="1_j4vi4"]
 
 [node name="HealEffect" type="Node2D"]
 script = ExtResource("1_j4vi4")

@@ -11,6 +11,6 @@ class_name Effect
 signal finished
 
 ## Called by the parent item (weapon/tool) when the effect should be triggered
-func call_effect():
+func call_effect(args : Dictionary[String, Variant] = {}) -> void:
 	# Override in subclasses to do something meaningful
 	finished.emit()

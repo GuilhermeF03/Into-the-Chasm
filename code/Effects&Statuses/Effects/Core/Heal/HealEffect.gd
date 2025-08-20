@@ -1,4 +1,4 @@
-extends ToolEffect
+extends Effect
 
 #region Constants
 @export_range(0.1, 5.0) var SHADER_TIME : float 
@@ -16,7 +16,7 @@ func _ready():
 	player = PlayerManager.player
 	
 
-func call_effect() -> void:
+func call_effect(args = {}) -> void:
 	PlayerManager.heal(effect_args.get("ammount") as int)
 	super.call_effect()
 

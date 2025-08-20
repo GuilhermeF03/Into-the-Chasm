@@ -1,6 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dj3qo2ysxs57v"]
 
-[ext_resource type="Script" uid="uid://c8gnd7m6ors3u" path="res://Items/Weapons/Data/Effects/Boomerang/BoomerangEffect.gd" id="1_0e22q"]
+[ext_resource type="Script" uid="uid://c8gnd7m6ors3u" path="res://Effects&Statuses/Effects/Weapon/Boomerang/BoomerangEffect.gd" id="1_0e22q"]
+
 
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0e22q"]

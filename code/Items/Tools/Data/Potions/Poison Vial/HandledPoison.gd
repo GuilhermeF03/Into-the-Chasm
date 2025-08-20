@@ -12,11 +12,23 @@ var tween : Tween
 
 #region builtins
 func _ready() -> void:
+	super._ready()
 	collision_detection.area_entered.connect(burst)
 	collision_detection.body_entered.connect(burst)
 	
-	var target_dir = global_position.direction_to(get_global_mouse_position())
-	var target_pos = global_position + (target_dir * MAX_THROWN_DISTANCE)
+	# Calculate throw vector
+	var target_vector = (get_global_mouse_position() - global_position)
+	var target_vector_lenght = target_vector.length()
+	
+	# Calculate max throw vector
+	var target_vector_normalized = target_vector.normalized()
+	
+	# Calculate actual throw vector by clamping vector
+	var throw_vector = target_vector_normalized * (
+		min(target_vector_lenght, MAX_THROWN_DISTANCE)
+	)
+	
+	var target_pos = global_position + throw_vector
 
 	var time = min(target_pos.length() / THROW_SPEED, 2.0)
 	
@@ -31,8 +43,7 @@ func _ready() -> void:
 	#await tween.finished
 	
 	## Burst on floor -> poison area only
-	
-	super.use()
+	call_effect()
 #endregion
 
 func burst(other : Node2D):
@@ -40,4 +51,16 @@ func burst(other : Node2D):
 	if other.is_in_group("Player"): return
 	
 	tween.kill()
-	super.use()
+	call_effect()
+	
+
+func call_effect():
+	can_use.emit(false)
+	
+	anim_player.play("use")
+	await anim_player.animation_finished
+	
+	effect.call_effect({
+		"spawn_position" : global_position
+	})
+	despawn_item()

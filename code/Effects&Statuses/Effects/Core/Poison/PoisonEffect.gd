@@ -1,4 +1,4 @@
-extends ToolEffect
+extends Effect
 
 #region Constants
 
@@ -20,5 +20,5 @@ func _ready():
 
 
 ## 1. 
-func call_effect() -> void:
+func call_effect(args = {}) -> void:
 	pass

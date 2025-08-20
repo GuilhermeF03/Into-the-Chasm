@@ -5,7 +5,7 @@ class_name HandledWeapon
 
 @export_group("Data")
 @export var weapon_data: WeaponData
-var effect : WeaponEffect
+var effect : Effect
 
 var temp_damage: WeaponData.DamageInfo
 var last_attack_was_special: bool
