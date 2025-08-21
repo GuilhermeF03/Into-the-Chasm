@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cay01r5qgatkf" path="res://Items/Tools/Data/Potions/Poison Vial/[H] Poison Vial.tscn" id="1_i07w2"]
 [ext_resource type="Script" uid="uid://7et20x1sfdgb" path="res://Items/Tools/Data/ToolData.gd" id="1_o8wiy"]
-[ext_resource type="PackedScene" uid="uid://d1pivpodhgygr" path="res://Effects&Statuses/Effects/Core/AoE/Poison/PoisonAoE.tscn" id="1_ro6wp"]
+[ext_resource type="PackedScene" uid="uid://d1pivpodhgygr" path="res://Gameplay/Effects/Core/AoE/Poison/PoisonAoE.tscn" id="1_ro6wp"]
 [ext_resource type="Texture2D" uid="uid://boggllc67txtg" path="res://Items/Tools/Data/Potions/Poison Vial/Art/poison-vial.png" id="3_ro6wp"]
 
 [resource]

@@ -1,13 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://c1djrvhrqlf8k"]
+[gd_scene load_steps=19 format=3 uid="uid://c1djrvhrqlf8k"]
 
 [ext_resource type="Script" uid="uid://6bdvq6vmgmb" path="res://Entities/Mob/Enemy.gd" id="1_53hx0"]
+[ext_resource type="PackedScene" uid="uid://da8e8runbgva0" path="res://Gameplay/Statuses/StatusController.tscn" id="2_ca4m2"]
 [ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Materials/Hit/hit_shader.gdshader" id="2_h6iiu"]
-
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_042f5"]
-shader = ExtResource("2_h6iiu")
-shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/flash_value = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ctdae"]
 
@@ -16,6 +11,11 @@ radius = 6.4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s0vdw"]
 radius = 192.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_042f5"]
+shader = ExtResource("2_h6iiu")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 0.0
 
 [sub_resource type="Animation" id="Animation_nh7oy"]
 length = 0.25
@@ -270,33 +270,7 @@ script = ExtResource("1_53hx0")
 ATTACK_SPEED = 600.0
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-material = SubResource("ShaderMaterial_042f5")
-hframes = 5
-vframes = 5
-frame = 5
-metadata/_aseprite_wizard_config_ = {
-"embed_tex": true,
-"i_mode": -1,
-"keep_anim_length": false,
-"layers": [],
-"o_ex_p": "",
-"o_folder": "",
-"o_name": "",
-"only_visible": false,
-"player": "AnimationPlayer",
-"slice": "",
-"source": "res://Entities/Mobs/Slime/Art/slime.aseprite"
-}
-metadata/_aseprite_wizard_source_file_hash_ = "b19d8bf5af51746727caf133dd4ea052"
-metadata/_aseprite_wizard_interface_config_ = {
-"animation_section": false,
-"layer_section": false,
-"output_section": false,
-"pending_changes": {},
-"slice_section": false
-}
+[node name="-- RayCast --" type="Node" parent="."]
 
 [node name="SightRayCast" type="RayCast2D" parent="."]
 target_position = Vector2(75, 0)
@@ -306,6 +280,8 @@ collide_with_areas = true
 [node name="PatrolRayCast" type="RayCast2D" parent="."]
 collision_mask = 0
 hit_from_inside = true
+
+[node name="-- Combat --" type="Node" parent="."]
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 16
@@ -328,6 +304,42 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Area"]
 shape = SubResource("CircleShape2D_s0vdw")
+
+[node name="-- Status --" type="Node" parent="."]
+
+[node name="StatusController" parent="." instance=ExtResource("2_ca4m2")]
+scale = Vector2(1, 1)
+
+[node name="-- Misc --" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_042f5")
+scale = Vector2(1, 1)
+hframes = 5
+vframes = 5
+frame = 16
+metadata/_aseprite_wizard_config_ = {
+"embed_tex": true,
+"i_mode": -1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"slice": "",
+"source": "res://Entities/Mobs/Slime/Art/slime.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "b19d8bf5af51746727caf133dd4ea052"
+metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": false,
+"layer_section": false,
+"output_section": false,
+"pending_changes": {},
+"slice_section": false
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

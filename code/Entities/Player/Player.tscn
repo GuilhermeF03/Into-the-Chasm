@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://d0mst4eki2yyd"]
+[gd_scene load_steps=31 format=3 uid="uid://d0mst4eki2yyd"]
 
 [ext_resource type="Script" uid="uid://b1wm3dahmoc0q" path="res://Entities/Player/PlayerController.gd" id="1_3iq6n"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_fvu4l"]
@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://b10lp1h4nbjjq" path="res://Materials/Hit/hit_shader_material.tres" id="2_uw7o4"]
 [ext_resource type="Texture2D" uid="uid://ct15olca7m1sy" path="res://Entities/Player/Art/player.png" id="3_5x0oj"]
 [ext_resource type="Script" uid="uid://b1rk8c57ikqu0" path="res://Entities/Player/Controllers/AnimationController.gd" id="6_jynvv"]
+[ext_resource type="PackedScene" uid="uid://da8e8runbgva0" path="res://Gameplay/Statuses/StatusController.tscn" id="7_gallu"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_ikipm"]
 [ext_resource type="Script" uid="uid://dgsc24vwamctl" path="res://Entities/Player/Controllers/WeaponHandler.gd" id="7_jynvv"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_kuc5k"]
@@ -14,10 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://5xry0mnc8j7o" path="res://Entities/Player/HUD/HUD.tscn" id="9_hyecf"]
 [ext_resource type="Script" uid="uid://cyqxjwgjfm1yp" path="res://Entities/Player/Controllers/ToolsController.gd" id="12_061yh"]
 [ext_resource type="Script" uid="uid://ch2eolfscg1qq" path="res://Entities/Player/Controllers/MovementController.gd" id="12_lmeus"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0n3kf"]
-radius = 16.0
-height = 48.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_brdpf"]
 radius = 24.0
@@ -312,6 +309,10 @@ _data = {
 &"walk_up": SubResource("Animation_yushi")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0n3kf"]
+radius = 16.0
+height = 48.0
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 process_mode = 3
 z_index = 1
@@ -321,6 +322,102 @@ collision_mask = 64
 motion_mode = 1
 script = ExtResource("1_3iq6n")
 DODGE_COOLDOWN = 0.7
+
+[node name="-- Combat --" type="Node" parent="."]
+
+[node name="Hurtbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_brdpf")
+
+[node name="-- Item Collect --" type="Node" parent="."]
+
+[node name="Collect" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collect"]
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_5tmpo")
+
+[node name="Trigger" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]
+shape = SubResource("CircleShape2D_3xweo")
+
+[node name="-- Timers --" type="Node" parent="."]
+
+[node name="DodgeTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="-- UI --" type="Node" parent="."]
+
+[node name="Inventory" parent="." instance=ExtResource("2_urbfw")]
+layer = 2
+visible = false
+
+[node name="HUD" parent="." instance=ExtResource("9_hyecf")]
+
+[node name="-- Controllers --" type="Node" parent="."]
+
+[node name="Weapon" type="Node2D" parent="."]
+script = ExtResource("7_jynvv")
+
+[node name="WeaponHandler" type="Node2D" parent="Weapon"]
+position = Vector2(50, 0)
+scale = Vector2(5, 5)
+
+[node name="Tools" type="Node2D" parent="."]
+script = ExtResource("12_061yh")
+
+[node name="Movement" type="Node2D" parent="."]
+script = ExtResource("12_lmeus")
+DODGE_SPEED = 1000
+
+[node name="Status" parent="." instance=ExtResource("7_gallu")]
+scale = Vector2(1, 1)
+
+[node name="-- Misc --" type="Node" parent="."]
+
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("camera")]
+physics_interpolation_mode = 1
+zoom = Vector2(1.5, 1.5)
+process_callback = 0
+position_smoothing_speed = 1.0
+drag_left_margin = 0.3
+drag_top_margin = 0.3
+drag_right_margin = 0.3
+drag_bottom_margin = 0.3
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource("2_hacra")
+camera = NodePath("../PhantomCamera2D")
+
+[node name="PhantomCameraHost" type="Node" parent="Camera"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("2_fvu4l")
+
+[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+top_level = true
+script = ExtResource("7_ikipm")
+follow_mode = 5
+follow_target = NodePath("..")
+zoom = Vector2(1.5, 1.5)
+tween_resource = SubResource("Resource_2evhq")
+draw_limits = true
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_4p46q")
+}
+script = ExtResource("6_jynvv")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -356,98 +453,7 @@ metadata/_aseprite_wizard_source_file_hash_ = "86cf4bab82009ad414faec216bd874d6"
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_0n3kf")
 
-[node name="Hurtbox" type="Area2D" parent="."]
-visible = false
-collision_layer = 8
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, 8)
-shape = SubResource("CapsuleShape2D_brdpf")
-
-[node name="ItemCollect" type="Node2D" parent="."]
-visible = false
-
-[node name="Collect" type="Area2D" parent="ItemCollect"]
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemCollect/Collect"]
-position = Vector2(0, 8)
-shape = SubResource("CapsuleShape2D_5tmpo")
-
-[node name="Trigger" type="Area2D" parent="ItemCollect"]
-collision_layer = 2
-collision_mask = 0
-monitoring = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemCollect/Trigger"]
-shape = SubResource("CircleShape2D_3xweo")
-
-[node name="Timers" type="Node" parent="."]
-
-[node name="DodgeTimer" type="Timer" parent="Timers"]
-one_shot = true
-
-[node name="UI" type="Node" parent="."]
-
-[node name="Inventory" parent="UI" instance=ExtResource("2_urbfw")]
-layer = 2
-visible = false
-
-[node name="HUD" parent="UI" instance=ExtResource("9_hyecf")]
-
-[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
-top_level = true
-script = ExtResource("7_ikipm")
-follow_mode = 5
-follow_target = NodePath("..")
-zoom = Vector2(1.5, 1.5)
-tween_resource = SubResource("Resource_2evhq")
-draw_limits = true
-
-[node name="Controllers" type="Node2D" parent="."]
-
-[node name="Animation" type="AnimationPlayer" parent="Controllers"]
-root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_4p46q")
-}
-script = ExtResource("6_jynvv")
-
-[node name="Camera" type="Camera2D" parent="Controllers" node_paths=PackedStringArray("camera")]
-physics_interpolation_mode = 1
-zoom = Vector2(1.5, 1.5)
-process_callback = 0
-position_smoothing_speed = 1.0
-drag_left_margin = 0.3
-drag_top_margin = 0.3
-drag_right_margin = 0.3
-drag_bottom_margin = 0.3
-editor_draw_limits = true
-editor_draw_drag_margin = true
-script = ExtResource("2_hacra")
-camera = NodePath("../../PhantomCamera2D")
-
-[node name="PhantomCameraHost" type="Node" parent="Controllers/Camera"]
-process_priority = 300
-process_physics_priority = 300
-script = ExtResource("2_fvu4l")
-
-[node name="Weapon" type="Node2D" parent="Controllers"]
-script = ExtResource("7_jynvv")
-
-[node name="WeaponHandler" type="Node2D" parent="Controllers/Weapon"]
-position = Vector2(50, 0)
-scale = Vector2(5, 5)
-
-[node name="Tools" type="Node2D" parent="Controllers"]
-script = ExtResource("12_061yh")
-
-[node name="Movement" type="Node2D" parent="Controllers"]
-script = ExtResource("12_lmeus")
-DODGE_SPEED = 1000
-
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_enemy_attack"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
-[connection signal="area_entered" from="ItemCollect/Collect" to="." method="_on_item_collect"]
-[connection signal="animation_finished" from="Controllers/Animation" to="." method="_on_animation_finished"]
+[connection signal="area_entered" from="Collect" to="." method="_on_item_collect"]
+[connection signal="animation_finished" from="Animation" to="." method="_on_animation_finished"]

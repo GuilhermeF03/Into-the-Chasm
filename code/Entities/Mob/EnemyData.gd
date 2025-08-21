@@ -7,8 +7,8 @@ class_name EnemyData
 @export_subgroup("Combat")
 ## Amount of damage in player lives
 @export var damage: int = 1
-## Amount of lives
-@export var lives: int = 3
+## Amount of HP
+@export var hp: int = 3
 
 @export_subgroup("Loot")
 ## Array of possible loot items for this enemy

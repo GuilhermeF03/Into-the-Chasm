@@ -17,16 +17,17 @@ class_name PlayerController
 #region Nodes
 @export_group("Nodes")
 @onready var sprite = $Sprite
-@onready var dodge_timer = $Timers/DodgeTimer
-@onready var inventory : Inventory = $UI/Inventory
+@onready var dodge_timer = $DodgeTimer
+@onready var inventory : Inventory = $Inventory
 @onready var hurtbox : Area2D = $Hurtbox
 @onready var collision : CollisionShape2D = $Collision
 
 @export_subgroup("Controllers")
-@onready var animation_controller : AnimationController = $Controllers/Animation
-@onready var camera_controller : CameraController = $Controllers/Camera
-@onready var movement_controller : MovementController = $Controllers/Movement
-@onready var weapon_controller : WeaponController = $Controllers/Weapon
+@onready var animation_controller : AnimationController = $Animation
+@onready var camera_controller : CameraController = $Camera
+@onready var movement_controller : MovementController = $Movement
+@onready var weapon_controller : WeaponController = $Weapon
+@onready var status_controller : StatusController = $Status
 #endregion
 
 #region Data

@@ -1,11 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://pcsdsn2ej3mj"]
 
-[ext_resource type="Script" uid="uid://ce4lrhfh2c7f0" path="res://Effects&Statuses/Effects/Core/AoE/AreaOfEffect.gd" id="1_cwmgu"]
+[ext_resource type="Script" uid="uid://ce4lrhfh2c7f0" path="res://Gameplay/Effects/Core/AoE/AreaOfEffect.gd" id="1_cwmgu"]
 
 [node name="Area of Effect" type="Node2D"]
+scale = Vector2(1e-05, 1e-05)
 script = ExtResource("1_cwmgu")
-min_size = null
-max_size = null
 
 [node name="Sprite" type="Sprite2D" parent="."]
 visible = false

@@ -19,11 +19,14 @@ extends Effect
 @onready var aoe : Area2D = $AoE
 @onready var timer : Timer = $Timer
 @onready var sprite : Sprite2D = $Sprite
+
+@export_subgroup("Preloads")
+@export var status_node : PackedScene
 #endregion
 
 #region Data
 @export_group("Data")
-var affected_entities : Array[Area2D]
+var affected_entities : Array[CharacterBody2D]
 #endregion
 
 #region builtins
@@ -36,29 +39,43 @@ func _ready() -> void:
 
 #region signal handlers
 func on_recheck():
-	print("[%s] rechecking..." % [name]) 
-	var overlapping_entities := aoe.get_overlapping_areas()
+	var overlapping_entities = (
+		aoe.get_overlapping_areas()
+		.map(func(area : Area2D): return area.get_parent())
+		.filter(func(entity : Node2D):
+		return entity is Enemy or entity is PlayerController
+		)
+		.map(func(entity : Node2D): return entity as CharacterBody2D)
+	)
 	
-	print("[%s] overlapped entities : %s " % [name, overlapping_entities])
-	
-	for overlapping_entity : Area2D in overlapping_entities:
+	for overlapping_entity : Node2D in overlapping_entities:
 		# Overlapping for the first round -> set status
 		if overlapping_entity not in affected_entities:
-			# entity.queue_status()
+			var status_controller : StatusController = (
+				overlapping_entity.status_controller
+			)
+			status_controller.add_status(status_node)
 			affected_entities.append(overlapping_entity)
 			continue
 		# Overlapping but already queued -> do nothing
 	
 	# Cycle through "out of area" entites -> queue status removal
-	var out_of_area_entities := affected_entities.filter(func (entity : Area2D):
-		return entity in overlapping_entities
+	var out_of_area_entities := affected_entities.filter(func (entity : Node):
+		return entity not in overlapping_entities
 	)
 	
-	for out_of_area_entity in out_of_area_entities:
-		# Queue status removal
-		# entity.queue_staus_removal()
-		pass
+	# Queue status removal
+	for out_of_area_entity : Node2D in out_of_area_entities:
+		var status_controller : StatusController = (
+			out_of_area_entity.status_controller
+		)
+		status_controller.remove_status(status_node)
 		
+	# Keep only the overlapped entities
+	for entity in affected_entities:
+		if entity not in overlapping_entities:
+			affected_entities.erase(entity)
+	
 
 func call_effect(args = {}):
 	reparent(LevelManager.scene)

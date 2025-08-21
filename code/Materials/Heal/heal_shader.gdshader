@@ -21,8 +21,8 @@ void fragment() {
     float pulse = clamp(0.5 + 0.5 * sin(time), min_intensity, max_intensity);
 
     // Apply healing tint blended with original texture
-    vec3 blended_rgb = mix(tex_color.rgb, 
-		tex_color.rgb + heal_color.rgb * pulse, 
+    vec3 blended_rgb = mix(tex_color.rgb,
+		tex_color.rgb + heal_color.rgb * pulse,
 		pulse * intensity
 	);
     float blended_alpha = tex_color.a;

@@ -7,7 +7,7 @@ class_name HandledWeapon
 @export var weapon_data: WeaponData
 var effect : Effect
 
-var temp_damage: WeaponData.DamageInfo
+var temp_damage: DamageLibrary.DamageInfo
 var last_attack_was_special: bool
 var hitbox_layers = [4, 32]
 

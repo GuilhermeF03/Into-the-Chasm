@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=4 uid="uid://dr5ax58ns4c7k"]
+[gd_scene load_steps=19 format=4 uid="uid://dr5ax58ns4c7k"]
 
 [ext_resource type="Script" uid="uid://dqfwhr1avmrn7" path="res://Entities/Mob/Copper Paths/Driftskin/Driftskin.gd" id="1_8d8is"]
 [ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Materials/Hit/hit_shader.gdshader" id="2_4pept"]
 [ext_resource type="Resource" uid="uid://bk12ad6pejafj" path="res://Entities/Mob/Copper Paths/Driftskin/Driftskin_D.tres" id="2_fxeid"]
+[ext_resource type="PackedScene" uid="uid://da8e8runbgva0" path="res://Gameplay/Statuses/StatusController.tscn" id="3_a0w7s"]
 [ext_resource type="BehaviorTree" uid="uid://b6mjhiku7448" path="res://Entities/Mob/AI/Trees/CopperPaths/Driftskin/Driftskin_BT.tres" id="3_sabak"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ctdae"]
@@ -182,6 +183,11 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Area"]
 shape = SubResource("CircleShape2D_s0vdw")
+
+[node name="-- Status --" type="Node" parent="."]
+
+[node name="StatusController" parent="." instance=ExtResource("3_a0w7s")]
+scale = Vector2(1, 1)
 
 [node name="-- Misc --" type="Node" parent="."]
 

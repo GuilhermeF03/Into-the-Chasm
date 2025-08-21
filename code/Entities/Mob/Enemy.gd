@@ -65,9 +65,9 @@ func on_player_damage(area : Area2D):
 	
 	## Handle damage
 	var damage : int = get_damage(area.get_parent())
-	data.lives -= damage
+	data.hp -= damage
 	
-	if data.lives <= 0:
+	if data.hp <= 0:
 		die()
 	
 	hurtbox.set_deferred("monitoring", true)
@@ -92,7 +92,7 @@ func hit_knockback(area : Area2D):
 #region Aux
 func get_damage(object : Node2D) -> int:
 	if object is HandledWeapon:
-		return InventoryManager.weapon.get_damage().damage
+		return InventoryManager.weapon.damage_info.get_damage().damage
 	if object is PickableTool:
 		return 1
 	return 1
