@@ -42,10 +42,10 @@ var back_view = false
 func _ready():
 	dodge_timer.wait_time = DODGE_COOLDOWN
 	LevelManager.add_pause_trigger(inventory.on_handling_changed)
-	#hurtbox.area_entered.connect(_on_enemy_attack)
 	hurtbox.body_entered.connect(_on_enemy_attack)
 	
-	#sprite.material = load("res://Entities/Player/Materials/heal_material.tres")
+	## Connect signals 
+	status_controller.on_deal_status.connect(deal_status)
 
 
 func _physics_process(_delta):
@@ -61,7 +61,7 @@ func _physics_process(_delta):
 		animation_controller.handle_animation(input)
 		movement_controller.handle_movement(input)
 		camera_controller.handle_camera()
-		
+
 
 func _input(event : InputEvent):
 	if (
@@ -140,18 +140,18 @@ func _on_enemy_attack(enemy : Node2D):
 		else "up"
 	)
 	animation_controller.play_animation("idle_" + dir)
-	animation_controller.play("hit")
+	animation_controller.play_animation("hit")
 	
-	knockback(enemy, HURT_KNOCKBACK)
-	await animation_controller.animation_finished
+	knockback(enemy.global_position, HURT_KNOCKBACK)
+	await animation_controller.wait()
 	
 	InputManager.input_level = InputManager.INPUT_LEVEL.ALL
 	
-	animation_controller.wait()
+
 
 
 func on_attack_registered(enemy : Area2D):
-	knockback(enemy, ATTACK_KNOCKBACK)
+	knockback(enemy.global_position, ATTACK_KNOCKBACK)
 	
 	if (
 		not weapon_controller.handled_weapon.last_attack_was_special
@@ -160,9 +160,9 @@ func on_attack_registered(enemy : Area2D):
 		InventoryManager.register_attack()
 
 
-func knockback(body : Node2D, intensity : int):
+func knockback(body_pos : Vector2, intensity : int):
 	var push_vector = (
-		(global_position - body.global_position).normalized()
+		(global_position - body_pos).normalized()
 		* intensity
 	)
 
@@ -175,4 +175,30 @@ func knockback(body : Node2D, intensity : int):
 		).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	)
 	await  tween.finished
+
+
+func deal_status(color : Color):
+	var animation : Animation = animation_controller.get_animation("deal_status")
+	var track = animation.find_track(
+		"Sprite:material:shader_parameter/flash_color",
+		Animation.TrackType.TYPE_VALUE
+	)
+	animation.track_set_key_value(track, 0, color)
+	
+	InputManager.input_level = InputManager.INPUT_LEVEL.NONE
+	
+	var curr_animation : String = animation_controller.current_animation
+	var dir = (
+		"down" if curr_animation.contains("down") 
+		else "up"
+	)
+	animation_controller.play_animation("idle_" + dir)
+	animation_controller.play_animation("deal_status")
+	
+	knockback(global_position + Vector2.DOWN * 10, HURT_KNOCKBACK / 4)
+	
+	await animation_controller.wait()
+	
+	
+	InputManager.input_level = InputManager.INPUT_LEVEL.ALL
 #endregion

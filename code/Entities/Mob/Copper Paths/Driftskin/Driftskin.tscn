@@ -187,7 +187,6 @@ shape = SubResource("CircleShape2D_s0vdw")
 [node name="-- Status --" type="Node" parent="."]
 
 [node name="StatusController" parent="." instance=ExtResource("3_a0w7s")]
-scale = Vector2(1, 1)
 
 [node name="-- Misc --" type="Node" parent="."]
 

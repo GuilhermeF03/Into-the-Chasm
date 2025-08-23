@@ -308,14 +308,12 @@ shape = SubResource("CircleShape2D_s0vdw")
 [node name="-- Status --" type="Node" parent="."]
 
 [node name="StatusController" parent="." instance=ExtResource("2_ca4m2")]
-scale = Vector2(1, 1)
 
 [node name="-- Misc --" type="Node" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_042f5")
-scale = Vector2(1, 1)
 hframes = 5
 vframes = 5
 frame = 16

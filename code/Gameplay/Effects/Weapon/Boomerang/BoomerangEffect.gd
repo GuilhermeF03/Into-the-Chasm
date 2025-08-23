@@ -1,4 +1,4 @@
-extends WeaponEffect
+extends Effect
 
 #region Constants
 @export_group("Constants")
@@ -42,7 +42,7 @@ func _physics_process(delta):
 
 
 #region Effect
-func call_effect():
+func call_effect(args = {}):
 	player.weapon_controller.lock_movement = true
 	hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 	

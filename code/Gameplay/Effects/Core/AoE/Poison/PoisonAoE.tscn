@@ -8,10 +8,13 @@ _data = PackedByteArray("AAADAAUAAAABAAAAIAAAACAAAACEAAAAUklGRnwAAABXRUJQVlA4TG8
 size_override = Vector2(32, 32)
 
 [node name="Area of Effect" type="Node2D"]
-scale = Vector2(6.51807, 6.51807)
+scale = Vector2(5.62029, 5.62029)
 script = ExtResource("1_y2rwu")
+LIFETIME = 10.0
+TIME_TO_SET_EFFET = 0.5
+TIME_TO_RECHECK = 5.0
 min_size = 2.5
-max_size = 7.0
+max_size = 5.0
 status_node = ExtResource("2_xjige")
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -37,7 +40,11 @@ metadata/_aseprite_wizard_config_ = {
 }
 metadata/_aseprite_wizard_source_file_hash_ = "75388ef9a0aadbd00e4bf89c36ecf264"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="-- Timers --" type="Node" parent="."]
+
+[node name="Recheck Timer" type="Timer" parent="."]
+
+[node name="Lifetime Timer" type="Timer" parent="."]
 
 [node name="AoE" type="Area2D" parent="."]
 scale = Vector2(7.5, 7.5)

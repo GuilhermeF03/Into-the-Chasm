@@ -17,8 +17,11 @@ extends Effect
 #region Nodes
 @export_group("Nodes")
 @onready var aoe : Area2D = $AoE
-@onready var timer : Timer = $Timer
 @onready var sprite : Sprite2D = $Sprite
+
+@export_subgroup("Timers")
+@onready var recheck_timer : Timer = $"Recheck Timer"
+@onready var lifetime_timer : Timer = $"Lifetime Timer"
 
 @export_subgroup("Preloads")
 @export var status_node : PackedScene
@@ -32,9 +35,12 @@ var affected_entities : Array[CharacterBody2D]
 #region builtins
 func _ready() -> void:
 	self.scale = Vector2.ONE * randf_range(min_size, max_size)
+	self.global_rotation = deg_to_rad(randf_range(-360, 360))
 	aoe.monitorable = false
 	aoe.monitoring = false
 	sprite.visible = false
+	
+	on_recheck()
 #endregion
 
 #region signal handlers
@@ -75,16 +81,29 @@ func on_recheck():
 	for entity in affected_entities:
 		if entity not in overlapping_entities:
 			affected_entities.erase(entity)
+			
+			
+func on_lifetime_end():
+	for entity in affected_entities:
+		var status_controller : StatusController = (
+			entity.status_controller
+		)
+		status_controller.remove_status(status_node)
+	queue_free()
 	
+#endregion	
 
 func call_effect(args = {}):
 	reparent(LevelManager.scene)
 	
-	timer.autostart = true
-	timer.timeout.connect(on_recheck)
-	timer.start(TIME_TO_RECHECK)
+	recheck_timer.autostart = true
+	recheck_timer.timeout.connect(on_recheck)
+	recheck_timer.start(TIME_TO_RECHECK)
+	
+	lifetime_timer.autostart = false
+	lifetime_timer.timeout.connect(on_lifetime_end)
+	lifetime_timer.start(LIFETIME)
 	
 	aoe.monitorable = true
 	aoe.monitoring = true
 	sprite.visible = true
-	

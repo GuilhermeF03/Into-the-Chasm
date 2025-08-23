@@ -14,7 +14,7 @@ class_name Status
 
 #region Signals
 @export_group("Signals")
-signal on_apply_status(status : Status)
+signal on_deal_status(status : Status)
 #endregion
 
 
@@ -23,10 +23,10 @@ func _ready() -> void:
 	
 	timer.autostart = true
 	timer.timeout.connect(apply_status)
-	timer.start(data.TIME_TO_APPLY_STATUS_EFFECT)
+	timer.start(data.TIME_TO_DEAL_STATUS)
 
 
 ## Overriden by specific statuses
 func apply_status():
-	on_apply_status.emit(self)
+	on_deal_status.emit(self)
 	pass 

@@ -5,9 +5,13 @@ class_name StatusController
 #region Data
 @export_group("Data")
 var statuses : LinkedList = LinkedList.new()
-## Used to trigger shader-bound animations -> must be implemented  by parent
-var parent_animation_player : AnimationPlayer
 #endregion
+
+#region Signals
+@export_group("Signals")
+signal on_deal_status(color : Color)
+#endregion
+
 
 ## Receives status packed node -> instantiate it and append
 func add_status(packed_status : PackedScene):
@@ -15,7 +19,10 @@ func add_status(packed_status : PackedScene):
 	add_child(status, true)
 	
 	statuses.append(status)
-	status.on_apply_status.connect(on_apply_status)
+	status.on_deal_status.connect(deal_status)
+	
+	## Manually applies the first time
+	deal_status(status)
 	
 	
 func remove_status(packed_status : PackedScene):
@@ -29,9 +36,9 @@ func remove_status(packed_status : PackedScene):
 	remove_child(status_child)
 
 
-func on_apply_status(status : Status):
+func deal_status(status : Status):
 	match status.data.status_type:
 		StatusData.STATUS_TYPE.DAMAGE:
-			pass#parent_animation_player.play("status_damage")
+			on_deal_status.emit(status.data.status_color)
 		StatusData.STATUS_TYPE.HEAL:
 			pass#parent_animation_player.play("status_heal")
