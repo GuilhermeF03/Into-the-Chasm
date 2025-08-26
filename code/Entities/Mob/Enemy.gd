@@ -29,8 +29,9 @@ class_name Enemy
 @onready var hurtbox = $Hurtbox
 
 @onready var attack_area = $"Attack Area"
-
 @onready var bt_player = $"Behaviour Tree"
+
+@onready var status_controller : StatusController = $StatusController
 #endregion
 
 #region Data
@@ -65,9 +66,9 @@ func on_player_damage(area : Area2D):
 	
 	## Handle damage
 	var damage : int = get_damage(area.get_parent())
-	data.lives -= damage
+	data.hp -= damage
 	
-	if data.lives <= 0:
+	if data.hp <= 0:
 		die()
 	
 	hurtbox.set_deferred("monitoring", true)
@@ -92,9 +93,13 @@ func hit_knockback(area : Area2D):
 #region Aux
 func get_damage(object : Node2D) -> int:
 	if object is HandledWeapon:
-		return InventoryManager.weapon.get_damage().damage
-	if object is PickableTool:
+		return InventoryManager.weapon.damage_info.get_damage().damage
+	if object is HandledTool:
 		return 1
+	if object is Effect:
+		return 1
+	if object is Status:
+		return object.data.damage_info.get_damage().damage
 	return 1
 	
 	

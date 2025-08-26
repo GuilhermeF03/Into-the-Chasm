@@ -5,11 +5,12 @@
 [ext_resource type="Material" uid="uid://p258o30kdie5" path="res://Materials/Heal/heal_shader_material.tres" id="3_if4hv"]
 [ext_resource type="Texture2D" uid="uid://dd0ev3s6uyahk" path="res://Entities/Neutral/Dummy/Dummy.png" id="4_6b64x"]
 
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gycfc"]
 shader = ExtResource("1_qsbtk")
 shader_parameter/heal_color = Color(0.5, 1, 0.7, 1)
 shader_parameter/intensity = 1.0
+shader_parameter/min_intensity = 0.25
+shader_parameter/max_intensity = 0.8
 shader_parameter/speed = 1.0
 
 [sub_resource type="Animation" id="Animation_sxowk"]

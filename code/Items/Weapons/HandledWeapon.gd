@@ -5,9 +5,9 @@ class_name HandledWeapon
 
 @export_group("Data")
 @export var weapon_data: WeaponData
-var effect : WeaponEffect
+var effect : Effect
 
-var temp_damage: WeaponData.DamageInfo
+var temp_damage: DamageLibrary.DamageInfo
 var last_attack_was_special: bool
 var hitbox_layers = [4, 32]
 

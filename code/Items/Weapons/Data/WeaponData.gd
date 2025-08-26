@@ -6,47 +6,9 @@ enum WEAPON_TYPE{CLOSE_COMBAT, RANGED}
 @export var weapon_type : WEAPON_TYPE
 
 @export_subgroup("Damage")
-@export var damage_dict : Dictionary[String, int] = {
-	"min": 0,
-	"max": 0,
-	"step": 0,
-}
+@export var damage_info : DamageLibrary
 @export_range(0.05, 0.7) var attack_cooldown : float = 0.15
-@export var crit_multiplier : int
-@export_range(0.01, 1) var crit_chance : float
 
 @export_group("Preloads")
 @export var handled_weapon : PackedScene
 @export var effect : PackedScene
-
-
-func get_damage() -> DamageInfo :
-	var rng = RandomNumberGenerator.new()
-
-	# Roll for critical hit
-	var is_crit = rng.randf() < crit_chance
-
-	# Generate base damage
-	var damage = randi_range(damage_dict["min"], damage_dict["max"])
-
-	# Apply critical multiplier if critical hit
-	if is_crit:
-		damage = int(damage * crit_multiplier)
-
-	# Align damage to step value
-	return DamageInfo.new(
-		snapped(damage, damage_dict["step"]),
-		is_crit
-	)
-
-
-# Helper class
-class DamageInfo:
-	var damage : int
-	var is_crit : bool
-	
-	func _init(new_damage : int, new_is_crit : bool):
-		self.damage = new_damage
-		self.is_crit = new_is_crit
-	
-	

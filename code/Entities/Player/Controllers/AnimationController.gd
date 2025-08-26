@@ -25,6 +25,7 @@ func handle_animation(input):
 	
 	var animation_side = "up" if player.back_view else "down"
 	var animation = "idle_" if input == Vector2.ZERO else "walk_"
+	
 	play_animation(animation + animation_side)
 	
 	

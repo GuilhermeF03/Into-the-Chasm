@@ -98,7 +98,6 @@ func die():
 #endregion
 
 
-
 func spawn_at_random_dirtpile():
 	if dirtpiles.is_empty():
 		push_warning("[Driftskin] No dirtpiles found!")

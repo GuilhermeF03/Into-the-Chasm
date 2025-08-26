@@ -17,16 +17,17 @@ class_name PlayerController
 #region Nodes
 @export_group("Nodes")
 @onready var sprite = $Sprite
-@onready var dodge_timer = $Timers/DodgeTimer
-@onready var inventory : Inventory = $UI/Inventory
+@onready var dodge_timer = $DodgeTimer
+@onready var inventory : Inventory = $Inventory
 @onready var hurtbox : Area2D = $Hurtbox
 @onready var collision : CollisionShape2D = $Collision
 
 @export_subgroup("Controllers")
-@onready var animation_controller : AnimationController = $Controllers/Animation
-@onready var camera_controller : CameraController = $Controllers/Camera
-@onready var movement_controller : MovementController = $Controllers/Movement
-@onready var weapon_controller : WeaponController = $Controllers/Weapon
+@onready var animation_controller : AnimationController = $Animation
+@onready var camera_controller : CameraController = $Camera
+@onready var movement_controller : MovementController = $Movement
+@onready var weapon_controller : WeaponController = $Weapon
+@onready var status_controller : StatusController = $Status
 #endregion
 
 #region Data
@@ -41,10 +42,10 @@ var back_view = false
 func _ready():
 	dodge_timer.wait_time = DODGE_COOLDOWN
 	LevelManager.add_pause_trigger(inventory.on_handling_changed)
-	#hurtbox.area_entered.connect(_on_enemy_attack)
 	hurtbox.body_entered.connect(_on_enemy_attack)
 	
-	#sprite.material = load("res://Entities/Player/Materials/heal_material.tres")
+	## Connect signals 
+	status_controller.on_deal_status.connect(deal_status)
 
 
 func _physics_process(_delta):
@@ -55,12 +56,14 @@ func _physics_process(_delta):
 		"move_up", "move_down"
 	)
 	
-	if InputManager.is_all_input_allowed():
+	if not InputManager.is_movement_input_blocked():
 		weapon_controller.handle_weapon()
-		animation_controller.handle_animation(input)
 		movement_controller.handle_movement(input)
 		camera_controller.handle_camera()
 		
+	if not InputManager.is_animation_input_blocked():
+		animation_controller.handle_animation(input)
+
 
 func _input(event : InputEvent):
 	if (
@@ -129,9 +132,8 @@ func _on_item_collect(area : Area2D):
 
 #region Combat
 func _on_enemy_attack(enemy : Node2D):
-	print("Hurt")
 	PlayerManager.damage_player(1)
-	InputManager.input_level = InputManager.INPUT_LEVEL.NONE
+	InputManager.input_level = InputManager.INPUT_LEVEL.NO_ANIMATION
 	
 	var curr_animation : String = animation_controller.current_animation
 	var dir = (
@@ -139,18 +141,16 @@ func _on_enemy_attack(enemy : Node2D):
 		else "up"
 	)
 	animation_controller.play_animation("idle_" + dir)
-	animation_controller.play("hit")
+	animation_controller.play_animation("hit")
 	
-	knockback(enemy, HURT_KNOCKBACK)
-	await animation_controller.animation_finished
+	knockback(enemy.global_position, HURT_KNOCKBACK)
+	await animation_controller.wait()
 	
 	InputManager.input_level = InputManager.INPUT_LEVEL.ALL
 	
-	animation_controller.wait()
-
 
 func on_attack_registered(enemy : Area2D):
-	knockback(enemy, ATTACK_KNOCKBACK)
+	knockback(enemy.global_position, ATTACK_KNOCKBACK)
 	
 	if (
 		not weapon_controller.handled_weapon.last_attack_was_special
@@ -159,9 +159,9 @@ func on_attack_registered(enemy : Area2D):
 		InventoryManager.register_attack()
 
 
-func knockback(body : Node2D, intensity : int):
+func knockback(body_pos : Vector2, intensity : int):
 	var push_vector = (
-		(global_position - body.global_position).normalized()
+		(global_position - body_pos).normalized()
 		* intensity
 	)
 
@@ -174,4 +174,31 @@ func knockback(body : Node2D, intensity : int):
 		).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	)
 	await  tween.finished
+
+
+func deal_status(status_data : StatusData):
+	var animation : Animation = animation_controller.get_animation("deal_status")
+	var track = animation.find_track(
+		"Sprite:material:shader_parameter/flash_color",
+		Animation.TrackType.TYPE_VALUE
+	)
+	animation.track_set_key_value(track, 0, status_data.STATUS_COLOR)
+	
+	InputManager.input_level = InputManager.INPUT_LEVEL.NO_ANIMATION
+	
+	var curr_animation : String = animation_controller.current_animation
+	var dir = (
+		"down" if curr_animation.contains("down") 
+		else "up"
+	)
+	animation_controller.play_animation("idle_" + dir)
+	animation_controller.play_animation("deal_status")
+	
+	knockback(
+		global_position + Vector2.DOWN * 10, 
+		status_data.STATUS_KNOCKBACK
+	)
+	
+	await animation_controller.wait()
+	InputManager.input_level = InputManager.INPUT_LEVEL.ALL
 #endregion

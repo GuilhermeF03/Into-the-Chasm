@@ -26,3 +26,6 @@ func _on_use_finished():
 
 func _disable_logic():
 	pass # override if needed in subclasses
+	
+func despawn_item():
+	queue_free()

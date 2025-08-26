@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt0l8c25a6bme"]
+
+[ext_resource type="Script" uid="uid://b5sq7pn2c3uiq" path="res://Gameplay/Statuses/Status.gd" id="1_o3t5j"]
+
+[node name="Status" type="Node2D"]
+z_index = 100
+z_as_relative = false
+script = ExtResource("1_o3t5j")
+
+[node name="Apply Status Timer" type="Timer" parent="."]
+
+[node name="Recheck Timer" type="Timer" parent="."]

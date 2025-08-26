@@ -158,33 +158,46 @@ func add_tool(tool : ToolData):
 		tool_added.emit(tool, idx)
 
 
-func remove_tool(index : int = -1, was_consumed : bool = false):
+func remove_tool(index: int = -1, was_consumed: bool = false) -> void:
+	if tools.is_empty():
+		return
+	
+	# Pick last slot if index is invalid
 	var idx = (
-		tools.size() if index not in range(curr_tools_size)
+		tools.size() - 1 if index not in range(tools.size())
 		else index
 	)
-	var tool = tools[index]
 	
-	tools[index] = null
+	var tool = tools[idx]
+
+	# Shift everything left after idx
+	for i in range(idx, tools.size() - 1):
+		tools[i] = tools[i + 1]
+	tools[tools.size() - 1] = null  # last slot becomes empty
+
 	tool_removed.emit(idx)
-	
+
+	# Drop tool back into world if it wasn't consumed
 	if tool != null and not was_consumed:
-		var _tool_node : PickableTool = tool_node.instantiate()
+		var _tool_node: PickableTool = tool_node.instantiate()
 		_tool_node.set_data(tool)
 		LevelManager.spawn(_tool_node, PlayerManager.player.global_position, true)
-	
-	
-	# Dropped current selected tool -> defer to next available tool
+
+	# If current selected tool was removed, pick next available one
 	if curr_tool == tool:
 		var available_tools = tools.filter(func(value): return value != null)
 		if available_tools.is_empty():
 			select_tool(-1)
 			curr_tool = null
 		else:
-			var curr_tool_index = tools.find(available_tools.front())
-			select_tool(curr_tool_index)
-	
-	
+			# keep selection on same slot if still valid, otherwise first non-null
+			var next_index = clamp(idx, 0, tools.size() - 1)
+			if tools[next_index] == null:
+				next_index = tools.find(available_tools.front())
+			curr_tool = tools[next_index]
+			select_tool(next_index)
+
+
 func select_tool(index : int):
 	if index == -1:
 		curr_tool = null
@@ -213,6 +226,7 @@ func get_tools_size():
 	
 	
 func consume_tool():
+	if curr_tool == null: return
 	curr_tool.usage -= 1
 	tool_used.emit(curr_tool)
 	if curr_tool.usage <= 0:
@@ -227,7 +241,7 @@ func add_trinket(trinket : TrinketData):
 
 
 func remove_trinket(index):
-	var trinket = trinkets[index]
+	var trinket: TrinketData = trinkets[index]
 	trinkets.remove_at(index)
 	trinket_removed.emit(trinket, index)
 #endregion

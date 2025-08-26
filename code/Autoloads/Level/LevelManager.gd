@@ -84,7 +84,7 @@ func spawn(
 	curr_room : bool = false
 ):
 	if curr_room and level:
-		var closest_room_id = get_closest_room(node.global_position)
+		var closest_room_id: StringName = get_closest_room(node.global_position)
 		var room : Room = level.get_room(closest_room_id)
 		room.add_child(node)
 		node.set_owner(room)
@@ -100,10 +100,6 @@ func spawn_bullet(bullet : Node2D, position : Vector2 = Vector2.ZERO):
 #endregion
 
 #region Helpers
-func mouse_pos():
-	return get_viewport().get_mouse_position()
-
-
 func add_pause_trigger(sig : Signal):
 	sig.connect(
 		func(value: bool): 
@@ -115,7 +111,7 @@ func set_timer(time : float, callback : Callable):
 	get_tree().create_timer(time).timeout.connect(callback)
 
 
-func biome_to_string(_biome : Biome):
+func biome_to_string(_biome : Biome) -> String:
 	match _biome:
 		Biome.COPPER_PATHS:
 			return "Copper Paths"
@@ -127,4 +123,6 @@ func biome_to_string(_biome : Biome):
 			return "Magma Grotto" # Not yet implemented
 		Biome.PLACEHOLDER:
 			return "Placeholder"
+		_:
+			return ""
 #endregion
