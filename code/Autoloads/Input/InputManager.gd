@@ -11,7 +11,8 @@ extends Node2D
 @export_group("Data")
 enum INPUT_LEVEL {
 	NONE, ## For special ocassions where the game must be blocked, like saving and loading
-	NO_MOVEMENT, ## No movement is allowed, for dialogues and cutscenes
+	NO_MOVEMENT, ## No movement is allowed, for dialogues and cutscenes,
+	NO_ANIMATION, ## Movement is allowed, but Animation is blocked, for special animation
 	ALL ## Normal input behaviour
 }
 
@@ -23,8 +24,12 @@ func is_all_input_allowed() -> bool:
 	return input_level == INPUT_LEVEL.ALL
 
 
-func is_movement_input_allowed() -> bool:
+func is_movement_input_blocked() -> bool:
 	return input_level == INPUT_LEVEL.NO_MOVEMENT
+
+
+func is_animation_input_blocked()-> bool:
+	return input_level == INPUT_LEVEL.NO_ANIMATION
 
 
 func is_no_input_allowed() -> bool:

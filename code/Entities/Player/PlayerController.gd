@@ -56,11 +56,13 @@ func _physics_process(_delta):
 		"move_up", "move_down"
 	)
 	
-	if InputManager.is_all_input_allowed():
+	if not InputManager.is_movement_input_blocked():
 		weapon_controller.handle_weapon()
-		animation_controller.handle_animation(input)
 		movement_controller.handle_movement(input)
 		camera_controller.handle_camera()
+		
+	if not InputManager.is_animation_input_blocked():
+		animation_controller.handle_animation(input)
 
 
 func _input(event : InputEvent):
@@ -130,9 +132,8 @@ func _on_item_collect(area : Area2D):
 
 #region Combat
 func _on_enemy_attack(enemy : Node2D):
-	print("Hurt")
 	PlayerManager.damage_player(1)
-	InputManager.input_level = InputManager.INPUT_LEVEL.NONE
+	InputManager.input_level = InputManager.INPUT_LEVEL.NO_ANIMATION
 	
 	var curr_animation : String = animation_controller.current_animation
 	var dir = (
@@ -147,8 +148,6 @@ func _on_enemy_attack(enemy : Node2D):
 	
 	InputManager.input_level = InputManager.INPUT_LEVEL.ALL
 	
-
-
 
 func on_attack_registered(enemy : Area2D):
 	knockback(enemy.global_position, ATTACK_KNOCKBACK)
@@ -177,15 +176,15 @@ func knockback(body_pos : Vector2, intensity : int):
 	await  tween.finished
 
 
-func deal_status(color : Color):
+func deal_status(status_data : StatusData):
 	var animation : Animation = animation_controller.get_animation("deal_status")
 	var track = animation.find_track(
 		"Sprite:material:shader_parameter/flash_color",
 		Animation.TrackType.TYPE_VALUE
 	)
-	animation.track_set_key_value(track, 0, color)
+	animation.track_set_key_value(track, 0, status_data.STATUS_COLOR)
 	
-	InputManager.input_level = InputManager.INPUT_LEVEL.NONE
+	InputManager.input_level = InputManager.INPUT_LEVEL.NO_ANIMATION
 	
 	var curr_animation : String = animation_controller.current_animation
 	var dir = (
@@ -195,10 +194,11 @@ func deal_status(color : Color):
 	animation_controller.play_animation("idle_" + dir)
 	animation_controller.play_animation("deal_status")
 	
-	knockback(global_position + Vector2.DOWN * 10, HURT_KNOCKBACK / 4)
+	knockback(
+		global_position + Vector2.DOWN * 10, 
+		status_data.STATUS_KNOCKBACK
+	)
 	
 	await animation_controller.wait()
-	
-	
 	InputManager.input_level = InputManager.INPUT_LEVEL.ALL
 #endregion

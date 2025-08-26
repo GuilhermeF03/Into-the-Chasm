@@ -4,7 +4,8 @@ class_name StatusData
 #region Constants
 @export_group("Constants")
 @export_range(0.1, 10) var TIME_TO_DEAL_STATUS : float
-@export var status_color : Color = Color.WHITE
+@export var STATUS_COLOR : Color = Color.WHITE
+@export var STATUS_KNOCKBACK : int = 0
 
 @export_subgroup("Combat")
 @export var damage_info : DamageLibrary

@@ -7,4 +7,6 @@ z_index = 100
 z_as_relative = false
 script = ExtResource("1_o3t5j")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Apply Status Timer" type="Timer" parent="."]
+
+[node name="Recheck Timer" type="Timer" parent="."]

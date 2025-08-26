@@ -14,7 +14,6 @@ y_sort_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_it1xi")]
 position = Vector2(80, -128)
-collision_layer = 64
 ATTACK_KNOCKBACK = 5
 
 [node name="Dummy" parent="." instance=ExtResource("2_7rb17")]

@@ -11,7 +11,9 @@ z_as_relative = false
 script = ExtResource("1_8hdcw")
 data = ExtResource("2_yfcfu")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Apply Status Timer" type="Timer" parent="."]
+
+[node name="Recheck Timer" type="Timer" parent="."]
 
 [node name="Poison Particles" type="GPUParticles2D" parent="."]
 amount = 2

@@ -29,8 +29,9 @@ class_name Enemy
 @onready var hurtbox = $Hurtbox
 
 @onready var attack_area = $"Attack Area"
-
 @onready var bt_player = $"Behaviour Tree"
+
+@onready var status_controller : StatusController = $StatusController
 #endregion
 
 #region Data
@@ -93,8 +94,12 @@ func hit_knockback(area : Area2D):
 func get_damage(object : Node2D) -> int:
 	if object is HandledWeapon:
 		return InventoryManager.weapon.damage_info.get_damage().damage
-	if object is PickableTool:
+	if object is HandledTool:
 		return 1
+	if object is Effect:
+		return 1
+	if object is Status:
+		return object.data.damage_info.get_damage().damage
 	return 1
 	
 	

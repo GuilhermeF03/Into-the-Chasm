@@ -8,7 +8,8 @@ _data = PackedByteArray("AAADAAUAAAABAAAAIAAAACAAAACEAAAAUklGRnwAAABXRUJQVlA4TG8
 size_override = Vector2(32, 32)
 
 [node name="Area of Effect" type="Node2D"]
-scale = Vector2(5.62029, 5.62029)
+rotation = -5.66929
+scale = Vector2(4.42316, 4.42316)
 script = ExtResource("1_y2rwu")
 LIFETIME = 10.0
 TIME_TO_SET_EFFET = 0.5
@@ -39,10 +40,6 @@ metadata/_aseprite_wizard_config_ = {
 "source": "res://Effects&Statuses/Effects/Core/AoE/Poison/poison-area.aseprite"
 }
 metadata/_aseprite_wizard_source_file_hash_ = "75388ef9a0aadbd00e4bf89c36ecf264"
-
-[node name="-- Timers --" type="Node" parent="."]
-
-[node name="Recheck Timer" type="Timer" parent="."]
 
 [node name="Lifetime Timer" type="Timer" parent="."]
 
