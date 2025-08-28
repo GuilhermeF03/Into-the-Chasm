@@ -6,7 +6,6 @@ class_name ItemSlot
 @export_group("Constants")
 const DARK_MODULATE = Color("646464")
 const LIGHT_MODULATE = Color("FFFFFF")
-const ITEM_SCALE = 2
 #endregion
 
 #region Nodes
@@ -70,7 +69,6 @@ func set_item(data : ItemData):
 		return
 
 	icon.texture = item_data.texture
-	icon.scale = Vector2.ONE * ITEM_SCALE
 	
 	stats.set_stats(item_data)
 
