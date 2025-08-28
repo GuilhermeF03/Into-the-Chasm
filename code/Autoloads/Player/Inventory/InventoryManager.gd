@@ -65,10 +65,10 @@ signal weapon_changed(weapon : WeaponData)
 signal weapon_ability_progress_changed(value : float)
 
 @export_subgroup("Tools")
-signal tool_removed(index : int)
+signal tool_unequipped(index : int)
 signal tool_selected(index : int)
 signal tool_slots_upgraded(ammount : int)
-signal tool_added(tool : ToolData, index : int)
+signal tool_equipped(tool : ToolData, index : int)
 signal tool_used(tool : ToolData)
 
 @export_subgroup("Trinkets")
@@ -140,89 +140,78 @@ func register_special():
 
 
 #region Tools
-func add_tool(tool : ToolData):
+func equip_tool(tool : ToolData):
+	print("%s: emit equipped" % [name])
 	var available_slot = tools.find(null)
 	
 	# Find next available spot
 	if available_slot != -1:
 		tools[available_slot] = tool
-		tool_added.emit(tool, available_slot)
+		tool_equipped.emit(tool, available_slot)
 		
 		if available_slot == 0 and curr_tool == null:
 			curr_tool = tool
 			select_tool(0)
 	else: 
 		var idx = curr_tools_size - 1 # No space - swap with last tool
-		
 		tools[idx] = tool
-		tool_added.emit(tool, idx)
+		tool_equipped.emit(tool, idx)
 
 
-func remove_tool(index: int = -1, was_consumed: bool = false) -> void:
-	if tools.is_empty():
-		return
+func unequip_tool(index: int, was_dropped: bool = false) -> void:
+	if tools.is_empty(): return
 	
-	# Pick last slot if index is invalid
-	var idx = (
-		tools.size() - 1 if index not in range(tools.size())
-		else index
-	)
+	# Wrapp index
+	var wrapped_index = MathUtilities.mod_wrap(index, tools.size())
+	var tool = tools[wrapped_index]
+	tools.remove_at(wrapped_index)
+	tool_unequipped.emit(wrapped_index)
 	
-	var tool = tools[idx]
-
-	# Shift everything left after idx
-	for i in range(idx, tools.size() - 1):
-		tools[i] = tools[i + 1]
-	tools[tools.size() - 1] = null  # last slot becomes empty
-
-	tool_removed.emit(idx)
-
-	# Drop tool back into world if it wasn't consumed
-	if tool != null and not was_consumed:
+	## Didn't remove at the back -> re-update UI
+	if wrapped_index != tools.size():
+		for i in range(0, curr_tools_size):
+			if i >= tools.size():
+				tool_unequipped.emit(i)
+				continue
+			tool_equipped.emit(tools[i], i)
+	
+	# Drop tool back into world
+	if tool != null and was_dropped:
 		var _tool_node: PickableTool = tool_node.instantiate()
 		_tool_node.set_data(tool)
 		LevelManager.spawn(_tool_node, PlayerManager.player.global_position, true)
 
 	# If current selected tool was removed, pick next available one
 	if curr_tool == tool:
-		var available_tools = tools.filter(func(value): return value != null)
-		if available_tools.is_empty():
-			select_tool(-1)
+		if tools.is_empty():
+			select_tool(null)
 			curr_tool = null
 		else:
 			# keep selection on same slot if still valid, otherwise first non-null
-			var next_index = clamp(idx, 0, tools.size() - 1)
-			if tools[next_index] == null:
-				next_index = tools.find(available_tools.front())
+			var next_index = clamp(wrapped_index, 0, tools.size() - 1)
 			curr_tool = tools[next_index]
 			select_tool(next_index)
 
 
-func select_tool(index : int):
-	if index == -1:
-		curr_tool = null
-		curr_tool_idx = -1
-		tool_selected.emit(-1)
-		return
+func select_tool(index):
+	## No list
+	if index == null:
+		curr_tool_idx = null
+		tool_selected.emit(null)
+	## Wrap index
+	if tools.is_empty(): return
 	
-	var _tool = tools[index]
+	var wrapped_index = MathUtilities.mod_wrap(index, tools.size())
+	var selected_tool = tools[wrapped_index]
 	
-	curr_tool = (
-		_tool if _tool != null
-		else tools.filter(func(value): return value != null and value != curr_tool).front()
-	)
-		
-	curr_tool_idx = index
-	tool_selected.emit(index)
+	curr_tool = selected_tool
+	curr_tool_idx = wrapped_index
+	tool_selected.emit(wrapped_index)
 	
 	
 func add_tool_slots(ammount : int):
 	curr_tools_size = clamp(curr_tools_size + ammount, 0, MAX_TOOLS)
 	tool_slots_upgraded.emit(ammount)
-
-
-func get_tools_size():
-	return tools.filter( func (a): return a != null).size()
 	
 	
 func consume_tool():
@@ -230,7 +219,11 @@ func consume_tool():
 	curr_tool.usage -= 1
 	tool_used.emit(curr_tool)
 	if curr_tool.usage <= 0:
-		remove_tool(curr_tool_idx, true)
+		unequip_tool(curr_tool_idx, false)
+		
+
+func drop_tool(index : int):
+	unequip_tool(index, true)
 #endregion
 
 

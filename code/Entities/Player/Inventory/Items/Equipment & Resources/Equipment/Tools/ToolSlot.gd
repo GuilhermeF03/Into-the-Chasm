@@ -14,6 +14,7 @@ signal on_drop(ToolSlot)
 #region Data
 @export_group("Data")
 @export var dock : UiDock.DOCK
+@export var data : ToolData : set = set_data
 #endregion
 
 
@@ -27,3 +28,7 @@ func _on_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("drop_item") && item_slot.item != null:
 		on_drop.emit(self)
 #endregion
+
+func set_data(_data : ToolData):
+	data = _data
+	item_slot.item_data = data

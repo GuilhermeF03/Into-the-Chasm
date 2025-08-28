@@ -26,6 +26,7 @@ class_name PlayerController
 @onready var animation_controller : AnimationController = $Animation
 @onready var camera_controller : CameraController = $Camera
 @onready var movement_controller : MovementController = $Movement
+@onready var tools_controller : ToolsController = $Tools
 @onready var weapon_controller : WeaponController = $Weapon
 @onready var status_controller : StatusController = $Status
 #endregion
@@ -68,10 +69,10 @@ func _physics_process(_delta):
 func _input(event : InputEvent):
 	if (
 		inventory.handling_input or
-		InputManager.input_level == InputManager.INPUT_LEVEL.NONE
+		InputManager.is_no_input_allowed()
 	): return
 	handle_dodge_input(event)
-	handle_tool_selection(event)
+	tools_controller.handle_tool_selection(event)
 #endregion
 
 #region Input Handlers
@@ -95,33 +96,6 @@ func handle_dodge_input(event : InputEvent):
 	
 	hurtbox.monitoring = true
 	collision.disabled = false
-
-
-func handle_tool_selection(event: InputEvent) -> void:
-	if (
-		not event.is_action_pressed("next_consumable")
-		and not event.is_action_pressed("prev_consumable")
-	): return
-	
-	var curr_tool_idx = InventoryManager.curr_tool_idx
-	var tools_size = InventoryManager.tools.filter(func(value): 
-		return value != null
-	).size()
-	
-	if tools_size == 0: return
-	
-	var idx = curr_tool_idx + (
-		1 if event.is_action_pressed("next_consumable")
-		else -1 if event.is_action_pressed("prev_consumable") 
-		else 0
-	)
-		
-	if idx != curr_tool_idx:
-		idx = (
-			tools_size - 1 if idx == -1 
-			else idx % InventoryManager.get_tools_size()
-		)
-		InventoryManager.select_tool(idx)
 #endregion
 
 

@@ -8,8 +8,8 @@ _data = PackedByteArray("AAADAAUAAAABAAAAIAAAACAAAACEAAAAUklGRnwAAABXRUJQVlA4TG8
 size_override = Vector2(32, 32)
 
 [node name="Area of Effect" type="Node2D"]
-rotation = -5.66929
-scale = Vector2(4.42316, 4.42316)
+rotation = -0.433475
+scale = Vector2(3.68865, 3.68865)
 script = ExtResource("1_y2rwu")
 LIFETIME = 10.0
 TIME_TO_SET_EFFET = 0.5
