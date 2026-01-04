@@ -12,20 +12,21 @@ config_version=5
 
 config/name="Into the Chasm"
 config/version="0.0.3"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/use_filter=false
 boot_splash/image="uid://cpra3180kwt1r"
 config/icon="uid://cpra3180kwt1r"
 
 [autoload]
 
-LevelManager="*res://Autoloads/Level/LevelManager.tscn"
-InputManager="*res://Autoloads/Input/InputManager.tscn"
-UiManager="*res://Autoloads/UI/UiManager.tscn"
-InventoryManager="*res://Autoloads/Player/Inventory/InventoryManager.gd"
-InteractionManager="*res://Autoloads/Interaction/InteractionManager.tscn"
+LevelManager="*res://Core/Autoloads/Level/LevelManager.tscn"
+InputManager="*res://Core/Autoloads/Input/InputManager.tscn"
+UiManager="*res://Core/Autoloads/UI/UiManager.tscn"
+InventoryManager="*res://Core/Autoloads/Player/Inventory/InventoryManager.gd"
+InteractionManager="*res://Core/Autoloads/Interaction/InteractionManager.tscn"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
-PlayerManager="*res://Autoloads/Player/PlayerManager.gd"
+CombatManager="*res://Core/Autoloads/Combat/CombatManager.gd"
+EntityManager="*res://Core/Autoloads/Entity/EntityManager.gd"
 
 [display]
 
@@ -35,7 +36,13 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/Asset_Drawer/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/awesome_input_icons/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/Asset_Drawer/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/awesome_input_icons/plugin.cfg", "res://addons/font_auto_size_labels/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://Core/Entities/Mob/Impl/Copper Paths/": "gray"
+}
 
 [input]
 
@@ -122,7 +129,7 @@ special_attack={
 2d_physics/layer_3="Player_Hitbox"
 2d_physics/layer_4="Player_Hurtbox"
 2d_physics/layer_5="Mob_Hitbox"
-2d_physics/layer_6="Mob_HurtBox"
+2d_physics/layer_6="Mob_Hurtbox"
 2d_physics/layer_7="Collisions"
 
 [limbo_ai]
@@ -136,3 +143,4 @@ common/physics_interpolation=true
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+2d/snap/snap_2d_transforms_to_pixel=true

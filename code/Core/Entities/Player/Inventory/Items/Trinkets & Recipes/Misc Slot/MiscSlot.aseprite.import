@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c7b5eawf24chj"
+path="res://.godot/imported/MiscSlot.aseprite-818146dd520a17fcea6ebed1785e433a.res"
+
+[deps]
+
+source_file="res://Core/Entities/Player/Inventory/Items/Trinkets & Recipes/Misc Slot/MiscSlot.aseprite"
+dest_files=["res://.godot/imported/MiscSlot.aseprite-818146dd520a17fcea6ebed1785e433a.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ft54mo8nduod"
+path="res://.godot/imported/blueprint_ui_container.aseprite-b8b476647a86d529fd168f631a4e1c17.res"
+
+[deps]
+
+source_file="res://Core/Systems/Crafting/Blueprint/Art/blueprint_ui_container.aseprite"
+dest_files=["res://.godot/imported/blueprint_ui_container.aseprite-b8b476647a86d529fd168f631a4e1c17.res"]
+
+[params]
+

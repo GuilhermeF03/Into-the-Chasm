@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgvhqa68kopw1"]
+
+[ext_resource type="Script" uid="uid://b1sjvo5p2yjrv" path="res://Systems/Combat/Effects/Core/Poison/PoisonEffect.gd" id="1_lpdme"]
+
+[node name="PoisonEffect" type="Node2D"]
+script = ExtResource("1_lpdme")

@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2u0wimnxxcnc"]
+
+[ext_resource type="Script" uid="uid://bowwk17m8fjin" path="res://Core/Entities/Neutral/Dummy/Dummy.gd" id="1_sxowk"]
+[ext_resource type="Texture2D" uid="uid://dd0ev3s6uyahk" path="res://Core/Entities/Neutral/Dummy/Dummy.png" id="1_xbvns"]
+
+
+
+[sub_resource type="Animation" id="Animation_sxowk"]
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fo3c1"]
+_data = {
+&"Hit": SubResource("Animation_sxowk")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xbvns"]
+size = Vector2(13, 14.4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sxowk"]
+size = Vector2(13, 14.4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fo3c1"]
+size = Vector2(13.8, 14.4)
+
+[node name="Dummy" type="CharacterBody2D"]
+z_index = 1
+scale = Vector2(5, 5)
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("1_sxowk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_xbvns")
+hframes = 3
+vframes = 2
+metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": true,
+"layer_section": true,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"slice": "",
+"source": "res://Entities/Dummy/Dummy.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "91e6a5f4b0710869837fb1b3386b551a"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fo3c1")
+}
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 3)
+shape = SubResource("RectangleShape2D_xbvns")
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0.5, 3)
+shape = SubResource("RectangleShape2D_sxowk")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0.5, 3)
+shape = SubResource("RectangleShape2D_fo3c1")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

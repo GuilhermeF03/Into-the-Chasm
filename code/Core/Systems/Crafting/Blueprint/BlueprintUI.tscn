@@ -1,0 +1,99 @@
+[gd_scene load_steps=4 format=3 uid="uid://bp6oygufk5gfa"]
+
+[ext_resource type="Texture2D" uid="uid://cjcxbpupxepx2" path="res://Systems/Crafting/Blueprint/Art/blueprint_ui_container_front.png" id="1_b72kq"]
+[ext_resource type="Texture2D" uid="uid://c84c0vwjjktic" path="res://Systems/Crafting/Blueprint/Art/blueprint_ui_image_placeholder..png" id="2_ku2nf"]
+[ext_resource type="PackedScene" uid="uid://70somrqkb0mp" path="res://Core/Entities/Player/Inventory/Items/Equipment & Resources/Resources/ResourceSlot.tscn" id="3_glks1"]
+
+[node name="BlueprintUi" type="AspectRatioContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Container - Front" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_b72kq")
+
+[node name="Margin" type="MarginContainer" parent="Container - Front"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.12200001
+anchor_right = 0.874
+anchor_bottom = 0.96300006
+offset_left = 0.23999023
+offset_right = 0.079956055
+offset_bottom = -0.040039063
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Column" type="VBoxContainer" parent="Container - Front/Margin"]
+clip_contents = true
+layout_mode = 2
+alignment = 1
+
+[node name="Spacer2" type="Container" parent="Container - Front/Margin/Column"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Image placeholder" type="AspectRatioContainer" parent="Container - Front/Margin/Column"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.65
+
+[node name="Nine Patch" type="NinePatchRect" parent="Container - Front/Margin/Column/Image placeholder"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_ku2nf")
+region_rect = Rect2(8, 4, 16, 17)
+
+[node name="Image" type="TextureRect" parent="Container - Front/Margin/Column/Image placeholder/Nine Patch"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Spacer3" type="Container" parent="Container - Front/Margin/Column"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Row" type="HBoxContainer" parent="Container - Front/Margin/Column"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+alignment = 1
+
+[node name="Resource Slot" parent="Container - Front/Margin/Column/Row" instance=ExtResource("3_glks1")]
+layout_mode = 2
+type = 0
+
+[node name="Resource Slot2" parent="Container - Front/Margin/Column/Row" instance=ExtResource("3_glks1")]
+layout_mode = 2
+type = 1
+
+[node name="Resource Slot3" parent="Container - Front/Margin/Column/Row" instance=ExtResource("3_glks1")]
+layout_mode = 2
+
+[node name="Spacer" type="Container" parent="Container - Front/Margin/Column"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Container - Back" type="NinePatchRect" parent="."]
+layout_mode = 2
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnlak2256563a"]
+
+[ext_resource type="Script" uid="uid://dnp3don3qa830" path="res://Core/Systems/Animation/Components/AnimationController.gd" id="1_vc43q"]
+
+[node name="AnimationController" type="AnimationPlayer"]
+script = ExtResource("1_vc43q")

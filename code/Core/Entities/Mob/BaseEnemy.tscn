@@ -1,0 +1,152 @@
+[gd_scene load_steps=14 format=3 uid="uid://c1djrvhrqlf8k"]
+
+[ext_resource type="Script" uid="uid://6bdvq6vmgmb" path="res://Core/Entities/Mob/Enemy.gd" id="1_53hx0"]
+[ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Core/Materials/Hit/hit_shader.gdshader" id="2_h6iiu"]
+[ext_resource type="PackedScene" uid="uid://b3i22gef6s8ly" path="res://Core/Systems/Combat/Components/CombatHitbox.tscn" id="2_n3x77"]
+[ext_resource type="PackedScene" uid="uid://dscvj7xpdri4f" path="res://Core/Systems/Combat/Components/CombatHurtbox.tscn" id="3_n3x77"]
+[ext_resource type="PackedScene" uid="uid://bn22lpcq2hs5r" path="res://Core/Systems/Combat/Components/StatusController.tscn" id="4_n3x77"]
+[ext_resource type="PackedScene" uid="uid://wgoqu77dgcg8" path="res://Core/Systems/Combat/Components/KnockbackController.tscn" id="4_vi6vg"]
+[ext_resource type="PackedScene" uid="uid://bnlak2256563a" path="res://Core/Systems/Animation/Components/AnimationController.tscn" id="5_gbi62"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gbi62"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n3x77"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s0vdw"]
+radius = 192.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_042f5"]
+shader = ExtResource("2_h6iiu")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yf3bw"]
+radius = 6.21289
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_hfs6b"]
+var/enemy/name = &"enemy"
+var/enemy/type = 24
+var/enemy/value = Object(CharacterBody2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":1,"z_as_relative":true,"y_sort_enabled":true,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(5, 5),"skew":0.0,"disable_mode":0,"collision_layer":64,"collision_mask":4,"collision_priority":1.0,"input_pickable":false,"motion_mode":0,"up_direction":Vector2(0, -1),"velocity":Vector2(0, 0),"slide_on_ceiling":true,"max_slides":4,"wall_min_slide_angle":0.2617994,"floor_stop_on_slope":true,"floor_constant_speed":false,"floor_block_on_wall":true,"floor_max_angle":0.7853982,"floor_snap_length":1.0,"platform_on_leave":0,"platform_floor_layers":4294967295,"platform_wall_layers":0,"safe_margin":0.08,"script":ExtResource("1_53hx0"),"data":null,"metadata/_edit_group_":true)
+
+var/enemy/hint = 34
+var/enemy/hint_string = "Enemy"
+var/player/name = &"player"
+var/player/type = 24
+var/player/hint = 0
+var/player/hint_string = ""
+var/hit/name = &"hit"
+var/hit/type = 1
+var/hit/value = false
+var/hit/hint = 0
+var/hit/hint_string = ""
+var/on_attack_range/name = &"on_attack_range"
+var/on_attack_range/type = 3
+var/on_attack_range/value = 0.0
+var/on_attack_range/hint = 0
+var/on_attack_range/hint_string = ""
+var/on_attack_cooldown/name = &"on_attack_cooldown"
+var/on_attack_cooldown/type = 3
+var/on_attack_cooldown/value = 0.0
+var/on_attack_cooldown/hint = 0
+var/on_attack_cooldown/hint_string = ""
+
+[node name="BaseEnemy" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
+scale = Vector2(5, 5)
+collision_layer = 64
+collision_mask = 4
+script = ExtResource("1_53hx0")
+metadata/_edit_group_ = true
+
+[node name="-- RAY CAST --" type="Node" parent="."]
+
+[node name="Sight" type="RayCast2D" parent="."]
+scale = Vector2(0.9999998, 0.9999998)
+target_position = Vector2(75, 0)
+collision_mask = 10
+collide_with_areas = true
+
+[node name="Patrol" type="RayCast2D" parent="."]
+scale = Vector2(0.9999998, 0.9999998)
+collision_mask = 0
+hit_from_inside = true
+
+[node name="-- COMBAT --" type="Node" parent="."]
+
+[node name="Hitbox" parent="." instance=ExtResource("2_n3x77")]
+scale = Vector2(0.99999994, 0.99999994)
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_gbi62")
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_n3x77")]
+visible = false
+scale = Vector2(0.99999994, 0.99999994)
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_n3x77")
+
+[node name="Attack Area" type="Area2D" parent="."]
+visible = false
+scale = Vector2(0.2, 0.2)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Area"]
+shape = SubResource("CircleShape2D_s0vdw")
+
+[node name="Knockback" parent="." instance=ExtResource("4_vi6vg")]
+scale = Vector2(0.19999999, 0.19999999)
+
+[node name="Status" parent="." instance=ExtResource("4_n3x77")]
+scale = Vector2(0.19999999, 0.19999999)
+
+[node name="-- ANIMATION --" type="Node" parent="."]
+
+[node name="AnimationController" parent="." instance=ExtResource("5_gbi62")]
+
+[node name="-- MISC --" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_042f5")
+hframes = 5
+vframes = 5
+frame = 16
+metadata/_aseprite_wizard_config_ = {
+"embed_tex": true,
+"i_mode": -1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationController",
+"slice": "",
+"source": "res://Entities/Mobs/Slime/Art/slime.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "b19d8bf5af51746727caf133dd4ea052"
+metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": false,
+"layer_section": false,
+"output_section": false,
+"pending_changes": {},
+"slice_section": false
+}
+
+[node name="Body" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -0.8)
+shape = SubResource("CircleShape2D_yf3bw")
+
+[node name="Behaviour Tree" type="BTPlayer" parent="."]
+blackboard_plan = SubResource("BlackboardPlan_hfs6b")
+
+[node name="Attack timer" type="Timer" parent="."]
+one_shot = true

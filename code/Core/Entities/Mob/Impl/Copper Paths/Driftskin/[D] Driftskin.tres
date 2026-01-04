@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://bk12ad6pejafj"]
+
+[ext_resource type="Script" uid="uid://frsm01x8vww3" path="res://Core/Systems/Combat/Data/LootEntry.gd" id="1_jx0c5"]
+[ext_resource type="Script" uid="uid://dih5uka4r4nol" path="res://Core/Entities/Mob/EnemyData.gd" id="2_w25vs"]
+
+[resource]
+script = ExtResource("2_w25vs")
+metadata/_custom_type_script = "uid://dih5uka4r4nol"

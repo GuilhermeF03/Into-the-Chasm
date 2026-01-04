@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cl3xyc0mg7i2n"
+path="res://.godot/imported/Sprite-0001.aseprite-8c9e6837c9382de4d471f67d53efd438.res"
+
+[deps]
+
+source_file="res://Core/Systems/Crafting/Blueprint/Art/Sprite-0001.aseprite"
+dest_files=["res://.godot/imported/Sprite-0001.aseprite-8c9e6837c9382de4d471f67d53efd438.res"]
+
+[params]
+

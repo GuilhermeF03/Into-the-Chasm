@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://wgoqu77dgcg8"]
+
+[ext_resource type="Script" uid="uid://b1lojvqsqkhs2" path="res://Core/Systems/Combat/Components/KnockbackController.gd" id="1_qb686"]
+
+[node name="Knockback" type="Node2D"]
+script = ExtResource("1_qb686")

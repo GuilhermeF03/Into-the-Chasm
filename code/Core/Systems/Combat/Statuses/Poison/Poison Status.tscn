@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://0r3mci1jljw0"]
+
+[ext_resource type="Script" uid="uid://b5sq7pn2c3uiq" path="res://Core/Systems/Combat/Statuses/Status.gd" id="1_8hdcw"]
+[ext_resource type="Resource" uid="uid://dwtwilnnsodqp" path="res://Core/Systems/Combat/Statuses/Poison/[D] Poison Status.tres" id="2_yfcfu"]
+[ext_resource type="Texture2D" uid="uid://brn25l8b2axym" path="res://Core/Items/Tools/Data/Potions/Poison Vial/Art/poison-bubble.png" id="3_qnvhg"]
+[ext_resource type="Material" uid="uid://bxuaygs6u2rda" path="res://Core/Materials/Poison/poison_particles.tres" id="4_fkmts"]
+
+[node name="Poison Status" type="Node2D"]
+z_index = 100
+z_as_relative = false
+script = ExtResource("1_8hdcw")
+data = ExtResource("2_yfcfu")
+
+[node name="Apply Status Timer" type="Timer" parent="."]
+
+[node name="Recheck Timer" type="Timer" parent="."]
+
+[node name="Poison Particles" type="GPUParticles2D" parent="."]
+amount = 2
+amount_ratio = 0.5
+texture = ExtResource("3_qnvhg")
+randomness = 0.25
+process_material = ExtResource("4_fkmts")

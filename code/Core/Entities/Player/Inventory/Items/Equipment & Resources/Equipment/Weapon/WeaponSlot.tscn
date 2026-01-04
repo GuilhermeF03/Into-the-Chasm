@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://okq1vurdbveb"]
+
+[ext_resource type="Script" uid="uid://ctitgq06ecy7u" path="res://Core/Entities/Player/Inventory/Items/Equipment & Resources/Equipment/Weapon/WeaponSlot.gd" id="1_v3x2f"]
+[ext_resource type="Texture2D" uid="uid://6v3v0reidi10" path="res://Core/Entities/Player/Inventory/Items/Equipment & Resources/Equipment/Art/EquipmentSlot.png" id="2_vbdqn"]
+[ext_resource type="Texture2D" uid="uid://xnh687700ape" path="res://Core/Entities/Player/Inventory/Items/Equipment & Resources/Equipment/Weapon/WeaponAbilityProgress.png" id="4_38nb5"]
+[ext_resource type="PackedScene" uid="uid://b5ote6c6nj3y5" path="res://Core/Entities/Player/Inventory/Items/Stats Panel/StatsPanel.tscn" id="7_twjkh"]
+
+
+
+[node name="Weapon Slot" type="AspectRatioContainer"]
+script = ExtResource("1_v3x2f")
+
+[node name="Weapon Ability Progress" type="TextureProgressBar" parent="."]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+step = 5.0
+rounded = true
+fill_mode = 3
+nine_patch_stretch = true
+texture_under = ExtResource("2_vbdqn")
+texture_progress = ExtResource("4_38nb5")
+
+[node name="Stats Panel" parent="Weapon Ability Progress" instance=ExtResource("7_twjkh")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+offset_left = -0.5
+offset_top = -202.0
+offset_right = 0.5
+offset_bottom = 202.0

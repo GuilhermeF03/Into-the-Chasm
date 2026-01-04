@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bkyorg53bge1e"
+path="res://.godot/imported/pickable_recipe.aseprite-ce6645f73b56ffe6f3c8cb9846091e59.res"
+
+[deps]
+
+source_file="res://Core/Items/Recipes/Art/pickable_recipe.aseprite"
+dest_files=["res://.godot/imported/pickable_recipe.aseprite-ce6645f73b56ffe6f3c8cb9846091e59.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bxmouwvmhn125"
+path="res://.godot/imported/poison-bubble.aseprite-dcdd8bb38d95099a9b1c19f797d3d970.res"
+
+[deps]
+
+source_file="res://Core/Items/Tools/Data/Potions/Poison Vial/Art/poison-bubble.aseprite"
+dest_files=["res://.godot/imported/poison-bubble.aseprite-dcdd8bb38d95099a9b1c19f797d3d970.res"]
+
+[params]
+

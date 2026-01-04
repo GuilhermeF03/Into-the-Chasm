@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://wdwtlaklhvrn"]
+
+[ext_resource type="Script" uid="uid://dmxf434mlne3t" path="res://Core/Items/Recipes/PickableRecipe.gd" id="1_nq8a3"]
+[ext_resource type="PackedScene" uid="uid://cte68dj3jl77y" path="res://Core/Items/PickableItem.tscn" id="2_ibpwy"]
+[ext_resource type="Resource" uid="uid://c82s1o4ttqg4j" path="res://Core/Items/Recipes/Data/Sword/StandardSwordRecipeData.tres" id="2_snt26"]
+[ext_resource type="Texture2D" path="res://Items/Recipes/Art/pickable_recipe.png" id="3_r5d40"]
+
+
+
+[node name="Standard Sword Recipe" type="Node2D"]
+script = ExtResource("1_nq8a3")
+data = ExtResource("2_snt26")
+
+[node name="PickableItem" parent="." instance=ExtResource("2_ibpwy")]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("3_r5d40")

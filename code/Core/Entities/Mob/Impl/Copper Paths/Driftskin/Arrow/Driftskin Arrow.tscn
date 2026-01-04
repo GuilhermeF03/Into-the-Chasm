@@ -1,0 +1,95 @@
+[gd_scene load_steps=6 format=4 uid="uid://buqri2j1vwbe0"]
+
+[ext_resource type="Script" uid="uid://dav83yp8tmbct" path="res://Core/Entities/Mob/Impl/Copper Paths/Driftskin/Arrow/DriftskinArrow.gd" id="1_6icgg"]
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_234kk"]
+_data = PackedByteArray("AAADAAUAAAABAAAAQAAAAEAAAACoAAAAUklGRqAAAABXRUJQVlA4TJMAAAAvP8APEEegqG0kZ3+9M9glc/ypHBo1AUAwEuxVgEsA/TMoZCYAGQG4qODXZOnXZ/4DAPYWkaLiz5OV9+e6Rg1Oa9uWms2M/aQCeB18GsjoxwJwREZG0r9jxUT0P+3HpQO4Ax2A92Gecvw6gGsa0jx9AO5gawGABUDtP7oBAL4tgFukMccK4J1jGGMFOAI9wBHo7WMA")
+size_override = Vector2(64, 64)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_234kk"]
+radius = 3.0
+height = 14.0
+
+[sub_resource type="Animation" id="Animation_prpcs"]
+length = 0.12
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.06, 0.09),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hqw0t"]
+_data = {
+&"Fly": SubResource("Animation_prpcs")
+}
+
+[node name="DriftskinArrow" type="CharacterBody2D"]
+script = ExtResource("1_6icgg")
+MOVEMENT_SPEED = 400
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("PortableCompressedTexture2D_234kk")
+hframes = 2
+vframes = 2
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"embed_tex": true,
+"i_mode": 0,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"slice": "",
+"source": "res://Entities/Mobs/Copper Paths/Driftskin/Art/Arrow.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "0c4c98c89e28782a9291ff824891c0ac"
+
+[node name="Player Hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player Hitbox"]
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_234kk")
+
+[node name="Enemy Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 32
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Hitbox"]
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_234kk")
+
+[node name="Parry" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parry"]
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_234kk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hqw0t")
+}
+
+[node name="World detection zone" type="Area2D" parent="."]
+
+[node name="De-spawn timer" type="Timer" parent="."]
+one_shot = true

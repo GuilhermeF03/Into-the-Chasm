@@ -1,0 +1,149 @@
+[gd_resource type="BehaviorTree" load_steps=37 format=3 uid="uid://cnfda5ah2ves0"]
+
+[ext_resource type="Script" uid="uid://caw38h4uwggc1" path="res://Core/Entities/Mob/AI/Tasks/Core/get_player.gd" id="1_3xgrr"]
+[ext_resource type="Script" uid="uid://dy82agixnm8nm" path="res://Core/Entities/Mob/AI/Tasks/Attack/burrow_attack.gd" id="2_nt160"]
+[ext_resource type="Script" uid="uid://ul1mrmhi6m5s" path="res://Core/Entities/Mob/AI/Tasks/Core/log_variable.gd" id="3_xadt3"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_ydd02"]
+var/target/name = &"target"
+var/target/type = 24
+var/target/hint = 0
+var/target/hint_string = ""
+var/attack_speed/name = &"attack_speed"
+var/attack_speed/type = 3
+var/attack_speed/value = 0.0
+var/attack_speed/hint = 0
+var/attack_speed/hint_string = ""
+
+[sub_resource type="BBVariant" id="BBVariant_e536j"]
+saved_value = null
+resource_name = "<null>"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_xsx8j"]
+variable = &"target"
+value = SubResource("BBVariant_e536j")
+custom_name = "Check if player is set"
+
+[sub_resource type="BTAction" id="BTAction_xsx8j"]
+script = ExtResource("1_3xgrr")
+
+[sub_resource type="BBNode" id="BBNode_pi1c3"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTEvaluateExpression" id="BTEvaluateExpression_iov1g"]
+node = SubResource("BBNode_pi1c3")
+expression_string = "ATTACK_SPEED"
+result_var = &"attack_speed"
+
+[sub_resource type="BTSequence" id="BTSequence_v4o6j"]
+children = [SubResource("BTCheckVar_xsx8j"), SubResource("BTAction_xsx8j"), SubResource("BTEvaluateExpression_iov1g")]
+
+[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_xsx8j"]
+children = [SubResource("BTSequence_v4o6j")]
+
+[sub_resource type="BTComment" id="BTComment_7vyri"]
+custom_name = "Telegraph"
+
+[sub_resource type="BBVariant" id="BBVariant_nt160"]
+type = 3
+saved_value = 0.0
+resource_name = "0.0"
+
+[sub_resource type="BTSetAgentProperty" id="BTSetAgentProperty_7vyri"]
+property = &"global_rotation"
+value = SubResource("BBVariant_nt160")
+_enabled = false
+
+[sub_resource type="BBNode" id="BBNode_hs548"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_w8o8y"]
+animation_player = SubResource("BBNode_hs548")
+animation_name = &"Attack_telegraph"
+
+[sub_resource type="BBNode" id="BBNode_nt160"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTAwaitAnimation" id="BTAwaitAnimation_7vyri"]
+animation_player = SubResource("BBNode_nt160")
+animation_name = &"Attack_telegraph"
+max_time = 0.2
+
+[sub_resource type="BTComment" id="BTComment_mj1fs"]
+custom_name = "Setup"
+
+[sub_resource type="BBNode" id="BBNode_e536j"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_xsx8j"]
+animation_player = SubResource("BBNode_e536j")
+animation_name = &"Attack_setup"
+
+[sub_resource type="BBNode" id="BBNode_w8o8y"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTAwaitAnimation" id="BTAwaitAnimation_pi1c3"]
+animation_player = SubResource("BBNode_w8o8y")
+animation_name = &"Attack_setup"
+max_time = 0.2
+
+[sub_resource type="BTComment" id="BTComment_e536j"]
+custom_name = "Leap"
+
+[sub_resource type="BBNode" id="BBNode_xsx8j"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_v4o6j"]
+animation_player = SubResource("BBNode_xsx8j")
+animation_name = &"Attack"
+
+[sub_resource type="BTAction" id="BTAction_pi1c3"]
+script = ExtResource("2_nt160")
+
+[sub_resource type="BTComment" id="BTComment_756w4"]
+custom_name = "Landing"
+
+[sub_resource type="BBVariant" id="BBVariant_xsx8j"]
+type = 3
+saved_value = 0.0
+resource_name = "0.0"
+
+[sub_resource type="BTSetAgentProperty" id="BTSetAgentProperty_v4o6j"]
+property = &"global_rotation"
+value = SubResource("BBVariant_xsx8j")
+_enabled = false
+
+[sub_resource type="BBNode" id="BBNode_ihw5d"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_qo3vk"]
+animation_player = SubResource("BBNode_ihw5d")
+animation_name = &"Attack_cleanup"
+
+[sub_resource type="BBNode" id="BBNode_7vyri"]
+saved_value = NodePath("AnimationPlayer")
+resource_name = "AnimationPlayer"
+
+[sub_resource type="BTAwaitAnimation" id="BTAwaitAnimation_hs548"]
+animation_player = SubResource("BBNode_7vyri")
+animation_name = &"Attack_cleanup"
+max_time = 0.5
+
+[sub_resource type="BTAction" id="BTAction_v4o6j"]
+script = ExtResource("3_xadt3")
+variable_var = &"target"
+
+[sub_resource type="BTSequence" id="BTSequence_qo3vk"]
+custom_name = "Burrow Attack"
+children = [SubResource("BTAlwaysSucceed_xsx8j"), SubResource("BTComment_7vyri"), SubResource("BTSetAgentProperty_7vyri"), SubResource("BTPlayAnimation_w8o8y"), SubResource("BTAwaitAnimation_7vyri"), SubResource("BTComment_mj1fs"), SubResource("BTPlayAnimation_xsx8j"), SubResource("BTAwaitAnimation_pi1c3"), SubResource("BTComment_e536j"), SubResource("BTPlayAnimation_v4o6j"), SubResource("BTAction_pi1c3"), SubResource("BTComment_756w4"), SubResource("BTSetAgentProperty_v4o6j"), SubResource("BTPlayAnimation_qo3vk"), SubResource("BTAwaitAnimation_hs548"), SubResource("BTAction_v4o6j")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_ydd02")
+root_task = SubResource("BTSequence_qo3vk")

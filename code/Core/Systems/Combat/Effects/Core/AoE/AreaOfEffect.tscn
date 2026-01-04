@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://pcsdsn2ej3mj"]
+
+[ext_resource type="Script" uid="uid://ce4lrhfh2c7f0" path="res://Systems/Combat/Effects/Core/AoE/AreaOfEffect.gd" id="1_cwmgu"]
+
+[node name="Area of Effect" type="Node2D"]
+rotation = 0.499431
+scale = Vector2(1e-05, 1e-05)
+script = ExtResource("1_cwmgu")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+scale = Vector2(7.5, 7.5)
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"embed_tex": true,
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Items/Tools/Data/Potions/Poison Vial/Art/poison-area.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "75388ef9a0aadbd00e4bf89c36ecf264"
+
+[node name="Lifetime Timer" type="Timer" parent="."]
+
+[node name="AoE" type="Area2D" parent="."]
+scale = Vector2(7.5, 7.5)
+collision_layer = 0
+collision_mask = 40
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="AoE"]
+position = Vector2(-0.58149, 3.78149)
