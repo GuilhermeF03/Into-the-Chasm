@@ -15,7 +15,7 @@
 [ext_resource type="Material" uid="uid://p258o30kdie5" path="res://Core/Materials/Heal/heal_shader_material.tres" id="8_uw7o4"]
 [ext_resource type="PackedScene" uid="uid://5xry0mnc8j7o" path="res://Core/Entities/Player/HUD/HUD.tscn" id="9_hyecf"]
 [ext_resource type="Script" uid="uid://cyqxjwgjfm1yp" path="res://Core/Entities/Player/Controllers/ToolsController.gd" id="12_061yh"]
-[ext_resource type="Script" uid="uid://ch2eolfscg1qq" path="res://Core/Entities/Player/Controllers/MovementController.gd" id="12_lmeus"]
+[ext_resource type="Script" uid="uid://dadiyubd72xa4" path="res://Core/Systems/Movement/Components/MovementController.gd" id="12_lmeus"]
 [ext_resource type="Script" uid="uid://dnp3don3qa830" path="res://Core/Systems/Animation/Components/AnimationController.gd" id="14_70avk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vp70m"]
@@ -427,7 +427,7 @@ visible = false
 
 [node name="HUD" parent="." instance=ExtResource("9_hyecf")]
 
-[node name="-- Controllers --" type="Node" parent="."]
+[node name="-- CONTROLLERS --" type="Node" parent="."]
 
 [node name="Movement" type="Node2D" parent="."]
 script = ExtResource("12_lmeus")

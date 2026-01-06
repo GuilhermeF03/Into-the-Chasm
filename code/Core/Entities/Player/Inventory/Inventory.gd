@@ -4,8 +4,6 @@ class_name Inventory
 ## Inventory
 ## This class is used to manage the inventory of the player
 ## It handles the input and the pages of the inventory
-
-
 #region Nodes
 @export_group("Nodes")
 @onready var player: AnimationPlayer = $AnimationPlayer
@@ -49,7 +47,7 @@ func toggle():
 func open():
 	pages.visible = false
 	self.visible = true
-	player.play("Open")
+	player.play("open")
 
 	await player.animation_finished
 
@@ -61,7 +59,7 @@ func open():
 
 func close():
 	pages.visible = false
-	player.play("Close")
+	player.play("close")
 	await  player.animation_finished
 	self.visible = false
 

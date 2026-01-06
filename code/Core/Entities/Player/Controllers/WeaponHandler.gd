@@ -9,15 +9,11 @@ var handled_weapon : HandledWeapon
 
 #region Data
 @export_group("Data")
-@export var texture : Texture2D
-
 var can_attack := true
 #endregion
 
 #region Signals
-signal attack_started(lock_movement: bool)
-signal attack_finished
-signal attack_registered(target)
+signal on_hit()#(target : CombatHurtbox)
 #endregion
 
 
@@ -45,7 +41,7 @@ func try_attack() -> void:
 	if not can_attack or handled_weapon == null:
 		return
 
-	attack_started.emit(handled_weapon.lock_movement)
+	on_hit.emit()
 	handled_weapon.use()
 
 
@@ -57,9 +53,9 @@ func try_special_attack() -> void:
 	):
 		return
 
-	attack_started.emit(handled_weapon.lock_movement)
-	handled_weapon.special_attack()
 	InventoryManager.register_special()
+	handled_weapon.special_attack()
+	on_hit.emit()
 #endregion
 
 
@@ -80,14 +76,8 @@ func set_weapon(weapon: WeaponData) -> void:
 
 	# Signals from weapon
 	handled_weapon.can_use.connect(_on_can_attack_changed)
-	handled_weapon.attack_registered.connect(
-		func(target):
-			attack_registered.emit(target)
-	)
-
-	handled_weapon.attack_finished.connect(
-		func():
-			attack_finished.emit()
+	handled_weapon.hitbox.on_hit.connect(func(target):
+		on_hit.emit(target)
 	)
 
 	handled_weapon.anim_player.play("idle")

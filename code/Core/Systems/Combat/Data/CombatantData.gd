@@ -24,6 +24,7 @@ class_name CombatantData
 @export var knockback_force: float = 200.0
 ## Knockback duration (seconds)
 @export var knockback_time: float = 0.2
+@export_range(0.1, 1.0, 0.1) var armor_knockback_ratio : float = 0.6
 #endregion
 
 

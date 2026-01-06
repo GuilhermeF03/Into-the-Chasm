@@ -26,7 +26,6 @@ extends Node
 var mobs : Dictionary[StringName, CombatantData]
 
 
-
 #region builtins
 func _ready() -> void:
 	# IF PLAYER_DATA IS NULL - LOAD
@@ -36,28 +35,31 @@ func _ready() -> void:
 
 
 func register(this : Entity, data : CombatantData):
-	match this:
-		Player: player_data = data
-		Enemy: mobs[this.name] = data
+	if this is Player:
+		player_data = data
+	elif this is Enemy:
+		mobs.set(this.name, data)
 
 
 func fetch(this : Entity) -> CombatantData:
-	match this:
-		Player: return player.combatant_data	
-		Enemy: return mobs[this.name]
-		_: return null
+	if this is Player:
+		return player_data
+	elif this is Enemy:
+		return mobs.get(this.name)
+	else:
+		return null
 
 
 func update(this : Entity, data : CombatantData):
-	match this:
-		Player: player_data = data
-		Enemy: mobs[this.name] = data
+	if this is Player:
+		player_data = data
+	elif this is Enemy:
+		mobs.set(this.name, data)
 
 
 func unregister(this : Entity):
-	match this:
-		Player: 
-			player = null
-			player_data = null
-		Enemy:
-			mobs[this.name] = null
+	if this is Player:
+		player = null
+		player_data = null
+	elif this is Enemy:
+		mobs.set(this.name, null)

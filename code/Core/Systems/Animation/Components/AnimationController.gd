@@ -10,20 +10,13 @@ func play_animation(anim_name: String) -> void:
 	animation_finished.emit(anim_name)
 
 
-func play_idle(direction: String) -> void:
-	await play_animation("idle_" + direction)
-
-
 func handle_animation(idle : bool, back_view : bool):
-	var animation_side = "up" if back_view else "down"
-	var animation = "idle_" if idle else "walk_"
-	
-	play_animation(animation + animation_side)
+	var animation = "idle" if idle else "walk"
+	play_directional_animation(animation, back_view)
 	
 	
 func play_directional_animation(animation : StringName, back_view : bool):
 	var animation_side = "up" if back_view else "down"
-	
 	play_animation(animation + "_" + animation_side)
 
 

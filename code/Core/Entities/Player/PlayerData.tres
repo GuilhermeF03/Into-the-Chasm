@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_alyre")
+move_speed = 500.0
 metadata/_custom_type_script = "uid://dmo6r8lf7yvts"

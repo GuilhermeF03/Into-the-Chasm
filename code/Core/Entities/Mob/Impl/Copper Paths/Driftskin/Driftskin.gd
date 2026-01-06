@@ -59,8 +59,8 @@ func _ready():
 
 func _physics_process(_delta):
 	var player_pos = (
-		PlayerManager.player.global_position
-		if PlayerManager.player else Vector2.ZERO
+		EntityManager.player.global_position
+		if EntityManager.player else Vector2.ZERO
 	)
 
 	follow_raycast.look_at(player_pos)

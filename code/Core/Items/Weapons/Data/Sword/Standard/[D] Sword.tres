@@ -1,11 +1,20 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://b2ddjpm4x7dqf"]
+[gd_resource type="Resource" script_class="PickableWeaponData" load_steps=6 format=3 uid="uid://fqls0y7lkjyk"]
 
-[ext_resource type="Script" uid="uid://krr24qxu0rho" path="res://Core/Items/Weapons/Data/WeaponData.gd" id="1_d5jx0"]
+[ext_resource type="Script" uid="uid://cakoxo6veom2p" path="res://Core/Systems/Combat/Data/DamageData.gd" id="1_cy4i2"]
+[ext_resource type="Script" uid="uid://c2plpjjm1fyp4" path="res://Core/Items/Weapons/Data/PickableWeaponData.gd" id="1_w0ff2"]
+[ext_resource type="PackedScene" uid="uid://c3vj8y2bl8orp" path="res://Core/Items/Weapons/Data/Sword/Standard/[H] Sword.tscn" id="2_pf06w"]
 [ext_resource type="Texture2D" uid="uid://bdwu0d0xst86k" path="res://Core/Items/Weapons/Data/Sword/Standard/Art/icon.png" id="3_gsdur"]
 
+[sub_resource type="Resource" id="Resource_cx46g"]
+script = ExtResource("1_cy4i2")
+metadata/_custom_type_script = "uid://cakoxo6veom2p"
+
 [resource]
-script = ExtResource("1_d5jx0")
+script = ExtResource("1_w0ff2")
+handled_weapon = ExtResource("2_pf06w")
+damage_data = SubResource("Resource_cx46g")
 name = "Sword"
 type = 3
+description = "Standard sword"
 texture = ExtResource("3_gsdur")
-metadata/_custom_type_script = "uid://krr24qxu0rho"
+metadata/_custom_type_script = "uid://c2plpjjm1fyp4"

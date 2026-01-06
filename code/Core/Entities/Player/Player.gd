@@ -2,13 +2,10 @@ extends Entity
 class_name Player
 
 #region Nodes
-@onready var animation : AnimationController = $Animation
-@onready var movement : MovementController = $Movement
 @onready var weapon : WeaponController = $Weapon
 @onready var tools : ToolsController = $Tools
 @onready var inventory : Inventory = $Inventory
 @onready var camera : CameraController = $Camera
-@onready var sprite : Sprite2D = $Sprite
 #endregion
 
 #region State
@@ -18,20 +15,14 @@ var back_view := false
 
 #region Lifecycle
 func _ready() -> void:
+	super._ready()
 	# Signals
-	status.on_deal_status.connect(_on_status_dealt)
 
-	movement.body = self
 	movement.dodge_started.connect(_on_dodge_started)
 	movement.dodge_finished.connect(_on_dodge_finished)
 	
 	camera.flip_x.connect(_on_flip_x)
 	camera.flip_y.connect(_on_flip_y)
-	
-	weapon.attack_started.connect(_on_attack_started)
-	weapon.attack_finished.connect(_on_attack_finished)
-	#weapon.attack_registered.connect(_on_attack_registered)
-
 #endregion
 
 
@@ -89,14 +80,10 @@ func _input(event: InputEvent) -> void:
 
 
 #region Combat reactions
-func _on_attack_registered(source : CombatHitbox):
-	super._on_attack_registered(source)
-	
+func _on_hurt(source : CombatHitbox):
 	InputManager.block_all()
-
-	animation.play_animation("hit")
-
-	await animation.wait()
+	
+	super._on_hurt(source)
 
 	InputManager.allow_all()
 
@@ -104,22 +91,8 @@ func _on_attack_registered(source : CombatHitbox):
 func _on_status_dealt(status_data: StatusData) -> void:
 	InputManager.block_animation()
 
-	animation.play_animation("deal_status")
-	knockback.apply_direction(
-		Vector2.DOWN,
-		status_data.STATUS_KNOCKBACK
-	)
+	super._on_status_dealt(status_data)
 
-	await animation.wait()
-
-	InputManager.allow_all()
-
-
-func _on_attack_started(lock_movement: bool):
-	if lock_movement:
-		InputManager.block_movement()
-
-func _on_attack_finished():
 	InputManager.allow_all()
 #endregion
 

@@ -12,6 +12,7 @@ config_version=5
 
 config/name="Into the Chasm"
 config/version="0.0.3"
+config/tags=PackedStringArray("roguelite")
 config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/use_filter=false
 boot_splash/image="uid://cpra3180kwt1r"

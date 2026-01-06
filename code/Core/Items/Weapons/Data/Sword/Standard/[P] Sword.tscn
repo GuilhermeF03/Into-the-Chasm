@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dbvl2aq745kyx"]
 
 [ext_resource type="Script" uid="uid://vqrocd37gf13" path="res://Core/Items/Weapons/PickableWeapon.gd" id="1_g6rxc"]
-[ext_resource type="Resource" uid="uid://b2ddjpm4x7dqf" path="res://Core/Items/Weapons/Data/Sword/Standard/[D] Sword.tres" id="2_0bxi8"]
+[ext_resource type="Resource" uid="uid://fqls0y7lkjyk" path="res://Core/Items/Weapons/Data/Sword/Standard/[D] Sword.tres" id="2_0bxi8"]
 [ext_resource type="PackedScene" uid="uid://dh86htrmpu0mq" path="res://Core/Objects/InteractArea.tscn" id="2_rjt15"]
 [ext_resource type="Texture2D" uid="uid://bdwu0d0xst86k" path="res://Core/Items/Weapons/Data/Sword/Standard/Art/icon.png" id="4_gckml"]
 

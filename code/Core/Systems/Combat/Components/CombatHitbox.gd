@@ -8,7 +8,7 @@ class_name CombatHitbox
 @export var active := false : set = set_active
 
 @export_group("Signals")
-signal on_attack_registered()
+signal on_hit(other : CombatHurtbox)
 
 
 func _ready():
@@ -21,8 +21,7 @@ func set_active(value: bool):
 	monitoring = value
 
 
-func _on_hit(area : Area2D):
-	if not area is CombatHurtbox: return
-	
-	on_attack_registered.emit()
+func _on_hit(other : Area2D):
+	if not other is CombatHurtbox: return
+	on_hit.emit(other)
 	

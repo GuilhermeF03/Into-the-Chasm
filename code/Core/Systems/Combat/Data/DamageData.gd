@@ -21,6 +21,7 @@ class_name DamageData
 #region Enums
 enum DamageType {
 	NORMAL,
+	ARMOR_DAMAGE,
 	HEAL
 }
 #endregion
@@ -50,10 +51,10 @@ class DamageInfo:
 	var element : ElementData.Element
 
 	func _init(
-		d : int,
-		c : bool,
-		t : DamageType,
-		e : ElementData.Element
+		d : int = 0,
+		c : bool = false,
+		t : DamageType = DamageType.NORMAL,
+		e : ElementData.Element = ElementData.Element.PHYSICAL
 	):
 		damage = d
 		is_crit = c

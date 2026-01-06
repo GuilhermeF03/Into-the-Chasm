@@ -117,9 +117,9 @@ func set_resource(resource : ResourceType, ammount : int, override : bool = fals
 func set_weapon(new_weapon : WeaponData):
 	# drop old weapon
 	if weapon != null:
-		var _weapon = weapon_node.instantiate()
-		_weapon.set_data(weapon)
-		LevelManager.spawn(_weapon, EntityManager.player.global_position, true)
+		var _old_weapon = weapon_node.instantiate()
+		_old_weapon.set_data(weapon)
+		LevelManager.spawn(_old_weapon, EntityManager.player.global_position, true)
 
 	weapon = new_weapon
 	weapon_changed.emit(weapon)

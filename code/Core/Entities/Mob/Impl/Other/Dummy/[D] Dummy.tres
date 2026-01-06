@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=5 format=3 uid="uid://cm2c73yuim15m"]
+
+[ext_resource type="Script" uid="uid://cakoxo6veom2p" path="res://Core/Systems/Combat/Data/DamageData.gd" id="1_jdt5g"]
+[ext_resource type="Script" uid="uid://frsm01x8vww3" path="res://Core/Systems/Combat/Data/LootEntry.gd" id="1_yf48x"]
+[ext_resource type="Script" uid="uid://dih5uka4r4nol" path="res://Core/Entities/Mob/EnemyData.gd" id="2_7627w"]
+
+[sub_resource type="Resource" id="Resource_v1wbn"]
+script = ExtResource("1_jdt5g")
+metadata/_custom_type_script = "uid://cakoxo6veom2p"
+
+[resource]
+script = ExtResource("2_7627w")
+damage_data = SubResource("Resource_v1wbn")
+attack_cooldown = 0.0
+attack_speed = 0.0
+max_hp = -1
+max_armor = -1
+move_speed = 0.0
+can_be_knocked = false
+metadata/_custom_type_script = "uid://dih5uka4r4nol"

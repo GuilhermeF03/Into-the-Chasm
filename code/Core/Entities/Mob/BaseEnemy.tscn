@@ -108,11 +108,11 @@ scale = Vector2(0.19999999, 0.19999999)
 
 [node name="-- ANIMATION --" type="Node" parent="."]
 
-[node name="AnimationController" parent="." instance=ExtResource("5_gbi62")]
+[node name="Animation" parent="." instance=ExtResource("5_gbi62")]
 
 [node name="-- MISC --" type="Node" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_042f5")
 hframes = 5

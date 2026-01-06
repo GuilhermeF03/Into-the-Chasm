@@ -3,17 +3,19 @@ class_name HandledWeapon
 
 @onready var hitbox: CombatHitbox = $Hitbox
 
+#region Data
 @export_group("Data")
-@export var weapon_data: WeaponData
+
+var weapon_data : WeaponData
+
+@export_subgroup("Damage")
+@export var damage_data : DamageData
+@export_range(0.05, 0.7) var attack_cooldown : float = 0.15
 var effect : Effect
 
-var temp_damage: DamageData.DamageInfo
 var last_attack_was_special: bool
 var hitbox_layers = [4, 32]
-
-@export_group("Signals")
-signal attack_registered(area: Area2D)
-
+#endregion
 
 func _ready():
 	super._ready()
@@ -25,16 +27,14 @@ func _ready():
 	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	hitbox.collision_layer = hitbox_layers[0]
 	hitbox.collision_mask = hitbox_layers[1]
-	hitbox.area_entered.connect(_on_area_entered)
 	
 	hitbox.damage_data = weapon_data.damage_data
 
 
 func use():
+	super.use()
 	last_attack_was_special = false
-	can_use.emit(false)
-	temp_damage = weapon_data.damage_info.get_damage()
-	anim_player.play("attack")
+
 	var timer = get_tree().create_timer(weapon_data.attack_cooldown)
 	timer.timeout.connect(_on_timeout)
 
@@ -47,16 +47,11 @@ func special_attack():
 
 
 func _on_timeout():
-	temp_damage = null
 	_on_use_finished()
 
 
 func _on_special_finished():
 	_on_use_finished()
-
-
-func _on_area_entered(area: Area2D):
-	attack_registered.emit(area)
 
 
 func _disable_logic():

@@ -6,6 +6,11 @@ func resolve_attack(
 	target : CombatHurtbox
 ) -> DamageData.DamageInfo:
 	# 1. Roll raw damage (intent)
+	
+	# NO DAMAGE DATA -> RETURN EMPTY REPRESETATION
+	if attack.damage_data == null:
+		return DamageData.DamageInfo.new()
+	
 	var info := attack.damage_data.roll()
 
 	# 2. Apply elemental resistance
@@ -22,6 +27,8 @@ func apply_resistance(
 ) -> DamageData.DamageInfo:
 	if info.type != DamageData.DamageType.NORMAL:
 		return info
+		
+	if combatant == null: return info
 
 	var resistance = combatant.element_affinities.get(
 		info.element,
