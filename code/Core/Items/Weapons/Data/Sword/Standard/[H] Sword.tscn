@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=4 uid="uid://c3vj8y2bl8orp"]
 
 [ext_resource type="Script" uid="uid://ds55ikcrjl2rq" path="res://Core/Items/Weapons/HandledWeapon.gd" id="1_sd21j"]
-[ext_resource type="PackedScene" uid="uid://b3i22gef6s8ly" path="res://Core/Systems/Combat/Components/CombatHitbox.tscn" id="2_vb6l8"]
+[ext_resource type="PackedScene" uid="uid://b3i22gef6s8ly" path="res://Core/Systems/Combat/Contacts/Hitbox/CombatHitbox.tscn" id="2_vb6l8"]
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_irj05"]
 _data = PackedByteArray("AAADAAUAAAABAAAAYAAAAGAAAAAoAgAAUklGRiACAABXRUJQVlA4TBQCAAAvX8AXEF+gJgDQhF707+AwPfVcE8VtIynbf5N0jD8mqW0jSbn+m7yI75k/m/8AANPQv75VslWyXYtEhH/QYEiLlovXLkiStr1tm5+qBOhuH4CDG/gGvW5zgXoAZmUOV9rlH6842fVeWE5g63aigA//n7qM6D8Et20kSUzXevpOLao/Qf9tNcJ9iOW4j79QYMeQk9p5hCcujcMZ5oT5jGQ+xaQQGeATztoiS0J1g9L0BlhaOI2e0DzvCXgNs80scGGBo88GeUBtPD6ogeczEtZFQkRu5NtN8MBJYY8vSOosQet2IrYbuQxz0bYKNwpJpJ9VXOZyowj/M8WrUt4WzI32waYi9Z9W/4ZUXZcp7za3Vjtuf6bKyjvW3mWhlzFrRbbtxGhkuy/KCNXPgE8mIgvoE5chdYYzJai4C+4s4Rzw+dquMDf+eEOoKpSmN6sd5tLzGo66h/O8Hy7pfEefDdJmFnB2beH6h5/PCHlAbeSuHv74dhOSlhvR2s76eHwRMXB669DLiUICiUZ6tL47N0I0shg0nZZiTvMhq59a+1SsHystqRZzo5X+uzilP6jYWzK6/5hG+2BTkfpPq39Dqq7LlHebufquPlK/mf5r6q0Ny+1bK5O/aU24DfeqNbLhvmThLtzQh4RzbgS7EB51DnVNJDVCfZC4wrP+vb+MBXP6e2s6ZYvqp3JyaZUHN6nu04Z7fssi")

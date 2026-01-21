@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="StatusData" load_steps=3 format=3 uid="uid://dwtwilnnsodqp"]
+
+[ext_resource type="Script" uid="uid://b0ou21vtxgtfr" path="res://Core/Systems/Combat/Status System/Status/Data/StatusEffect.gd" id="1_366bq"]
+
+[sub_resource type="GDScript" id="GDScript_lo7ys"]
+script/source = "extends Resource
+class_name StatusData
+
+enum StatusType {
+	IGNORE,
+	REFRESH,
+	STACK,
+	REPLACE
+}
+
+#region Data
+@export_group(\"Data\")
+
+@export var name : String
+@export var type : StatusType = StatusType.STACK
+
+@export var apply_ticks : int = 1
+@export var recheck_ticks : int = 1
+
+@export var effects : Array[StatusEffect] = []
+
+@export var recheck : Callable
+"
+
+[resource]
+script = SubResource("GDScript_lo7ys")
+metadata/_custom_type_script = "uid://dkoai5a7vinqf"

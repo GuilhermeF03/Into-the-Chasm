@@ -21,7 +21,7 @@ class_name DamageData
 #region Enums
 enum DamageType {
 	NORMAL,
-	ARMOR_DAMAGE,
+	PIERCING,
 	HEAL
 }
 #endregion

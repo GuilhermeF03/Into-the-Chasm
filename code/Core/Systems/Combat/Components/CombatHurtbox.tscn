@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dscvj7xpdri4f"]
-
-[ext_resource type="Script" uid="uid://c8bc0fdckjtcj" path="res://Core/Systems/Combat/Components/CombatHurtbox.gd" id="1_pgjgp"]
-
-[node name="Hurtbox" type="Area2D"]
-script = ExtResource("1_pgjgp")

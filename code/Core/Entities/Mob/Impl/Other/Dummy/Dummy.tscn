@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://6bdvq6vmgmb" path="res://Core/Entities/Mob/Enemy.gd" id="1_m6r67"]
 [ext_resource type="Texture2D" uid="uid://dd0ev3s6uyahk" path="res://Core/Entities/Mob/Impl/Other/Dummy/Art/Dummy.png" id="1_xbvns"]
 [ext_resource type="Resource" uid="uid://cm2c73yuim15m" path="res://Core/Entities/Mob/Impl/Other/Dummy/[D] Dummy.tres" id="2_4bv5f"]
-[ext_resource type="PackedScene" uid="uid://dscvj7xpdri4f" path="res://Core/Systems/Combat/Components/CombatHurtbox.tscn" id="3_m6r67"]
-[ext_resource type="PackedScene" uid="uid://b3i22gef6s8ly" path="res://Core/Systems/Combat/Components/CombatHitbox.tscn" id="4_4vbhs"]
+[ext_resource type="PackedScene" uid="uid://dscvj7xpdri4f" path="res://Core/Systems/Combat/Contacts/Hurtbox/CombatHurtbox.tscn" id="3_m6r67"]
+[ext_resource type="PackedScene" uid="uid://b3i22gef6s8ly" path="res://Core/Systems/Combat/Contacts/Hitbox/CombatHitbox.tscn" id="4_4vbhs"]
 [ext_resource type="Script" uid="uid://dnp3don3qa830" path="res://Core/Systems/Animation/Components/AnimationController.gd" id="4_348lm"]
 
 [sub_resource type="Animation" id="Animation_sxowk"]

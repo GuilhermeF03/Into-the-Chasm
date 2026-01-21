@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://6bdvq6vmgmb" path="res://Core/Entities/Mob/Enemy.gd" id="1_53hx0"]
 [ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Core/Materials/Hit/hit_shader.gdshader" id="2_h6iiu"]
-[ext_resource type="PackedScene" uid="uid://b3i22gef6s8ly" path="res://Core/Systems/Combat/Components/CombatHitbox.tscn" id="2_n3x77"]
-[ext_resource type="PackedScene" uid="uid://dscvj7xpdri4f" path="res://Core/Systems/Combat/Components/CombatHurtbox.tscn" id="3_n3x77"]
-[ext_resource type="PackedScene" uid="uid://bn22lpcq2hs5r" path="res://Core/Systems/Combat/Components/StatusController.tscn" id="4_n3x77"]
-[ext_resource type="PackedScene" uid="uid://wgoqu77dgcg8" path="res://Core/Systems/Combat/Components/KnockbackController.tscn" id="4_vi6vg"]
+[ext_resource type="PackedScene" uid="uid://b3i22gef6s8ly" path="res://Core/Systems/Combat/Contacts/Hitbox/CombatHitbox.tscn" id="2_n3x77"]
+[ext_resource type="PackedScene" uid="uid://dscvj7xpdri4f" path="res://Core/Systems/Combat/Contacts/Hurtbox/CombatHurtbox.tscn" id="3_n3x77"]
+[ext_resource type="PackedScene" uid="uid://bn22lpcq2hs5r" path="res://Core/Systems/Combat/Status System/Status/StatusController.tscn" id="4_n3x77"]
+[ext_resource type="PackedScene" uid="uid://wgoqu77dgcg8" path="res://Core/Systems/Combat/Knockback/KnockbackController.tscn" id="4_vi6vg"]
 [ext_resource type="PackedScene" uid="uid://bnlak2256563a" path="res://Core/Systems/Animation/Components/AnimationController.tscn" id="5_gbi62"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gbi62"]
