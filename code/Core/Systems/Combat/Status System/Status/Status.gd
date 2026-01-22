@@ -33,11 +33,6 @@ signal applied(status : Status)
 signal recheck_requested(status : Status)
 #endregion
 
-#region builtins
-func _ready() -> void:
-	name = "{}:{}" % [name, randi()]
-#endregion
-
 #region lifecycle
 func enable() -> void:
 	if active: return

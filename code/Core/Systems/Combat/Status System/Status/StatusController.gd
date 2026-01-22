@@ -13,6 +13,7 @@ signal status_removed(status: Status)
 
 #region Data
 var statuses : Dictionary[String, Status] = {}
+
 var curr_tick : int = 0
 #endregion
 
