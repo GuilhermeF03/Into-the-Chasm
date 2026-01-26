@@ -56,6 +56,7 @@ func add_status(status: Status) -> void:
 
 	var entry : Status = statuses.get(key)
 	if entry == null:
+		status.reparent(self, false)
 		statuses[key] = status
 		
 	# --- refresh / stacking rules ---

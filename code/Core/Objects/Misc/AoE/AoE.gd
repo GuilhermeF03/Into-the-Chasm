@@ -1,5 +1,6 @@
+@abstract
 extends Area2D
-class_name AreaOfEffect
+class_name AoE
 
 #region Nodes
 @export_group("Nodes")
@@ -11,10 +12,6 @@ class_name AreaOfEffect
 
 @export_subgroup("Times")
 @export_range(0.1, 100.0) var lifetime_time : float
-
-@export_subgroup("Effects")
-@export var node_effects : Array[NodeEffect]
-@export var resource_effects : Array[ResourceEffect]
 #endregion
 
 #region builtins
@@ -28,20 +25,11 @@ func _ready() -> void:
 	
 	
 #region signal handlers
-func on_area_entered(_area : Area2D):
-	for effect in node_effects:
-		effect.apply()
-		
-	for effect in resource_effects:
-		effect.apply()
-	
+@abstract
+func on_area_entered(_area : Area2D)
 
-func on_body_entered(_body : Node2D):
-	for effect in node_effects:
-		effect.apply()
-		
-	for effect in resource_effects:
-		effect.apply()
+@abstract
+func on_body_entered(_body : Node2D)
 
 
 func on_end_lifetime():

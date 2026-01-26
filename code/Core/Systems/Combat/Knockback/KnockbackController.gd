@@ -1,8 +1,7 @@
 extends Node
 class_name KnockbackController
 
-
-
+#region Signal handling
 func on_knockback(
 	_amount: int,
 	_is_crit: bool,
@@ -21,3 +20,4 @@ func on_knockback(
 		parent.global_position + direction * force,
 		parent.data.knockback_time
 	).set_ease(Tween.EASE_OUT)
+#endregion

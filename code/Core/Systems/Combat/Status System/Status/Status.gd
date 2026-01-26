@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 class_name Status
 
 #region Data
@@ -22,6 +22,7 @@ enum StatusType { STACK, REPLACE }
 #region State
 var active : bool : get = is_active
 var stacks : Array[Stack]
+var max_stacks = 3
 #endregion
 
 #region Signals
@@ -40,10 +41,15 @@ func reset() -> void:
 
 
 func add_stack():
+	if stacks.size() + 1 >= max_stacks:
+		print_debug("Max stacks reached")
+		return
+	
 	stacks.append(Stack.new())
 	
 
 func remove_stack(stack : Stack):
+	if stacks.is_empty(): return
 	stacks.erase(stack)
 #endregion
 

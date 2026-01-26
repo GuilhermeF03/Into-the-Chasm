@@ -4,6 +4,7 @@ class_name ElementData
 enum Element {
 	PHYSICAL,
 	FIRE,
+	POISON
 }
 
 enum ElementResistance {

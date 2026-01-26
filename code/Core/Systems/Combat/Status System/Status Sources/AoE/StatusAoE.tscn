@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfkcoi4nsln6u"]
+
+[ext_resource type="PackedScene" uid="uid://brmmpkslx608s" path="res://Core/Objects/Misc/AoE/AoE.tscn" id="1_livhp"]
+
+[node name="AoE" instance=ExtResource("1_livhp")]
+lifetime_time = null

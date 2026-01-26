@@ -1,3 +1,4 @@
+@abstract
 extends NodeEffect
 class_name StatusEffect
 
