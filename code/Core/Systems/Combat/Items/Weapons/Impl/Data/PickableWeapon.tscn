@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c37sltcpyvs3r"]
 
-[ext_resource type="Script" uid="uid://vqrocd37gf13" path="res://Core/Systems/Combat/Items/Weapons/Impl/PickableWeapon.gd" id="1_olvi3"]
+[ext_resource type="Script" uid="uid://vqrocd37gf13" path="res://Core/Systems/Combat/Items/Weapons/Impl/Data/PickableWeapon.gd" id="1_olvi3"]
 [ext_resource type="PackedScene" uid="uid://dh86htrmpu0mq" path="res://Core/Objects/Data/InteractArea.tscn" id="2_oxkbe"]
 
 [sub_resource type="Animation" id="Animation_qqgpw"]

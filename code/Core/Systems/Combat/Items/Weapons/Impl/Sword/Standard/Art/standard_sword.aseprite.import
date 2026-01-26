@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://boeh0aea105s3"
+path="res://.godot/imported/standard_sword.aseprite-9ffcccf2ad17236b355d67c7a2bb5b02.res"
+
+[deps]
+
+source_file="res://Core/Systems/Combat/Items/Weapons/Impl/Sword/Standard/Art/standard_sword.aseprite"
+dest_files=["res://.godot/imported/standard_sword.aseprite-9ffcccf2ad17236b355d67c7a2bb5b02.res"]
+
+[params]
+

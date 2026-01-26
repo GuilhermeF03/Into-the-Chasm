@@ -1,4 +1,4 @@
-extends Effect
+extends WeaponEffect
 
 #region Constants
 @export_group("Constants")
@@ -14,7 +14,7 @@ extends Effect
 var anim_player : AnimationPlayer
 var weapon : HandledWeapon
 var original_pos : Vector2
-var player : PlayerController
+var player : Player
 var tween : Tween
 #endregion
 
@@ -28,7 +28,7 @@ var state = STATE.CAUGHT
 #region builtins
 func _ready():
 	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
-	player = PlayerManager.player
+	player = EntityManager.player
 	weapon = get_parent()
 	anim_player = weapon.find_child("Player")
 	hitbox.area_entered.connect(on_boomerang_hit)
@@ -42,7 +42,7 @@ func _physics_process(delta):
 
 
 #region Effect
-func call_effect(_args = {}):
+func apply(_entity : Entity) -> void:
 	player.weapon_controller.lock_movement = true
 	hitbox.process_mode = Node.PROCESS_MODE_INHERIT
 	

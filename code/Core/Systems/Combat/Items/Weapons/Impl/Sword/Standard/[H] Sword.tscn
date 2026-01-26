@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=4 uid="uid://c3vj8y2bl8orp"]
 
-[ext_resource type="Script" uid="uid://ds55ikcrjl2rq" path="res://Core/Systems/Combat/Items/Weapons/Impl/HandledWeapon.gd" id="1_sd21j"]
+[ext_resource type="Script" uid="uid://ds55ikcrjl2rq" path="res://Core/Systems/Combat/Items/Weapons/Impl/Data/HandledWeapon.gd" id="1_sd21j"]
 [ext_resource type="PackedScene" uid="uid://b3i22gef6s8ly" path="res://Core/Systems/Combat/Contacts/Hitbox/CombatHitbox.tscn" id="2_vb6l8"]
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_irj05"]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://qn4tkrelxuep"]
 
-[ext_resource type="Script" uid="uid://vqrocd37gf13" path="res://Core/Systems/Combat/Items/Weapons/Impl/PickableWeapon.gd" id="1_y25yt"]
-[ext_resource type="Resource" uid="uid://dm8rltybtbs27" path="res://Core/Systems/Combat/Items/Weapons/Impl/Data/Pickaxe/Standard/[D] Pickaxe.tres" id="2_6g3bl"]
+[ext_resource type="Script" uid="uid://vqrocd37gf13" path="res://Core/Systems/Combat/Items/Weapons/Impl/Data/PickableWeapon.gd" id="1_y25yt"]
+[ext_resource type="Resource" uid="uid://dm8rltybtbs27" path="res://Core/Systems/Combat/Items/Weapons/Impl/Pickaxe/Standard/[D] Pickaxe.tres" id="2_6g3bl"]
 [ext_resource type="PackedScene" uid="uid://dh86htrmpu0mq" path="res://Core/Objects/Data/InteractArea.tscn" id="2_umdvy"]
-[ext_resource type="Texture2D" uid="uid://r5uwc3rx82ya" path="res://Core/Systems/Combat/Items/Weapons/Impl/Data/Pickaxe/Standard/Art/icon.png" id="4_6g3bl"]
+[ext_resource type="Texture2D" uid="uid://r5uwc3rx82ya" path="res://Core/Systems/Combat/Items/Weapons/Impl/Pickaxe/Standard/Art/icon.png" id="4_6g3bl"]
 
 
 

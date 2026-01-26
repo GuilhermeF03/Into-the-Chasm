@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=4 uid="uid://dlph307samicy"]
 
-[ext_resource type="Script" uid="uid://ds55ikcrjl2rq" path="res://Core/Systems/Combat/Items/Weapons/Impl/HandledWeapon.gd" id="1_haxx0"]
+[ext_resource type="Script" uid="uid://ds55ikcrjl2rq" path="res://Core/Systems/Combat/Items/Weapons/Impl/Data/HandledWeapon.gd" id="1_haxx0"]
 [ext_resource type="PackedScene" uid="uid://b3i22gef6s8ly" path="res://Core/Systems/Combat/Contacts/Hitbox/CombatHitbox.tscn" id="2_3w2c3"]
-[ext_resource type="Resource" uid="uid://dm8rltybtbs27" path="res://Core/Systems/Combat/Items/Weapons/Impl/Data/Pickaxe/Standard/[D] Pickaxe.tres" id="2_x154b"]
+[ext_resource type="Resource" uid="uid://dm8rltybtbs27" path="res://Core/Systems/Combat/Items/Weapons/Impl/Pickaxe/Standard/[D] Pickaxe.tres" id="2_x154b"]
 
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_hvg6h"]

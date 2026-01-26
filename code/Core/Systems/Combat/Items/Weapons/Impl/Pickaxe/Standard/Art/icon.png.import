@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdwu0d0xst86k"
-path="res://.godot/imported/icon.png-d51ca80442648a8036cc6518e857e32c.ctex"
+uid="uid://r5uwc3rx82ya"
+path="res://.godot/imported/icon.png-676c1c3e18ddaf82268bfc381807fb1e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Core/Systems/Combat/Items/Weapons/Impl/Data/Sword/Standard/Art/icon.png"
-dest_files=["res://.godot/imported/icon.png-d51ca80442648a8036cc6518e857e32c.ctex"]
+source_file="res://Core/Systems/Combat/Items/Weapons/Impl/Pickaxe/Standard/Art/icon.png"
+dest_files=["res://.godot/imported/icon.png-676c1c3e18ddaf82268bfc381807fb1e.ctex"]
 
 [params]
 
