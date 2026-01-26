@@ -5,11 +5,7 @@ class_name Status
 @export_group("Data")
 
 @export_subgroup("Core")
-enum StatusType {
-	STACK,
-	REPLACE,
-	MERGE
-}
+enum StatusType { STACK, REPLACE }
 
 #region Data
 @export_group("Data")
@@ -24,8 +20,8 @@ enum StatusType {
 #endregion
 
 #region State
-var active : bool = true
-var ticks : int = 0
+var active : bool : get = is_active
+var stacks : Array[Stack]
 #endregion
 
 #region Signals
@@ -34,35 +30,27 @@ signal recheck_requested(status : Status)
 #endregion
 
 #region lifecycle
-func enable() -> void:
-	if active: return
-
-	active = true
-	ticks = 0
-
-
-func disable() -> void:
-	if not active: return
-
-	active = false
-	ticks = 0
-
-
-func refresh() -> void:
-	if not active: return
-
-	ticks = 0
+func is_active() -> bool : return not stacks.is_empty()
 
 
 func reset() -> void:
-	disable()
-	enable()
+	if not active: return
+	for stack in stacks:
+		stack.ticks = 0
+
+
+func add_stack():
+	stacks.append(Stack.new())
+	
+
+func remove_stack(stack : Stack):
+	stacks.erase(stack)
 #endregion
 
 #region behavior
 func apply() -> void:
 	if not active: return
-
+	
 	for effect in effects:
 		effect.apply()
 
@@ -71,7 +59,12 @@ func apply() -> void:
 
 func recheck() -> bool:
 	if not active: return false
-	
 	recheck_requested.emit(self)
 	return recheck_handler.bool_call()
 #endregion
+
+
+
+#region Stack Class
+class Stack:
+	var ticks : int = 0
