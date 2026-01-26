@@ -1,8 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://dcqhmokw2vldx"]
 
-[ext_resource type="PackedScene" uid="uid://dh86htrmpu0mq" path="res://Core/Objects/InteractArea.tscn" id="1_frivs"]
+[ext_resource type="PackedScene" uid="uid://dh86htrmpu0mq" path="res://Core/Objects/Data/InteractArea.tscn" id="1_frivs"]
 [ext_resource type="Script" uid="uid://dq1g6wuvb8unm" path="res://Core/Objects/Containers/Chests/Chest.gd" id="1_h3mpe"]
 [ext_resource type="Texture2D" uid="uid://dt4j2jwgpt4c2" path="res://Core/Objects/Containers/Chests/Default/chest_default.png" id="2_xym2m"]
+
 
 
 

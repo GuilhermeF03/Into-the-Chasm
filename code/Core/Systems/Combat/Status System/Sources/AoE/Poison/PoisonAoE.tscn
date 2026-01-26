@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=4 uid="uid://ceu0hd7c74vft"]
+
+[ext_resource type="PackedScene" uid="uid://cfkcoi4nsln6u" path="res://Core/Systems/Combat/Status System/Sources/AoE/StatusAoE.tscn" id="1_gihnn"]
+
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_1fjcw"]
+_data = PackedByteArray("AAADAAUAAAABAAAAIAAAACAAAACEAAAAUklGRnwAAABXRUJQVlA4TG8AAAAvH8AHEB8gJCBTnmgeiZj/wBU4qrZtOi4zOw1+DVQQw06EuYQ+9n8FDeYIjpXfszILENH/CfDf+zDqWdWxna6rDi7ZpcA9yZBRknQe1Nk/OCdJjctTZY1rkimqJG3ckrKGe5kJVEXVgU1rXIOBDwMA")
+size_override = Vector2(32, 32)
+
+[node name="AoE" instance=ExtResource("1_gihnn")]
+
+[node name="Sprite" type="Sprite2D" parent="." index="0"]
+texture_filter = 1
+texture = SubResource("PortableCompressedTexture2D_1fjcw")
+metadata/_aseprite_wizard_interface_config_ = {
+"output_section": true,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"embed_tex": true,
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"slice": "",
+"source": "res://Core/Systems/Combat/Status System/Sources/AoE/Poison/poison-area.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "75388ef9a0aadbd00e4bf89c36ecf264"
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(-0.58149, 3.78149)
+scale = Vector2(3.09537, 0.51251)
+polygon = PackedVector2Array(0.463538, -8.21088, -0.0189024, -8.21088, -0.294583, -6.12962, -0.294583, -4.46461, 0.256778, -4.46461, 0.601378, -6.12962, 0.601378, -8.21088)

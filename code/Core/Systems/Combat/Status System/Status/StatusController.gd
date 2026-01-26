@@ -3,6 +3,7 @@ class_name StatusController
 
 #region Nodes
 @export_group("Nodes")
+var parent : Entity
 @onready var tick_timer : Timer = $TickTimer
 #endregion
 
@@ -19,6 +20,7 @@ var curr_tick : int = 0
 
 #region builtins
 func _ready() -> void:
+	parent = get_parent() as Entity
 	tick_timer.timeout.connect(process_statuses)
 #endregion
 
@@ -37,11 +39,11 @@ func process_statuses():
 			
 			# Apply status
 			if stack_ticks % status.apply_ticks == 0:
-				status.apply()
+				status.apply(parent)
 				status_applied.emit(status)
 			# Recheck status
 			if stack_ticks % status.recheck_ticks == 0:
-				var keep_status = status.recheck()
+				var keep_status: bool = status.recheck()
 				if not keep_status:
 					status.remove_stack(stack)
 	

@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqj3pnlfa2bb4"]
-
-[ext_resource type="Script" uid="uid://dcn0egbwj2iuy" path="res://Core/Systems/Combat/Effects/Impl/Misc/ShaderEffect.gd" id="1_8dvyf"]
-
-[node name="ShaderEffect" type="Node"]
-script = ExtResource("1_8dvyf")
-color = Color(0, 1, 0, 1)
-metadata/_custom_type_script = "uid://b0ou21vtxgtfr"

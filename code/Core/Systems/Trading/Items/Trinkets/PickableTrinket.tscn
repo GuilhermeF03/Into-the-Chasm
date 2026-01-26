@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://crl5owfklwshp"]
+
+[ext_resource type="Script" uid="uid://cvauy6amef76v" path="res://Core/Systems/Trading/Items/Trinkets/PickableTrinket.gd" id="1_wg1ar"]
+[ext_resource type="Texture2D" uid="uid://b7mmwj07seqca" path="res://Core/Systems/Trading/Items/Trinkets/Art/trinket.png" id="2_6qawr"]
+[ext_resource type="PackedScene" uid="uid://cte68dj3jl77y" path="res://Core/Items/Data/PickableItem.tscn" id="2_i6tvj"]
+
+
+
+
+[node name="PickableTrinket" type="Node2D"]
+y_sort_enabled = true
+texture_filter = 1
+script = ExtResource("1_wg1ar")
+texture = ExtResource("2_6qawr")
+
+[node name="PickableItem" parent="." instance=ExtResource("2_i6tvj")]
+texture = ExtResource("2_6qawr")
+
+[connection signal="get_picked" from="PickableItem" to="." method="_on_get_picked"]

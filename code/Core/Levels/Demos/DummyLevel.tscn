@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://Core/Entities/Player/Player.tscn" id="1_afhyo"]
 [ext_resource type="PackedScene" uid="uid://b2u0wimnxxcnc" path="res://Core/Entities/Mob/Impl/Other/Dummy/Dummy.tscn" id="2_ou613"]
-[ext_resource type="PackedScene" uid="uid://dbvl2aq745kyx" path="res://Core/Items/Weapons/Data/Sword/Standard/[P] Sword.tscn" id="3_ou613"]
+[ext_resource type="PackedScene" uid="uid://dbvl2aq745kyx" path="res://Core/Systems/Combat/Items/Weapons/Impl/Data/Sword/Standard/[P] Sword.tscn" id="3_ou613"]
 
 [node name="DummyLevel" type="Node2D"]
 y_sort_enabled = true

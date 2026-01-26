@@ -2,14 +2,18 @@ extends Entity
 class_name Player
 
 #region Nodes
+@export_group("Nodes")
 @onready var weapon : WeaponController = $Weapon
 @onready var tools : ToolsController = $Tools
 @onready var inventory : Inventory = $Inventory
 @onready var camera : CameraController = $Camera
 #endregion
 
-#region State
+#region Data
+@export_group("Data")
 var back_view := false
+
+var data : PlayerData
 #endregion
 
 
@@ -80,18 +84,18 @@ func _input(event: InputEvent) -> void:
 
 
 #region Combat reactions
-func _on_hurt(source : CombatHitbox):
-	InputManager.block_all()
+func _on_hurt(attacker_hitbox : CombatHitbox):
+	InputManager.block_movement()
 	
-	super._on_hurt(source)
+	await super._on_hurt(attacker_hitbox)
 
 	InputManager.allow_all()
 
 
-func _on_status_dealt(status_data: StatusData) -> void:
-	InputManager.block_animation()
+func _on_status_dealt(status: Status) -> void:
+	InputManager.block_all()
 
-	super._on_status_dealt(status_data)
+	super._on_status_dealt(status)
 
 	InputManager.allow_all()
 #endregion
@@ -116,6 +120,8 @@ func _on_flip_y(value : bool):
 #endregion
 
 #region interface functions
-func get_data() -> CombatantData: return EntityManager.player_data
-func update_data(new_data : CombatantData): EntityManager.player_data = new_data
+func get_data() -> CombatantData: return data
+func update_data(new_data : CombatantData): 
+	EntityManager.player_data = new_data
+	data = new_data
 #endregion

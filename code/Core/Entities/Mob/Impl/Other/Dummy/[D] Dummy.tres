@@ -6,6 +6,8 @@
 
 [sub_resource type="Resource" id="Resource_v1wbn"]
 script = ExtResource("1_jdt5g")
+max_damage = 1.0
+critical_multiplier = 0.0
 metadata/_custom_type_script = "uid://cakoxo6veom2p"
 
 [resource]

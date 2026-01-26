@@ -1,15 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://0r3mci1jljw0"]
 
 [ext_resource type="Script" uid="uid://b5sq7pn2c3uiq" path="res://Core/Systems/Combat/Status System/Status/Status.gd" id="1_8hdcw"]
-[ext_resource type="Texture2D" uid="uid://brn25l8b2axym" path="res://Core/Items/Tools/Data/Potions/Poison Vial/Art/poison-bubble.png" id="3_qnvhg"]
+[ext_resource type="Script" uid="uid://dcn0egbwj2iuy" path="res://Core/Systems/Combat/Status System/Effects/Impl/Shader/ShaderEffect.gd" id="2_uqefk"]
+[ext_resource type="Texture2D" uid="uid://brn25l8b2axym" path="res://Core/Systems/Combat/Items/Tools/Impl/Data/Potions/Poison Vial/Art/poison-bubble.png" id="3_qnvhg"]
 [ext_resource type="Material" uid="uid://bxuaygs6u2rda" path="res://Core/Materials/Poison/poison_particles.tres" id="4_fkmts"]
-[ext_resource type="Script" uid="uid://dcn0egbwj2iuy" path="res://Core/Systems/Combat/Effects/Impl/Misc/ShaderEffect.gd" id="4_uqefk"]
 
 [node name="Poison Status" type="Node2D"]
 script = ExtResource("1_8hdcw")
 
 [node name="Shader" type="Node" parent="."]
-script = ExtResource("4_uqefk")
+script = ExtResource("2_uqefk")
 color = Color(0, 0.98039216, 0, 1)
 metadata/_custom_type_script = "uid://dcn0egbwj2iuy"
 

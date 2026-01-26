@@ -1,21 +1,22 @@
 extends Node
 class_name Status
 
-#region Data
-@export_group("Data")
-
-@export_subgroup("Core")
+#region Enums
+@export_group("Enums")
 enum StatusType { STACK, REPLACE }
 
 #region Data
 @export_group("Data")
+
+@export_subgroup("Core")
 @export var type : StatusType = StatusType.STACK
 
+@export_subgroup("Ticks")
 @export var apply_ticks : int = 1
 @export var recheck_ticks : int = 1
 
+@export_subgroup("Effects")
 @export var effects : Array[StatusEffect]
-
 @export var recheck_handler : BooleanCallable
 #endregion
 
@@ -54,11 +55,11 @@ func remove_stack(stack : Stack):
 #endregion
 
 #region behavior
-func apply() -> void:
+func apply(entity : Entity) -> void:
 	if not active: return
 	
 	for effect in effects:
-		effect.apply()
+		effect.apply(entity)
 
 	applied.emit(self)
 

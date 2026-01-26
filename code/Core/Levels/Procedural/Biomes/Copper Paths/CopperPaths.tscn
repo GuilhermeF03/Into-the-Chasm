@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://cv3m0a2g3qke8" path="res://Core/Levels/Procedural/Biomes/Copper Paths/CopperPaths.tres" id="1_61rdh"]
 [ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://Core/Entities/Player/Player.tscn" id="2_8b4em"]
-[ext_resource type="PackedScene" uid="uid://dje586mcin71p" path="res://Core/Items/Resources/PickableResource.tscn" id="3_2xjc7"]
+[ext_resource type="PackedScene" uid="uid://dje586mcin71p" path="res://Core/Systems/Crafting/Items/Resources/PickableResource.tscn" id="3_2xjc7"]
 
 
 

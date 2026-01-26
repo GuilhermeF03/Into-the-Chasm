@@ -1,11 +1,12 @@
 [gd_scene load_steps=7 format=3 uid="uid://cxy1wsxu5cisv"]
 
 [ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://Core/Entities/Player/Player.tscn" id="1_2xywp"]
-[ext_resource type="PackedScene" uid="uid://dje586mcin71p" path="res://Core/Items/Resources/PickableResource.tscn" id="2_waivb"]
-[ext_resource type="PackedScene" uid="uid://hvirmd1rmgea" path="res://Core/Items/Tools/PickableTool.tscn" id="3_5fvn0"]
-[ext_resource type="PackedScene" uid="uid://crl5owfklwshp" path="res://Core/Items/Trinkets/PickableTrinket.tscn" id="4_xrbet"]
+[ext_resource type="PackedScene" uid="uid://dje586mcin71p" path="res://Core/Systems/Crafting/Items/Resources/PickableResource.tscn" id="2_waivb"]
+[ext_resource type="PackedScene" uid="uid://hvirmd1rmgea" path="res://Core/Systems/Combat/Items/Tools/Impl/PickableTool.tscn" id="3_5fvn0"]
+[ext_resource type="PackedScene" uid="uid://crl5owfklwshp" path="res://Core/Systems/Trading/Items/Trinkets/PickableTrinket.tscn" id="4_xrbet"]
 [ext_resource type="PackedScene" path="res://Entities/Mob/Slime/Slime.tscn" id="5_2edra"]
-[ext_resource type="PackedScene" uid="uid://wdwtlaklhvrn" path="res://Core/Items/Recipes/Data/Sword/StandardSwordRecipe.tscn" id="6_7wko3"]
+[ext_resource type="PackedScene" uid="uid://wdwtlaklhvrn" path="res://Core/Systems/Crafting/Items/Recipes/Data/Sword/StandardSwordRecipe.tscn" id="6_7wko3"]
+
 
 
 

@@ -436,6 +436,7 @@ script = ExtResource("12_lmeus")
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("camera")]
 physics_interpolation_mode = 1
+top_level = true
 zoom = Vector2(1.5, 1.5)
 process_callback = 0
 position_smoothing_speed = 1.0

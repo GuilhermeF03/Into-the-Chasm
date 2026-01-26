@@ -26,7 +26,7 @@ func can_move() -> bool:
 
 func can_animate() -> bool:
 	return (
-		input_level == INPUT_LEVEL.ALL
+		input_level == INPUT_LEVEL.ALL or input_level == INPUT_LEVEL.NO_MOVEMENT
 	)
 #endregion
 
