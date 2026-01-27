@@ -8,8 +8,6 @@
 
 [node name="Poison Status" type="Node2D" unique_id=1019468108]
 script = ExtResource("1_8hdcw")
-status_name = &"Poison"
-stack_lifetime_ticks = 10
 
 [node name="ShaderEffect" parent="." unique_id=6749717 instance=ExtResource("2_uqefk")]
 shader = ExtResource("3_00qds")

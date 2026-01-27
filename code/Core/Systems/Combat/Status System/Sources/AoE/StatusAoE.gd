@@ -13,13 +13,12 @@ class_name StatusAoE
 func on_area_entered(_area : Area2D):
 	var entity : Entity = _area.get_parent()
 	
-	var status: Status = packed_status.instantiate()
-	entity.status_controller.add_status(status)
+	entity.status_controller.add_status(packed_status)
 
 
 func on_body_entered(_body : Node2D):
 	var entity : Entity = _body.get_parent()
 	
 	var status: Status = packed_status.instantiate()
-	entity.status_controller.add_status(status)
+	entity.status_controller.add_status(packed_status)
 #endregion

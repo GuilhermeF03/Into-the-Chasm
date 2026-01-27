@@ -18,7 +18,7 @@ signal status_disabled(status: Status)
 #endregion
 
 #region Data
-var statuses : Dictionary[String, Status] = {}
+var statuses : Dictionary[StringName, Status] = {}
 
 var curr_tick : int = 0
 #endregion
@@ -38,6 +38,8 @@ func process_statuses():
 	for status : Status in statuses.values():
 		if not status.active: continue
 		
+		var data = status.data
+		
 		# Each stack is verified
 		for stack in status.stacks:
 			stack.ticks += 1
@@ -45,11 +47,11 @@ func process_statuses():
 			var stack_ticks = stack.ticks
 			
 			# Apply status
-			if stack_ticks % status.apply_ticks == 0:
+			if stack_ticks % data.apply_ticks >= 0:
 				status.apply(parent)
 				status_applied.emit(status)
 			# Recheck status
-			if stack_ticks % stack.lifetime_ticks == 0:
+			if stack_ticks % data.stack_lifetime_ticks >= 0:
 				status.remove_stack(stack)
 	
 		# No stacks - remove status
@@ -58,26 +60,30 @@ func process_statuses():
 #endregion
 
 #region API
-func add_status(status: Status) -> void:
-	var key := status.name
+func add_status(
+	data : StatusData,
+	packed_status: PackedScene
+) -> void:
+	var key := data.status_name
 
 	var entry : Status = statuses.get(key)
 	
 	# No previous entry - add children node
 	if entry == null:
-		status.reparent(self, false)
-		statuses[key] = status
+		entry = packed_status.instantiate()
+		add_child(entry)
+		statuses[key] = entry
 		
 	# --- refresh / stacking rules ---
-	match status.type:
-		Status.StatusType.STACK:
-			status.add_stack()
+	match data.type:
+		StatusData.StatusType.STACK:
+			entry.add_stack()
 
-		Status.StatusType.REPLACE:
+		StatusData.StatusType.REPLACE:
 			entry.reset()
 			
 	# enable status node
-	status.process_mode = Node.PROCESS_MODE_INHERIT
+	entry.process_mode = Node.PROCESS_MODE_INHERIT
 
 
 func disable_status(status : Status):

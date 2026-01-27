@@ -1,20 +1,10 @@
 extends Node
 class_name Status
 
-#region Enums
-@export_group("Enums")
-enum StatusType { STACK, REPLACE }
-
 #region Data
 @export_group("Data")
 
-@export_subgroup("Core")
-@export var status_name : StringName
-@export var type : StatusType = StatusType.STACK
-
-@export_subgroup("Ticks")
-@export var apply_ticks : int = 1
-@export var stack_lifetime_ticks : int = 1
+@export var data : StatusData
 
 @export_subgroup("Effects")
 @export var effects : Array[StatusEffect]
@@ -23,7 +13,6 @@ enum StatusType { STACK, REPLACE }
 #region State
 var active : bool : get = is_active
 var stacks : Array[Stack]
-var max_stacks = 3
 #endregion
 
 #region Signals
@@ -51,7 +40,7 @@ func reset() -> void:
 
 
 func add_stack():
-	if stacks.size() + 1 >= max_stacks:
+	if stacks.size() + 1 >= data.max_stacks:
 		print_debug("Max stacks reached")
 		return
 	
