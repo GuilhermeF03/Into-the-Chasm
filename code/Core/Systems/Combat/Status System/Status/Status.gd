@@ -55,9 +55,7 @@ func add_stack():
 		print_debug("Max stacks reached")
 		return
 	
-	stacks.append(Stack.new(
-		stack_lifetime_ticks
-	))
+	stacks.append(Stack.new())
 	
 
 func remove_stack(stack : Stack):
@@ -80,9 +78,3 @@ func apply(entity : Entity) -> void:
 #region Stack Class
 class Stack:
 	var ticks : int = 0
-	var lifetime_ticks : int
-	
-	func _init(
-		new_lifetime_ticks : int
-	) -> void:
-		self.lifetime_ticks = new_lifetime_ticks

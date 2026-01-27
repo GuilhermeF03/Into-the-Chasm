@@ -41,7 +41,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/awesome_input_icons/plugin.cfg", "res://addons/font_auto_size_labels/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/awesome_input_icons/plugin.cfg", "res://addons/font_auto_size_labels/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/script-dock/plugin.cfg")
 
 [file_customization]
 
