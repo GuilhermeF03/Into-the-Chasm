@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://p258o30kdie5"]
+
+[ext_resource type="Shader" uid="uid://u6yvla6j137" path="res://Core/Systems/Combat/Status System/Status/Heal/Shader/heal_shader.gdshader" id="1_ibfr1"]
+
+
+[resource]
+shader = ExtResource("1_ibfr1")
+shader_parameter/heal_color = Color(0.744827, 0, 0.0783338, 1)
+shader_parameter/intensity = 0.5
+shader_parameter/min_intensity = 0.25
+shader_parameter/max_intensity = 1.0
+shader_parameter/speed = 7.5

@@ -10,7 +10,6 @@ extends Node
 ## 
 ## Operation flow: Nodes fetch data from here, update it, save the new version
 
-
 #region Nodes
 @export_category("Nodes")
 @onready var player : Player = get_tree().get_first_node_in_group("Player")
@@ -24,6 +23,7 @@ extends Node
 
 @export_subgroup("Mobs")
 var mobs : Dictionary[StringName, CombatantData]
+#endregion
 
 
 #region builtins

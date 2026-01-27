@@ -1,9 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bn22lpcq2hs5r"]
+[gd_scene format=3 uid="uid://bn22lpcq2hs5r"]
 
 [ext_resource type="Script" uid="uid://yosmlqsqrogs" path="res://Core/Systems/Combat/Status System/Status/StatusController.gd" id="1_e16gl"]
 
-[node name="Status" type="Node2D"]
+[node name="Status Controller" type="Node2D" unique_id=1779010859]
 script = ExtResource("1_e16gl")
+TIME_TO_TICK = 0.25
 
-[node name="TickTimer" type="Timer" parent="."]
+[node name="TickTimer" type="Timer" parent="." unique_id=565315217]
 process_callback = 0

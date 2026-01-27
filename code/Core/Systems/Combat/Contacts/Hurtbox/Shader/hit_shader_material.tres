@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b10lp1h4nbjjq"]
+
+[ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Core/Systems/Combat/Contacts/Hurtbox/Shader/hit_shader.gdshader" id="1_kvnu2"]
+
+[resource]
+shader = ExtResource("1_kvnu2")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 0.0

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cqj3pnlfa2bb4"]
+
+[ext_resource type="Script" uid="uid://dcn0egbwj2iuy" path="res://Core/Systems/Combat/Status System/Effects/Shader/ShaderEffect.gd" id="1_8dvyf"]
+
+[node name="Shader Effect" type="Node2D" unique_id=6749717]
+script = ExtResource("1_8dvyf")

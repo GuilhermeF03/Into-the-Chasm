@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://c1djrvhrqlf8k"]
+[gd_scene format=3 uid="uid://c1djrvhrqlf8k"]
 
 [ext_resource type="Script" uid="uid://6bdvq6vmgmb" path="res://Core/Entities/Mob/Enemy.gd" id="1_53hx0"]
-[ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Core/Materials/Hit/hit_shader.gdshader" id="2_h6iiu"]
+[ext_resource type="Shader" uid="uid://c1olbbncr15i5" path="res://Core/Systems/Combat/Contacts/Hurtbox/Shader/hit_shader.gdshader" id="2_h6iiu"]
 [ext_resource type="PackedScene" uid="uid://b3i22gef6s8ly" path="res://Core/Systems/Combat/Contacts/Hitbox/CombatHitbox.tscn" id="2_n3x77"]
 [ext_resource type="PackedScene" uid="uid://dscvj7xpdri4f" path="res://Core/Systems/Combat/Contacts/Hurtbox/CombatHurtbox.tscn" id="3_n3x77"]
 [ext_resource type="PackedScene" uid="uid://bn22lpcq2hs5r" path="res://Core/Systems/Combat/Status System/Status/StatusController.tscn" id="4_n3x77"]

@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://x7pdkt7h284e"]
+
+[ext_resource type="Shader" uid="uid://b7lp2jvyxt8u" path="res://Core/Systems/Combat/Status System/Status/Poison/Shader/poison_shader.gdshader" id="1_x72ec"]
+
+[resource]
+shader = ExtResource("1_x72ec")
+shader_parameter/color = Color(0, 0.556226, 0.161786, 1)
+shader_parameter/intensity = 0.7
+shader_parameter/min_intensity = 0.25
+shader_parameter/max_intensity = 0.8
+shader_parameter/speed = 8.0

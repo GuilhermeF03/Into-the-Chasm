@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://byrctn3mjlypp"
+path="res://.godot/imported/Arrow.aseprite-b5dc8257c029d5df3747fcc5f1e732ed.res"
+
+[deps]
+
+source_file="res://Core/Entities/Mob/Copper Paths/Driftskin/Arrow/Arrow.aseprite"
+dest_files=["res://.godot/imported/Arrow.aseprite-b5dc8257c029d5df3747fcc5f1e732ed.res"]
+
+[params]
+

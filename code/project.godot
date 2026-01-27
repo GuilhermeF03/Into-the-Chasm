@@ -8,12 +8,16 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Into the Chasm"
 config/version="0.0.3"
 config/tags=PackedStringArray("roguelite")
-config/features=PackedStringArray("4.5", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/use_filter=false
 boot_splash/image="uid://cpra3180kwt1r"
 config/icon="uid://cpra3180kwt1r"
@@ -25,7 +29,7 @@ InputManager="*res://Core/Autoloads/Input/InputManager.tscn"
 UiManager="*res://Core/Autoloads/UI/UiManager.tscn"
 InventoryManager="*res://Core/Autoloads/Player/Inventory/InventoryManager.gd"
 InteractionManager="*res://Core/Autoloads/Interaction/InteractionManager.tscn"
-PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+PhantomCameraManager="*uid://duq6jhf6unyis"
 CombatManager="*res://Core/Autoloads/Combat/CombatManager.gd"
 EntityManager="*res://Core/Autoloads/Entity/EntityManager.gd"
 
@@ -37,12 +41,12 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/Asset_Drawer/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/awesome_input_icons/plugin.cfg", "res://addons/font_auto_size_labels/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/awesome_input_icons/plugin.cfg", "res://addons/font_auto_size_labels/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
-"res://Core/Entities/Mob/Impl/Copper Paths/": "gray"
+"res://Core/Entities/Mob/Copper Paths/": "gray"
 }
 
 [input]

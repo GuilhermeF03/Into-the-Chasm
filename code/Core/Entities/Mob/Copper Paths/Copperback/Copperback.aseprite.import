@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://6dvbrts1sgc3"
+path="res://.godot/imported/Copperback.aseprite-cb18a523574c4a031a5be0f3c908046d.res"
+
+[deps]
+
+source_file="res://Core/Entities/Mob/Copper Paths/Copperback/Copperback.aseprite"
+dest_files=["res://.godot/imported/Copperback.aseprite-cb18a523574c4a031a5be0f3c908046d.res"]
+
+[params]
+
