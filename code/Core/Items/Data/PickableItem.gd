@@ -12,15 +12,15 @@ const MIN_SPAWN_RANGE = 75
 
 #region Nodes
 @export_category("Nodes")
-@onready var sprite = $Sprite2D
-@onready var interact_area = $InteractArea
-@onready var animation_player = $AnimationPlayer
+var sprite : Sprite2D
+var interact_area : InteractArea
+var animation_player : AnimationController
 #endregion
 
 #region Data
 @export_category("Data")
 @export var data : ItemData
-@onready var hovered_texture
+@onready var hovered_texture : Texture2D
 #endregion
 
 #region Signals
