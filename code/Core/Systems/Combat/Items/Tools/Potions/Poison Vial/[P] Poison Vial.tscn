@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://dvo2pao4k66g8"]
+[gd_scene format=3 uid="uid://cghwksc0im8av"]
 
-[ext_resource type="Script" uid="uid://dc5rbt761juca" path="res://Core/Systems/Combat/Items/Tools/PickableTool.gd" id="1_qb2ua"]
-[ext_resource type="Resource" uid="uid://by5d0iy1y2s56" path="res://Core/Systems/Combat/Items/Tools/Data/Potions/Healing Potion/[D] Healing Potion.tres" id="2_asvvf"]
-[ext_resource type="PackedScene" uid="uid://dh86htrmpu0mq" path="res://Core/Objects/Data/InteractArea.tscn" id="2_mlh1d"]
-[ext_resource type="Texture2D" uid="uid://dw8y2vxonkiof" path="res://Core/Systems/Combat/Items/Tools/Data/Potions/Healing Potion/Art/small_jar.png" id="3_wiu6x"]
+[ext_resource type="Script" uid="uid://dc5rbt761juca" path="res://Core/Systems/Combat/Items/Tools/Data/PickableTool.gd" id="1_drjgp"]
+[ext_resource type="Resource" uid="uid://5chqx18ukyyl" path="res://Core/Systems/Combat/Items/Tools/Potions/Poison Vial/[D] Poison Vial.tres" id="2_o1npv"]
+[ext_resource type="Texture2D" uid="uid://boggllc67txtg" path="res://Core/Systems/Combat/Items/Tools/Potions/Poison Vial/Art/poison-vial.png" id="3_nipy0"]
+[ext_resource type="PackedScene" uid="uid://dh86htrmpu0mq" path="res://Core/Objects/Data/InteractArea.tscn" id="4_qp6t2"]
 
 
 
@@ -44,15 +44,15 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_1tcku"]
 radius = 7.00071
 
-[node name="[P] Healing Potion" type="Node2D"]
-scale = Vector2(1.5, 1.5)
-script = ExtResource("1_qb2ua")
-data = ExtResource("2_asvvf")
+[node name="[P] Poison Vial" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_drjgp")
+data = ExtResource("2_o1npv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, 4.76837e-07)
-texture = ExtResource("3_wiu6x")
+texture = ExtResource("3_nipy0")
 metadata/_aseprite_wizard_interface_config_ = {
 "pending_changes": {}
 }
@@ -75,7 +75,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_ujd57")
 }
 
-[node name="InteractArea" parent="." instance=ExtResource("2_mlh1d")]
+[node name="InteractArea" parent="." instance=ExtResource("4_qp6t2")]
 scale = Vector2(2, 2)
 collision_mask = 2
 

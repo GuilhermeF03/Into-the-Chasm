@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dsanea3jvis5f"]
 
 [ext_resource type="PackedScene" uid="uid://d0mst4eki2yyd" path="res://Core/Entities/Player/Player.tscn" id="1_m15uc"]
-[ext_resource type="PackedScene" uid="uid://cghwksc0im8av" path="res://Core/Systems/Combat/Items/Tools/Data/Potions/Poison Vial/[P] Poison Vial.tscn" id="2_7c8eu"]
+[ext_resource type="PackedScene" uid="uid://cghwksc0im8av" path="res://Core/Systems/Combat/Items/Tools/Potions/Poison Vial/[P] Poison Vial.tscn" id="2_7c8eu"]
 
 
 [node name="AoEDemo" type="Node2D"]

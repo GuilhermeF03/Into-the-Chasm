@@ -12,7 +12,7 @@ extends WeaponEffect
 @onready var hitbox = $Hitbox
 
 var anim_player : AnimationPlayer
-var weapon : HandledWeapon
+var weapon : WeaponItem
 var original_pos : Vector2
 var player : Player
 var tween : Tween

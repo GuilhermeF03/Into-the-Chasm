@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b5sq7pn2c3uiq" path="res://Core/Systems/Combat/Status System/Status/Status.gd" id="1_8hdcw"]
 [ext_resource type="PackedScene" uid="uid://cqj3pnlfa2bb4" path="res://Core/Systems/Combat/Status System/Effects/Shader/ShaderEffect.tscn" id="2_uqefk"]
 [ext_resource type="Shader" uid="uid://b7lp2jvyxt8u" path="res://Core/Systems/Combat/Status System/Status/Poison/Shader/poison_shader.gdshader" id="3_00qds"]
-[ext_resource type="Texture2D" uid="uid://brn25l8b2axym" path="res://Core/Systems/Combat/Items/Tools/Data/Potions/Poison Vial/Art/poison-bubble.png" id="3_qnvhg"]
+[ext_resource type="Texture2D" uid="uid://brn25l8b2axym" path="res://Core/Systems/Combat/Items/Tools/Potions/Poison Vial/Art/poison-bubble.png" id="3_qnvhg"]
 [ext_resource type="Material" uid="uid://bxuaygs6u2rda" path="res://Core/Systems/Combat/Status System/Status/Poison/Shader/poison_particles.tres" id="4_fkmts"]
 
 [node name="Poison Status" type="Node2D" unique_id=1019468108]

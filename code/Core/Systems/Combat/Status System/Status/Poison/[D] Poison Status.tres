@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StatusData" format=3 uid="uid://cpaon3roew4jo"]
+
+[ext_resource type="Script" uid="uid://dwqwfiiqskbx0" path="res://Core/Systems/Combat/Status System/Status/StatusData.gd" id="1_o118n"]
+[ext_resource type="PackedScene" uid="uid://0r3mci1jljw0" path="res://Core/Systems/Combat/Status System/Status/Poison/[S] Poison Status.tscn" id="1_v8gp4"]
+
+[resource]
+script = ExtResource("1_o118n")
+packed_status = ExtResource("1_v8gp4")
+status_name = &"Poison"
+max_stacks = 3
+apply_ticks = 7
+stack_lifetime_ticks = 14
+metadata/_custom_type_script = "uid://dwqwfiiqskbx0"

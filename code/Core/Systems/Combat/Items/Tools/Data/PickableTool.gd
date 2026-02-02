@@ -1,4 +1,3 @@
-@tool
 extends PickableItem
 class_name PickableTool
 

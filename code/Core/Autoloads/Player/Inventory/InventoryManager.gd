@@ -24,7 +24,7 @@ const REGISTERED_ATTACK_PROGRESS_AMOUNT = 20
 #region Nodes
 @export_group("Nodes")
 var tool_node = preload("uid://hvirmd1rmgea")
-var weapon_node := preload("uid://c37sltcpyvs3r")
+var weapon_node := preload("uid://brwb01jvpywd1")
 #endregion
 
 #region Data
@@ -38,7 +38,7 @@ var cristals : int
 enum ResourceType{MINERAL, ORGANIC, CRISTAL}
 
 @export_subgroup("Weapon")
-var weapon : WeaponData
+var weapon_data : WeaponData
 var weapon_ability_progress : float = 0.0
 
 @export_subgroup("Tools")
@@ -114,15 +114,18 @@ func set_resource(resource : ResourceType, ammount : int, override : bool = fals
 	resource_changed.emit(resource, new_amount)
 
 
-func set_weapon(new_weapon : WeaponData):
+func set_weapon(new_weapon_data : WeaponData):
 	# drop old weapon
-	if weapon != null:
-		var _old_weapon = weapon_node.instantiate()
-		_old_weapon.set_data(weapon)
+	if weapon_data != null:
+		var _old_weapon = weapon_node.instantiate() as WeaponItem
+		_old_weapon.data = weapon_data
+		_old_weapon.is_picked = false
+		_old_weapon.init()
+		
 		LevelManager.spawn(_old_weapon, EntityManager.player.global_position, true)
 
-	weapon = new_weapon
-	weapon_changed.emit(weapon)
+	weapon_data = new_weapon_data
+	weapon_changed.emit(weapon_data)
 	
 	
 func register_attack():

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://0sw3iyspqiyy"
+path="res://.godot/imported/poison-vial.aseprite-89797c7c58f8ae1dfdba1c07541d26d0.res"
+
+[deps]
+
+source_file="res://Core/Systems/Combat/Items/Tools/Potions/Poison Vial/Art/poison-vial.aseprite"
+dest_files=["res://.godot/imported/poison-vial.aseprite-89797c7c58f8ae1dfdba1c07541d26d0.res"]
+
+[params]
+

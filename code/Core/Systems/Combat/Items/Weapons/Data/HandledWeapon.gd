@@ -1,5 +1,5 @@
-extends HandledItem
-class_name HandledWeapon
+extends HandleableItem
+class_name HandleableWeapon
 
 #region Nodes
 @export_group("Nodes")
@@ -8,58 +8,37 @@ class_name HandledWeapon
 
 #region Data
 @export_group("Data")
+var data : WeaponData
+var _effect : WeaponEffect
 
-var weapon_data : WeaponData
-
-@export_subgroup("Damage")
-@export var damage_data : DamageData
-@export_range(0.05, 0.7) var attack_cooldown : float = 0.15
-var effect : WeaponEffect
-
-var last_attack_was_special: bool
-var hitbox_layers = [4, 32]
+var _last_attack_was_special: bool
+var _hitbox_layers = [4, 32]
 #endregion
 
 #region builtins
-func _ready():
-	super._ready()
-	if effect:
-		effect = weapon_data.effect.instantiate()
-		add_child(effect)
-		effect.finished.connect(_on_special_finished)
+func init():
+	if data.effect:
+		_effect = data.effect.instantiate()
+		add_child(_effect)
 
 	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
-	hitbox.collision_layer = hitbox_layers[0]
-	hitbox.collision_mask = hitbox_layers[1]
+	hitbox.collision_layer = _hitbox_layers[0]
+	hitbox.collision_mask = _hitbox_layers[1]
 	
-	hitbox.damage_data = weapon_data.damage_data
+	hitbox.damage_data = data.damage_data
 #endregion
 
 #region Combat
-func use():
-	super.use()
-	last_attack_was_special = false
+func _do_work():
+	_last_attack_was_special = false
 
-	var timer = get_tree().create_timer(weapon_data.attack_cooldown)
-	timer.timeout.connect(_on_timeout)
+	var timer = get_tree().create_timer(data.attack_cooldown)
+	await timer.timeout
 
 
 func special_attack():
-	if effect == null: return
-	last_attack_was_special = true
+	if not _effect: return
+	_last_attack_was_special = true
 	can_use.emit(false)
-	effect.call_effect()
-#endregion
-
-#region Signal handlings
-func _on_timeout():
-	_on_use_finished()
-
-
-func _on_special_finished():
-	_on_use_finished()
-
-
-func _disable_logic():
-	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
+	_effect.apply(null)
 #endregion

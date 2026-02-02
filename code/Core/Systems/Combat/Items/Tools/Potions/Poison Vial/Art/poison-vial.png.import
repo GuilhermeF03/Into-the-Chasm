@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brn25l8b2axym"
-path="res://.godot/imported/poison-bubble.png-6292872243b6e875ec86a8f55e8d6d6d.ctex"
+uid="uid://boggllc67txtg"
+path="res://.godot/imported/poison-vial.png-0347de2162bfd69fc0cffd2c3b2d941f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Core/Systems/Combat/Items/Tools/Data/Potions/Poison Vial/Art/poison-bubble.png"
-dest_files=["res://.godot/imported/poison-bubble.png-6292872243b6e875ec86a8f55e8d6d6d.ctex"]
+source_file="res://Core/Systems/Combat/Items/Tools/Potions/Poison Vial/Art/poison-vial.png"
+dest_files=["res://.godot/imported/poison-vial.png-0347de2162bfd69fc0cffd2c3b2d941f.ctex"]
 
 [params]
 

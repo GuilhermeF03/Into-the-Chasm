@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://cay01r5qgatkf"]
 
-[ext_resource type="Script" uid="uid://k5ua88ec851g" path="res://Core/Systems/Combat/Items/Tools/Data/Potions/Poison Vial/HandledPoison.gd" id="1_bu5l7"]
+[ext_resource type="Script" uid="uid://k5ua88ec851g" path="res://Core/Systems/Combat/Items/Tools/Potions/Poison Vial/HandledPoison.gd" id="1_bu5l7"]
 
 
 

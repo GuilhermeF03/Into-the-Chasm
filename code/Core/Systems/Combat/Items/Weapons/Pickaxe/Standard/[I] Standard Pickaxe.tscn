@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cg8hssrdfdieg"]
+
+[ext_resource type="PackedScene" uid="uid://brwb01jvpywd1" path="res://Core/Systems/Combat/Items/Weapons/WeaponItem.tscn" id="1_0kvle"]
+
+[node name="Standard Pickaxe" unique_id=135004685 instance=ExtResource("1_0kvle")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=1755618684]
+metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": false,
+"layer_section": false,
+"output_section": true,
+"pending_changes": {},
+"slice_section": false
+}
+metadata/_aseprite_wizard_config_ = {
+"embed_tex": true,
+"i_mode": 0,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"slice": "",
+"source": "res://Core/Systems/Combat/Items/Weapons/Pickaxe/Standard/Art/standard_pickaxe.aseprite"
+}

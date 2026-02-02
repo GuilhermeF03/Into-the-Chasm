@@ -1,15 +1,17 @@
-[gd_scene load_steps=3 format=4 uid="uid://ceu0hd7c74vft"]
+[gd_scene format=4 uid="uid://ceu0hd7c74vft"]
 
 [ext_resource type="PackedScene" uid="uid://cfkcoi4nsln6u" path="res://Core/Systems/Combat/Status System/Sources/AoE/StatusAoE.tscn" id="1_gihnn"]
-
+[ext_resource type="Resource" uid="uid://cpaon3roew4jo" path="res://Core/Systems/Combat/Status System/Status/Poison/[D] Poison Status.tres" id="2_1fjcw"]
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_1fjcw"]
 _data = PackedByteArray("AAADAAUAAAABAAAAIAAAACAAAACEAAAAUklGRnwAAABXRUJQVlA4TG8AAAAvH8AHEB8gJCBTnmgeiZj/wBU4qrZtOi4zOw1+DVQQw06EuYQ+9n8FDeYIjpXfszILENH/CfDf+zDqWdWxna6rDi7ZpcA9yZBRknQe1Nk/OCdJjctTZY1rkimqJG3ckrKGe5kJVEXVgU1rXIOBDwMA")
 size_override = Vector2(32, 32)
 
-[node name="AoE" instance=ExtResource("1_gihnn")]
+[node name="AoE" unique_id=12169957 instance=ExtResource("1_gihnn")]
+status_data = ExtResource("2_1fjcw")
+lifetime_time = 10.0
 
-[node name="Sprite" type="Sprite2D" parent="." index="0"]
+[node name="Sprite" type="Sprite2D" parent="." index="0" unique_id=601973503]
 texture_filter = 1
 texture = SubResource("PortableCompressedTexture2D_1fjcw")
 metadata/_aseprite_wizard_interface_config_ = {

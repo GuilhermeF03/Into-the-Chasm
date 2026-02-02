@@ -3,7 +3,12 @@ class_name StatusData
 
 #region Enums
 @export_group("Enums")
-enum StatusType { STACK, REPLACE }
+enum StackType { STACK, REPLACE }
+#endregion
+
+#region Nodes
+@export_group("Nodes")
+@export var packed_status : PackedScene
 #endregion
 
 #region Data
@@ -11,8 +16,8 @@ enum StatusType { STACK, REPLACE }
 
 @export_subgroup("Core")
 @export var status_name : StringName
-@export var type : StatusType = StatusType.STACK
-@export_range(1, 1000) var max_stacks = 1
+@export var stack_type : StackType = StackType.STACK
+@export_range(1, 1000) var max_stacks : int = 1
 
 @export_subgroup("Ticks")
 @export var apply_ticks : int = 1

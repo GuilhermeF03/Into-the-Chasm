@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bytudwpcoscid"]
+
+[ext_resource type="Script" uid="uid://te7jbuj5q5f" path="res://Core/Systems/Combat/Items/Tools/Data/HandleableTool.gd" id="1_swwjv"]
+
+[node name="HandleableTool" type="Node2D" unique_id=845004070]
+script = ExtResource("1_swwjv")

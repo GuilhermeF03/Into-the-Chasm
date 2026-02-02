@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://diovyw1tygmpu"]
 
-[ext_resource type="Script" uid="uid://te7jbuj5q5f" path="res://Core/Systems/Combat/Items/Tools/HandledTool.gd" id="1_wy8ax"]
+[ext_resource type="Script" uid="uid://te7jbuj5q5f" path="res://Core/Systems/Combat/Items/Tools/Data/HandleableTool.gd" id="1_wy8ax"]
 
 
 

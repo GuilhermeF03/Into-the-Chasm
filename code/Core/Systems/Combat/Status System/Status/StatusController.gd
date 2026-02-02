@@ -38,7 +38,7 @@ func process_statuses():
 	for status : Status in statuses.values():
 		if not status.active: continue
 		
-		var data = status.data
+		var data : StatusData = status.data
 		
 		# Each stack is verified
 		for stack in status.stacks:
@@ -60,17 +60,14 @@ func process_statuses():
 #endregion
 
 #region API
-func add_status(
-	data : StatusData,
-	packed_status: PackedScene
-) -> void:
+func add_status(data : StatusData) -> void:
 	var key := data.status_name
 
 	var entry : Status = statuses.get(key)
 	
 	# No previous entry - add children node
 	if entry == null:
-		entry = packed_status.instantiate()
+		entry = data.packed_status.instantiate()
 		add_child(entry)
 		statuses[key] = entry
 		

@@ -1,4 +1,3 @@
-@tool
 extends Node2D
 class_name PickableItem
 
@@ -12,9 +11,9 @@ const MIN_SPAWN_RANGE = 75
 
 #region Nodes
 @export_category("Nodes")
-var sprite : Sprite2D
+@export var sprite : Sprite2D
 var interact_area : InteractArea
-var animation_player : AnimationController
+@export var animation_player : AnimationPlayer
 #endregion
 
 #region Data
@@ -30,9 +29,7 @@ signal get_picked
 
 
 #region builtins
-func _ready():
-	if Engine.is_editor_hint(): return
-
+func init() -> void:
 	var spawn_vector = (
 		Vector2(randf_range(-1, 1), randf_range(-1, 1)) 
 		* randi_range(MIN_SPAWN_RANGE, MAX_SPAWN_RANGE)
@@ -52,20 +49,15 @@ func _ready():
 	
 	
 func _process(_delta):
-	if Engine.is_editor_hint():
-		if data == null: return
-		sprite.texture = data.texture
-	else:
-		if data == null: return
-		sprite.texture = data.texture
-		var _hov_texture = data.texture.resource_path.split(".png")[0] + "_hovered.png"
-		if FileAccess.file_exists(_hov_texture):
-			hovered_texture = load(_hov_texture)
+	if data == null: return
+	sprite.texture = data.texture
+	var _hov_texture = data.texture.resource_path.split(".png")[0] + "_hovered.png"
+	if FileAccess.file_exists(_hov_texture):
+		hovered_texture = load(_hov_texture)
 
 
 func _on_get_picked():
 	get_picked.emit()
-	queue_free()
 
 
 func _on_interact_area_area_entered(_area):

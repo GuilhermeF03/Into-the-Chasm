@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://dhpbsgiao8ia3" path="res://Core/Entities/Mob/Copper Paths/Driftskin/Dirtpile/Dirtpile.tscn" id="3_rne0o"]
 [ext_resource type="PackedScene" uid="uid://dbvl2aq745kyx" path="res://Core/Systems/Combat/Items/Weapons/Sword/Standard/[P] Sword.tscn" id="5_uvjpj"]
 [ext_resource type="PackedScene" uid="uid://qn4tkrelxuep" path="res://Core/Systems/Combat/Items/Weapons/Pickaxe/Standard/[P] Pickaxe.tscn" id="6_q5c44"]
-[ext_resource type="PackedScene" uid="uid://dvo2pao4k66g8" path="res://Core/Systems/Combat/Items/Tools/Data/Potions/Healing Potion/[P] Healing Potion.tscn" id="7_jtesj"]
-[ext_resource type="PackedScene" uid="uid://cghwksc0im8av" path="res://Core/Systems/Combat/Items/Tools/Data/Potions/Poison Vial/[P] Poison Vial.tscn" id="8_7rb17"]
+[ext_resource type="PackedScene" uid="uid://dvo2pao4k66g8" path="res://Core/Systems/Combat/Items/Tools/Potions/Healing Potion/[P] Healing Potion.tscn" id="7_jtesj"]
+[ext_resource type="PackedScene" uid="uid://cghwksc0im8av" path="res://Core/Systems/Combat/Items/Tools/Potions/Poison Vial/[P] Poison Vial.tscn" id="8_7rb17"]
 
 
 [node name="WeaponHandlingDemo" type="Node2D"]

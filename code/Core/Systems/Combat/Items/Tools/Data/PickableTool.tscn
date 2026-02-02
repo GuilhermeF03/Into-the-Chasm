@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://hvirmd1rmgea"]
 
-[ext_resource type="Script" uid="uid://dc5rbt761juca" path="res://Core/Systems/Combat/Items/Tools/PickableTool.gd" id="1_qq6hf"]
+[ext_resource type="Script" uid="uid://dc5rbt761juca" path="res://Core/Systems/Combat/Items/Tools/Data/PickableTool.gd" id="1_qq6hf"]
 [ext_resource type="PackedScene" uid="uid://dh86htrmpu0mq" path="res://Core/Objects/Data/InteractArea.tscn" id="2_alvoy"]
 
 

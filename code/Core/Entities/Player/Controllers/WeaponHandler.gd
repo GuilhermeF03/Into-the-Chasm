@@ -4,7 +4,7 @@ class_name WeaponController
 #region Nodes
 @export_group("Nodes")
 @onready var handler : Node2D = $WeaponHandler
-var handled_weapon : HandledWeapon
+var handled_weapon : WeaponItem
 #endregion
 
 #region Data
@@ -60,12 +60,13 @@ func try_special_attack() -> void:
 
 
 #region Weapon handling
-func set_weapon(weapon: WeaponData) -> void:
-	if weapon == null:
+func set_weapon(weapon_data: WeaponData) -> void:
+	if weapon_data == null:
 		return
 
-	var new_weapon := weapon.handled_weapon.instantiate() as HandledWeapon
-	new_weapon.weapon_data = weapon
+	var new_weapon := weapon_data.weapon_item.instantiate() as WeaponItem
+	new_weapon.data = weapon_data
+	new_weapon.init()
 
 	if handled_weapon:
 		handler.remove_child(handled_weapon)

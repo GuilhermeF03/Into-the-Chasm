@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://brwb01jvpywd1"]
+
+[ext_resource type="PackedScene" uid="uid://b33l2tbwbwdqq" path="res://Core/Systems/Combat/Items/Weapons/Data/HandleableWeapon.tscn" id="1_um5xu"]
+[ext_resource type="Script" uid="uid://b17ewsykdtjs5" path="res://Core/Systems/Combat/Items/Weapons/WeaponItem.gd" id="1_x5cwd"]
+[ext_resource type="PackedScene" uid="uid://c37sltcpyvs3r" path="res://Core/Systems/Combat/Items/Weapons/Data/PickableWeapon.tscn" id="2_x5cwd"]
+
+[node name="WeaponItem" type="Node2D" unique_id=135004685]
+script = ExtResource("1_x5cwd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1755618684]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1838987203]
+
+[node name="HandleableWeapon" parent="." unique_id=845004070 node_paths=PackedStringArray("sprite", "anim_player") instance=ExtResource("1_um5xu")]
+sprite = NodePath("../Sprite2D")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="PickableWeapon" parent="." unique_id=121571260 node_paths=PackedStringArray("sprite", "animation_player") instance=ExtResource("2_x5cwd")]
+sprite = NodePath("../Sprite2D")
+animation_player = NodePath("../AnimationPlayer")

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b6b11dsghr0j1"]
+
+[ext_resource type="Script" uid="uid://c4dbcgnvfy1v6" path="res://Core/Systems/Combat/Items/CombatItem.gd" id="1_0gpqh"]
+[ext_resource type="PackedScene" uid="uid://bytudwpcoscid" path="res://Core/Systems/Combat/Items/Tools/Data/HandleableTool.tscn" id="2_5evb6"]
+[ext_resource type="PackedScene" uid="uid://hvirmd1rmgea" path="res://Core/Systems/Combat/Items/Tools/Data/PickableTool.tscn" id="3_jll1t"]
+
+[node name="ToolItem" type="Node2D" unique_id=135004685]
+script = ExtResource("1_0gpqh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1755618684]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1838987203]
+
+[node name="Handleable" parent="." unique_id=845004070 instance=ExtResource("2_5evb6")]
+
+[node name="Pickable" parent="." unique_id=1259288931 instance=ExtResource("3_jll1t")]
+position = Vector2(-7.7290235, 107.117165)

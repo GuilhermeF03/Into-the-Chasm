@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boggllc67txtg"
-path="res://.godot/imported/poison-vial.png-350dec9c218b4edc44bfa8d6a1420b42.ctex"
+uid="uid://dw8y2vxonkiof"
+path="res://.godot/imported/small_jar.png-0a40bd03a86231b139f6725dc27f73fa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Core/Systems/Combat/Items/Tools/Data/Potions/Poison Vial/Art/poison-vial.png"
-dest_files=["res://.godot/imported/poison-vial.png-350dec9c218b4edc44bfa8d6a1420b42.ctex"]
+source_file="res://Core/Systems/Combat/Items/Tools/Potions/Healing Potion/Art/small_jar.png"
+dest_files=["res://.godot/imported/small_jar.png-0a40bd03a86231b139f6725dc27f73fa.ctex"]
 
 [params]
 
