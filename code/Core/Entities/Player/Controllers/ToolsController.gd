@@ -35,7 +35,7 @@ func handle_tool_selection(event: InputEvent) -> void:
 
 
 func on_tool_used(tool_data : ToolData):
-	var tool_handled_scene : HandledTool = tool_data.handled_scene.instantiate()
+	var tool_handled_scene : HandleableTool = tool_data.handled_scene.instantiate()
 	
 	tool_handled_scene.tool_data = tool_data
 	LevelManager.spawn(tool_handled_scene, self.global_position, true)

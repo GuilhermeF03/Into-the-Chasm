@@ -92,7 +92,22 @@ func spawn(
 	else:
 		node.global_position = position
 		scene.add_child(node)
-
+		
+func reparent_node(
+	node : Node2D, 
+	position : Vector2 = Vector2.ZERO,
+	curr_room : bool = false
+):
+	if curr_room and level:
+		var closest_room_id: StringName = get_closest_room(node.global_position)
+		var room : Room = level.get_room(closest_room_id)
+		
+		node.reparent(room)
+		node.global_position = position
+	else:
+		node.reparent(scene)
+		node.global_position = position
+		
 
 func spawn_bullet(bullet : Node2D, position : Vector2 = Vector2.ZERO):
 	bullet.global_position = position

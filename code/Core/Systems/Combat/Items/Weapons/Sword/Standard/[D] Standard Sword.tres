@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="WeaponItemData" format=3 uid="uid://clcb66trvccqk"]
+
+[ext_resource type="Script" uid="uid://fceg4p30cpu2" path="res://Core/Systems/Combat/Items/Weapons/Data/WeaponData.gd" id="1_17bc4"]
+[ext_resource type="Texture2D" uid="uid://bdwu0d0xst86k" path="res://Core/Systems/Combat/Items/Weapons/Sword/Standard/Art/icon.png" id="2_rvw7n"]
+
+[resource]
+script = ExtResource("1_17bc4")
+name = "Standard Sword"
+texture = ExtResource("2_rvw7n")
+metadata/_custom_type_script = "uid://fceg4p30cpu2"

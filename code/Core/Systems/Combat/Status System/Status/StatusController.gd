@@ -73,10 +73,10 @@ func add_status(data : StatusData) -> void:
 		
 	# --- refresh / stacking rules ---
 	match data.type:
-		StatusData.StatusType.STACK:
+		StatusData.StackType.STACK:
 			entry.add_stack()
 
-		StatusData.StatusType.REPLACE:
+		StatusData.StackType.REPLACE:
 			entry.reset()
 			
 	# enable status node

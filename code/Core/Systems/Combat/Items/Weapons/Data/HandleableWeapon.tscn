@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://b33l2tbwbwdqq"]
 
 [ext_resource type="Script" uid="uid://ds55ikcrjl2rq" path="res://Core/Systems/Combat/Items/Weapons/Data/HandledWeapon.gd" id="1_bbp8k"]
+[ext_resource type="PackedScene" uid="uid://b3i22gef6s8ly" path="res://Core/Systems/Combat/Contacts/Hitbox/CombatHitbox.tscn" id="2_0jlar"]
 
 [node name="HandleableWeapon" type="Node2D" unique_id=845004070]
 script = ExtResource("1_bbp8k")
+
+[node name="Hitbox" parent="." unique_id=1147515360 instance=ExtResource("2_0jlar")]

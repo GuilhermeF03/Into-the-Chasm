@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PackedWeaponData" format=3 uid="uid://cxc2n0mvg0653"]
+
+[ext_resource type="Resource" uid="uid://clcb66trvccqk" path="res://Core/Systems/Combat/Items/Weapons/Sword/Standard/[D] Standard Sword.tres" id="1_7ngjb"]
+[ext_resource type="Script" uid="uid://krr24qxu0rho" path="res://Core/Systems/Combat/Items/Weapons/Data/PackedWeaponData.gd" id="1_h14ox"]
+[ext_resource type="PackedScene" uid="uid://yvcnsll8h8rm" path="res://Core/Systems/Combat/Items/Weapons/Sword/Standard/[N] Standard Sword.tscn" id="3_g0cyy"]
+
+[resource]
+script = ExtResource("1_h14ox")
+weapon_item = ExtResource("3_g0cyy")
+data = ExtResource("1_7ngjb")
+metadata/_custom_type_script = "uid://krr24qxu0rho"

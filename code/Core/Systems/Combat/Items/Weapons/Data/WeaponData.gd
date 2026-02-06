@@ -1,11 +1,6 @@
 extends ItemData
 class_name WeaponData
 
-#region Nodes
-@export_group("Nodes")
-@export var weapon_item : PackedScene
-#endregion
-
 #region Data
 @export_group("Data")
 enum WEAPON_TYPE{CLOSE_COMBAT, RANGED}

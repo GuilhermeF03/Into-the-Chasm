@@ -2,7 +2,7 @@ extends PickableItem
 class_name PickableWeapon
 
 func _on_get_picked():
-	InventoryManager.set_weapon(data as WeaponData)
+	InventoryManager.set_weapon(get_parent())
 	super._on_get_picked()
 
 

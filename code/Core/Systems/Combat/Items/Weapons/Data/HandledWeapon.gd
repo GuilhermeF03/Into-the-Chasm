@@ -9,7 +9,7 @@ class_name HandleableWeapon
 #region Data
 @export_group("Data")
 var data : WeaponData
-var _effect : WeaponEffect
+var _effect_node : WeaponEffect
 
 var _last_attack_was_special: bool
 var _hitbox_layers = [4, 32]
@@ -18,8 +18,8 @@ var _hitbox_layers = [4, 32]
 #region builtins
 func init():
 	if data.effect:
-		_effect = data.effect.instantiate()
-		add_child(_effect)
+		_effect_node = data.effect.instantiate()
+		add_child(_effect_node)
 
 	hitbox.process_mode = Node.PROCESS_MODE_DISABLED
 	hitbox.collision_layer = _hitbox_layers[0]
@@ -37,8 +37,8 @@ func _do_work():
 
 
 func special_attack():
-	if not _effect: return
+	if not _effect_node: return
 	_last_attack_was_special = true
 	can_use.emit(false)
-	_effect.apply(null)
+	_effect_node.apply(null)
 #endregion

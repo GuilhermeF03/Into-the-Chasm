@@ -37,7 +37,7 @@ func _ready():
 
 func _physics_process(delta):
 	if state != STATE.RETURNING: return
-	return_to_player(delta)	
+	return_to_player(delta)
 #endregion
 
 

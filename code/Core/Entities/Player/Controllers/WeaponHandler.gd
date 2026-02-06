@@ -22,7 +22,8 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 
-	set_weapon(InventoryManager.weapon)
+	if InventoryManager.curr_weapon:
+		set_weapon(InventoryManager.curr_weapon)
 	InventoryManager.weapon_changed.connect(set_weapon)
 #endregion
 
@@ -38,8 +39,7 @@ func aim_at(world_position: Vector2) -> void:
 
 
 func try_attack() -> void:
-	if not can_attack or handled_weapon == null:
-		return
+	if not can_attack or not handled_weapon: return
 
 	on_hit.emit()
 	handled_weapon.use()
@@ -60,24 +60,20 @@ func try_special_attack() -> void:
 
 
 #region Weapon handling
-func set_weapon(weapon_data: WeaponData) -> void:
-	if weapon_data == null:
+func set_weapon(weapon_item: WeaponItem) -> void:
+	if weapon_item == null:
 		return
-
-	var new_weapon := weapon_data.weapon_item.instantiate() as WeaponItem
-	new_weapon.data = weapon_data
-	new_weapon.init()
 
 	if handled_weapon:
 		handler.remove_child(handled_weapon)
 
-	handled_weapon = new_weapon
-	handler.add_child(handled_weapon)
+	handled_weapon = weapon_item
+	handled_weapon.reparent(handler, false)
 	handled_weapon.z_index = 1
 
 	# Signals from weapon
-	handled_weapon.can_use.connect(_on_can_attack_changed)
-	handled_weapon.hitbox.on_hit.connect(func(target):
+	handled_weapon.handleable.can_use.connect(_on_can_attack_changed)
+	handled_weapon.handleable.hitbox.on_hit.connect(func(target):
 		on_hit.emit(target)
 	)
 

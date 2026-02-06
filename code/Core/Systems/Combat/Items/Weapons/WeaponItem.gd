@@ -12,14 +12,19 @@ class_name WeaponItem
 #region Data
 @export_group("Data")
 @export var data : WeaponData
-
 var is_picked : bool = false
 #endregion
 
 #region builtins
-func init() -> void:
+func _ready() -> void:
+	sprite.texture = data.texture
+	sprite.scale *= 5
+	
 	handleable.data = data
+	
 	pickable.data = data
+	pickable.sprite = sprite
+	pickable.animation_player = anim_player
 	
 	if is_picked:
 		pickable.process_mode = Node.PROCESS_MODE_DISABLED

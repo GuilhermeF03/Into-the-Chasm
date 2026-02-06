@@ -38,7 +38,7 @@ var cristals : int
 enum ResourceType{MINERAL, ORGANIC, CRISTAL}
 
 @export_subgroup("Weapon")
-var weapon_data : WeaponData
+var curr_weapon : WeaponItem
 var weapon_ability_progress : float = 0.0
 
 @export_subgroup("Tools")
@@ -61,7 +61,7 @@ var recipes : Array[RecipeData]
 signal resource_changed(resource : ResourceType, ammount : int)
 
 @export_subgroup("Weapon")
-signal weapon_changed(weapon : WeaponData)
+signal weapon_changed(weapon : WeaponItem)
 signal weapon_ability_progress_changed(value : float)
 
 @export_subgroup("Tools")
@@ -114,18 +114,17 @@ func set_resource(resource : ResourceType, ammount : int, override : bool = fals
 	resource_changed.emit(resource, new_amount)
 
 
-func set_weapon(new_weapon_data : WeaponData):
+func set_weapon(weapon_item : WeaponItem):
 	# drop old weapon
-	if weapon_data != null:
-		var _old_weapon = weapon_node.instantiate() as WeaponItem
-		_old_weapon.data = weapon_data
-		_old_weapon.is_picked = false
-		_old_weapon.init()
-		
-		LevelManager.spawn(_old_weapon, EntityManager.player.global_position, true)
-
-	weapon_data = new_weapon_data
-	weapon_changed.emit(weapon_data)
+	if curr_weapon:
+		LevelManager.reparent_node(
+			curr_weapon, 
+			EntityManager.player.global_position, 
+			true
+		)
+	
+	curr_weapon = weapon_item
+	weapon_changed.emit(curr_weapon)
 	
 	
 func register_attack():

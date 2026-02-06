@@ -21,10 +21,10 @@ func _ready():
 #endregion
 
 #region Weapon Management
-func equip(weapon : WeaponData):
+func equip(weapon : WeaponItem):
 	#ability_progress.item_data = weapon
 	#ability_progress.stats.set_stats(weapon)
-	ability_progress.texture_over = weapon.texture
+	ability_progress.texture_over = weapon.data.texture
 
 
 func update_ability_progress(value : float):

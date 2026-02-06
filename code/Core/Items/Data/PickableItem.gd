@@ -12,7 +12,7 @@ const MIN_SPAWN_RANGE = 75
 #region Nodes
 @export_category("Nodes")
 @export var sprite : Sprite2D
-var interact_area : InteractArea
+@onready var interact_area : InteractArea = $InteractArea
 @export var animation_player : AnimationPlayer
 #endregion
 
@@ -30,6 +30,8 @@ signal get_picked
 
 #region builtins
 func init() -> void:
+	sprite.texture = data.texture
+	
 	var spawn_vector = (
 		Vector2(randf_range(-1, 1), randf_range(-1, 1)) 
 		* randi_range(MIN_SPAWN_RANGE, MAX_SPAWN_RANGE)
@@ -37,34 +39,32 @@ func init() -> void:
 
 	var tween = create_tween()
 	(
-	tween.tween_property(self, "global_position", global_position + spawn_vector, 1.5)
-	.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+		tween.tween_property(
+			self, 
+			"global_position", 
+			global_position + spawn_vector, 
+			1.5
+		)\
+		.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	)
 
 	interact_area.toggle_only = true
 	interact_area._on_interaction_enter.connect(_on_get_picked)
 	
 	await get_tree().create_timer(randf_range(MIN_WAIT_TIME, MAX_WAIT_TIME)).timeout
-	animation_player.play('hover')
-	
-	
-func _process(_delta):
-	if data == null: return
-	sprite.texture = data.texture
-	var _hov_texture = data.texture.resource_path.split(".png")[0] + "_hovered.png"
-	if FileAccess.file_exists(_hov_texture):
-		hovered_texture = load(_hov_texture)
+#endregion
 
-
+#region Signal Handling
 func _on_get_picked():
 	get_picked.emit()
 
 
 func _on_interact_area_area_entered(_area):
-	sprite.texture = hovered_texture
+	if animation_player.current_animation != "hover":
+		animation_player.play('hover')
 
 
 func _on_interact_area_area_exited(_area):
-	if data == null: return
-	sprite.texture = data.texture
+	if animation_player.current_animation != "idle":
+		animation_player.play("idle")
 #endregion
